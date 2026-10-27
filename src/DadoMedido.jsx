@@ -5,8 +5,9 @@ import {Legenda} from './componentes/Legenda';
 import {Gameplay, MetadeDeCima, LegendaDupla} from './componentes/Gameplay';
 import {BlocoBarras, BlocoNumero, BlocoTitulo, camera} from './componentes/Blocos';
 import {BlocoRanking, BlocoVersus, BlocoCuriosidade, BlocoEvolucao} from './componentes/Blocos2';
+import {BlocoChefao, BlocoExtrato} from './componentes/Blocos3';
 
-const BLOCOS = {barras: BlocoBarras, numero: BlocoNumero, titulo: BlocoTitulo, ranking: BlocoRanking, versus: BlocoVersus, curiosidade: BlocoCuriosidade, evolucao: BlocoEvolucao};
+const BLOCOS = {barras: BlocoBarras, numero: BlocoNumero, titulo: BlocoTitulo, ranking: BlocoRanking, versus: BlocoVersus, curiosidade: BlocoCuriosidade, evolucao: BlocoEvolucao, chefao: BlocoChefao, extrato: BlocoExtrato};
 import {COR, FONTE, W, easeOut, clamp, aplicarEstilo} from './tema';
 
 /* fontes locais (não depende de internet na hora de renderizar) */
@@ -15,7 +16,9 @@ const fontesCss = `
 @font-face{font-family:'Archivo Black';src:url('${staticFile('fonts/ArchivoBlack.woff')}') format('woff');}
 @font-face{font-family:'Bebas Neue';src:url('${staticFile('fonts/BebasNeue.woff')}') format('woff');}
 @font-face{font-family:'Bangers';src:url('${staticFile('fonts/Bangers.woff')}') format('woff');}
-@font-face{font-family:'Russo One';src:url('${staticFile('fonts/RussoOne.woff')}') format('woff');}`;
+@font-face{font-family:'Russo One';src:url('${staticFile('fonts/RussoOne.woff')}') format('woff');}
+@font-face{font-family:'Archivo Texto';font-weight:600;src:url('${staticFile('fonts/Archivo600.woff')}') format('woff');}
+@font-face{font-family:'Archivo Texto';font-weight:800;src:url('${staticFile('fonts/Archivo800.woff')}') format('woff');}`;
 const useFontes = () => {
   const [h] = useState(() => delayRender('fontes'));
   React.useEffect(() => {
@@ -25,6 +28,8 @@ const useFontes = () => {
       new FontFace('Bebas Neue', `url(${staticFile('fonts/BebasNeue.woff')})`).load(),
       new FontFace('Bangers', `url(${staticFile('fonts/Bangers.woff')})`).load(),
       new FontFace('Russo One', `url(${staticFile('fonts/RussoOne.woff')})`).load(),
+      new FontFace('Archivo Texto', `url(${staticFile('fonts/Archivo600.woff')})`, {weight: '600'}).load(),
+      new FontFace('Archivo Texto', `url(${staticFile('fonts/Archivo800.woff')})`, {weight: '800'}).load(),
     ]).then((fs) => { fs.forEach((f) => document.fonts.add(f)); continueRender(h); }).catch(() => continueRender(h));
   }, [h]);
 };

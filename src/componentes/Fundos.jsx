@@ -135,7 +135,34 @@ const Espaco = ({t, dur}) => {
   );
 };
 
-const FUNDOS = {synthwave: Synthwave, cinema: Cinema, anime: Anime, arcade: Arcade, streaming: Streaming, espaco: Espaco};
+
+/* finanças: caderno quadriculado claro, gráfico desenhado ao fundo e moedas flutuando */
+const MOEDAS = [{x: .12, y: .18, r: 46, p: .1}, {x: .86, y: .27, r: 34, p: .5}, {x: .78, y: .74, r: 52, p: .3}, {x: .2, y: .82, r: 30, p: .8}, {x: .5, y: .1, r: 24, p: .65}];
+const Grana = ({t, dur}) => {
+  const c = (t % dur) / dur;
+  const pts = Array.from({length: 13}, (_, i) => [60 + i * 80, 1500 - 520 * Math.pow(i / 12, 1.8) - 30 * Math.sin(i * 1.7)]);
+  const d = pts.map((q, i) => `${i ? 'L' : 'M'}${q[0]} ${q[1]}`).join(' ');
+  return (
+    <AbsoluteFill style={{background: COR.tinta, overflow: 'hidden'}}>
+      <AbsoluteFill style={{backgroundImage: 'linear-gradient(rgba(14,159,110,.10) 2px, transparent 2px), linear-gradient(90deg, rgba(14,159,110,.10) 2px, transparent 2px)',
+        backgroundSize: '60px 60px', backgroundPosition: `0 ${-c * 120}px`}} />
+      <AbsoluteFill style={{backgroundImage: 'linear-gradient(rgba(14,159,110,.18) 3px, transparent 3px)', backgroundSize: '100% 300px', backgroundPosition: `0 ${-c * 120}px`}} />
+      <div style={{position: 'absolute', left: 120, top: 0, bottom: 0, width: 4, background: 'rgba(224,62,45,.35)'}} />
+      <svg width="1080" height="1920" style={{position: 'absolute', inset: 0, opacity: .22}}>
+        <path d={d} fill="none" stroke={COR.rosa} strokeWidth="10" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="2400" strokeDashoffset={2400 * (1 - (0.5 + 0.5 * Math.sin(TAU * c)))} />
+      </svg>
+      {MOEDAS.map((m, i) => {
+        const y = m.y * 1920 + 30 * Math.sin(TAU * (c + m.p));
+        const rot = 360 * ((c + m.p) % 1);
+        return <div key={i} style={{position: 'absolute', left: m.x * 1080 - m.r, top: y - m.r, width: m.r * 2, height: m.r * 2, borderRadius: '50%',
+          background: 'radial-gradient(circle at 35% 30%, #FFE08A, #E5A400 60%, #B97F00)', boxShadow: '0 8px 18px rgba(185,127,0,.35)',
+          transform: `rotateY(${rot}deg)`, display: 'grid', placeItems: 'center', fontFamily: "'Archivo Black', sans-serif", fontSize: m.r * .7, color: '#8A5A00', opacity: .85}}>R$</div>;
+      })}
+    </AbsoluteFill>
+  );
+};
+
+const FUNDOS = {grana: Grana, synthwave: Synthwave, cinema: Cinema, anime: Anime, arcade: Arcade, streaming: Streaming, espaco: Espaco};
 export const FundoEstilo = ({estilo, t, dur}) => {
   const F = FUNDOS[estilo] || Synthwave;
   return <F t={t} dur={dur} />;

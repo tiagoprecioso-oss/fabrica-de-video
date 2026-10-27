@@ -111,3 +111,23 @@ Análise de out/2026 (Vitoca, Leley, Eri, GamerCosta): nos shorts de games que p
 - Com gameplay a legenda vira **dupla**: a frase pequena + a palavra entre `*asteriscos*` gigante. Marque **uma** palavra-chave por legenda. `gancho` fica fixo no topo (só no layout cheio).
 - **Direitos:** só gameplay **gravada pelo Tiago** (pasta `public/gameplay/`) e de jogos que permitem monetizar (hoje: **Fortnite**; ver `docs/direitos.md`). Nunca baixar gameplay de outro canal. **GTA não**: a política da Rockstar proíbe uso comercial das imagens — pautas de GTA usam só as nossas animações ou gameplay de outro jogo no layout dividido. Vídeo com Fortnite leva o aviso da Epic na descrição. Como gravar: `docs/gravar-gameplay.md`.
 - `gameplay/teste.mp4` é um clipe sintético só para testar o layout.
+
+## Canal de finanças (estilo `grana`, composição `Financas`)
+Formato próprio, diferente do canal de games: caderno de contas claro (quadriculado, margem vermelha, moedas), legenda em cartão branco com borda, destaque em vermelho-dívida. Dinheiro vira jogo.
+
+### `chefao` — a dívida como chefão com barra de vida
+```json
+{"tipo": "chefao", "de": 0, "ate": 25, "rotulo": "CHEFÃO", "nome": "ROTATIVO DO CARTÃO", "divida": 1000,
+ "taxa": 0.151752, "taxaTexto": "15,18% AO MÊS", "meses": 12, "teto": 2, "inicio": 4, "fim": 22, "selo": "TRAVADO PELA LEI"}
+```
+- A barra (vida = saldo) cresce mês a mês com juros compostos (`taxa` ao mês, fração) entre `inicio` e `fim`.
+- `teto` (multiplicador, opcional): parede da lei; a barra trava ali e o resto vira "fantasma" listrado com o valor "sem a lei" riscado. Rotativo e parcelado do cartão: `teto: 2` (Lei 14.690/2023).
+- Use a taxa que bate com a anual oficial: `taxa = (1 + anual)^(1/12) − 1`.
+
+### `extrato` — linhas de um recibo aparecendo, com total
+```json
+{"tipo": "extrato", "titulo": "R$ 1.000 NO ROTATIVO", "linhas": [{"texto": "Dívida original", "valor": "R$ 1.000", "em": 25.6},
+ {"texto": "Juros máximos (lei)", "valor": "+ R$ 1.000", "cor": "vermelho", "em": 26.6}], "total": {"texto": "Teto da dívida", "valor": "R$ 2.000", "cor": "vermelho", "em": 27.6}}
+```
+- Os modelos de sempre (ranking, versus, evolução, dado medido) também funcionam no estilo `grana`.
+- Rodapé obrigatório: fonte oficial (Banco Central/IBGE com o código da série) e "Conteúdo educativo, não é recomendação financeira".

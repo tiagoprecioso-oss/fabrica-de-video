@@ -1,0 +1,129 @@
+{
+  "id": "fin-rotativo-1000",
+  "modelo": "Financas",
+  "estilo": "grana",
+  "canal": "financas",
+  "titulo": "R$ 1.000 no rotativo viram quanto?",
+  "duracao": 33.5,
+  "batidas": 58,
+  "trilha": "trilhas/fin-rotativo-1000.wav",
+  "blocos": [
+    {
+      "tipo": "chefao",
+      "de": 0,
+      "ate": 25,
+      "camera": "empurrar",
+      "saida": "whip",
+      "rotulo": "CHEFÃO",
+      "nome": "ROTATIVO DO CARTÃO",
+      "divida": 1000,
+      "taxa": 0.151752,
+      "taxaTexto": "15,18% AO MÊS",
+      "meses": 12,
+      "teto": 2,
+      "inicio": 4,
+      "fim": 22,
+      "selo": "TRAVADO PELA LEI"
+    },
+    {
+      "tipo": "extrato",
+      "de": 25,
+      "ate": 33.5,
+      "camera": "empurrar",
+      "entrada": "whip",
+      "saida": "loop",
+      "titulo": "R$ 1.000 NO ROTATIVO",
+      "linhas": [
+        {
+          "texto": "Dívida original",
+          "valor": "R$ 1.000",
+          "em": 25.6
+        },
+        {
+          "texto": "Juros máximos (lei)",
+          "valor": "+ R$ 1.000",
+          "cor": "vermelho",
+          "em": 26.6
+        }
+      ],
+      "total": {
+        "texto": "Teto da dívida",
+        "valor": "R$ 2.000",
+        "cor": "vermelho",
+        "em": 27.6
+      }
+    }
+  ],
+  "legendas": [
+    {
+      "de": 0,
+      "ate": 3.5,
+      "texto": "*R$ 1.000* no rotativo do cartão:"
+    },
+    {
+      "de": 3.5,
+      "ate": 7.5,
+      "texto": "o juro médio é *15,18% ao mês*."
+    },
+    {
+      "de": 7.5,
+      "ate": 11.5,
+      "texto": "Isso dá *444,89% ao ano*."
+    },
+    {
+      "de": 11.5,
+      "ate": 14,
+      "texto": "Em *5 meses*, a dívida dobra."
+    },
+    {
+      "de": 14,
+      "ate": 16.5,
+      "texto": "E aí a lei *trava*."
+    },
+    {
+      "de": 16.5,
+      "ate": 21,
+      "texto": "Sem limite: *R$ 5.449* em um ano."
+    },
+    {
+      "de": 21,
+      "ate": 25,
+      "texto": "Lei de 2024: juros até *100%* da dívida."
+    },
+    {
+      "de": 25,
+      "ate": 29.5,
+      "texto": "Até *R$ 2.000* por uma dívida de mil."
+    },
+    {
+      "de": 29.5,
+      "ate": 33.5,
+      "texto": "Quanto *você* tem no rotativo agora?"
+    }
+  ],
+  "rodape": [
+    {
+      "de": 0,
+      "texto": "Juro médio do rotativo, pessoa física, ago/2026 · Banco Central (SGS 25477 e 22022)"
+    },
+    {
+      "de": 21,
+      "texto": "Lei 14.690/2023 · Conteúdo educativo, não é recomendação financeira"
+    }
+  ],
+  "fontes": [
+    {
+      "titulo": "Banco Central, SGS 25477: taxa média mensal, cartão rotativo PF (ago/2026: 15,18% a.m.)",
+      "url": "https://api.bcb.gov.br/dados/serie/bcdata.sgs.25477/dados/ultimos/1?formato=json"
+    },
+    {
+      "titulo": "Banco Central, SGS 22022: taxa média anual, cartão rotativo PF (ago/2026: 444,89% a.a.)",
+      "url": "https://api.bcb.gov.br/dados/serie/bcdata.sgs.22022/dados/ultimos/1?formato=json"
+    },
+    {
+      "titulo": "COAD: limite dos juros do cartão entra em vigor (Lei 14.690/2023)",
+      "url": "https://www.coad.com.br/home/noticias-detalhe/123777/limite-dos-juros-do-cartao-entra-em-vigor"
+    }
+  ],
+  "observacao": "primeiro vídeo do canal de finanças; puxa o ebook Chefões do cartão"
+}

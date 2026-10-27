@@ -26,7 +26,7 @@ export const Legenda = ({texto, lt, dur, y = 1330}) => {
   return (
     <div style={{position: 'absolute', left: 0, right: 0, top: y, transform: 'translateY(-50%)', display: 'flex', justifyContent: 'center'}}>
       <div style={{
-        maxWidth: 940, padding: '18px 34px', borderRadius: 26, background: COR.legenda, backdropFilter: 'blur(6px)',
+        maxWidth: 940, padding: '18px 34px', borderRadius: 26, background: COR.legenda, backdropFilter: 'blur(6px)', boxShadow: COR.claro ? '0 12px 30px rgba(18,36,27,.14)' : 'none', border: COR.claro ? '3px solid #12241B' : 'none',
         textAlign: 'center', fontFamily: FONTE.display, fontSize: 78, lineHeight: 1.12, letterSpacing: 0.5,
       }}>
         {ws.map((p, i) => {
@@ -37,9 +37,9 @@ export const Legenda = ({texto, lt, dur, y = 1330}) => {
             <span key={i} style={{
               display: 'inline-block', marginRight: i < ws.length - 1 ? '0.26em' : 0,
               opacity: a, transform: `translateY(${(1 - a) * 14}px)`,
-              color: p.hl ? COR.amarelo : COR.branco,
-              WebkitTextStroke: '4px #000', paintOrder: 'stroke fill',
-              textShadow: p.hl ? `0 0 28px rgba(255,214,0,.55), 4px 5px 0 rgba(0,0,0,.6)` : '4px 5px 0 rgba(0,0,0,.6)',
+              color: p.hl ? (COR.destaque || COR.amarelo) : COR.branco,
+              WebkitTextStroke: COR.claro ? '0' : '4px #000', paintOrder: 'stroke fill',
+              textShadow: COR.claro ? 'none' : (p.hl ? `0 0 28px rgba(255,214,0,.55), 4px 5px 0 rgba(0,0,0,.6)` : '4px 5px 0 rgba(0,0,0,.6)'),
             }}>{p.w}</span>
           );
         })}

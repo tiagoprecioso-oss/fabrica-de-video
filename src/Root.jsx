@@ -6,9 +6,10 @@ import ranking from '../videos/gta-ranking-precos.json';
 import versus from '../videos/gta6-vs-gta5.json';
 import curiosidades from '../videos/gta6-5-fatos.json';
 import evolucao from '../videos/gta-evolucao-espera.json';
+import financas from '../videos/fin-rotativo-1000.json';
 
 // Todos os modelos usam o mesmo motor; o JSON decide os blocos.
-const MODELOS = [['DadoMedido', dado], ['Ranking', ranking], ['Versus', versus], ['Curiosidades', curiosidades], ['Evolucao', evolucao]];
+const MODELOS = [['DadoMedido', dado], ['Ranking', ranking], ['Versus', versus], ['Curiosidades', curiosidades], ['Evolucao', evolucao], ['Financas', financas]];
 
 export const Root = () => (
   <>

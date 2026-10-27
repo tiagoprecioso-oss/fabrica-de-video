@@ -6,6 +6,7 @@ const D = {
   bangers: "'Bangers', 'Anton', Impact, sans-serif",
   russo: "'Russo One', 'Anton', sans-serif",
   archivo: "'Archivo Black', 'Arial Black', sans-serif",
+  archivoTexto: "'Archivo Texto', 'Archivo Black', 'Arial', sans-serif",
 };
 
 export const ESTILOS = {
@@ -47,13 +48,21 @@ export const ESTILOS = {
   },
 };
 
+// finanças (canal Din no Chão): caderno de contas claro, verde dinheiro, vermelho dívida
+ESTILOS.grana = {
+  claro: true,
+  cor: {tinta: '#EEF3EE', branco: '#12241B', amarelo: '#C77700', rosa: '#E03E2D', ciano: '#0E8A5F', violeta: '#3557D6', verde: '#0E9F6E', apagado: '#5C6F64', destaque: '#E03E2D', papel: '#FFFFFF'},
+  painel: 'linear-gradient(180deg, #FFFFFF, #F7FAF7)', painelSolido: '#FFFFFF', legenda: 'rgba(255,255,255,.94)',
+  fonte: {display: D.archivo, apoio: D.archivoTexto},
+};
+
 export const COR = {...ESTILOS.synthwave.cor, painel: ESTILOS.synthwave.painel, painelSolido: ESTILOS.synthwave.painelSolido, legenda: ESTILOS.synthwave.legenda};
 export const CORES_ITEM = {};
 export const FONTE = {...ESTILOS.synthwave.fonte};
 
 export const aplicarEstilo = (nome) => {
   const e = ESTILOS[nome] || ESTILOS.synthwave;
-  Object.assign(COR, e.cor, {painel: e.painel, painelSolido: e.painelSolido, legenda: e.legenda});
+  Object.assign(COR, {destaque: undefined, papel: undefined}, e.cor, {painel: e.painel, painelSolido: e.painelSolido, legenda: e.legenda, claro: !!e.claro});
   Object.assign(CORES_ITEM, {rosa: COR.rosa, ciano: COR.ciano, amarelo: COR.amarelo, verde: COR.verde, violeta: COR.violeta});
   Object.assign(FONTE, e.fonte);
   return nome in ESTILOS ? nome : 'synthwave';
