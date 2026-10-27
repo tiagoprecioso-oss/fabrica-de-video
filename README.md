@@ -28,6 +28,24 @@ npx remotion studio src/index.jsx         # abre o editor visual para ajustar ao
 Pedido completo para o Claude Code, dentro desta pasta:
 > Faça o vídeo da pauta "<título>": use o pesquisador, depois o roteirista, o diretor, renderize com ./fabricar.sh e passe pelo revisor. Corrija o que ele apontar e renderize de novo.
 
+## Para quem vai rodar no próprio Claude (amigos e colaboradores)
+
+1. **Faça um fork** deste repositório no GitHub (botão *Fork*) e clone o seu fork.
+2. Instale: `npm install` e `npx remotion browser ensure` (precisa de Node 18+ e Python 3 com `numpy`).
+3. Teste: `./fabricar.sh videos/gta6-preco.json` deve gerar `saida/gta6-preco.mp4`.
+4. Abra a pasta no **Claude Code**. Os agentes de `.claude/agents/` (pesquisador, roteirista, diretor, revisor) são carregados sozinhos.
+5. Peça um vídeo: *"Faça um vídeo sobre <assunto> usando o fluxo do README"*.
+6. Para ver e ajustar o visual ao vivo: `npx remotion studio src/index.jsx`.
+
+Onde mexer para aperfeiçoar:
+- **Novo estilo visual:** `src/tema.js` (cores e fontes) + um fundo em `src/componentes/Fundos.jsx`.
+- **Novo tipo de bloco/formato:** `src/componentes/Blocos2.jsx` e registrar em `src/DadoMedido.jsx`; documente em `MODELOS.md`.
+- **Comportamento dos agentes:** `.claude/agents/*.md`.
+
+Mandou uma melhoria? Abra um *pull request* para este repositório. A automação diária do canal usa a branch `main`, então mudanças só entram depois de revisadas.
+
+O Radar Pop (painel de pautas) e as tarefas agendadas são da conta do dono do canal e não vêm junto com o código.
+
 ## Estrutura
 - `src/` — modelos de vídeo (React/Remotion). `tema.js` = cores e fontes da marca.
 - `videos/` — um JSON por vídeo.
