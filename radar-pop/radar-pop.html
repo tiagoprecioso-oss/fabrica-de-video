@@ -10,6 +10,7 @@
   --accent:#2F3BE0; --accent-ink:#FFFFFF;
   --games:#0E8A5F; --filmes:#B86A00; --series:#2463C9; --animes:#C2307A;
   --chip:#E3E7EE;
+  --financas:#A05A00; --tecnologia:#0B7F99; --esporte:#C2410C; --celebridades:#9333EA; --ciencia:#4D7C0F; --outros:#6B7280;
   --f-display:"Anton","Impact","Arial Narrow",sans-serif;
   --f-body:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
   --f-mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
@@ -18,12 +19,12 @@
   --bg:#10131A; --paper:#181C25; --ink:#E8EBF2; --muted:#9AA2B3; --line:#2A303C;
   --accent:#7C85FF; --accent-ink:#0B0D14;
   --games:#3CC892; --filmes:#F0A33A; --series:#6EA2FF; --animes:#F06AAE;
-  --chip:#232836; color-scheme:dark}}
+  --chip:#232836; --financas:#F5B54A; --tecnologia:#4CC9E8; --esporte:#FB8A4C; --celebridades:#C084FC; --ciencia:#A3D65C; --outros:#9CA3AF; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#10131A; --paper:#181C25; --ink:#E8EBF2; --muted:#9AA2B3; --line:#2A303C;
   --accent:#7C85FF; --accent-ink:#0B0D14;
   --games:#3CC892; --filmes:#F0A33A; --series:#6EA2FF; --animes:#F06AAE;
-  --chip:#232836; color-scheme:dark}
+  --chip:#232836; --financas:#F5B54A; --tecnologia:#4CC9E8; --esporte:#FB8A4C; --celebridades:#C084FC; --ciencia:#A3D65C; --outros:#9CA3AF; color-scheme:dark}
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.5}
 .wrap{max-width:980px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 64px;display:grid;gap:28px}
@@ -51,7 +52,7 @@ h2{font-family:var(--f-mono);font-size:12px;font-weight:600;letter-spacing:.12em
 .list{display:grid;gap:10px}
 .row{background:var(--paper);border:1px solid var(--line);border-radius:6px;display:grid;grid-template-columns:6px 1fr}
 .row .stripe{border-radius:6px 0 0 6px;background:var(--cat)}
-.row[data-cat="games"]{--cat:var(--games)}.row[data-cat="filmes"]{--cat:var(--filmes)}.row[data-cat="series"]{--cat:var(--series)}.row[data-cat="animes"]{--cat:var(--animes)}
+.row[data-cat="games"]{--cat:var(--games)}.row[data-cat="filmes"]{--cat:var(--filmes)}.row[data-cat="series"]{--cat:var(--series)}.row[data-cat="animes"]{--cat:var(--animes)}.row[data-cat="financas"]{--cat:var(--financas)}.row[data-cat="tecnologia"]{--cat:var(--tecnologia)}.row[data-cat="esporte"]{--cat:var(--esporte)}.row[data-cat="celebridades"]{--cat:var(--celebridades)}.row[data-cat="ciencia"]{--cat:var(--ciencia)}.row[data-cat="outros"]{--cat:var(--outros)}
 .row .body{min-width:0;padding:14px 16px;display:grid;gap:8px}
 .top{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;font-family:var(--f-mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
 .cat{color:var(--cat);font-weight:600}
@@ -118,17 +119,49 @@ select{font:500 13px/1 var(--f-body);background:var(--paper);color:var(--ink);bo
 .hint b{color:var(--ink)}
 .mini{font:600 12px/1 var(--f-body);background:none;border:1px solid var(--line);color:var(--ink);border-radius:4px;padding:6px 8px;cursor:pointer}
 .studio a{color:var(--accent)}
+
+/* em alta agora */
+.trends{display:grid;gap:8px}
+.tr{background:var(--paper);border:1px solid var(--line);border-radius:6px;display:grid;grid-template-columns:6px 1fr auto;align-items:stretch}
+.tr .stripe{border-radius:6px 0 0 6px;background:var(--cat,var(--outros))}
+.tr .b{min-width:0;padding:10px 14px;display:grid;gap:4px}
+.tr .termo{font-weight:700;font-size:16px;line-height:1.2}
+.tr .ln{display:flex;flex-wrap:wrap;gap:6px 12px;font-family:var(--f-mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;align-items:center}
+.tr .ideia{font-size:13.5px}
+.tr .nw{font-size:12.5px;color:var(--muted);overflow-wrap:anywhere}
+.tr .nw a{color:var(--muted)}
+.tr .act{display:flex;align-items:center;padding:10px 12px}
+.tr.fora{opacity:.55}
+.tr.fora .termo{text-decoration:line-through;text-decoration-thickness:1px}
+.vol{font-family:var(--f-display);font-size:18px;color:var(--ink);letter-spacing:.5px}
+.sim{color:var(--games);font-weight:600}.talvez{color:var(--filmes);font-weight:600}.nao{color:var(--muted)}
+.tr[data-cat="games"]{--cat:var(--games)}.tr[data-cat="filmes"]{--cat:var(--filmes)}.tr[data-cat="series"]{--cat:var(--series)}.tr[data-cat="animes"]{--cat:var(--animes)}.tr[data-cat="financas"]{--cat:var(--financas)}.tr[data-cat="tecnologia"]{--cat:var(--tecnologia)}.tr[data-cat="esporte"]{--cat:var(--esporte)}.tr[data-cat="celebridades"]{--cat:var(--celebridades)}.tr[data-cat="ciencia"]{--cat:var(--ciencia)}.tr[data-cat="outros"]{--cat:var(--outros)}
+@media (max-width:560px){.tr{grid-template-columns:6px 1fr}.tr .act{grid-column:2;padding:0 14px 12px}}
 </style>
 
 <div class="wrap">
   <header>
     <h1>Radar <span>Pop</span></h1>
-    <div class="meta"><span>Games · Filmes · Séries · Animes</span><span id="hoje"></span><span id="sync">Conectando…</span></div>
+    <div class="meta"><span>Todos os nichos · Brasil e EUA</span><span id="hoje"></span><span id="sync">Conectando…</span></div>
   </header>
 
   <section>
     <h2>Lançamentos na mira</h2>
     <div class="ruler" id="ruler"><div class="empty" style="padding:14px">A agenda de lançamentos aparece aqui assim que carregar.</div></div>
+  </section>
+
+  <section>
+    <h2>Em alta agora</h2>
+    <div class="filters" id="tfilters">
+      <button class="chip" data-tf="pais" data-v="BR" aria-pressed="true">Brasil</button>
+      <button class="chip" data-tf="pais" data-v="US" aria-pressed="false">EUA</button>
+      <span class="sep" aria-hidden="true"></span>
+      <span id="tnichos"></span>
+      <span class="sep" aria-hidden="true"></span>
+      <button class="chip" data-tf="fora" data-v="esconder" aria-pressed="false">Esconder fora do canal</button>
+    </div>
+    <div class="trends" id="trends" style="margin-top:12px"><div class="empty">O que está em alta no dia aparece aqui toda manhã, com nicho, nota e se dá vídeo nosso.</div></div>
+    <p class="note" id="tnota">Fonte: buscas em alta do Google Trends no dia. Riscado = fora do canal (política, tragédias, crimes, saúde): esses temas derrubam a monetização.</p>
   </section>
 
   <section>
@@ -139,6 +172,9 @@ select{font:500 13px/1 var(--f-body);background:var(--paper);color:var(--ink);bo
       <button class="chip" data-f="cat" data-v="filmes" aria-pressed="false">Filmes</button>
       <button class="chip" data-f="cat" data-v="series" aria-pressed="false">Séries</button>
       <button class="chip" data-f="cat" data-v="animes" aria-pressed="false">Animes</button>
+      <button class="chip" data-f="cat" data-v="financas" aria-pressed="false">Finanças</button>
+      <button class="chip" data-f="cat" data-v="tecnologia" aria-pressed="false">Tecnologia</button>
+      <button class="chip" data-f="cat" data-v="outros" aria-pressed="false">Outros</button>
       <span class="sep" aria-hidden="true"></span>
       <button class="chip" data-f="st" data-v="abertas" aria-pressed="true">Em aberto</button>
       <button class="chip" data-f="st" data-v="postada" aria-pressed="false">Postadas</button>
@@ -185,11 +221,11 @@ select{font:500 13px/1 var(--f-body);background:var(--paper);color:var(--ink);bo
 
 <script>
 (function(){
-  const CAT={games:"Games",filmes:"Filmes",series:"Séries",animes:"Animes"};
+  const CAT={games:"Games",filmes:"Filmes",series:"Séries",animes:"Animes",financas:"Finanças",tecnologia:"Tecnologia",esporte:"Esporte",celebridades:"Celebridades",ciencia:"Ciência",outros:"Outros"};
   const ST={nova:"Nova",producao:"Em produção",postada:"Postada",descartada:"Descartada"};
   const today=new Date(); today.setHours(0,0,0,0);
   document.getElementById("hoje").innerHTML="Hoje <b>"+today.toLocaleDateString("pt-BR",{weekday:"short",day:"2-digit",month:"short"})+"</b>";
-  let pautas=[], agenda=[], filt={cat:"todas",st:"abertas"}, open=new Set(), db=null;
+  let tend=[], tf={pais:"BR",nicho:"todos",fora:false}, pautas=[], agenda=[], filt={cat:"todas",st:"abertas"}, open=new Set(), db=null;
 
   function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
   function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.hidden=false;clearTimeout(toast._t);toast._t=setTimeout(()=>t.hidden=true,1800)}
@@ -202,6 +238,46 @@ select{font:500 13px/1 var(--f-body);background:var(--paper);color:var(--ink);bo
     el.innerHTML=evs.map(e=>{const n=days(e.data);const dt=new Date(e.data+"T00:00:00").toLocaleDateString("pt-BR",{day:"2-digit",month:"short"});
       return `<div class="ev ${n===0?"hoje":""}" data-cat="${esc(e.categoria)}"><div class="d">${n===0?"HOJE":n}<small>${n===0?"":(n===1?"dia":"dias")}</small></div><div class="t">${esc(e.titulo)}</div><div class="p">${esc(dt)} · ${esc(e.plataforma||CAT[e.categoria]||"")}</div></div>`}).join("");
   }
+
+
+  function renderTrends(){
+    const el=document.getElementById("trends");
+    const doPais=tend.filter(t=>t.pais===tf.pais);
+    const ultima=doPais.reduce((m,t)=>(t.data||"")>m?t.data:m,"");
+    const dia=doPais.filter(t=>t.data===ultima);
+    const nichos=[...new Set(dia.map(t=>t.nicho))].sort();
+    document.getElementById("tnichos").innerHTML=["todos",...nichos].map(n=>`<button class="chip" data-tf="nicho" data-v="${esc(n)}" aria-pressed="${tf.nicho===n}">${n==="todos"?"Todos":esc(CAT[n]||n)}</button>`).join(" ");
+    const v=dia.filter(t=>(tf.nicho==="todos"||t.nicho===tf.nicho)&&!(tf.fora&&t.fora))
+      .sort((a,b)=>(a.fora?1:0)-(b.fora?1:0)||(b.potencial||0)-(a.potencial||0));
+    if(!tend.length){el.innerHTML='<div class="empty">O que está em alta no dia aparece aqui toda manhã, com nicho, nota e se dá vídeo nosso.</div>';return}
+    if(!v.length){el.innerHTML='<div class="empty">Nada neste filtro.</div>';return}
+    const DV={sim:["sim","Dá vídeo"],talvez:["talvez","Talvez dê vídeo"],nao:["nao","Não dá vídeo"]};
+    el.innerHTML=v.map(t=>{const heat=[1,2,3,4,5].map(i=>`<i class="${i<=(t.potencial||0)?"on":""}"></i>`).join("");const dv=DV[t.da_video]||DV.nao;
+      return `<article class="tr ${t.fora?"fora":""}" data-cat="${esc(t.nicho)}"><div class="stripe"></div><div class="b">
+        <div class="ln"><span class="vol">${esc(t.volume||"")}</span><span class="cat" style="color:var(--cat)">${esc(CAT[t.nicho]||t.nicho)}</span><span class="heat" style="--cat:inherit" title="Potencial ${t.potencial||0} de 5">${heat}</span>${t.fora?`<span>Fora do canal: ${esc(t.motivo||"")}</span>`:`<span class="${dv[0]}">${dv[1]}</span>${t.encaixe?`<span>${esc(t.encaixe)}</span>`:""}`}</div>
+        <div class="termo">${esc(t.termo)}</div>
+        ${t.ideia&&!t.fora?`<div class="ideia">${esc(t.ideia)}</div>`:""}
+        ${t.noticia&&t.noticia.url?`<div class="nw"><a href="${esc(t.noticia.url)}" target="_blank" rel="noopener">${esc(t.noticia.titulo||t.noticia.url)}</a></div>`:""}
+      </div><div class="act">${t.fora?"":(t.virou_pauta?'<span class="status">Virou pauta</span>':`<button class="btn" data-virar="${esc(t.id)}">Virar pauta</button>`)}</div></article>`}).join("");
+  }
+  document.getElementById("tfilters").addEventListener("click",e=>{
+    const b=e.target.closest(".chip");if(!b)return;
+    if(b.dataset.tf==="fora"){tf.fora=!tf.fora;b.setAttribute("aria-pressed",tf.fora)}
+    else{tf[b.dataset.tf]=b.dataset.v;if(b.dataset.tf==="pais"){tf.nicho="todos";document.querySelectorAll('.chip[data-tf="pais"]').forEach(c=>c.setAttribute("aria-pressed",c===b))}}
+    renderTrends();
+  });
+  document.getElementById("trends").addEventListener("click",async e=>{
+    const b=e.target.closest("[data-virar]");if(!b)return;
+    const t=tend.find(x=>x.id===b.dataset.virar);if(!t)return;
+    if(!db){toast("Sem conexão com o banco.");return}
+    b.disabled=true;
+    const id=(t.data||"")+"-"+String(t.termo).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,40);
+    try{
+      await db.collection("pautas").doc(id).set({titulo:t.termo,categoria:t.nicho,data:t.data,status:"nova",potencial:t.potencial||3,formato:"A definir",gancho:t.ideia||"",origem:"em-alta",pais:t.pais,completar:true,fontes:t.noticia&&t.noticia.url?[t.noticia]:[]});
+      await db.collection("tendencias").doc(t.id).update({virou_pauta:true});
+      toast("Virou pauta. O agente da manhã completa o roteiro.");
+    }catch(err){b.disabled=false;toast("Não deu pra criar a pauta. Tente de novo.")}
+  });
 
   function visible(){
     return pautas.filter(p=>(filt.cat==="todas"||p.categoria===filt.cat)&&(filt.st==="tudo"||(filt.st==="postada"?p.status==="postada":(p.status==="nova"||p.status==="producao"))))
@@ -577,13 +653,14 @@ select{font:500 13px/1 var(--f-body);background:var(--paper);color:var(--ink);bo
     return {open};
   })();
 
-  renderRuler();renderList();
+  renderRuler();renderList();renderTrends();
   (async()=>{
     try{db=window.claude&&await window.claude.use("db")}catch(_){db=null}
     const sync=document.getElementById("sync");
     if(!db){sync.textContent="Modo leitura";return}
     sync.textContent="Ao vivo";
     db.collection("pautas").onSnapshot(s=>{pautas=s.docs.map(d=>Object.assign({id:d.id},d.data()));renderList()},()=>{sync.textContent="Conexão perdida"});
+    db.collection("tendencias").onSnapshot(s=>{tend=s.docs.map(d=>Object.assign({id:d.id},d.data()));renderTrends()},()=>{});
     db.collection("agenda").onSnapshot(s=>{agenda=s.docs.map(d=>Object.assign({id:d.id},d.data()));renderRuler()},()=>{});
   })();
 })();
