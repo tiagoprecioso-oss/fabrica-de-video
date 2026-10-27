@@ -44,7 +44,7 @@ Onde mexer para aperfeiçoar:
 
 Mandou uma melhoria? Abra um *pull request* para este repositório. A automação diária do canal usa a branch `main`, então mudanças só entram depois de revisadas.
 
-O Radar Pop (painel de pautas) e as tarefas agendadas são da conta do dono do canal e não vêm junto com o código.
+O **Radar Pop** (painel de pautas) está em `radar-pop/`: cada pessoa publica o seu no próprio claude.ai e cria as tarefas agendadas com os prompts de lá. Veja `radar-pop/LEIA-ME.md`.
 
 ## Estrutura
 - `src/` — modelos de vídeo (React/Remotion). `tema.js` = cores e fontes da marca.
