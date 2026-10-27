@@ -23,4 +23,4 @@ Como dirigir:
 Depois de escrever, valide: `python3 -c "import json;json.load(open('videos/<id>.json'))"`.
 
 ## Gameplay
-Se a pauta é de um jogo e existe gravação dele em `public/gameplay/` (veja `ls public/gameplay`), use a camada `"gameplay"` (MODELOS.md): `"cheia"` para ranking/curiosidades, `"dividida"` para versus/barras/evolução. Escolha o trecho que mostra o fato, marque uma palavra-chave por legenda e escreva o `gancho`. Nunca use gameplay que não seja do Tiago; sem gravação do jogo, faça sem a camada.
+Se a pauta é de um jogo e existe gravação dele em `public/gameplay/` (veja `ls public/gameplay`), use a camada `"gameplay"` (MODELOS.md): `"cheia"` para ranking/curiosidades, `"dividida"` para versus/barras/evolução. Escolha o trecho que mostra o fato, marque uma palavra-chave por legenda e escreva o `gancho`. Nunca use gameplay que não seja do Tiago, nem de jogo que proíbe monetizar (GTA/Rockstar: nunca imagens do jogo; veja `docs/direitos.md`). Pauta de GTA pode usar gameplay de Fortnite no layout `"dividida"` como fundo. Com Fortnite, ponha o aviso da Epic em `"aviso"` no JSON (vai para a descrição do post). Sem gravação disponível, faça sem a camada.

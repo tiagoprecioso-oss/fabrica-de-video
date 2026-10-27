@@ -49,11 +49,18 @@ Mandou uma melhoria? Abra um *pull request* para este repositório. A automaçã
 
 O **Radar Pop** (painel de pautas) está em `radar-pop/`: cada pessoa publica o seu no próprio claude.ai e cria as tarefas agendadas com os prompts de lá. Veja `radar-pop/LEIA-ME.md`.
 
+## Gameplay, direitos e medição
+- **Gameplay:** camada `"gameplay"` (tela cheia ou dividida) em `MODELOS.md`. Clipes em `public/gameplay/`; como gravar em `docs/gravar-gameplay.md`.
+- **Direitos:** o que pode e o que não pode (música e vídeo) em `docs/direitos.md`. Resumo: trilha nossa, Fortnite sim (com aviso da Epic), GTA sem imagens do jogo.
+- **Medição:** `tools/medir.sh saida/<id>.mp4` mede cenas, cortes/min, câmera e áudio com o Sharingan (`tools/sharingan`, licença MIT). Precisa de `pip install opencv-python-headless`.
+- **Pesquisa de formato:** `docs/analise-canais-dark.md`.
+
 ## Estrutura
 - `src/` — modelos de vídeo (React/Remotion). `tema.js` = cores e fontes da marca.
 - `videos/` — um JSON por vídeo.
 - `tools/trilha.py` — trilha sintetizada que fecha no loop.
 - `public/` — fontes e trilhas.
 - `saida/` — vídeos prontos.
+- `docs/` — análise de canais, direitos, como gravar gameplay.
 
 Requer Node 18+ e Python 3 com numpy.

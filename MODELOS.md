@@ -109,5 +109,5 @@ Análise de out/2026 (Vitoca, Leley, Eri, GamerCosta): nos shorts de games que p
 - `corte` — troca de trecho do clipe a cada N segundos, com soco de zoom e clarão (os virais trocam de cena a cada 1–3 s). `0` = sem cortes.
 - `duracaoClipe` — duração real do arquivo em segundos (obrigatório).
 - Com gameplay a legenda vira **dupla**: a frase pequena + a palavra entre `*asteriscos*` gigante. Marque **uma** palavra-chave por legenda. `gancho` fica fixo no topo (só no layout cheio).
-- **Direitos:** só gameplay **gravada pelo Tiago** (pasta `public/gameplay/`). Nunca baixar gameplay de outro canal: é conteúdo reutilizado e derruba a monetização. Gravar sem HUD/mapa quando der, 1080p, 1–5 min por jogo.
+- **Direitos:** só gameplay **gravada pelo Tiago** (pasta `public/gameplay/`) e de jogos que permitem monetizar (hoje: **Fortnite**; ver `docs/direitos.md`). Nunca baixar gameplay de outro canal. **GTA não**: a política da Rockstar proíbe uso comercial das imagens — pautas de GTA usam só as nossas animações ou gameplay de outro jogo no layout dividido. Vídeo com Fortnite leva o aviso da Epic na descrição. Como gravar: `docs/gravar-gameplay.md`.
 - `gameplay/teste.mp4` é um clipe sintético só para testar o layout.
