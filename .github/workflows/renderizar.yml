@@ -1,0 +1,77 @@
+name: Renderizar vídeos
+
+# Roda sozinho quando um JSON em videos/ é criado ou alterado na main,
+# ou manualmente (aba Actions → Renderizar vídeos → Run workflow).
+on:
+  push:
+    branches: [main]
+    paths: ['videos/*.json']
+  workflow_dispatch:
+    inputs:
+      id:
+        description: 'id do vídeo (nome do arquivo em videos/, sem .json)'
+        required: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: renderizar
+  cancel-in-progress: false
+
+jobs:
+  renderizar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Instalar dependências
+        run: |
+          pip install numpy
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+          npm ci
+          npx remotion browser ensure
+
+      - name: Descobrir quais vídeos renderizar
+        id: lista
+        run: |
+          if [ -n "${{ github.event.inputs.id }}" ]; then
+            ids="${{ github.event.inputs.id }}"
+          else
+            ids=$(git diff --name-only --diff-filter=AM HEAD~1 HEAD -- 'videos/*.json' | xargs -r -n1 basename | sed 's/\.json$//' | tr '\n' ' ')
+          fi
+          echo "ids=$ids" >> "$GITHUB_OUTPUT"
+          echo "Vídeos: $ids"
+
+      - name: Renderizar e publicar
+        if: steps.lista.outputs.ids != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for id in ${{ steps.lista.outputs.ids }}; do
+            echo "::group::$id"
+            ./fabricar.sh "videos/$id.json"
+            tam=$(stat -c%s "saida/$id.mp4")
+            if [ "$tam" -gt 14000000 ]; then
+              echo "Arquivo grande ($tam bytes), renderizando com mais compressão"
+              npx remotion render src/index.jsx "$(jq -r '.modelo // "DadoMedido"' videos/$id.json)" "saida/$id.mp4" --props="saida/$id.props.json" --crf=26 --log=error
+            fi
+            python3 tools/folha.py "saida/$id.mp4" "videos/$id.json" "saida/$id-revisao.jpg"
+            gh release delete "$id" -y --cleanup-tag 2>/dev/null || true
+            gh release create "$id" "saida/$id.mp4" "saida/$id-revisao.jpg" \
+              --title "$(jq -r .titulo videos/$id.json)" \
+              --notes "Renderizado automaticamente a partir de \`videos/$id.json\` (commit ${GITHUB_SHA::7})."
+            echo "::endgroup::"
+          done

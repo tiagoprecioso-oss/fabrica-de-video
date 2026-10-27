@@ -4,3 +4,4 @@ saida/*.json
 saida/*.log
 public/trilhas/*.wav
 saida/*.png
+saida/*.jpg

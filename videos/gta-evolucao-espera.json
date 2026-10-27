@@ -7,32 +7,124 @@
   "batidas": 58,
   "trilha": "trilhas/gta-evolucao-espera.wav",
   "blocos": [
-    {"tipo": "evolucao", "de": 0, "ate": 33.5, "camera": "empurrar", "saida": "loop",
-     "titulo": "A ESPERA ENTRE CADA GTA",
-     "itens": [
-       {"ano": "2001", "nome": "GTA III", "texto": "Outubro · PS2", "em": 0.6},
-       {"ano": "2002", "nome": "VICE CITY", "texto": "Outubro · PS2", "intervalo": "+1 ANO", "em": 5.0},
-       {"ano": "2004", "nome": "SAN ANDREAS", "texto": "Outubro · PS2", "intervalo": "+2 ANOS", "em": 8.5},
-       {"ano": "2008", "nome": "GTA IV", "texto": "Abril · PS3 e Xbox 360", "intervalo": "+3,5 ANOS", "em": 12.2},
-       {"ano": "2013", "nome": "GTA V", "texto": "Setembro · PS3 e Xbox 360", "intervalo": "+5,4 ANOS", "em": 16.0},
-       {"ano": "2026", "nome": "GTA VI", "texto": "19 de novembro · PS5 e Xbox Series", "intervalo": "+13 ANOS", "em": 21.0, "cor": "rosa"}
-     ]}
+    {
+      "tipo": "evolucao",
+      "de": 0,
+      "ate": 33.5,
+      "camera": "empurrar",
+      "saida": "loop",
+      "titulo": "A ESPERA ENTRE CADA GTA",
+      "itens": [
+        {
+          "ano": "2001",
+          "nome": "GTA III",
+          "texto": "Outubro · PS2",
+          "em": 0.6
+        },
+        {
+          "ano": "2002",
+          "nome": "VICE CITY",
+          "texto": "Outubro · PS2",
+          "intervalo": "+1 ANO",
+          "em": 5.0
+        },
+        {
+          "ano": "2004",
+          "nome": "SAN ANDREAS",
+          "texto": "Outubro · PS2",
+          "intervalo": "+2 ANOS",
+          "em": 8.5
+        },
+        {
+          "ano": "2008",
+          "nome": "GTA IV",
+          "texto": "Abril · PS3 e Xbox 360",
+          "intervalo": "+3,5 ANOS",
+          "em": 12.2
+        },
+        {
+          "ano": "2013",
+          "nome": "GTA V",
+          "texto": "Setembro · PS3 e Xbox 360",
+          "intervalo": "+5,4 ANOS",
+          "em": 16.0
+        },
+        {
+          "ano": "2026",
+          "nome": "GTA VI",
+          "texto": "19 de novembro · PS5 e Xbox Series",
+          "intervalo": "+13 ANOS",
+          "em": 21.0,
+          "cor": "rosa"
+        }
+      ]
+    }
   ],
   "legendas": [
-    {"de": 0, "ate": 3.5, "texto": "Cada GTA demorou *mais* que o anterior pra sair."},
-    {"de": 3.5, "ate": 7, "texto": "2001: GTA III. Um ano depois, *Vice City*."},
-    {"de": 7, "ate": 11, "texto": "Mais *2 anos*: San Andreas, em 2004."},
-    {"de": 11, "ate": 15, "texto": "Depois, *3 anos e meio*: GTA IV."},
-    {"de": 15, "ate": 19.5, "texto": "Mais de *5 anos*: GTA V, em 2013."},
-    {"de": 19.5, "ate": 26, "texto": "E agora… *13 anos* até o GTA 6."},
-    {"de": 26, "ate": 30, "texto": "Mais que o *dobro* de qualquer espera anterior."},
-    {"de": 30, "ate": 33.5, "texto": "Será que cada GTA vai *demorar mais?*"}
+    {
+      "de": 0,
+      "ate": 3.5,
+      "texto": "Cada GTA demorou *mais* que o anterior pra sair."
+    },
+    {
+      "de": 3.5,
+      "ate": 7,
+      "texto": "2001: GTA III. Um ano depois, *Vice City*."
+    },
+    {
+      "de": 7,
+      "ate": 11,
+      "texto": "Mais *2 anos*: San Andreas, em 2004."
+    },
+    {
+      "de": 11,
+      "ate": 15,
+      "texto": "Depois, *3 anos e meio*: GTA IV."
+    },
+    {
+      "de": 15,
+      "ate": 19.5,
+      "texto": "Mais de *5 anos*: GTA V, em 2013."
+    },
+    {
+      "de": 19.5,
+      "ate": 26,
+      "texto": "E agora… *13 anos* até o GTA 6."
+    },
+    {
+      "de": 26,
+      "ate": 30,
+      "texto": "Mais que o *dobro* de qualquer espera anterior."
+    },
+    {
+      "de": 30,
+      "ate": 33.5,
+      "texto": "Será que cada GTA vai *demorar mais?*"
+    }
   ],
-  "rodape": [{"de": 0, "texto": "Datas de lançamento nos EUA · Rockstar Games"}],
+  "rodape": [
+    {
+      "de": 0,
+      "texto": "Datas de lançamento nos EUA · Rockstar Games"
+    }
+  ],
   "fontes": [
-    {"titulo": "Grand Theft Wiki: San Andreas em 26/10/2004", "url": "https://www.grandtheftwiki.com/2004"},
-    {"titulo": "News 12: GTA IV em 29/04/2008", "url": "https://longisland.news12.com/grand-theft-auto-iv-races-onto-store-shelves-34821952"},
-    {"titulo": "PlayStation LifeStyle: GTA V em 17/09/2013", "url": "https://www.playstationlifestyle.net/?p=271513"},
-    {"titulo": "Worten: GTA VI em 19/11/2026", "url": "https://www.worten.pt/worten-game-ring/lancamentos-de-jogos"}
-  ]
+    {
+      "titulo": "Grand Theft Wiki: San Andreas em 26/10/2004",
+      "url": "https://www.grandtheftwiki.com/2004"
+    },
+    {
+      "titulo": "News 12: GTA IV em 29/04/2008",
+      "url": "https://longisland.news12.com/grand-theft-auto-iv-races-onto-store-shelves-34821952"
+    },
+    {
+      "titulo": "PlayStation LifeStyle: GTA V em 17/09/2013",
+      "url": "https://www.playstationlifestyle.net/?p=271513"
+    },
+    {
+      "titulo": "Worten: GTA VI em 19/11/2026",
+      "url": "https://www.worten.pt/worten-game-ring/lancamentos-de-jogos"
+    }
+  ],
+  "observacao": "primeiro render feito pelo GitHub Actions"
 }
