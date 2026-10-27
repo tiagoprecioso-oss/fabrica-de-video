@@ -37,6 +37,7 @@ for b in v["blocos"]:
 mix = mix / max(1e-6, np.abs(mix).max()) * .85
 f = int(.04 * SR); mix[:f] *= np.linspace(0, 1, f); mix[-f:] *= np.linspace(1, 0, f)
 out = "public/" + v["trilha"]
+import os; os.makedirs(os.path.dirname(out), exist_ok=True)
 with wave.open(out, "w") as w:
     w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR); w.writeframes((mix * 32767).astype(np.int16).tobytes())
 print("trilha:", out)
