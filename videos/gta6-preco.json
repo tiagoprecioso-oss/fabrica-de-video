@@ -1,0 +1,85 @@
+{
+  "id": "gta6-preco",
+  "modelo": "DadoMedido",
+  "titulo": "O preço de GTA 6, medido",
+  "duracao": 44.5,
+  "batidas": 77,
+  "trilha": "trilhas/gta6-preco.wav",
+  "blocos": [
+    {
+      "tipo": "numero", "de": 0, "ate": 3.2, "camera": "empurrar", "saida": "whip",
+      "valor": 79.99, "moeda": "$", "casas": 2,
+      "chip": "GTA VI · EDIÇÃO PADRÃO",
+      "nota": "nos EUA  ·  R$ 449,90 no Brasil",
+      "nota2": "↑ o GTA mais caro já lançado"
+    },
+    {
+      "tipo": "barras", "de": 3.2, "ate": 25, "camera": "orbita", "entrada": "whip", "saida": "whip",
+      "titulo": "PREÇO DE LANÇAMENTO NOS EUA",
+      "tituloDepois": "CORRIGIDO PELA INFLAÇÃO · US$ DE 2026",
+      "moeda": "$", "casas": 0, "max": 100, "grade": [25, 50, 75, 100],
+      "mostrarDiferenca": true,
+      "itens": [
+        {"nome": "GTA III", "ano": "2001", "valor": 49.99, "valorDepois": 94.79},
+        {"nome": "VICE CITY", "ano": "2002", "valor": 49.99, "valorDepois": 92.90},
+        {"nome": "S. ANDREAS", "ano": "2004", "valor": 49.99, "valorDepois": 88.23},
+        {"nome": "GTA IV", "ano": "2008", "valor": 59.99, "valorDepois": 94.09},
+        {"nome": "GTA V", "ano": "2013", "valor": 59.99, "valorDepois": 86.33},
+        {"nome": "GTA VI", "ano": "2026", "valor": 79.99, "cor": "rosa"}
+      ],
+      "morphEm": 9.4,
+      "destaques": [
+        {"em": 3.2, "indices": [4, 5]},
+        {"em": 6.5, "indices": null},
+        {"em": 14, "indices": [0, 3]},
+        {"em": 18, "indices": [4]},
+        {"em": 21, "indices": [5]}
+      ],
+      "formula": {"de": 6.6, "ate": 9.3, "linha1": "PREÇO × CPI HOJE ÷ CPI NA ÉPOCA", "linha2": "$59,99 × 336,9 ÷ 234,1 = $86,33"},
+      "selo": {"em": 21.6, "texto": "MAIS BARATO", "indice": 5}
+    },
+    {
+      "tipo": "titulo", "de": 25, "ate": 28.5, "camera": "mergulho", "entrada": "whip", "saida": "whip",
+      "linha1": "E NO", "linha2": "BRASIL?", "corLinha": "verde"
+    },
+    {
+      "tipo": "barras", "de": 28.5, "ate": 44.5, "camera": "inclinar", "entrada": "whip", "saida": "loop",
+      "titulo": "NO BRASIL · PREÇO DE LANÇAMENTO",
+      "tituloDepois": "NO BRASIL · CORRIGIDO PELO IPCA",
+      "moeda": "R$", "casas": 2, "max": 600, "grade": [100, 200, 300, 400, 500, 600],
+      "notaFantasma": "R$ 199,99 em 2013",
+      "itens": [
+        {"nome": "GTA V", "ano": "2013", "valor": 199.99, "valorDepois": 411.63, "entra": 28.7},
+        {"nome": "GTA VI", "ano": "2026", "valor": 449.90, "cor": "rosa", "entra": 37.1}
+      ],
+      "morphEm": 33.3,
+      "destaques": [{"em": 37, "indices": [1]}],
+      "selo": {"em": 38, "texto": "+9% MAIS CARO", "indice": 1}
+    }
+  ],
+  "legendas": [
+    {"de": 0.0, "ate": 3.2, "texto": "O GTA 6 é o GTA *mais caro* da história."},
+    {"de": 3.2, "ate": 6.5, "texto": "80 dólares. *33% a mais* que o GTA 5."},
+    {"de": 6.5, "ate": 9.0, "texto": "Mas a gente fez a *conta*."},
+    {"de": 9.0, "ate": 14.0, "texto": "Corrigindo pela *inflação* dos EUA até setembro de 2026…"},
+    {"de": 14.0, "ate": 18.0, "texto": "O GTA III custaria *95 dólares* hoje. O GTA IV, *94*."},
+    {"de": 18.0, "ate": 21.0, "texto": "O GTA 5? *86*."},
+    {"de": 21.0, "ate": 25.0, "texto": "Em dólar, o GTA 6 é o *mais barato* da série."},
+    {"de": 25.0, "ate": 28.5, "texto": "Mas e no *Brasil?*"},
+    {"de": 28.5, "ate": 33.0, "texto": "O GTA 5 saiu por *R$ 199,99* em 2013."},
+    {"de": 33.0, "ate": 37.0, "texto": "Com a inflação do IPCA, isso dá *R$ 412* hoje."},
+    {"de": 37.0, "ate": 41.0, "texto": "O GTA 6 sai por *R$ 449,90.* *9% mais caro.*"},
+    {"de": 41.0, "ate": 44.5, "texto": "Então ele é o mais barato… ou o *mais caro?*"}
+  ],
+  "rodape": [
+    {"de": 0, "texto": "Fonte: preços de lançamento EUA · CPI-U (BLS) até set/2026"},
+    {"de": 25, "texto": "Fonte: preço de lançamento BR · IPCA (IBGE/BCB) out/2013–set/2026"}
+  ],
+  "fontes": [
+    {"titulo": "TechRadar: preço oficial de GTA 6", "url": "https://www.techradar.com/gaming/we-finally-know-the-official-gta-6-price-its-expensive-but-not-too-bad"},
+    {"titulo": "Tecnoblog: GTA 6 custa R$ 449,90 no Brasil", "url": "https://tecnoblog.net/noticias/preco-de-gta-6-no-brasil-e-revelado-r-449/"},
+    {"titulo": "Critical Hits: GTA V a R$ 199,99", "url": "https://criticalhits.com.br/artigos/gta-v-guia-completo/"},
+    {"titulo": "FRED: CPI-U (CPIAUCNS)", "url": "https://fred.stlouisfed.org/series/CPIAUCNS"},
+    {"titulo": "Banco Central SGS 433 (IPCA)", "url": "https://api.bcb.gov.br/dados/serie/bcdata.sgs.433/dados?formato=json"}
+  ]
+}
