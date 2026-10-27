@@ -74,12 +74,12 @@ export const BlocoChefao = ({b, t}) => {
       </div>
       {/* parede da lei */}
       {b.teto && (
-        <div style={{position: 'absolute', left: X0 + w(teto) - 6, top: BY - 34, width: 12, height: BH + 68, background: '#12241B', borderRadius: 6,
+        <div style={{position: 'absolute', left: X0 + w(teto) - 6, top: BY - 20, width: 12, height: BH + 40, background: '#12241B', borderRadius: 6,
           opacity: clamp((t - ini) / 0.6), transform: `scaleY(${travou ? 1 + 0.15 * (1 - aTrava) : 1})`}} />
       )}
-      {b.teto && <div style={{position: 'absolute', left: X0 + w(teto) - 120, top: BY + BH + 44, width: 240, textAlign: 'center', fontFamily: FONTE.apoio, fontWeight: 800, fontSize: 26, color: INK()}}>TETO DA LEI<br />{reais(teto)}</div>}
+      {b.teto && <div style={{position: 'absolute', left: X0 + w(teto) - 120, top: BY + BH + 30, width: 240, textAlign: 'center', fontFamily: FONTE.apoio, fontWeight: 800, fontSize: 26, color: INK()}}>TETO DA LEI<br />{reais(teto)}</div>}
       {/* contador */}
-      <div style={{position: 'absolute', left: 60, top: 1015, width: 960, textAlign: 'center'}}>
+      <div style={{position: 'absolute', left: 60, top: 1065, width: 960, textAlign: 'center'}}>
         <div style={{fontFamily: FONTE.apoio, fontWeight: 800, fontSize: 30, color: COR.apagado, letterSpacing: 2}}>MÊS {Math.min(meses, Math.floor(m))} DE {meses}</div>
         {b.teto && semLei > teto && (
           <div style={{fontFamily: FONTE.apoio, fontWeight: 800, fontSize: 34, color: COR.rosa, marginTop: 6, textDecoration: travou ? 'line-through' : 'none', opacity: 0.8}}>sem a lei: {reais(semLei)}</div>
