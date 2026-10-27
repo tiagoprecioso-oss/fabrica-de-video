@@ -1,0 +1,337 @@
+<title>Chão da Fábrica</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Chakra+Petch:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: uma tela de jogo de fábrica — HUD no topo, esteira de produção, depois inventário, arsenal e missões. Visual único, noturno (arcade), por escolha. */
+:root{
+  color-scheme: dark;
+  --noite:#0d0b1f;      /* fundo */
+  --placa:#17143a;      /* painéis */
+  --placa2:#201c4d;
+  --linha:#2f2a6b;
+  --texto:#ecebff;
+  --apagado:#9d99cc;
+  --ambar:#ffc23d;      /* destaque principal */
+  --ciano:#3fe0ff;
+  --rosa:#ff4f8b;
+  --ok:#43e08a; --alerta:#ffb020; --pare:#ff5d5d;
+  --pixel:'Press Start 2P', ui-monospace, monospace;
+  --corpo:'Chakra Petch', 'Segoe UI', system-ui, sans-serif;
+}
+*{box-sizing:border-box}
+body{background:var(--noite);color:var(--texto);font-family:var(--corpo);font-size:15px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 48px;
+  background-image:radial-gradient(circle at 1px 1px, rgba(255,255,255,.05) 1px, transparent 0);background-size:22px 22px}
+.tela{max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:36px}
+h1,h2,h3{margin:0;text-wrap:balance}
+h2{font-family:var(--pixel);font-size:13px;letter-spacing:.06em;color:var(--ambar);display:flex;align-items:center;gap:10px}
+h2 small{font-family:var(--corpo);font-size:13px;color:var(--apagado);letter-spacing:0;font-weight:500}
+.sub{color:var(--apagado);margin:6px 0 0;max-width:62ch}
+a{color:var(--ciano)}
+:focus-visible{outline:2px solid var(--ambar);outline-offset:3px;border-radius:6px}
+
+/* HUD */
+.hud{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:end;border-bottom:2px dashed var(--linha);padding-bottom:22px}
+.hud h1{font-family:var(--pixel);font-size:clamp(20px,4vw,34px);line-height:1.3;color:var(--texto);text-shadow:3px 3px 0 var(--rosa)}
+.nivel{font-family:var(--pixel);font-size:10px;color:var(--noite);background:var(--ambar);display:inline-block;padding:7px 10px;border-radius:4px;margin-bottom:12px}
+.quando{color:var(--apagado);font-size:13px;text-align:right}
+.status{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.stat{background:var(--placa);border:1px solid var(--linha);border-radius:10px;padding:10px 14px;min-width:120px}
+.stat b{display:block;font-family:var(--pixel);font-size:18px;color:var(--ciano);font-variant-numeric:tabular-nums}
+.stat span{font-size:12.5px;color:var(--apagado)}
+
+/* esteira */
+.esteira{position:relative;margin-top:14px;overflow-x:auto;padding-bottom:8px}
+.trilho{display:grid;grid-template-columns:repeat(9,minmax(112px,1fr));gap:12px;position:relative;min-width:1080px;padding-top:6px}
+.trilho::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:10px;border-radius:5px;
+  background:repeating-linear-gradient(90deg,var(--linha) 0 14px,var(--placa2) 14px 28px);animation:anda 1.2s linear infinite}
+@keyframes anda{to{background-position:28px 0}}
+.caixa{position:absolute;bottom:10px;width:18px;height:18px;background:var(--ambar);border-radius:3px;box-shadow:0 0 12px var(--ambar);animation:viaja 14s linear infinite;z-index:2}
+@keyframes viaja{from{left:0}to{left:calc(100% - 18px)}}
+.maq{background:var(--placa);border:1px solid var(--linha);border-radius:12px;padding:12px 12px 22px;text-align:left;color:inherit;font:inherit;cursor:pointer;display:flex;flex-direction:column;gap:6px;position:relative}
+.maq:hover,.maq[aria-pressed="true"]{border-color:var(--ciano);background:var(--placa2)}
+.maq .ico{font-size:24px;line-height:1}
+.maq .nome{font-weight:700;font-size:14px}
+.maq .quem{font-size:11.5px;color:var(--apagado)}
+.luz{position:absolute;top:10px;right:10px;width:9px;height:9px;border-radius:50%}
+.luz.ok{background:var(--ok);box-shadow:0 0 8px var(--ok)} .luz.voce{background:var(--ambar);box-shadow:0 0 8px var(--ambar)}
+.detalhe{margin-top:16px;background:var(--placa);border:1px solid var(--linha);border-left:4px solid var(--ciano);border-radius:10px;padding:14px 18px;min-height:84px}
+.detalhe h3{font-size:16px} .detalhe p{margin:6px 0 0;color:var(--apagado);max-width:75ch}
+.legenda-luz{display:flex;gap:16px;font-size:12.5px;color:var(--apagado);margin-top:10px}
+.legenda-luz i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;vertical-align:middle}
+
+/* inventário */
+.grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:16px;margin-top:16px}
+.cartucho{background:var(--placa);border:1px solid var(--linha);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.cartucho video{width:100%;aspect-ratio:9/16;object-fit:cover;display:block;background:#000;max-width:100%}
+.cartucho .info{padding:10px 12px 12px;display:flex;flex-direction:column;gap:6px}
+.cartucho .t{font-weight:600;font-size:13.5px;line-height:1.3}
+.tags{display:flex;flex-wrap:wrap;gap:5px}
+.tag{font-size:11px;padding:2px 7px;border-radius:99px;border:1px solid var(--linha);color:var(--apagado)}
+.tag.teste{border-color:var(--rosa);color:var(--rosa)} .tag.espera{border-color:var(--alerta);color:var(--alerta)}
+.dica{font-size:12.5px;color:var(--apagado);margin-top:8px}
+
+/* arsenal */
+.arsenal{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin-top:16px}
+.bloco{background:var(--placa);border:1px solid var(--linha);border-radius:12px;padding:14px 16px}
+.bloco h3{font-size:14px;margin-bottom:10px;color:var(--texto)}
+.lista{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.lista li{display:flex;justify-content:space-between;gap:10px;font-size:13.5px}
+.lista li span:last-child{color:var(--apagado);font-size:12.5px;text-align:right;font-variant-numeric:tabular-nums}
+.estilos{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.est{border-radius:8px;padding:8px;font-size:12px;font-weight:600;border:1px solid var(--linha)}
+.est:last-child{grid-column:1/-1}.est .sw{display:flex;gap:3px;margin-top:6px}.est .sw i{width:14px;height:14px;border-radius:3px;display:block}
+
+/* missões */
+.missoes{display:grid;grid-template-columns:2fr 1fr;gap:16px;margin-top:16px}
+.missao{background:var(--placa);border:1px solid var(--linha);border-radius:12px;padding:16px 18px}
+.missao.atual{border-color:var(--ambar)}
+.missao .rot{font-family:var(--pixel);font-size:9px;color:var(--ambar);letter-spacing:.06em}
+.missao h3{font-size:18px;margin:8px 0 4px}
+.barra{height:12px;background:var(--noite);border:1px solid var(--linha);border-radius:6px;overflow:hidden;margin:12px 0 6px}
+.barra i{display:block;height:100%;background:repeating-linear-gradient(90deg,var(--ambar) 0 10px,#ffd77a 10px 20px)}
+.passos{list-style:none;padding:0;margin:12px 0 0;display:flex;flex-direction:column;gap:7px;font-size:13.5px}
+.passos li::before{content:"□";color:var(--apagado);margin-right:8px;font-family:var(--corpo)}
+.passos li.feito::before{content:"■";color:var(--ok)}
+.passos li.voce::before{content:"◆";color:var(--ambar)}
+.fila{display:flex;flex-direction:column;gap:12px}
+.fila .missao h3{font-size:15px}
+.fila .missao p{margin:4px 0 0;font-size:13px;color:var(--apagado)}
+
+/* radar */
+.radar{margin-top:16px;overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:13.5px}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--linha)}
+th{font-size:11.5px;color:var(--apagado);font-weight:500;letter-spacing:.04em;text-transform:uppercase}
+.estrela{color:var(--ambar);letter-spacing:2px} .estrela s{color:var(--linha);text-decoration:none}
+.pill{font-size:11.5px;padding:2px 8px;border-radius:99px;border:1px solid}
+.pill.nova{color:var(--ciano);border-color:var(--ciano)} .pill.producao{color:var(--ok);border-color:var(--ok)}
+
+.rodape{border-top:2px dashed var(--linha);padding-top:18px;display:flex;flex-wrap:wrap;gap:10px 22px;font-size:13.5px;color:var(--apagado)}
+@media (max-width:760px){.hud{grid-template-columns:1fr}.quando{text-align:left}.missoes{grid-template-columns:1fr}.estilos{grid-template-columns:repeat(2,1fr)}}
+@media (prefers-reduced-motion:reduce){.trilho::after,.caixa{animation:none}.caixa{display:none}}
+
+/* estúdio */
+.deps{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:16px}
+.dep{background:var(--placa);border:1px solid var(--linha);border-radius:12px;padding:14px 16px}
+.dep h3{font-family:var(--pixel);font-size:10px;letter-spacing:.06em;color:var(--ciano);margin-bottom:12px}
+.agentes{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.agente{display:grid;grid-template-columns:36px 1fr auto;gap:10px;align-items:center}
+.av{width:36px;height:36px;border-radius:8px;display:grid;place-items:center;font-family:var(--pixel);font-size:10px;color:var(--noite);background:var(--ciano)}
+.agente b{display:block;font-size:14px}
+.agente small{display:block;font-size:12.5px;color:var(--apagado);line-height:1.3}
+.st{font-size:11px;padding:2px 8px;border-radius:99px;border:1px solid;white-space:nowrap}
+.st.on{color:var(--ok);border-color:var(--ok)} .st.novo{color:var(--ciano);border-color:var(--ciano)} .st.voce{color:var(--ambar);border-color:var(--ambar)}
+.dep.voceDep .av{background:var(--ambar)}
+.linhas{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:16px}
+.linhaP{background:var(--placa);border:1px dashed var(--linha);border-radius:12px;padding:12px 14px;font-size:13px;color:var(--apagado)}
+.linhaP b{display:block;color:var(--texto);font-size:14px;margin-bottom:4px}
+</style>
+
+<main class="tela">
+  <header class="hud">
+    <div>
+      <span class="nivel">NÍVEL 4 · ESTÚDIO COM 22 AGENTES</span>
+      <h1>Chão da Fábrica</h1>
+      <p class="sub">O estúdio inteiro: quem trabalha em cada função, o que já foi produzido, as peças que ele usa e as próximas missões. Retrato de 27 de outubro de 2026.</p>
+      <div class="status">
+        <div class="stat"><b>22</b><span>agentes no estúdio</span></div>
+        <div class="stat"><b>8</b><span>vídeos renderizados</span></div>
+        <div class="stat"><b>5</b><span>modelos virais</span></div>
+        <div class="stat"><b>7</b><span>estilos visuais</span></div>
+        <div class="stat"><b>3</b><span>canais planejados</span></div>
+        <div class="stat"><b>10</b><span>pautas no Radar Pop</span></div>
+        <div class="stat"><b>2</b><span>turnos automáticos/dia</span></div>
+      </div>
+    </div>
+    <p class="quando">Turno das pautas: 06:47<br>Turno da fábrica: 08:23<br>Nada é postado sem você</p>
+  </header>
+
+  <section aria-labelledby="t-est">
+    <h2 id="t-est">O ESTÚDIO <small>um agente para cada função</small></h2>
+    <div class="deps" id="deps"></div>
+    <div class="linhas">
+      <div class="linhaP"><b>Vídeo curto</b>olheiro → editor-chefe → pesquisador → roteirista → checador → arte, trilha e voz → diretor → render → revisor → compliance → social media → você</div>
+      <div class="linhaP"><b>Ebook</b>editor-chefe → pesquisador → autor do ebook → checador → diagramador → revisor → compliance → copywriter → desenvolvedor web → você</div>
+      <div class="linhaP"><b>Minicurso</b>professor → checador → narrador → diretor → revisor → compliance → você</div>
+      <div class="linhaP"><b>Funil</b>copywriter → desenvolvedor web → atendente de WhatsApp → compliance → você</div>
+    </div>
+  </section>
+
+  <section aria-labelledby="t-linha">
+    <h2 id="t-linha">LINHA DE PRODUÇÃO <small>toque numa máquina para ver o que ela faz</small></h2>
+    <div class="esteira">
+      <div class="trilho" id="trilho">
+        <span class="caixa" aria-hidden="true"></span>
+      </div>
+    </div>
+    <div class="legenda-luz"><span><i style="background:var(--ok)"></i>automático</span><span><i style="background:var(--ambar)"></i>é com você</span></div>
+    <div class="detalhe" id="detalhe" aria-live="polite"></div>
+  </section>
+
+  <section aria-labelledby="t-inv">
+    <h2 id="t-inv">INVENTÁRIO <small>passe o mouse ou toque para rodar</small></h2>
+    <div class="grade" id="grade"></div>
+    <p class="dica">Os dois marcados como teste usam um clipe sintético no lugar da gameplay. Com a sua gravação do Fortnite, eles viram vídeos de verdade. "O preço de GTA 6, medido" está no Radar Pop.</p>
+  </section>
+
+  <section aria-labelledby="t-ars">
+    <h2 id="t-ars">ARSENAL</h2>
+    <div class="arsenal">
+      <div class="bloco">
+        <h3>Modelos</h3>
+        <ul class="lista">
+          <li><span>Curiosidades</span><span>até 2,5 mi views</span></li>
+          <li><span>Ranking</span><span>620–750 mil</span></li>
+          <li><span>Versus</span><span>657 mil</span></li>
+          <li><span>Evolução</span><span>278 mil</span></li>
+          <li><span>Dado medido</span><span>nosso diferencial</span></li>
+          <li><span>Chefão e extrato</span><span>finanças como jogo</span></li>
+        </ul>
+      </div>
+      <div class="bloco">
+        <h3>Estilos visuais</h3>
+        <div class="estilos" id="estilos"></div>
+      </div>
+      <div class="bloco">
+        <h3>Camadas e ferramentas</h3>
+        <ul class="lista">
+          <li><span>Gameplay em tela cheia</span><span>corte a cada 2,5 s</span></li>
+          <li><span>Gameplay dividida</span><span>dados em cima</span></li>
+          <li><span>Legenda dupla</span><span>frase + palavra-chave</span></li>
+          <li><span>Final em loop</span><span>todo vídeo</span></li>
+          <li><span>Trilha sintetizada</span><span>sem direitos</span></li>
+          <li><span>Sharingan</span><span>mede o ritmo</span></li>
+          <li><span>Folha de revisão</span><span>1 quadro por legenda</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="t-mis">
+    <h2 id="t-mis">MISSÕES</h2>
+    <div class="missoes">
+      <article class="missao atual">
+        <span class="rot">MISSÃO ATUAL · CANAL DE FINANÇAS</span>
+        <h3>Ebook "Chefões do cartão"</h3>
+        <p class="sub">Primeiro produto à venda: 6 capítulos, cada dívida é um chefão. R$ 19 na Hotmart, pronto na semana 2.</p>
+        <div class="barra" role="progressbar" aria-valuemin="0" aria-valuemax="8" aria-valuenow="4" aria-label="Progresso da missão"><i style="width:50%"></i></div>
+        <span class="tag">4 de 8 passos</span>
+        <ul class="passos">
+          <li class="feito">Plano do funil escrito</li>
+          <li class="feito">Tema, formato e capítulos definidos</li>
+          <li class="voce">Escolher o nome do canal e a voz</li>
+          <li class="feito">Estilo visual de finanças na fábrica (grana, chefão, extrato)</li>
+          <li class="feito">1º Short: R$ 1.000 no rotativo (Banco Central)</li>
+          <li>Ebook escrito, ilustrado e em PDF</li>
+          <li>Página de venda no ar</li>
+          <li class="voce">Conta e produto criados na Hotmart</li>
+        </ul>
+      </article>
+      <div class="fila">
+        <article class="missao"><span class="rot">PRÓXIMA</span><h3>Gameplay do Fortnite</h3><p>Esperando a sua gravação pelo app da NVIDIA. O guia está no GitHub.</p></article>
+        <article class="missao"><span class="rot">DEPOIS</span><h3>Minicurso em 6 fases</h3><p>Aulas animadas pela fábrica; vendas na semana 7.</p></article>
+        <article class="missao"><span class="rot">DEPOIS</span><h3>WhatsApp automático</h3><p>Robô que entrega a calculadora, responde dúvidas e recupera carrinho.</p></article>
+        <article class="missao"><span class="rot">MAIS TARDE</span><h3>Canal em inglês</h3><p>Mesma fábrica, legendas traduzidas, preços em dólar.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="t-radar">
+    <h2 id="t-radar">NO RADAR POP <small>pautas de hoje</small></h2>
+    <div class="radar"><table>
+      <thead><tr><th>Pauta</th><th>Tema</th><th>Potencial</th><th>Situação</th></tr></thead>
+      <tbody id="pautas"></tbody>
+    </table></div>
+  </section>
+
+  <footer class="rodape">
+    <a href="https://claude.ai/artifact/LasVjXDtUwVj9qAkA5KZis" target="_blank" rel="noopener">Radar Pop</a>
+    <a href="https://claude.ai/artifact/R2NRFYjELs4opAFzEJJv7G" target="_blank" rel="noopener">Plano do funil</a>
+    <a href="https://github.com/tiagoprecioso-oss/fabrica-de-video" target="_blank" rel="noopener">Fábrica no GitHub</a>
+    <span>Retrato atualizado pelo Claude quando a fábrica muda.</span>
+  </footer>
+</main>
+
+<script>
+
+const deps = [
+  ['PAUTA', [['OL','Olheiro','caça o que está em alta (06:47)','on'],['EC','Editor-chefe','escolhe pauta, canal e formato','on']]],
+  ['ROTEIRO E DADOS', [['PE','Pesquisador','dados oficiais com fonte','on'],['RO','Roteirista','roteiro curto com final em loop','on']]],
+  ['ARTE E VÍDEO', [['DI','Diretor','monta o vídeo e a câmera','on'],['DA','Diretor de arte','a cara de cada canal','on'],['CO','Compositor','trilha que fecha o loop','on'],['NA','Narrador','locução','voce'],['EG','Editor de gameplay','corta a sua gravação','voce']]],
+  ['PRODUTOS', [['AE','Autor do ebook','escreve "Chefões do cartão"','novo'],['DG','Diagramador','ebook e fichas em PDF','novo'],['PR','Professor','aulas do minicurso','novo']]],
+  ['VENDAS', [['CW','Copywriter','página, e-mails e chamadas','novo'],['DW','Desenvolvedor web','calculadora e páginas','novo'],['WA','Atendente de WhatsApp','robô de respostas','voce'],['SM','Social media','legenda, hashtags e horário','on'],['TR','Tradutor','versões em inglês','novo']]],
+  ['QUALIDADE E NÚMEROS', [['CH','Checador','refaz cada conta','on'],['RV','Revisor','confere o vídeo quadro a quadro','on'],['CP','Compliance','direitos e regras das redes','on'],['AN','Analista','números da semana','voce'],['PD','Produtor','cronograma e este painel','on']]]
+];
+const ST = {on:'trabalhando', novo:'chegou agora', voce:'esperando você'};
+document.getElementById('deps').innerHTML = deps.map(([n, ags]) => `<div class="dep"><h3>${n}</h3><ul class="agentes">${ags.map(([i, nome, f, st]) =>
+  `<li class="agente"><span class="av" aria-hidden="true" style="${st === 'voce' ? 'background:var(--ambar)' : st === 'novo' ? 'background:var(--rosa)' : ''}">${i}</span><span><b>${nome}</b><small>${f}</small></span><span class="st ${st}">${ST[st]}</span></li>`).join('')}</ul></div>`).join('');
+
+const maquinas = [
+  {ico:'📡', nome:'Radar Pop', quem:'automático · 06:47', luz:'ok', txt:'Todo dia de manhã, um agente procura o que está em alta em games, filmes, séries e animes e deixa pautas com gancho, roteiro e fontes no Radar Pop.'},
+  {ico:'🧭', nome:'Editor-chefe', quem:'agente', luz:'ok', txt:'Escolhe a pauta do dia para cada canal (pop, finanças, inglês), o formato e o produto que ela puxa, sem repetir assunto.'},
+  {ico:'🔎', nome:'Pesquisador', quem:'agente', luz:'ok', txt:'Confere cada número em fonte oficial (preço, data, inflação, juros do Banco Central) e escreve a ficha de dados com a fonte de cada valor.'},
+  {ico:'✍️', nome:'Roteirista', quem:'agente', luz:'ok', txt:'Escreve o roteiro de 25 a 45 segundos: gancho forte, frases curtas e um final que emenda no começo (loop).'},
+  {ico:'🎬', nome:'Diretor', quem:'agente', luz:'ok', txt:'Escolhe o modelo viral, o estilo visual, a câmera, os destaques e, quando há gravação, a camada de gameplay. Sai um arquivo de instruções do vídeo.'},
+  {ico:'⚙️', nome:'Render', quem:'GitHub · ~3 min', luz:'ok', txt:'O GitHub monta o vídeo vertical com animações, legenda e trilha, e gera a folha de revisão com um quadro por legenda.'},
+  {ico:'🧐', nome:'Qualidade', quem:'checador · revisor · compliance', luz:'ok', txt:'O checador refaz cada conta; o revisor procura texto cortado, testa o loop e mede o ritmo com o Sharingan; o compliance confere direitos e regras das redes. Manda corrigir até 3 vezes.'},
+  {ico:'✅', nome:'Aprovação', quem:'você', luz:'voce', txt:'O vídeo chega no Radar Pop para você assistir. Nada segue sem o seu ok: é o que mantém o canal seguro nas regras do YouTube.'},
+  {ico:'🚀', nome:'Postar', quem:'você', luz:'voce', txt:'Você posta ou agenda no YouTube, Instagram e TikTok. A fábrica entrega legenda e hashtags prontas.'}
+];
+const trilho = document.getElementById('trilho'), detalhe = document.getElementById('detalhe');
+const mostrar = (i) => {
+  const m = maquinas[i];
+  detalhe.innerHTML = `<h3>${m.ico} ${m.nome}</h3><p>${m.txt}</p>`;
+  trilho.querySelectorAll('.maq').forEach((b, j) => b.setAttribute('aria-pressed', j === i ? 'true' : 'false'));
+};
+maquinas.forEach((m, i) => {
+  const b = document.createElement('button');
+  b.className = 'maq'; b.type = 'button'; b.id = 'maq-' + i;
+  b.innerHTML = `<span class="luz ${m.luz}" aria-hidden="true"></span><span class="ico" aria-hidden="true">${m.ico}</span><span class="nome">${m.nome}</span><span class="quem">${m.quem}</span>`;
+  b.addEventListener('click', () => mostrar(i));
+  trilho.appendChild(b);
+});
+mostrar(0);
+
+const videos = [
+  {id:'gta6-vs-gta5', t:'GTA 6 vs GTA 5: qual sai mais caro?', m:'Versus', e:'synthwave'},
+  {id:'gta-ranking-precos', t:'O GTA mais caro da história (corrigido)', m:'Ranking', e:'synthwave'},
+  {id:'gta6-5-fatos', t:'5 coisas sobre o GTA 6', m:'Curiosidades', e:'synthwave'},
+  {id:'gta-evolucao-espera', t:'A espera entre cada GTA', m:'Evolução', e:'arcade'},
+  {id:'fin-rotativo-1000', t:'R$ 1.000 no rotativo viram quanto?', m:'Chefão', e:'grana'},
+  {id:'teste-gameplay-cheia', t:'Ranking com gameplay em tela cheia', m:'Ranking', e:'gameplay', teste:true},
+  {id:'teste-gameplay-dividida', t:'Versus com gameplay dividida', m:'Versus', e:'gameplay', teste:true}
+];
+const grade = document.getElementById('grade');
+videos.forEach(v => {
+  const c = document.createElement('article');
+  c.className = 'cartucho';
+  c.innerHTML = `<video muted loop playsinline preload="metadata" poster="midia/${v.id}.jpg" src="midia/${v.id}.mp4" aria-label="Prévia: ${v.t}"></video>
+    <div class="info"><span class="t">${v.t}</span><div class="tags"><span class="tag">${v.m}</span><span class="tag">${v.e}</span>${v.teste ? '<span class="tag teste">teste</span>' : '<span class="tag espera">esperando aprovação</span>'}</div></div>`;
+  const vid = c.querySelector('video');
+  const play = () => { const p = vid.play(); if (p) p.catch(() => {}); };
+  c.addEventListener('mouseenter', play); c.addEventListener('mouseleave', () => vid.pause());
+  c.addEventListener('click', () => vid.paused ? play() : vid.pause());
+  grade.appendChild(c);
+});
+
+const estilos = [
+  ['synthwave', '#0A0618', ['#FF2E78','#00E1FF','#FFD600']], ['cinema', '#07070A', ['#E8B04B','#D7263D','#8EC5CC']],
+  ['anime', '#0B0B10', ['#FF3B3B','#3BB2FF','#FFE14D']], ['arcade', '#040A06', ['#3EFF8B','#FF3EA5','#FFE600']],
+  ['streaming', '#050814', ['#7B61FF','#4DD2FF','#FFC94D']], ['espaço', '#03030C', ['#9B6BFF','#5CE1FF','#FFD86B']], ['grana (finanças)', '#EEF3EE', ['#0E9F6E','#E03E2D','#E5A400']]
+];
+document.getElementById('estilos').innerHTML = estilos.map(([n, bg, cs]) =>
+  `<div class="est" style="background:${bg};color:${bg === '#EEF3EE' ? '#12241B' : '#fff'}">${n}<span class="sw">${cs.map(c => `<i style="background:${c}"></i>`).join('')}</span></div>`).join('');
+
+const pautas = [
+  ['R$ 1.000 no rotativo viram quanto?', 'finanças', 5, 'producao'], ['O preço de GTA 6, medido', 'games', 5, 'producao'], ['GTA 6 vs GTA 5: qual sai mais caro?', 'games', 5, 'producao'],
+  ['Ranking: qual foi o GTA mais caro?', 'games', 5, 'producao'], ['Contagem regressiva GTA 6: faltam 23 dias', 'games', 5, 'nova'],
+  ['5 coisas que você precisa saber do GTA 6', 'games', 4, 'producao'], ['Phantom Blade Zero sai quinta-feira (29/10)', 'games', 4, 'nova'],
+  ['Anéis de Poder T3: o Um Anel vai ser forjado', 'séries', 4, 'nova'], ['3 animes da temporada de outono', 'animes', 3, 'nova'],
+  ['Quem é Haymitch? O novo Jogos Vorazes', 'filmes', 3, 'nova']
+];
+document.getElementById('pautas').innerHTML = pautas.map(([t, c, p, s]) =>
+  `<tr><td>${t}</td><td>${c}</td><td class="estrela" aria-label="${p} de 5">${'★'.repeat(p)}<s>${'★'.repeat(5 - p)}</s></td><td><span class="pill ${s}">${s === 'nova' ? 'nova' : 'em produção'}</span></td></tr>`).join('');
+</script>

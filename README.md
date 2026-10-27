@@ -1,5 +1,7 @@
 # Fábrica de vídeos — Radar Pop
 
+**Novo por aqui? Leia [COMECE-AQUI.md](COMECE-AQUI.md).** O estúdio (22 agentes) está em [ESTUDIO.md](ESTUDIO.md).
+
 Sistema de agentes do Claude que transforma uma pauta em um Short/Reels pronto (1080×1920, com trilha e final em loop).
 
 ## O fluxo
