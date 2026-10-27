@@ -1,0 +1,42 @@
+{
+  "id": "gta6-vs-gta5",
+  "modelo": "Versus",
+  "titulo": "GTA 6 vs GTA 5: qual sai mais caro?",
+  "duracao": 32,
+  "batidas": 55,
+  "trilha": "trilhas/gta6-vs-gta5.wav",
+  "blocos": [
+    {"tipo": "versus", "de": 0, "ate": 32, "camera": "inclinar", "saida": "loop",
+     "lados": [
+       {"nome": "GTA V", "sub": "2013", "cor": "ciano"},
+       {"nome": "GTA VI", "sub": "2026", "cor": "rosa"}
+     ],
+     "linhas": [
+       {"rotulo": "LANÇAMENTO", "a": "17/09/2013", "b": "19/11/2026", "em": 3.4},
+       {"rotulo": "PREÇO NOS EUA", "a": "$59,99", "b": "$79,99", "vence": "a", "em": 7.3},
+       {"rotulo": "PREÇO NO BRASIL", "a": "R$ 199,99", "b": "R$ 449,90", "vence": "a", "em": 11.3},
+       {"rotulo": "BRASIL CORRIGIDO PELO IPCA", "a": "R$ 411,63", "b": "R$ 449,90", "vence": "a", "em": 15.3},
+       {"rotulo": "CONSOLES", "a": "PS3 · X360", "b": "PS5 · XSX", "em": 20.3},
+       {"rotulo": "PC NO LANÇAMENTO", "a": "NÃO (2015)", "b": "SEM DATA", "em": 24.3}
+     ]}
+  ],
+  "legendas": [
+    {"de": 0, "ate": 3.3, "texto": "GTA 6 contra GTA 5: qual sai *mais caro?*"},
+    {"de": 3.3, "ate": 7.2, "texto": "O 5 saiu em 2013. O 6 chega em *19 de novembro*."},
+    {"de": 7.2, "ate": 11.2, "texto": "Nos EUA: 60 contra *80 dólares*."},
+    {"de": 11.2, "ate": 15.2, "texto": "No Brasil: R$ 199,99 contra *R$ 449,90*."},
+    {"de": 15.2, "ate": 20.2, "texto": "Corrigindo o GTA 5 pelo IPCA: *R$ 412*. Ainda mais barato."},
+    {"de": 20.2, "ate": 24.2, "texto": "Um nasceu no *PS3*. O outro, só na nova geração."},
+    {"de": 24.2, "ate": 28.2, "texto": "E no PC? Nenhum dos dois *de cara*."},
+    {"de": 28.2, "ate": 32, "texto": "Placar: *3 a 0* pro GTA 5. Mas e aí…"}
+  ],
+  "rodape": [{"de": 0, "texto": "Fontes: Rockstar · Tecnoblog · Critical Hits · IPCA (BCB)"}],
+  "fontes": [
+    {"titulo": "TechRadar: preço oficial de GTA 6", "url": "https://www.techradar.com/gaming/we-finally-know-the-official-gta-6-price-its-expensive-but-not-too-bad"},
+    {"titulo": "Tecnoblog: GTA 6 custa R$ 449,90 no Brasil", "url": "https://tecnoblog.net/noticias/preco-de-gta-6-no-brasil-e-revelado-r-449/"},
+    {"titulo": "Critical Hits: GTA V a R$ 199,99", "url": "https://criticalhits.com.br/artigos/gta-v-guia-completo/"},
+    {"titulo": "PlayStation LifeStyle: GTA V em 17/09/2013 a $59,99", "url": "https://www.playstationlifestyle.net/?p=271513"},
+    {"titulo": "Tecnoblog: GTA V para PC em abril de 2015", "url": "https://tecnoblog.net/174219/gta-v-pc-adiado-14-abril/"},
+    {"titulo": "Banco Central SGS 433 (IPCA)", "url": "https://api.bcb.gov.br/dados/serie/bcdata.sgs.433/dados?formato=json"}
+  ]
+}

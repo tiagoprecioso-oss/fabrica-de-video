@@ -3,6 +3,9 @@ import {AbsoluteFill, Audio, continueRender, delayRender, staticFile, useCurrent
 import {Fundo} from './componentes/Fundo';
 import {Legenda} from './componentes/Legenda';
 import {BlocoBarras, BlocoNumero, BlocoTitulo, camera} from './componentes/Blocos';
+import {BlocoRanking, BlocoVersus, BlocoCuriosidade} from './componentes/Blocos2';
+
+const BLOCOS = {barras: BlocoBarras, numero: BlocoNumero, titulo: BlocoTitulo, ranking: BlocoRanking, versus: BlocoVersus, curiosidade: BlocoCuriosidade};
 import {COR, FONTE, W, easeOut, clamp} from './tema';
 
 /* fontes locais (não depende de internet na hora de renderizar) */
@@ -50,7 +53,7 @@ export const DadoMedido = ({video}) => {
         const p = clamp((t - b.de) / (b.ate - b.de));
         const lt = t - b.de;
         const {x, blur} = whip(b, t, dur);
-        const Comp = b.tipo === 'barras' ? BlocoBarras : b.tipo === 'numero' ? BlocoNumero : BlocoTitulo;
+        const Comp = BLOCOS[b.tipo] || BlocoTitulo;
         return (
           <AbsoluteFill key={i} style={{perspective: 1800, perspectiveOrigin: '50% 40%', transform: `translateX(${x}px)`, filter: blur ? `blur(${blur}px)` : 'none'}}>
             <AbsoluteFill style={{transform: camera(b.camera, p, t, batida), transformOrigin: '50% 40%', transformStyle: 'preserve-3d'}}>

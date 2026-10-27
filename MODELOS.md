@@ -54,7 +54,28 @@ Vídeo vertical 1080×1920, 30 fps, com fundo synthwave, legendas corridas e fin
 4. Nada de logo, pôster ou arte oficial desenhada; prints e clipes oficiais só entram por cima, na edição.
 5. Duração 25–45 s.
 
-## Próximos modelos (a construir)
-- `TresProvas` — gancho + 3 provas numeradas com mídia (print/clipe) em quadro.
-- `Ranking` — top 5 com barras horizontais correndo.
-- `Curiosidades` — lista numerada com mídia em tela cheia.
+## Qual modelo usar (baseado no que viraliza no nicho, out/2026)
+| modelo (`"modelo"`) | quando usar | exemplos que bombam |
+|---|---|---|
+| `DadoMedido` | um número muda tudo quando corrigido/comparado | "o preço de GTA 6, medido" |
+| `Ranking` | lista ordenável por um número (vendas, preço, nota, audiência) | "5 games mais vendidos" (750 mil), "10 animes mais assistidos" (620 mil) |
+| `Versus` | dois produtos rivais, atributo por atributo | "GTA 6 vs GTA 5" (657 mil), "Goku vs Naruto" (227 mil) |
+| `Curiosidades` | 3–7 fatos curtos sobre um lançamento/obra | "10 curiosidades de Demon Slayer" (2,5 mi), "cada Homem-Aranha pula diferente" (960 mil) |
+
+Todos usam o mesmo motor; misture blocos quando fizer sentido (ex.: abrir um Ranking com um bloco `titulo`).
+
+### `ranking` — contagem regressiva do último ao 1º
+- `titulo`, `subtitulo`, `moeda`, `casas`, `unidade` (ex.: "mi"), `max`
+- `itens`: em ordem do **1º lugar primeiro**: `{nome, sub, valor, cor?}` (até 7). O 1º fica amarelo com partículas.
+- `revelacoes`: tempos (s) de entrada de cada item, na mesma ordem dos itens (o 1º é o último a aparecer). Sincronize com a legenda que fala aquele lugar.
+
+### `versus` — lado a lado
+- `lados`: `[{nome, sub, cor, midia?}, {…}]` (cor padrão: ciano × rosa)
+- `linhas`: `{rotulo, a, b, vence?: "a"|"b", em}` (até 6). O placar no canto conta as vitórias.
+
+### `curiosidade` — um fato por bloco
+- `numero`, `total` (bolinhas de progresso no topo), `cor`, `valor` (o número/palavra gigante, curto), `titulo`, `texto`, `midia?`
+- Um bloco por fato, 5–6 s cada, com `entrada`/`saida` whip; o último com `saida: loop`.
+
+### Mídia (print ou clipe)
+`midia: "midias/arquivo.jpg"` (ou .mp4) em `curiosidade` e nos `lados` do `versus`. O arquivo vai em `public/midias/`. Só fontes oficiais, clipes de 3–5 s. Sem mídia o bloco tem visual próprio — nunca invente imagem.

@@ -1,0 +1,43 @@
+{
+  "id": "gta6-5-fatos",
+  "modelo": "Curiosidades",
+  "titulo": "5 coisas que você precisa saber do GTA 6",
+  "duracao": 33,
+  "batidas": 57,
+  "trilha": "trilhas/gta6-5-fatos.wav",
+  "blocos": [
+    {"tipo": "titulo", "de": 0, "ate": 3, "camera": "mergulho", "saida": "whip",
+     "linha1": "5 COISAS DO", "linha2": "GTA 6", "corLinha": "rosa"},
+    {"tipo": "curiosidade", "de": 3, "ate": 9, "camera": "empurrar", "entrada": "whip", "saida": "whip",
+     "numero": 1, "total": 5, "cor": "ciano", "valor": "19/11",
+     "titulo": "Sai numa quinta-feira", "texto": "19 de novembro de 2026, no PS5 e no Xbox Series."},
+    {"tipo": "curiosidade", "de": 9, "ate": 15, "camera": "orbita", "entrada": "whip", "saida": "whip",
+     "numero": 2, "total": 5, "cor": "rosa", "valor": "US$ 79,99",
+     "titulo": "O GTA mais caro já lançado em dólar", "texto": "33% acima dos US$ 59,99 do GTA 5."},
+    {"tipo": "curiosidade", "de": 15, "ate": 21, "camera": "inclinar", "entrada": "whip", "saida": "whip",
+     "numero": 3, "total": 5, "cor": "verde", "valor": "R$ 449,90",
+     "titulo": "O preço no Brasil", "texto": "Edição padrão. A Ultimate sai por R$ 549,90."},
+    {"tipo": "curiosidade", "de": 21, "ate": 27, "camera": "empurrar", "entrada": "whip", "saida": "whip",
+     "numero": 4, "total": 5, "cor": "violeta", "valor": "PC?",
+     "titulo": "Versão de computador sem data", "texto": "A Rockstar só confirmou PS5 e Xbox Series."},
+    {"tipo": "curiosidade", "de": 27, "ate": 33, "camera": "orbita", "entrada": "whip", "saida": "loop",
+     "numero": 5, "total": 5, "cor": "amarelo", "valor": "13 ANOS",
+     "titulo": "De espera desde o GTA 5", "texto": "Setembro de 2013 a novembro de 2026."}
+  ],
+  "legendas": [
+    {"de": 0, "ate": 3, "texto": "*5 coisas* que você precisa saber do GTA 6."},
+    {"de": 3, "ate": 9, "texto": "1: ele sai numa *quinta-feira*, 19 de novembro."},
+    {"de": 9, "ate": 15, "texto": "2: custa *80 dólares*. O GTA mais caro em dólar."},
+    {"de": 15, "ate": 21, "texto": "3: no Brasil, *R$ 449,90*. A Ultimate, R$ 549,90."},
+    {"de": 21, "ate": 27, "texto": "4: versão de *PC*? A Rockstar ainda não confirmou."},
+    {"de": 27, "ate": 30.5, "texto": "5: são *13 anos* desde o GTA 5."},
+    {"de": 30.5, "ate": 33, "texto": "Qual dessas você *não sabia?*"}
+  ],
+  "rodape": [{"de": 0, "texto": "Fontes: Rockstar · TechRadar · Tecnoblog"}],
+  "fontes": [
+    {"titulo": "TechRadar: preço oficial de GTA 6", "url": "https://www.techradar.com/gaming/we-finally-know-the-official-gta-6-price-its-expensive-but-not-too-bad"},
+    {"titulo": "Tecnoblog: GTA 6 custa R$ 449,90 no Brasil (Ultimate R$ 549,90)", "url": "https://tecnoblog.net/noticias/preco-de-gta-6-no-brasil-e-revelado-r-449/"},
+    {"titulo": "Worten: data de GTA VI e PC não confirmado", "url": "https://www.worten.pt/worten-game-ring/lancamentos-de-jogos"},
+    {"titulo": "PlayStation LifeStyle: GTA V em 17/09/2013", "url": "https://www.playstationlifestyle.net/?p=271513"}
+  ]
+}

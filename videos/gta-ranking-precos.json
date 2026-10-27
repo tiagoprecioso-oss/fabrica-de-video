@@ -1,0 +1,43 @@
+{
+  "id": "gta-ranking-precos",
+  "modelo": "Ranking",
+  "titulo": "Ranking: o GTA mais caro da história (corrigido)",
+  "duracao": 29.5,
+  "batidas": 51,
+  "trilha": "trilhas/gta-ranking-precos.wav",
+  "blocos": [
+    {"tipo": "titulo", "de": 0, "ate": 3, "camera": "mergulho", "saida": "whip",
+     "linha1": "QUAL FOI O GTA", "linha2": "MAIS CARO?", "corLinha": "rosa"},
+    {"tipo": "ranking", "de": 3, "ate": 29.5, "camera": "orbita", "entrada": "whip", "saida": "loop",
+     "titulo": "GTA MAIS CARO", "subtitulo": "PREÇO DE LANÇAMENTO CORRIGIDO · US$ DE 2026",
+     "moeda": "$", "casas": 0, "max": 100,
+     "itens": [
+       {"nome": "GTA III", "sub": "2001 · $49,99", "valor": 94.79},
+       {"nome": "GTA IV", "sub": "2008 · $59,99", "valor": 94.09},
+       {"nome": "VICE CITY", "sub": "2002 · $49,99", "valor": 92.90},
+       {"nome": "SAN ANDREAS", "sub": "2004 · $49,99", "valor": 88.23},
+       {"nome": "GTA V", "sub": "2013 · $59,99", "valor": 86.33},
+       {"nome": "GTA VI", "sub": "2026 · $79,99", "valor": 79.99, "cor": "rosa"}
+     ],
+     "revelacoes": [22.6, 19.2, 16.2, 13.2, 10.2, 7.2]}
+  ],
+  "legendas": [
+    {"de": 0, "ate": 3, "texto": "Qual foi o GTA *mais caro* da história?"},
+    {"de": 3, "ate": 7, "texto": "Corrigindo pela *inflação*, em dólares de hoje…"},
+    {"de": 7, "ate": 10, "texto": "Em 6º, o *GTA 6*: 80 dólares."},
+    {"de": 10, "ate": 13, "texto": "5º, GTA 5: *86*."},
+    {"de": 13, "ate": 16, "texto": "4º, San Andreas: *88*."},
+    {"de": 16, "ate": 19, "texto": "3º, Vice City: *93*."},
+    {"de": 19, "ate": 22.4, "texto": "2º, GTA IV: *94*."},
+    {"de": 22.4, "ate": 26.4, "texto": "E o 1º, por menos de 1 dólar: *GTA III*, 95."},
+    {"de": 26.4, "ate": 29.5, "texto": "Ainda acha que o GTA 6 é o *mais caro?*"}
+  ],
+  "rodape": [{"de": 0, "texto": "Fonte: preços de lançamento EUA · CPI-U (BLS) até set/2026"}],
+  "fontes": [
+    {"titulo": "FRED: CPI-U (CPIAUCNS)", "url": "https://fred.stlouisfed.org/series/CPIAUCNS"},
+    {"titulo": "TechRadar: preço oficial de GTA 6", "url": "https://www.techradar.com/gaming/we-finally-know-the-official-gta-6-price-its-expensive-but-not-too-bad"},
+    {"titulo": "News 12: GTA IV a $59,99", "url": "https://longisland.news12.com/grand-theft-auto-iv-races-onto-store-shelves-34821952"},
+    {"titulo": "PlayStation LifeStyle: GTA V a $59,99", "url": "https://www.playstationlifestyle.net/?p=271513"},
+    {"titulo": "GameGPU: preços de lançamento da série", "url": "https://en.gamegpu.com/news/igry/s-uchetom-inflyatsii-grand-theft-auto-6-stala-samoj-deshevoj-chastyu-serii-na-moment-reliza"}
+  ]
+}
