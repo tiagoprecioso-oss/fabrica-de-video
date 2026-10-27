@@ -28,7 +28,7 @@ export const BlocoNumero = ({b, lt}) => {
       {b.chip && <div style={{fontFamily: FONTE.apoio, fontSize: 32, color: COR.branco, padding: '14px 30px', borderRadius: 40,
         border: '2px solid rgba(255,255,255,.45)', background: 'rgba(255,255,255,.08)', opacity: clamp(lt / 0.3)}}>{b.chip}</div>}
       <div style={{fontFamily: FONTE.display, fontSize: 300, lineHeight: 1, color: COR.rosa, transform: `scale(${k})`,
-        textShadow: `${neon(COR.rosa, 1.2)}, 6px 8px 0 #5A0C2C, 12px 16px 0 #3A0820`}}>{dinheiro(v, b.moeda || '$', b.casas ?? 2)}</div>
+        textShadow: `${neon(COR.rosa, 1.2)}, 6px 8px 0 rgba(0,0,0,.45), 12px 16px 0 rgba(0,0,0,.3)`}}>{dinheiro(v, b.moeda || '$', b.casas ?? 2)}</div>
       {b.nota && <div style={{fontFamily: FONTE.apoio, fontSize: 32, color: COR.apagado, opacity: nota}}>{b.nota}</div>}
       {b.nota2 && <div style={{fontFamily: FONTE.apoio, fontSize: 32, color: COR.amarelo, opacity: nota, textShadow: neon(COR.amarelo, .5)}}>{b.nota2}</div>}
     </AbsoluteFill>
@@ -42,7 +42,7 @@ export const BlocoTitulo = ({b, lt}) => {
     <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', flexDirection: 'column', top: -300}}>
       <div style={{fontFamily: FONTE.display, fontSize: 130, color: COR.branco, transform: `scale(${k})`, lineHeight: 1}}>{b.linha1}</div>
       <div style={{fontFamily: FONTE.display, fontSize: 250, color: COR.amarelo, transform: `scale(${k})`, lineHeight: 1.05,
-        textShadow: `${neon(COR.amarelo, 1.1)}, 6px 8px 0 #6A5200, 12px 16px 0 #3A2C00`}}>{b.linha2}</div>
+        textShadow: `${neon(COR.amarelo, 1.1)}, 6px 8px 0 rgba(0,0,0,.45), 12px 16px 0 rgba(0,0,0,.3)`}}>{b.linha2}</div>
       <div style={{width: 620 * k, height: 12, marginTop: 26, borderRadius: 6, background: b.corLinha ? CORES_ITEM[b.corLinha] : COR.verde,
         boxShadow: neon(b.corLinha ? CORES_ITEM[b.corLinha] : COR.verde, .8)}} />
     </AbsoluteFill>
@@ -73,7 +73,7 @@ export const BlocoBarras = ({b, t}) => {
   return (
     <AbsoluteFill>
       <div style={{position: 'absolute', left: PX0, top: PY0, width: PX1 - PX0, height: PY1 - PY0, borderRadius: 36,
-        background: 'linear-gradient(180deg, rgba(30,12,60,.92), rgba(14,6,32,.92))', border: '2px solid rgba(255,255,255,.12)',
+        background: COR.painel, border: '2px solid rgba(255,255,255,.12)',
         boxShadow: '0 30px 80px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.12)'}} />
       <div style={{position: 'absolute', left: PX0, width: PX1 - PX0, top: PY0 + 50, textAlign: 'center', fontFamily: FONTE.apoio, fontSize: 32,
         color: depois ? COR.amarelo : COR.branco, textShadow: depois ? neon(COR.amarelo, .5) : 'none'}}>{depois ? b.tituloDepois : b.titulo}</div>
@@ -142,7 +142,7 @@ export const BlocoBarras = ({b, t}) => {
         const a = easeOut((t - b.formula.de) / 0.4) * (1 - easeOut((t - b.formula.ate + 0.4) / 0.4));
         return (
           <div style={{position: 'absolute', left: 540, top: 660, transform: `translate(-50%, -50%) scale(${0.9 + 0.1 * a})`, opacity: a,
-            padding: '26px 40px', borderRadius: 24, background: 'rgba(10,6,24,.94)', border: `3px solid ${COR.amarelo}`, textAlign: 'center',
+            padding: '26px 40px', borderRadius: 24, background: COR.painelSolido, border: `3px solid ${COR.amarelo}`, textAlign: 'center',
             boxShadow: neon(COR.amarelo, .5)}}>
             <div style={{fontFamily: FONTE.apoio, fontSize: 30, color: COR.amarelo}}>{b.formula.linha1}</div>
             <div style={{fontFamily: FONTE.display, fontSize: 54, color: COR.branco, marginTop: 10, whiteSpace: 'nowrap'}}>{b.formula.linha2}</div>

@@ -33,7 +33,7 @@ export const BlocoRanking = ({b, t}) => {
   return (
     <AbsoluteFill>
       <div style={{position: 'absolute', left: 50, top: 250, width: 980, height: 1050 - 250 + 60 + (n > 5 ? 40 : 0), borderRadius: 36,
-        background: 'linear-gradient(180deg, rgba(30,12,60,.92), rgba(14,6,32,.92))', border: '2px solid rgba(255,255,255,.12)',
+        background: COR.painel, border: '2px solid rgba(255,255,255,.12)',
         boxShadow: '0 30px 80px rgba(0,0,0,.55)'}} />
       <div style={{position: 'absolute', left: 50, width: 980, top: 290, textAlign: 'center', fontFamily: FONTE.display, fontSize: 64, color: COR.branco,
         textShadow: neon(COR.violeta, .6)}}>{b.titulo}</div>
@@ -84,7 +84,7 @@ export const BlocoVersus = ({b, t, lt}) => {
       {[A, B].map((L, j) => (
         <div key={j} style={{position: 'absolute', top: 230, height: 300, left: j ? 545 : 35, width: 500, borderRadius: 30, overflow: 'hidden',
           transform: `translateX(${(1 - k) * (j ? 300 : -300)}px)`,
-          background: `linear-gradient(160deg, ${(j ? corB : corA)}55, rgba(14,6,32,.95))`, border: `3px solid ${j ? corB : corA}`, boxShadow: neon(j ? corB : corA, .5)}}>
+          background: `linear-gradient(160deg, ${(j ? corB : corA)}55, ${COR.painelSolido})`, border: `3px solid ${j ? corB : corA}`, boxShadow: neon(j ? corB : corA, .5)}}>
           <Midia src={L.midia} p={clamp(lt / (b.ate - b.de))} style={{inset: 0, opacity: 0.85}} />
           <div style={{position: 'absolute', inset: 0, background: 'linear-gradient(180deg, transparent 30%, rgba(0,0,0,.75))'}} />
           <div style={{position: 'absolute', left: 0, right: 0, bottom: 56, textAlign: 'center', fontFamily: FONTE.display, fontSize: 84, color: COR.branco, lineHeight: 1}}>{L.nome}</div>
@@ -92,10 +92,10 @@ export const BlocoVersus = ({b, t, lt}) => {
           <div style={{position: 'absolute', top: 18, [j ? 'right' : 'left']: 22, fontFamily: FONTE.display, fontSize: 56, color: j ? corB : corA, textShadow: '0 2px 0 #000'}}>{placar[j]}</div>
         </div>
       ))}
-      <div style={{position: 'absolute', left: 20, width: 1040, top: 570, height: 650, borderRadius: 30, background: 'rgba(14,6,32,.9)',
+      <div style={{position: 'absolute', left: 20, width: 1040, top: 570, height: 650, borderRadius: 30, background: COR.painelSolido,
         border: '2px solid rgba(255,255,255,.1)', opacity: clamp(lt / 0.6)}} />
       <div style={{position: 'absolute', left: 540, top: 380, transform: `translate(-50%, -50%) scale(${k}) rotate(-6deg)`, fontFamily: FONTE.display, fontSize: 120,
-        color: COR.amarelo, textShadow: `${neon(COR.amarelo, 1)}, 5px 7px 0 #5A4500`}}>VS</div>
+        color: COR.amarelo, textShadow: `${neon(COR.amarelo, 1)}, 5px 7px 0 rgba(0,0,0,.45)`}}>VS</div>
       {linhas.map((l, i) => {
         const a = easeOut((t - quando(i)) / 0.35);
         if (a <= 0) return null;
@@ -124,6 +124,59 @@ export const BlocoVersus = ({b, t, lt}) => {
 };
 
 /* =========================================================
+   EVOLUÇÃO — linha do tempo que a câmera percorre
+   Formato comprovado: "evolução do Homem-Aranha" (278 mil), "evolução dos gráficos do GTA" (104 mil).
+   ========================================================= */
+export const BlocoEvolucao = ({b, t}) => {
+  const it = b.itens;
+  const n = it.length;
+  const ini = b.de + 0.6, fim = b.ate - 2;
+  const quando = (i) => (it[i].em != null ? it[i].em : ini + (i * (fim - ini)) / Math.max(1, n - 1));
+  // posição contínua da câmera: vai de um marco ao outro com suavização
+  let pos = 0;
+  for (let i = 1; i < n; i++) pos += easeOut((t - quando(i) + 0.15) / 0.7);
+  const ESP = 720, CX = 540;
+  const off = CX - pos * ESP;
+  const gap = (i) => it[i].intervalo;
+  return (
+    <AbsoluteFill>
+      {b.titulo && <div style={{position: 'absolute', left: 0, right: 0, top: 230, textAlign: 'center', fontFamily: FONTE.display, fontSize: 70, color: COR.branco,
+        textShadow: neon(COR.violeta, .6)}}>{b.titulo}</div>}
+      {/* trilho */}
+      <div style={{position: 'absolute', left: 0, width: 1080, top: 1060, height: 8, background: 'rgba(255,255,255,.15)'}} />
+      <div style={{position: 'absolute', left: 0, width: Math.max(0, off + pos * ESP), top: 1060, height: 8, background: COR.amarelo, boxShadow: neon(COR.amarelo, .6)}} />
+      {it.map((m, i) => {
+        const x = off + i * ESP;
+        if (x < -600 || x > 1680) return null;
+        const foco = clamp(1 - Math.abs(pos - i));
+        const a = easeOut((t - quando(i) + 0.3) / 0.4);
+        const cor = CORES_ITEM[m.cor || (i === n - 1 ? 'rosa' : 'ciano')];
+        return (
+          <React.Fragment key={i}>
+            {i > 0 && gap(i) && (
+              <div style={{position: 'absolute', left: x - ESP / 2 - 150, width: 300, top: 1090, textAlign: 'center', fontFamily: FONTE.apoio, fontSize: 28,
+                color: COR.amarelo, opacity: .4 + .6 * clamp(pos - i + 1)}}>{gap(i)}</div>
+            )}
+            <div style={{position: 'absolute', left: x - 22, top: 1042, width: 44, height: 44, borderRadius: 22, background: i <= pos + 0.01 ? COR.amarelo : 'rgba(255,255,255,.3)',
+              boxShadow: foco > .5 ? neon(COR.amarelo, .7) : 'none'}} />
+            <div style={{position: 'absolute', left: x - 290, width: 580, top: 380, height: 620, borderRadius: 34, overflow: 'hidden',
+              opacity: Math.max(.35, a) * (0.45 + 0.55 * foco), transform: `scale(${0.82 + 0.18 * foco})`,
+              background: COR.painel, border: `3px solid ${foco > .5 ? cor : 'rgba(255,255,255,.15)'}`, boxShadow: foco > .5 ? neon(cor, .5) : 'none'}}>
+              <Midia src={m.midia} p={foco} style={{left: 0, top: 0, width: 580, height: 330}} />
+              {!m.midia && <div style={{position: 'absolute', left: 0, top: 0, width: 580, height: 330, background: `radial-gradient(ellipse at 50% 60%, ${cor}66, transparent 70%)`}} />}
+              <div style={{position: 'absolute', left: 0, right: 0, top: m.midia ? 220 : 70, textAlign: 'center', fontFamily: FONTE.display, fontSize: 150, lineHeight: 1,
+                color: COR.branco, textShadow: `${neon(cor, .8)}, 4px 6px 0 rgba(0,0,0,.5)`}}>{m.ano}</div>
+              <div style={{position: 'absolute', left: 20, right: 20, top: 380, textAlign: 'center', fontFamily: FONTE.display, fontSize: 64, color: cor, lineHeight: 1}}>{m.nome}</div>
+              {m.texto && <div style={{position: 'absolute', left: 30, right: 30, top: 470, textAlign: 'center', fontFamily: FONTE.apoio, fontSize: 26, color: COR.branco, lineHeight: 1.25}}>{m.texto}</div>}
+            </div>
+          </React.Fragment>
+        );
+      })}
+    </AbsoluteFill>
+  );
+};
+
+/* =========================================================
    CURIOSIDADE — "nº X de N", fato grande, mídia em tela cheia
    Formato comprovado: "10 curiosidades de Demon Slayer", "você percebeu…".
    ========================================================= */
@@ -138,7 +191,7 @@ export const BlocoCuriosidade = ({b, lt}) => {
       {b.midia
         ? <Midia src={b.midia} p={p} style={{left: 0, top: 0, width: 1080, height: 1920}} />
         : <div style={{position: 'absolute', left: 60, top: 250, width: 960, height: 880, borderRadius: 40,
-            background: `radial-gradient(ellipse at 30% 20%, ${cor}55, rgba(14,6,32,.95) 65%)`, border: `2px solid ${cor}88`, boxShadow: neon(cor, .35)}} />}
+            background: `radial-gradient(ellipse at 30% 20%, ${cor}55, ${COR.painelSolido} 65%)`, border: `2px solid ${cor}88`, boxShadow: neon(cor, .35)}} />}
       {b.midia && <AbsoluteFill style={{background: 'linear-gradient(180deg, rgba(8,4,20,.55) 0%, rgba(8,4,20,.1) 35%, rgba(8,4,20,.85) 70%)'}} />}
       {/* progresso X de N */}
       <div style={{position: 'absolute', left: 0, right: 0, top: 200, display: 'flex', justifyContent: 'center', gap: 14}}>

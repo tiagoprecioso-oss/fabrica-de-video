@@ -26,7 +26,7 @@ export const Legenda = ({texto, lt, dur, y = 1330}) => {
   return (
     <div style={{position: 'absolute', left: 0, right: 0, top: y, transform: 'translateY(-50%)', display: 'flex', justifyContent: 'center'}}>
       <div style={{
-        maxWidth: 940, padding: '18px 34px', borderRadius: 26, background: 'rgba(8,4,20,.80)', backdropFilter: 'blur(6px)',
+        maxWidth: 940, padding: '18px 34px', borderRadius: 26, background: COR.legenda, backdropFilter: 'blur(6px)',
         textAlign: 'center', fontFamily: FONTE.display, fontSize: 78, lineHeight: 1.12, letterSpacing: 0.5,
       }}>
         {ws.map((p, i) => {

@@ -61,6 +61,7 @@ Vídeo vertical 1080×1920, 30 fps, com fundo synthwave, legendas corridas e fin
 | `Ranking` | lista ordenável por um número (vendas, preço, nota, audiência) | "5 games mais vendidos" (750 mil), "10 animes mais assistidos" (620 mil) |
 | `Versus` | dois produtos rivais, atributo por atributo | "GTA 6 vs GTA 5" (657 mil), "Goku vs Naruto" (227 mil) |
 | `Curiosidades` | 3–7 fatos curtos sobre um lançamento/obra | "10 curiosidades de Demon Slayer" (2,5 mi), "cada Homem-Aranha pula diferente" (960 mil) |
+| `Evolucao` | algo que muda ao longo do tempo (datas, versões, gráficos, atores) | "evolução do Homem-Aranha" (278 mil), "evolução dos gráficos do GTA" (104 mil) |
 
 Todos usam o mesmo motor; misture blocos quando fizer sentido (ex.: abrir um Ranking com um bloco `titulo`).
 
@@ -76,6 +77,22 @@ Todos usam o mesmo motor; misture blocos quando fizer sentido (ex.: abrir um Ran
 ### `curiosidade` — um fato por bloco
 - `numero`, `total` (bolinhas de progresso no topo), `cor`, `valor` (o número/palavra gigante, curto), `titulo`, `texto`, `midia?`
 - Um bloco por fato, 5–6 s cada, com `entrada`/`saida` whip; o último com `saida: loop`.
+
+### `evolucao` — linha do tempo percorrida pela câmera
+- `titulo`, `itens`: `{ano, nome, texto?, intervalo?, midia?, cor?, em}` (4–8). `em` = segundo em que a câmera chega naquele marco; sincronize com a legenda. `intervalo` aparece no trilho antes do item ("+13 ANOS").
+
+## Estilos visuais (`"estilo"` no JSON)
+Cada estilo troca fundo, cores, fontes e painéis de uma vez.
+| estilo | visual | use para |
+|---|---|---|
+| `synthwave` (padrão) | sol listrado, grade neon 3D, roxo/rosa | games atuais, tecnologia |
+| `arcade` | tela CRT, pixels, cidade em blocos, verde fósforo | games retrô, nostalgia, linhas do tempo de games |
+| `cinema` | sala escura, holofotes, poeira, granulado, dourado | filmes, bilheteria, Oscar |
+| `streaming` | manchas de luz desfocadas, vidro | séries, Netflix/Prime/HBO |
+| `anime` | linhas de velocidade, retícula de mangá, faixa vermelha | animes e mangás |
+| `espaco` | estrelas em camadas, nebulosa, planeta | ficção científica, lançamentos "épicos" |
+
+Varie o estilo entre vídeos seguidos do mesmo tema.
 
 ### Mídia (print ou clipe)
 `midia: "midias/arquivo.jpg"` (ou .mp4) em `curiosidade` e nos `lados` do `versus`. O arquivo vai em `public/midias/`. Só fontes oficiais, clipes de 3–5 s. Sem mídia o bloco tem visual próprio — nunca invente imagem.

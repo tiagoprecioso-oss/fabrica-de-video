@@ -1,23 +1,29 @@
 import React, {useState} from 'react';
 import {AbsoluteFill, Audio, continueRender, delayRender, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
-import {Fundo} from './componentes/Fundo';
+import {FundoEstilo} from './componentes/Fundos';
 import {Legenda} from './componentes/Legenda';
 import {BlocoBarras, BlocoNumero, BlocoTitulo, camera} from './componentes/Blocos';
-import {BlocoRanking, BlocoVersus, BlocoCuriosidade} from './componentes/Blocos2';
+import {BlocoRanking, BlocoVersus, BlocoCuriosidade, BlocoEvolucao} from './componentes/Blocos2';
 
-const BLOCOS = {barras: BlocoBarras, numero: BlocoNumero, titulo: BlocoTitulo, ranking: BlocoRanking, versus: BlocoVersus, curiosidade: BlocoCuriosidade};
-import {COR, FONTE, W, easeOut, clamp} from './tema';
+const BLOCOS = {barras: BlocoBarras, numero: BlocoNumero, titulo: BlocoTitulo, ranking: BlocoRanking, versus: BlocoVersus, curiosidade: BlocoCuriosidade, evolucao: BlocoEvolucao};
+import {COR, FONTE, W, easeOut, clamp, aplicarEstilo} from './tema';
 
 /* fontes locais (não depende de internet na hora de renderizar) */
 const fontesCss = `
 @font-face{font-family:'Anton';src:url('${staticFile('fonts/Anton.woff')}') format('woff');}
-@font-face{font-family:'Archivo Black';src:url('${staticFile('fonts/ArchivoBlack.woff')}') format('woff');}`;
+@font-face{font-family:'Archivo Black';src:url('${staticFile('fonts/ArchivoBlack.woff')}') format('woff');}
+@font-face{font-family:'Bebas Neue';src:url('${staticFile('fonts/BebasNeue.woff')}') format('woff');}
+@font-face{font-family:'Bangers';src:url('${staticFile('fonts/Bangers.woff')}') format('woff');}
+@font-face{font-family:'Russo One';src:url('${staticFile('fonts/RussoOne.woff')}') format('woff');}`;
 const useFontes = () => {
   const [h] = useState(() => delayRender('fontes'));
   React.useEffect(() => {
     Promise.all([
       new FontFace('Anton', `url(${staticFile('fonts/Anton.woff')})`).load(),
       new FontFace('Archivo Black', `url(${staticFile('fonts/ArchivoBlack.woff')})`).load(),
+      new FontFace('Bebas Neue', `url(${staticFile('fonts/BebasNeue.woff')})`).load(),
+      new FontFace('Bangers', `url(${staticFile('fonts/Bangers.woff')})`).load(),
+      new FontFace('Russo One', `url(${staticFile('fonts/RussoOne.woff')})`).load(),
     ]).then((fs) => { fs.forEach((f) => document.fonts.add(f)); continueRender(h); }).catch(() => continueRender(h));
   }, [h]);
 };
@@ -34,6 +40,7 @@ const whip = (b, t, dur) => {
 };
 
 export const DadoMedido = ({video}) => {
+  const estilo = aplicarEstilo(video.estilo);
   useFontes();
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
@@ -48,7 +55,7 @@ export const DadoMedido = ({video}) => {
   return (
     <AbsoluteFill style={{background: COR.tinta}}>
       <style>{fontesCss}</style>
-      <Fundo t={t} dur={dur} />
+      <FundoEstilo estilo={estilo} t={t} dur={dur} />
       {ativos.map((b, i) => {
         const p = clamp((t - b.de) / (b.ate - b.de));
         const lt = t - b.de;
