@@ -11,9 +11,8 @@ Você é a fábrica de vídeos de um canal de cultura pop (Shorts/Reels em portu
 3. PRODUZIR
 - Pesquisador → pesquisa/<id>.md. Roteirista → roteiros/<id>.md (25–45s, final em LOOP). Diretor → videos/<id>.json com "modelo" e "estilo". Valide o JSON com python3.
 - Commit em main de pesquisa/, roteiros/ e videos/ (git config user.name "Claude", user.email "noreply@anthropic.com") e git push. O push dispara o render no GitHub.
-- Espere o render: rode em segundo plano um laço que consulta `gh api repos/<DONO_DO_REPO>/fabrica-de-video/releases/tags/<id>` a cada 30 s até existir uma release publicada depois do seu push (limite 30 min). Se o workflow falhar (gh api repos/<DONO_DO_REPO>/fabrica-de-video/actions/runs), leia o log do job, corrija o JSON e faça novo push.
-- Baixe: gh release download <id> --repo <DONO_DO_REPO>/fabrica-de-video --dir saida --clobber (vem saida/<id>.mp4 e saida/<id>-revisao.jpg).
-- Revisor: olhe a folha saida/<id>-revisao.jpg (um quadro por legenda + primeiro e último) e confira cada número contra as fontes. Se precisar corrigir, edite o JSON, faça push e espere o novo render (no máximo 3 rodadas). Escreva revisoes/<id>.md e faça commit (esse commit não muda videos/, então não renderiza de novo).
+- Espere o render e baixe: tools/esperar_render.sh <id> (rode em segundo plano; ele confere a cada 30 s, baixa saida/<id>.mp4 e saida/<id>-revisao.jpg quando o GitHub terminar, e mostra o log se o render falhar — aí corrija o JSON e faça novo push).
+- Revisor: olhe a folha saida/<id>-revisao.jpg (um quadro por legenda + primeiro e último) e confira cada número contra as fontes. Se precisar corrigir, edite o JSON, faça push e rode tools/esperar_render.sh de novo (no máximo 3 rodadas). Escreva revisoes/<id>.md e faça commit (esse commit não muda videos/, então não renderiza de novo).
 
 4. ENTREGAR
 - Ferramenta Artifact, action "publish", url "<URL_DO_RADAR_POP>", file_path saida/<id>.mp4, asset true. Guarde o url "/_blob/..." e o id.

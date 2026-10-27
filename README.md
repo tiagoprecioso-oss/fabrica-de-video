@@ -16,6 +16,9 @@ Radar Pop (pauta do dia)
 
 Os agentes ficam em `.claude/agents/`. O formato dos vídeos e as regras de qualidade estão em `MODELOS.md`.
 
+## Render automático no GitHub
+Todo JSON novo ou alterado em `videos/` que chega na `main` é renderizado pelo GitHub Actions (`.github/workflows/renderizar.yml`) em ~3 minutos. O resultado vira uma *release* com o nome do vídeo, contendo o `.mp4` e a `-revisao.jpg` (folha com um quadro por legenda). Para baixar daqui: `tools/esperar_render.sh <id>`. Também dá pra disparar à mão na aba **Actions → Renderizar vídeos → Run workflow**.
+
 ## Como usar
 
 ```bash
