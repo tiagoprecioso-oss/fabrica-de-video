@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {AbsoluteFill, Audio, continueRender, delayRender, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
 import {FundoEstilo} from './componentes/Fundos';
 import {Legenda} from './componentes/Legenda';
+import {Gameplay, MetadeDeCima, LegendaDupla} from './componentes/Gameplay';
 import {BlocoBarras, BlocoNumero, BlocoTitulo, camera} from './componentes/Blocos';
 import {BlocoRanking, BlocoVersus, BlocoCuriosidade, BlocoEvolucao} from './componentes/Blocos2';
 
@@ -50,12 +51,18 @@ export const DadoMedido = ({video}) => {
   const ativos = video.blocos.filter((b) => t >= b.de && t < b.ate);
   const leg = video.legendas.find((l) => t >= l.de && t < l.ate);
   const fonte = [...(video.rodape || [])].reverse().find((r) => t >= r.de);
+  const gp = video.gameplay;
+  // gameplay em tela cheia: painéis viram vidro escuro para o jogo aparecer por trás
+  if (gp?.layout === 'cheia') Object.assign(COR, {painel: 'rgba(0,0,0,.42)', painelSolido: 'rgba(0,0,0,.6)'});
+  const Area = gp?.layout === 'dividida' ? MetadeDeCima : React.Fragment;
   const ultimo = video.blocos[video.blocos.length - 1];
   const legW = ultimo.saida === 'loop' && t > dur - LOOP_OUT ? -easeOut((t - (dur - LOOP_OUT)) / LOOP_OUT) * W * 0.95 : 0;
   return (
     <AbsoluteFill style={{background: COR.tinta}}>
       <style>{fontesCss}</style>
-      <FundoEstilo estilo={estilo} t={t} dur={dur} />
+      {gp?.layout !== 'cheia' && <FundoEstilo estilo={estilo} t={t} dur={dur} />}
+      {gp && <Gameplay g={gp} t={t} dur={dur} />}
+      <Area>
       {ativos.map((b, i) => {
         const p = clamp((t - b.de) / (b.ate - b.de));
         const lt = t - b.de;
@@ -69,9 +76,11 @@ export const DadoMedido = ({video}) => {
           </AbsoluteFill>
         );
       })}
+      </Area>
       <AbsoluteFill style={{transform: `translateX(${legW}px)`, filter: legW ? `blur(${Math.min(28, Math.abs(legW) / 30)}px)` : 'none'}}>
-        {leg && <Legenda texto={leg.texto} lt={t - leg.de} dur={leg.ate - leg.de} />}
-        {fonte && <div style={{position: 'absolute', left: 0, right: 0, top: 1530, textAlign: 'center', fontFamily: FONTE.apoio, fontSize: 22, color: COR.apagado}}>{fonte.texto}</div>}
+        {leg && !gp && <Legenda texto={leg.texto} lt={t - leg.de} dur={leg.ate - leg.de} />}
+        {leg && gp && <LegendaDupla texto={leg.texto} lt={t - leg.de} dur={leg.ate - leg.de} layout={gp.layout} gancho={video.gancho} />}
+        {fonte && <div style={{position: 'absolute', left: 0, right: 0, top: gp ? 1850 : 1530, textAlign: 'center', fontFamily: FONTE.apoio, fontSize: 22, color: COR.apagado}}>{fonte.texto}</div>}
       </AbsoluteFill>
       {video.trilha && <Audio src={staticFile(video.trilha)} />}
     </AbsoluteFill>

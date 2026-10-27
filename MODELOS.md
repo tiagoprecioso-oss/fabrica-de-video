@@ -96,3 +96,18 @@ Varie o estilo entre vídeos seguidos do mesmo tema.
 
 ### Mídia (print ou clipe)
 `midia: "midias/arquivo.jpg"` (ou .mp4) em `curiosidade` e nos `lados` do `versus`. O arquivo vai em `public/midias/`. Só fontes oficiais, clipes de 3–5 s. Sem mídia o bloco tem visual próprio — nunca invente imagem.
+
+## Camada gameplay (`"gameplay"` no JSON) — o visual que mais segura em games
+Análise de out/2026 (Vitoca, Leley, Eri, GamerCosta): nos shorts de games que passam de milhões, o **jogo roda o vídeo inteiro** e a própria cena prova o fato. Funciona com qualquer modelo.
+
+```json
+"gancho": "O GTA mais caro da história (corrigido pela inflação)",
+"gameplay": {"arquivo": "gameplay/gta5-voo.mp4", "layout": "cheia", "duracaoClipe": 60, "corte": 2.5, "inicio": 0, "escurecer": 0.4}
+```
+- `layout: "cheia"` — gameplay na tela toda; os painéis viram vidro escuro por cima. Bom para ranking, curiosidades e "você sabia".
+- `layout: "dividida"` — dados na metade de cima, gameplay embaixo (y 1000–1920). Bom para versus, barras e evolução.
+- `corte` — troca de trecho do clipe a cada N segundos, com soco de zoom e clarão (os virais trocam de cena a cada 1–3 s). `0` = sem cortes.
+- `duracaoClipe` — duração real do arquivo em segundos (obrigatório).
+- Com gameplay a legenda vira **dupla**: a frase pequena + a palavra entre `*asteriscos*` gigante. Marque **uma** palavra-chave por legenda. `gancho` fica fixo no topo (só no layout cheio).
+- **Direitos:** só gameplay **gravada pelo Tiago** (pasta `public/gameplay/`). Nunca baixar gameplay de outro canal: é conteúdo reutilizado e derruba a monetização. Gravar sem HUD/mapa quando der, 1080p, 1–5 min por jogo.
+- `gameplay/teste.mp4` é um clipe sintético só para testar o layout.

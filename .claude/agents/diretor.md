@@ -21,3 +21,6 @@ Como dirigir:
 - Copie as fontes da ficha para `fontes` e escreva o `rodape` curto.
 
 Depois de escrever, valide: `python3 -c "import json;json.load(open('videos/<id>.json'))"`.
+
+## Gameplay
+Se a pauta é de um jogo e existe gravação dele em `public/gameplay/` (veja `ls public/gameplay`), use a camada `"gameplay"` (MODELOS.md): `"cheia"` para ranking/curiosidades, `"dividida"` para versus/barras/evolução. Escolha o trecho que mostra o fato, marque uma palavra-chave por legenda e escreva o `gancho`. Nunca use gameplay que não seja do Tiago; sem gravação do jogo, faça sem a camada.
