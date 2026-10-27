@@ -1,0 +1,5 @@
+# video-sharingan runtime deps (ffmpeg + ffprobe must be on PATH as well)
+numpy>=1.24
+opencv-python-headless>=4.8
+# tests only
+pytest>=7

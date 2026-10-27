@@ -15,3 +15,4 @@ Faça:
 5. Direitos: nenhum logo, pôster ou arte oficial reproduzidos.
 
 Entregue `revisoes/<id>.md` com **APROVADO** ou **CORRIGIR**, e para cada problema: tempo, o que está errado e a mudança exata no JSON.
+6. Ritmo: rode `tools/medir.sh saida/<id>.mp4` (precisa de `pip install opencv-python-headless`) e anote cenas, cortes/min e câmera. Se o JSON tiver `"referencia"`, passe o arquivo como 2º argumento para comparar. Vídeo com gameplay deve trocar de cena a cada 1–3 s.
