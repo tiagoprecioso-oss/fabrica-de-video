@@ -33,7 +33,14 @@ for k in range(int(round(DUR / BEAT))):
 for b in v["blocos"]:
     if b.get("entrada") == "whip": add(whoosh, b["de"] - .22, .35)
     if b.get("saida") == "loop": add(whoosh, b["ate"] - .32, .35)
-    if b.get("selo"): add(brilho, b["selo"]["em"], .45)
+    if isinstance(b.get("selo"), dict): add(brilho, b["selo"]["em"], .45)
+    if b.get("tipo") == "chefao" and b.get("teto"):  # brilho quando a lei trava a dívida
+        import math
+        ini, fim = b.get("inicio", b["de"] + 2), b.get("fim", b["ate"] - 3)
+        add(brilho, ini + math.log(b["teto"]) / math.log(1 + b["taxa"]) / b.get("meses", 12) * (fim - ini), .45)
+    if b.get("whip") or b.get("tipo") == "extrato":
+        for l in b.get("linhas", []): add(hat, l["em"], .25)
+        if b.get("total"): add(brilho, b["total"]["em"], .4)
 mix = mix / max(1e-6, np.abs(mix).max()) * .85
 f = int(.04 * SR); mix[:f] *= np.linspace(0, 1, f); mix[-f:] *= np.linspace(1, 0, f)
 out = "public/" + v["trilha"]
