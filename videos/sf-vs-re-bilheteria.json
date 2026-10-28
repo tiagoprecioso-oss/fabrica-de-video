@@ -1,0 +1,49 @@
+{
+  "id": "sf-vs-re-bilheteria",
+  "modelo": "Versus",
+  "estilo": "cinema",
+  "titulo": "Street Fighter vs Resident Evil: qual filme de game venceu?",
+  "duracao": 36,
+  "batidas": 62,
+  "trilha": "trilhas/sf-vs-re-bilheteria.wav",
+  "blocos": [
+    {"tipo": "versus", "de": 0, "ate": 29.4, "camera": "inclinar", "saida": "whip",
+     "lados": [
+       {"nome": "RESIDENT EVIL", "sub": "SONY · 18/09/2026", "cor": "verde"},
+       {"nome": "STREET FIGHTER", "sub": "PARAMOUNT · 16/10/2026", "cor": "rosa"}
+     ],
+     "linhas": [
+       {"rotulo": "ESTREIA NOS EUA", "a": "$60,2 MI", "b": "$30,8 MI", "vence": "a", "em": 4.0},
+       {"rotulo": "ESTREIA NO BRASIL", "a": "R$ 10,7 MI", "b": "R$ 5,7 MI", "vence": "a", "em": 7.8},
+       {"rotulo": "QUEDA NO 2º FIM DE SEMANA", "a": "−62%", "b": "−72%", "vence": "a", "em": 11.6},
+       {"rotulo": "10 DIAS NOS EUA", "a": "$103,2 MI", "b": "$46,9 MI", "vence": "a", "em": 15.4},
+       {"rotulo": "CUSTO (MENOR VENCE)", "a": "$75–80 MI", "b": "$82 MI", "vence": "a", "em": 19.2},
+       {"rotulo": "BILHETERIA NO MUNDO", "a": "$383,9 MI", "b": "$80,3 MI", "vence": "a", "em": 23.0}
+     ]},
+    {"tipo": "titulo", "de": 29.4, "ate": 36, "camera": "mergulho", "entrada": "whip", "saida": "loop",
+     "linha1": "MARIO SOZINHO:", "linha2": "$1 BI", "corLinha": "amarelo"}
+  ],
+  "legendas": [
+    {"de": 0, "ate": 3.4, "texto": "Resident Evil deu um *nocaute* em Street Fighter. Nos números."},
+    {"de": 3.4, "ate": 7.2, "texto": "Round 1, estreia nos EUA: *US$ 60 milhões* contra 31."},
+    {"de": 7.2, "ate": 11, "texto": "No Brasil: *R$ 10,7 milhões* contra R$ 5,7 milhões."},
+    {"de": 11, "ate": 14.8, "texto": "No segundo fim de semana, Street Fighter *caiu 72%*."},
+    {"de": 14.8, "ate": 18.6, "texto": "Em 10 dias nos EUA: *US$ 103 milhões* contra 47."},
+    {"de": 18.6, "ate": 22.4, "texto": "E Street Fighter ainda custou *mais caro*: US$ 82 milhões."},
+    {"de": 22.4, "ate": 26.2, "texto": "No mundo: *US$ 384 milhões* contra 80. Menos que o custo."},
+    {"de": 26.2, "ate": 29.4, "texto": "Placar final: *6 a 0* pro Resident Evil."},
+    {"de": 29.4, "ate": 33, "texto": "Mas os dois somados não dão nem *metade do Mario*."},
+    {"de": 33, "ate": 36, "texto": "E é por isso que, em 2026…"}
+  ],
+  "rodape": [{"de": 0, "texto": "Fontes: The Numbers · Comscore via Omelete · Box Office Mojo"}],
+  "fontes": [
+    {"titulo": "The Numbers — Resident Evil (2026)", "url": "https://www.the-numbers.com/movie/Resident-Evil-(2026)"},
+    {"titulo": "The Numbers — Street Fighter (2026)", "url": "https://www.the-numbers.com/movie/Street-Fighter-%282026%29"},
+    {"titulo": "WECT/AP — Resident Evil estreia com US$ 60 mi, orçamento US$ 75 mi", "url": "https://www.wect.com/2026/09/21/box-office-resident-evil-tops-box-office-with-franchise-best-debut-60-million/"},
+    {"titulo": "Wikipedia — Resident Evil (2026): orçamento US$ 80 mi", "url": "https://en.wikipedia.org/wiki/Resident_Evil_(2026_film)"},
+    {"titulo": "EventHubs — Street Fighter cai 72% no 2º fds; filme de US$ 82 mi", "url": "https://www.eventhubs.com/news/2026/oct/26/street-fighter-box-office-disaster/"},
+    {"titulo": "Omelete — bilheteria BR 17–21/set: Resident Evil R$ 10,67 mi", "url": "https://www.omelete.com.br/filmes/bilheteria-brasil-17-a-21-set-estreia-resident-evil-minha-melhor-amiga-lidera-3a-semana"},
+    {"titulo": "Omelete — bilheteria BR 15–18/out: Street Fighter R$ 5,69 mi", "url": "https://www.omelete.com.br/filmes/bilheteria-brasil-15-18-outubro-verity-lideranca-estreia-street-fighter-dentro-da-baleia"},
+    {"titulo": "VGC — Super Mario Galaxy passa de US$ 1 bilhão (Box Office Mojo)", "url": "https://www.videogameschronicle.com/news/the-super-mario-galaxy-movie-has-finally-passed-1-billion-globally-making-it-the-first-2026-film-to-do-so/"}
+  ]
+}
