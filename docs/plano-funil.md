@@ -3,6 +3,8 @@
 Cópia do plano vivo (https://claude.ai/artifact/R2NRFYjELs4opAFzEJJv7G). Um canal de Shorts com dados reais sobre dinheiro leva o público a uma calculadora grátis, depois ao ebook "Chefões do cartão" (R$ 19 ou R$ 27) e ao minicurso em fases (R$ 47), vendidos na Hotmart.
 
 ## Funil
+**Decisão (27/out):** por enquanto não vendemos pelo TikTok. A venda acontece pelo Instagram e pelo YouTube, levando à Hotmart.
+
 Shorts com dado real (YouTube, Instagram, TikTok, 1/dia) → calculadora no link da bio → lista própria (Fase 0 grátis + 5 e-mails em 7 dias; WhatsApp) → página de venda → checkout Hotmart. Outras portas: afiliados Hotmart, carrosséis, Google, Pinterest, Kindle.
 
 ## Primeiro projeto: ebook "Chefões do cartão: como derrotar as dívidas sem passar fome"
