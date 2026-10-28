@@ -1,6 +1,6 @@
 # Roteiro — Street Fighter vs Resident Evil (36 s, Versus, cinema)
 
-[0-3.4s] Resident Evil deu um *nocaute* em Street Fighter. Nos números.
+[0-3.4s] Resident Evil deu um *nocaute* em Street Fighter.
 [3.4-7.2s] Round 1, estreia nos EUA: *US$ 60 milhões* contra 31.
 [7.2-11s] No Brasil: *R$ 10,7 milhões* contra R$ 5,7 milhões.
 [11-14.8s] No segundo fim de semana, Street Fighter *caiu 72%*.

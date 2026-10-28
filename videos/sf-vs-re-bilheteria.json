@@ -24,7 +24,7 @@
      "linha1": "MARIO SOZINHO:", "linha2": "$1 BI", "corLinha": "amarelo"}
   ],
   "legendas": [
-    {"de": 0, "ate": 3.4, "texto": "Resident Evil deu um *nocaute* em Street Fighter. Nos números."},
+    {"de": 0, "ate": 3.4, "texto": "Resident Evil deu um *nocaute* em Street Fighter."},
     {"de": 3.4, "ate": 7.2, "texto": "Round 1, estreia nos EUA: *US$ 60 milhões* contra 31."},
     {"de": 7.2, "ate": 11, "texto": "No Brasil: *R$ 10,7 milhões* contra R$ 5,7 milhões."},
     {"de": 11, "ate": 14.8, "texto": "No segundo fim de semana, Street Fighter *caiu 72%*."},
