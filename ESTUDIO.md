@@ -1,6 +1,6 @@
 # O estúdio
 
-A fábrica é um estúdio com 22 agentes, um por função, em 6 departamentos. Tudo o que os canais publicam e vendem passa por esta linha. O Tiago é o dono do estúdio: aprova, publica e cuida das contas.
+A fábrica é um estúdio com 23 agentes, um por função, em 6 departamentos. Tudo o que os canais publicam e vendem passa por esta linha. O Tiago é o dono do estúdio: aprova, publica e cuida das contas.
 
 Cada agente é um arquivo em `.claude/agents/` com o que recebe, o que faz, o que entrega e para quem passa.
 
@@ -12,7 +12,7 @@ Cada agente é um arquivo em `.claude/agents/` com o que recebe, o que faz, o qu
 | Roteiro e dados | pesquisador, roteirista |
 | Arte e vídeo | diretor, diretor-de-arte, compositor, narrador (esperando a voz), editor-de-gameplay |
 | Produtos | autor-de-ebook, diagramador, professor |
-| Vendas | copywriter, desenvolvedor-web, atendente-whatsapp, social-media, tradutor |
+| Vendas | espiao-de-ofertas, copywriter, desenvolvedor-web, atendente-whatsapp, social-media, tradutor |
 | Qualidade e números | checador, revisor, compliance, analista, produtor |
 
 ## As linhas de produção
