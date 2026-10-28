@@ -38,6 +38,6 @@ Nada é postado sem aprovação do Tiago.
 
 ## Próximos passos (decisões do Tiago)
 1. Nome do canal de finanças e voz do narrador (grátis ou paga).
-2. Criar as contas: canais, Hotmart, MailerLite.
+2. Criar as contas: canais (TikTok de finanças como conta comercial; de cultura pop como pessoal), Hotmart, MailerLite.
 3. Gravar o Fortnite (`docs/gravar-gameplay.md`) e subir no Drive.
 4. Escrever o ebook "Chefões do cartão" (autor-de-ebook → checador → diagramador).

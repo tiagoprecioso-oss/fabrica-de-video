@@ -3,7 +3,12 @@
 Cópia do plano vivo (https://claude.ai/artifact/R2NRFYjELs4opAFzEJJv7G). Um canal de Shorts com dados reais sobre dinheiro leva o público a uma calculadora grátis, depois ao ebook "Chefões do cartão" (R$ 19 ou R$ 27) e ao minicurso em fases (R$ 47), vendidos na Hotmart.
 
 ## Funil
-**Decisão (27/out):** por enquanto não vendemos pelo TikTok. A venda acontece pelo Instagram e pelo YouTube, levando à Hotmart.
+**Decisões (27/out):**
+- Os vídeos são postados no YouTube, no Instagram e no TikTok; todos levam à Hotmart.
+- TikTok do canal de finanças: **conta comercial** (link de site na bio desde o primeiro dia, sem mínimo de seguidores; perde parte das músicas famosas, o que não nos afeta).
+- TikTok do canal de cultura pop: **conta pessoal** (pode entrar no Creator Rewards: 10 mil seguidores, vídeos com mais de 1 minuto; link na bio a partir de 1.000 seguidores).
+- Antes do link liberar: comentário fixado com o endereço ou "comenta CHEFÃO" com envio automático do link por mensagem.
+- Regras do TikTok mudam por país: conferir no app ao criar as contas.
 
 Shorts com dado real (YouTube, Instagram, TikTok, 1/dia) → calculadora no link da bio → lista própria (Fase 0 grátis + 5 e-mails em 7 dias; WhatsApp) → página de venda → checkout Hotmart. Outras portas: afiliados Hotmart, carrosséis, Google, Pinterest, Kindle.
 
