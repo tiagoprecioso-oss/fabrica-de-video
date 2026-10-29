@@ -10,6 +10,24 @@ Este repositório é o estúdio inteiro: a fábrica, os 27 agentes, as receitas,
 
 Felipe e Lucca: façam um **fork** (ou peçam ao Tiago acesso de colaborador) e mandem melhorias por *pull request*. A automação diária usa a `main`.
 
+## Continuar de outra conta do Claude (ex.: Felipe, no PC dele)
+Tudo o que o Claude precisa está neste repositório. O que **não** vem junto: a memória do Claude do Tiago, os documentos do Project dele e as páginas vivas (são da conta dele). Por isso:
+1. **Acesso:** o Tiago adiciona a pessoa como colaboradora (GitHub → Settings → Collaborators) para ela poder dar push na `main`. Sem isso, fork + pull request.
+2. **Claude:** abra o clone no Claude Code (ou conecte o repositório numa sessão do Claude na web) e mande:
+   > Leia o README, o CLAUDE.md, o COMECE-AQUI.md e as receitas da fábrica e continue de onde paramos: <passo>.
+3. **Páginas (site, manual, Radar Pop):** a outra conta não edita as do Tiago. Ela publica a própria cópia a partir dos arquivos daqui (`portfolio/ninho-alto/site.html`, `portfolio/ninho-alto/manual.html` com as imagens de `img/`, `radar-pop/radar-pop.html`).
+4. **Blender:** precisa do Blender 4.2 instalado no PC de quem renderiza (`docs/blender.md`). Com placa NVIDIA, use `--gpu`. Sem placa de vídeo, só rascunhos e imagens soltas.
+5. **Preferências do Tiago que valem sempre:** todo Short/Reels fecha em loop; legendas menores e corridas, sem som a cada palavra; comparação em reais quando houver dado brasileiro; formatos baseados no que já funciona comprovadamente; nada é postado sem o Tiago.
+
+### Onde paramos (29/10/2026)
+- Feito hoje: manual da Ninho Alto como design system (`portfolio/ninho-alto/marca.json` → `python3 tools/manual_ninho.py`).
+- **Próximo:** refazer as fotos 3D da Ninho Alto com GPU e materiais reais, porque as atuais (renderizadas na nuvem, só CPU) ficaram fracas:
+  1. Texturas CC0 escaneadas da Poly Haven (pedra, papel kraft, cerâmica) no lugar das procedurais.
+  2. Pacote com simulação de tecido (dobras e amassados).
+  3. Grãos novos: rugosidade ~0,55, fenda funda, cor variando por grão, escala real (≈1 cm).
+  4. Render final com mais amostras e 2000 px+; comparar lado a lado com `portfolio/ninho-alto/img/hero.jpg` antes de trocar.
+  5. Depois: vídeo dos grãos caindo do pacote com física (`receitas/motion-3d.md`), pacote girando para Reels, café sendo servido; site v3 usando `tokens.css`.
+
 ## O que tem aqui
 | Arquivo | O que é |
 |---|---|

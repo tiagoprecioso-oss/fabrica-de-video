@@ -23,4 +23,5 @@ Uma **indústria de conteúdo, marcas e produtos digitais**, o mais automática 
 - Cortes de conteúdo alheio: só autorizados (campeonatos de cortes) e sempre com valor original nosso; ver [[Direitos - o que podemos usar]].
 
 ## Em aberto
-- Liberar links no menu Compartilhar; contador; conectar a pasta da fábrica no app Claude para computador (para o Claude usar o Blender do PC).
+- Liberar links no menu Compartilhar; contador.
+- 29/10: fotos 3D atuais (nuvem, só CPU) consideradas fracas pelo Tiago; refazer com GPU, texturas reais e tecido (ver COMECE-AQUI → Onde paramos).
