@@ -25,3 +25,10 @@ Por isso o 3D é para **trechos curtos e peças especiais** (abertura de 3–5 s
 ## Regras
 - Modelos 3D feitos por código pela fábrica ou de bibliotecas com licença livre (CC0, ex.: Poly Haven); nada de personagens ou marcas conhecidas.
 - O 3D é vitrine; o conteúdo continua sendo dado original e roteiro do estúdio.
+
+## Fotos de produto (marcas do portfólio)
+A fábrica também faz **fotos de produto em 3D**, sem câmera nem estúdio: `blender/ninho_produto.py` (marca conceito Ninho Alto) monta pacotes, grãos, pedra e luz de janela por código, com o rótulo gerado por `tools/rotulo_ninho.py`.
+- Tudo de uma vez: `tools/pecas_ninho.sh` (rótulos → 5 renders → JPGs em `portfolio/ninho-alto/img/`). Rascunho rápido: `tools/pecas_ninho.sh rascunho`.
+- No GitHub: Actions → **Renderizar peças 3D** (roda sozinho quando a cena muda; as imagens saem na release `pecas-ninho-alto`).
+- No PC do Tiago: `BLENDER="C:/Program Files/Blender Foundation/Blender 4.2/blender.exe" GPU=1 tools/pecas_ninho.sh` (Git Bash).
+- Na nuvem do Claude (2 núcleos): ~1 min por imagem em rascunho, 8–10 min por imagem final.

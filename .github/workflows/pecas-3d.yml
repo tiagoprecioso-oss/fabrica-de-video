@@ -1,0 +1,45 @@
+name: Renderizar peças 3D
+
+# Roda sozinho quando a cena 3D ou o gerador de rótulos da Ninho Alto mudam na main,
+# ou à mão (Actions → Renderizar peças 3D → Run workflow). Resultado: release "pecas-ninho-alto".
+on:
+  push:
+    branches: [main]
+    paths: ['blender/ninho_*.py', 'tools/rotulo_ninho.py', 'tools/pecas_ninho.sh']
+  workflow_dispatch:
+    inputs:
+      qualidade:
+        description: 'rascunho ou final'
+        default: 'final'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pecas-3d
+  cancel-in-progress: true
+
+jobs:
+  pecas:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Instalar Blender e bibliotecas
+        run: |
+          pip install numpy matplotlib pillow
+          curl -sSL -o b.tar.xz https://download.blender.org/release/Blender4.2/blender-4.2.3-linux-x64.tar.xz
+          tar xf b.tar.xz && rm b.tar.xz
+          sudo apt-get update -qq && sudo apt-get install -y -qq libxi6 libxkbcommon0 libsm6 libgl1
+      - name: Renderizar
+        run: BLENDER="$PWD/blender-4.2.3-linux-x64/blender" tools/pecas_ninho.sh "${{ github.event.inputs.qualidade || 'final' }}"
+      - name: Publicar imagens
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete pecas-ninho-alto -y --cleanup-tag 2>/dev/null || true
+          gh release create pecas-ninho-alto portfolio/ninho-alto/img/*.jpg \
+            --title "Peças 3D — Ninho Alto" --notes "commit ${GITHUB_SHA::7}" --latest=false
