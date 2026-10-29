@@ -65,3 +65,4 @@ Regra desde 29/10 (Felipe): toda etapa passa pelo agente da função, e aqui fic
 | Data | Agente | Tarefa | Bom | A melhorar |
 |---|---|---|---|---|
 | 29/10 | (sessão principal) | ebook "Chefões do cartão" até a capa | — | Feito sem os agentes; a partir daqui, cada etapa vai pelo agente da função. |
+| 29/10 | checador | Checagem independente do ebook (46 itens) | Refez todas as contas com código próprio e rodou o simulador da página; achou 11 problemas que a autochecagem deixou passar (regras jurídicas imprecisas, fonte de 2012, contradição texto × página, um arredondamento). | Citou 3 normas de memória sem abrir (REN 1.000/2021, Res. CMN 3.517/2007, art. 104-A do CDC): pedir que abra toda norma que sugerir. |
