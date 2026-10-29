@@ -9,7 +9,7 @@ Este repositório é a **fábrica** do Tiago Precioso: uma indústria de conteú
 4. **Pesquisa antes do primeiro rascunho** em qualquer coisa visual (`receitas/pesquisa-de-referencias.md`). Fugir do visual genérico de IA.
 5. **Números com fonte**; finanças é educativo; direitos conforme `docs/direitos.md`.
 6. **Nada é postado, vendido ou enviado** sem aprovação do Tiago.
-7. **Antes de encerrar**: commit e push em `main` com tudo o que foi produzido, repositório limpo (`git status` vazio), e o `README.md` atualizado se o estado do estúdio mudou.
+7. **Antes de encerrar**: commit e push em `main` com tudo o que foi produzido, repositório limpo (`git status` vazio), o `README.md` atualizado se o estado do estúdio mudou, e uma nota do dia em `segundo-cerebro/Diário/<data>.md` (o pacote do segundo cérebro do Tiago sai de `tools/segundo_cerebro.sh`).
 
 ## Atalhos
 - Vídeo: `videos/<id>.json` → push → GitHub renderiza → `tools/esperar_render.sh <id>`.
