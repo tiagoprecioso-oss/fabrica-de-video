@@ -311,6 +311,63 @@ input[type=range]{accent-color:var(--grana);flex:1;min-width:160px}
 .cta{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
 .cta .bt{background:var(--amarelo);color:var(--tinta);box-shadow:0 5px 0 var(--amarelo-esc)}
 .cta p{color:#CFC5EE;font-size:.9rem;max-width:44ch}
+/* baixar plano */
+.baixar{display:grid;grid-template-columns:150px 1fr;gap:22px;align-items:center;background:var(--card);border:3px solid var(--tinta);border-radius:24px;padding:22px;box-shadow:0 7px 0 var(--fogo);margin-top:26px}
+.baixar-arte{position:relative;width:150px;height:150px}
+.baixar-arte .folha-ic{position:absolute;inset:6px 22px 10px 14px;background:#fff;border:3px solid var(--tinta);border-radius:12px;transform:rotate(-6deg);display:grid;gap:7px;padding:16px 12px;align-content:start}
+.baixar-arte .folha-ic i{height:8px;border-radius:9px;background:var(--linha)}
+.baixar-arte .folha-ic i:nth-child(1){background:var(--fogo);width:70%}.baixar-arte .folha-ic i:nth-child(3){background:var(--grana)}
+.baixar-arte [data-din]{position:absolute;right:0;bottom:0;width:70px}
+.baixar-arte [data-din] svg{width:70px;height:70px}
+.baixar h3{margin:0 0 6px;font-size:1.6rem}
+.baixar-linha{display:flex;flex-wrap:wrap;gap:12px;align-items:end;margin-top:14px}
+.baixar-linha .campo{flex:1;min-width:180px}
+.baixar-msg{font-weight:800;font-size:.9rem;color:var(--grana-esc);margin-top:10px;min-height:1.4em}
+@media (max-width:560px){.baixar{grid-template-columns:1fr}.baixar-arte{margin:0 auto}}
+/* folhas do PDF (fora da tela) */
+.folhas{position:fixed;left:-30000px;top:0;z-index:-1}
+.folha{width:794px;height:1123px;background:#fff;color:var(--tinta);font-family:var(--texto);font-size:14px;line-height:1.45;position:relative;overflow:hidden;display:flex;flex-direction:column}
+.folha-topo{background:var(--tinta);color:#fff;padding:34px 44px 30px;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center}
+.folha-topo h1{font-size:44px;line-height:.95;text-transform:uppercase}
+.folha-topo h1 span{color:var(--amarelo)}
+.folha-topo p{color:#BFE9D2;font-weight:700;margin-top:8px}
+.folha-topo img{width:92px;height:92px}
+.folha-corpo{padding:28px 44px;display:grid;gap:18px;align-content:start;flex:1}
+.folha-pe{padding:14px 44px 22px;font-size:11px;color:var(--apagado);display:flex;justify-content:space-between;border-top:2px solid var(--linha)}
+.f-vitoria{border-radius:20px;padding:20px 24px;display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center}
+.f-vitoria.bom{background:var(--grana-claro);border:3px solid var(--grana)} .f-vitoria.ruim{background:var(--fogo-claro);border:3px solid var(--fogo)}
+.f-vitoria b{font-family:var(--display);font-size:34px;line-height:1}
+.f-vitoria small{display:block;font-weight:900;letter-spacing:.12em;text-transform:uppercase;font-size:11px;color:var(--apagado)}
+.f-tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.f-tiles div{background:var(--bg);border:2px solid var(--linha);border-radius:14px;padding:10px 12px}
+.f-tiles small{display:block;font-weight:900;letter-spacing:.08em;text-transform:uppercase;font-size:10px;color:var(--apagado)}
+.f-tiles b{font-family:var(--display);font-size:22px}
+.f-tit{font-family:var(--display);font-weight:800;font-size:24px;display:flex;align-items:center;gap:10px}
+.f-tit i{font-style:normal;width:30px;height:30px;border-radius:9px;background:var(--fogo);color:#fff;display:grid;place-items:center;font-size:16px}
+.f-boss{display:grid;grid-template-columns:30px 64px 1fr 110px 90px 90px 120px;gap:10px;align-items:center;border:2px solid var(--linha);border-radius:14px;padding:8px 12px}
+.f-boss.cab{border:0;padding:0 12px;font-size:10px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--apagado)}
+.f-boss img{width:60px;height:60px}
+.f-boss b{font-family:var(--display);font-size:17px;line-height:1.1;display:block}
+.f-boss span{font-size:12px;color:var(--apagado)}
+.f-boss .n{font-family:var(--display);font-weight:800;font-size:20px;color:var(--fogo)}
+.f-regras{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.f-regras div{background:var(--amarelo-claro);border-radius:12px;padding:10px 12px;font-size:12.5px;font-weight:700}
+.f-tab{width:100%;border-collapse:separate;border-spacing:0;font-size:12.5px;font-variant-numeric:tabular-nums}
+.f-tab th{background:var(--tinta);color:#fff;padding:8px 8px;text-align:right;font-size:11px;font-weight:800;vertical-align:bottom}
+.f-tab th:first-child{text-align:left;border-radius:10px 0 0 0}.f-tab th:last-child{border-radius:0 10px 0 0}
+.f-tab td{padding:6px 8px;text-align:right;border-bottom:1.5px solid var(--linha)}
+.f-tab td:first-child{text-align:left;font-weight:800;white-space:nowrap}
+.f-tab td.alvo{background:var(--grana-claro);color:var(--grana-esc);font-weight:900}
+.f-tab td.morto{color:var(--apagado);font-size:11px}
+.f-tab td.tot{font-weight:900}
+.f-semanas{display:grid;grid-template-columns:1fr 1fr;gap:8px 16px}
+.f-sem{display:grid;grid-template-columns:24px 1fr;gap:10px;align-items:start;border-bottom:1.5px solid var(--linha);padding-bottom:8px}
+.f-sem i{width:22px;height:22px;border:2.5px solid var(--tinta);border-radius:6px;display:grid;place-items:center;font-style:normal;font-weight:900;color:#fff;font-size:14px}
+.f-sem i.ok{background:var(--grana);border-color:var(--grana-esc)}
+.f-sem b{font-family:var(--display);font-size:15px;display:block;line-height:1.1}
+.f-sem small{font-size:10px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--grana-esc)}
+.f-sem span{font-size:12px;color:#3A564D}
+.f-caixa{border-radius:14px;padding:12px 14px;font-size:12.5px}
 /* plano */
 .plano-top{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
 .anel{width:110px;height:110px}
@@ -520,6 +577,7 @@ input[type=range]{accent-color:var(--grana);flex:1;min-width:160px}
         <div class="legenda-graf"><span><i style="background:var(--grana)"></i>Avalanche</span><span><i style="background:var(--amarelo-esc)"></i>Bola de Neve</span><span><i style="background:var(--fogo)"></i>Só o mínimo</span></div>
       </div>
       <div class="din"><span data-din></span><p class="balao" id="moral-bat"></p></div>
+      <a class="bt leve mini" href="#baixar">Baixar este plano em PDF</a>
     </div>
     <p style="font-size:.82rem;color:var(--apagado)">Simulação educativa: juros compostos mês a mês, mínimos fixos e teto de 100% para rotativo e parcelado do cartão. Na vida real, empréstimos têm parcelas fixas e o mínimo do cartão muda a cada fatura.</p>
   </div>
@@ -625,6 +683,18 @@ input[type=range]{accent-color:var(--grana);flex:1;min-width:160px}
       <p class="lead" style="flex:1;min-width:220px">Doze semanas, uma missão por semana. Marque cada uma quando concluir: o progresso fica salvo neste navegador.</p>
     </div>
     <div class="semanas" id="semanas" style="margin-top:20px"></div>
+    <div class="baixar" id="baixar">
+      <div class="baixar-arte" aria-hidden="true"><div class="folha-ic"><i></i><i></i><i></i><i></i><i></i><i></i></div><span data-din></span></div>
+      <div style="min-width:0">
+        <h3>Baixe o seu plano em PDF</h3>
+        <p>As suas dívidas na ordem de ataque, a data prevista da vitória, <strong>quanto pagar em cada dívida, mês a mês</strong>, e o seu checklist de 90 dias. Para imprimir e colar na geladeira.</p>
+        <div class="baixar-linha">
+          <div class="campo"><label for="nome-plano">Seu nome (vai na capa, opcional)</label><input id="nome-plano" autocomplete="given-name" maxlength="40"></div>
+          <button class="bt fogo" id="baixar-pdf" type="button">Baixar meu plano</button>
+        </div>
+        <p class="baixar-msg" id="baixar-msg" aria-live="polite"></p>
+      </div>
+    </div>
     <div class="din"><span data-din></span><p class="balao">Em 90 dias talvez nem todos os chefões estejam derrotados, e tudo bem. A vitória desta fase é <strong>saber exatamente quanto você deve, quanto paga de juros e ver a barra de vida descendo todo mês</strong>. E quando o último chefão cair, o jogo continua logo aqui embaixo.</p></div>
   </div>
 </section>
@@ -1232,6 +1302,113 @@ function desenhaPlano() {
 function anel() { const n = feitas.filter(Boolean).length; $('#anel').setAttribute('stroke-dashoffset', 289 - 289 * n / 12); $('#anel-txt').textContent = `${n}/12`; }
 $('#semanas').addEventListener('change', e => { const i = +e.target.dataset.i; feitas[i] = e.target.checked; guarda.pôr('plano', feitas); anel(); mundo2(); if (e.target.checked) confete(feitas.every(Boolean) ? 220 : 40); });
 desenhaPlano();
+
+// ---------- plano em PDF ----------
+const NOME_EST = {avalanche: 'Avalanche', bola: 'Bola de Neve', minimos: 'Só o mínimo'};
+const mesCal = (k, curto) => { const d = new Date(); d.setDate(1); d.setMonth(d.getMonth() + k); return d.toLocaleDateString('pt-BR', curto ? {month: 'short', year: '2-digit'} : {month: 'long', year: 'numeric'}).replace('.', ''); };
+const esc = t => String(t).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+function imgSvg(svg, corBoss) {
+  const cs = getComputedStyle(document.documentElement);
+  let x = svg.replace(/<g class="ko-olhos"[^>]*>.*?<\/g>/gs, '');
+  if (corBoss) x = x.replace(/var\(--boss-cor\)/g, `var(--${corBoss})`);
+  x = x.replace(/var\((--[\w-]+)\)/g, (m, n) => cs.getPropertyValue(n).trim() || '#999').replace('<svg ', '<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" ');
+  return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(x);
+}
+const imgBoss = tipo => imgSvg(svgBoss(tipo), TIPOS[tipo].cor);
+function folhasDoPlano() {
+  const nome = ($('#nome-plano').value || '').trim(), orc = lerNum($('#orc').value);
+  const est = estrat === 'minimos' ? 'avalanche' : estrat, s = sims[est];
+  const hoje = new Date().toLocaleDateString('pt-BR', {day: 'numeric', month: 'long', year: 'numeric'});
+  const pe = n => `<div class="folha-pe"><span>Chefões do Cartão · Din no Chão · plano gerado em ${hoje}</span><span>${n}</span></div>`;
+  const topo = sub => `<div class="folha-topo"><div><h1>${nome ? 'Plano de ' + esc(nome) : 'Meu plano'}<br><span>contra os chefões</span></h1><p>${sub}</p></div><img src="${imgSvg(svgDin())}" alt=""></div>`;
+  const vivas = s && s.ds ? s.ds : [];
+  const ordem = vivas.slice().sort(est === 'avalanche' ? (a, b) => b.taxaM - a.taxaM : (a, b) => a.saldo - b.saldo);
+  let pags = [];
+  // folha 1: resumo
+  let vit;
+  if (!s || s.erro) vit = `<div class="f-vitoria ruim"><img src="${imgBoss('rotativo')}" width="70" height="70" alt=""><div><small>Atenção</small><b>O valor por mês não cobre os mínimos</b><p>Você precisa de pelo menos ${brl(s && s.erro || 0)} por mês. Comece pelos ataques especiais: renegociar, trocar dívida cara por barata ou pedir socorro (Lei do Superendividamento).</p></div></div>`;
+  else if (s.nunca) vit = `<div class="f-vitoria ruim"><img src="${imgBoss('rotativo')}" width="70" height="70" alt=""><div><small>Atenção</small><b>Com ${brl(orc, 0)} por mês a dívida não termina</b><p>Os juros são maiores que os pagamentos. Aumente o valor da batalha ou use um ataque especial antes de seguir este plano.</p></div></div>`;
+  else vit = `<div class="f-vitoria bom"><img src="${imgSvg(svgDin())}" width="70" height="70" alt=""><div><small>Vitória prevista</small><b>${mesCal(s.mes)}</b><p>Mês ${s.mes} do plano, pagando ${brl(orc, 0)} por mês na estratégia ${NOME_EST[est]}.</p></div></div>`;
+  const vidaHoje = vivas.reduce((a, d) => a + d.orig, 0), atk = vivas.reduce((a, d) => a + d.orig * d.taxaM, 0);
+  const linhasBoss = ordem.map((d, n) => `<div class="f-boss"><span class="n">${n + 1}º</span><img src="${imgBoss(d.tipo)}" alt=""><div><b>${nomeD(d)}</b><span>${TIPOS[d.tipo].divida}</span></div><div><b>${brl(d.orig, 0)}</b><span>vida hoje</span></div><div><b>${pct(d.taxaM * 100)}</b><span>ao mês</span></div><div><b>${brl(d.minimo, 0)}</b><span>mínimo</span></div><div><b>${d.fim ? mesCal(d.fim, true) : '—'}</b><span>${d.fim ? 'derrota (mês ' + d.fim + ')' : 'sem previsão'}</span></div></div>`).join('');
+  pags.push(`<div class="folha">${topo(`Estratégia ${NOME_EST[est]} · ${brl(orc, 0)} por mês`)}<div class="folha-corpo">${vit}
+    <div class="f-tiles"><div><small>Vida total hoje</small><b>${brl(vidaHoje, 0)}</b></div><div><small>Ataque do 1º mês</small><b>${brl(atk, 0)}</b></div><div><small>Você paga por mês</small><b>${brl(orc, 0)}</b></div><div><small>Juros até a vitória</small><b>${s && !s.erro && !s.nunca ? brl(s.juros, 0) : '—'}</b></div></div>
+    <div class="f-tit">Ordem de ataque</div>
+    <div style="display:grid;gap:8px"><div class="f-boss cab"><span></span><span></span><span>Chefão</span><span>Vida</span><span>Taxa</span><span>Mínimo</span><span>Derrota</span></div>${linhasBoss || '<p>Nenhuma dívida cadastrada.</p>'}</div>
+    <div class="f-regras"><div>1. Pague o essencial primeiro: comida, moradia, contas e transporte.</div><div>2. Pague o mínimo de todas as dívidas, para nenhuma atrasar.</div><div>3. Toda sobra vai para o próximo chefão da lista. Quando ele cair, o pagamento dele vai para o seguinte.</div></div>
+  </div>${pe(1)}</div>`);
+  // folhas de cronograma
+  if (s && s.det && s.ds.length) {
+    const lim = s.nunca ? 12 : s.det.length, porPag = 26, cols = s.ds;
+    for (let ini = 0, f = 0; ini < lim; ini += porPag, f++) {
+      let rows = '';
+      for (let k = ini; k < Math.min(lim, ini + porPag); k++) {
+        const r = s.det[k], ant = s.quadros[k];
+        const cel = cols.map((d, i) => { const pago = r.m[i] + r.x[i]; if (ant[i] <= .005) return '<td class="morto">vencido</td>'; return `<td class="${r.x[i] > .005 ? 'alvo' : ''}">${brl(pago)}</td>`; }).join('');
+        const tot = r.m.reduce((a, b) => a + b, 0) + r.x.reduce((a, b) => a + b, 0);
+        rows += `<tr><td>${k + 1} · ${mesCal(k + 1, true)}</td>${cel}<td class="tot">${brl(tot)}</td><td>${brl(s.total[k + 1], 0)}</td></tr>`;
+      }
+      const head = `<tr><th>Mês</th>${cols.map(d => `<th>${nomeD(d).split(' ')[0]}<br><span style="font-weight:600;opacity:.75">${TIPOS[d.tipo].divida}</span></th>`).join('')}<th>Total</th><th>Vida restante</th></tr>`;
+      pags.push(`<div class="folha">${f === 0 ? topo('Quanto pagar em cada dívida, mês a mês') : ''}<div class="folha-corpo">${f === 0 ? `<p>Em verde, onde vai a sobra do mês (o alvo). Pague o valor de cada coluna no vencimento de cada dívida.${s.nunca ? ' <strong>Com esse valor a dívida não termina: a tabela mostra só os 12 primeiros meses.</strong>' : ''}</p>` : `<div class="f-tit">Cronograma (continuação)</div>`}
+        <table class="f-tab">${head}${rows}</table></div>${pe(pags.length + 1)}</div>`);
+    }
+  }
+  // folha final: checklist
+  const sem = PLANO.map(([t, d], i) => `<div class="f-sem"><i class="${feitas[i] ? 'ok' : ''}">${feitas[i] ? '✓' : ''}</i><div><small>Semana ${i + 1}</small><b>${t}</b><span>${d}</span></div></div>`).join('');
+  const cortes = gastos.filter(g => g.on);
+  const escOk = ESC.filter((e, i) => escudos[i]).map(e => e[0]);
+  pags.push(`<div class="folha">${topo('Missão de 90 dias')}<div class="folha-corpo">
+    <div class="f-semanas">${sem}</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div class="f-caixa" style="background:var(--grana-claro)"><b>Escudos equipados (${escOk.length} de 4)</b><br>${escOk.length ? escOk.map(esc).join(' · ') : 'Nenhum ainda. Comece pelo escudo de emergência.'}</div>
+      <div class="f-caixa" style="background:var(--fogo-claro)"><b>Gastos para cortar</b><br>${cortes.length ? cortes.map(g => esc(g.n) + ' (' + brl(+g.v || 0, 0) + ')').join(' · ') + ' = ' + brl(cortes.reduce((a, g) => a + (+g.v || 0), 0), 0) + ' por mês' : 'Nenhum marcado.'}</div>
+    </div>
+    <div class="f-caixa" style="background:var(--bg);color:var(--apagado);font-size:11px">Plano educativo, feito com os números que você informou e com juros compostos mês a mês (teto de 100% no rotativo e no parcelado do cartão). Não é recomendação de investimento nem substitui orientação profissional. Confira sempre o contrato e o CET de cada dívida. Taxas médias: Banco Central, setembro de 2026.</div>
+  </div>${pe(pags.length + 1)}</div>`);
+  const box = document.createElement('div'); box.className = 'folhas'; box.setAttribute('aria-hidden', 'true'); box.innerHTML = pags.join(''); return box;
+}
+function carregar(src) { return new Promise((ok, erro) => { const t = document.createElement('script'); t.src = src; t.onload = ok; t.onerror = () => erro(new Error('script')); document.head.appendChild(t); }); }
+const msgPdf = t => { $('#baixar-msg').textContent = t; };
+async function entregar(blob, arquivo) {
+  if (window.claude && typeof window.claude.use === 'function') {
+    const dl = await window.claude.use('downloads').catch(() => null);
+    if (dl) {
+      try { await dl.save({filename: arquivo, data: blob}); msgPdf('Plano salvo. Bom jogo!'); }
+      catch (e) { msgPdf(e && e.code === 'declined' ? 'Download cancelado.' : e && e.code === 'rate_limited' ? 'Já tem um download aberto. Tente de novo em instantes.' : 'Não foi possível baixar nesta tela.'); }
+      return;
+    }
+    msgPdf('Esta tela não permite downloads. Abra a página no navegador para baixar.'); return;
+  }
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = arquivo; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 5000); msgPdf('Plano baixado. Bom jogo!');
+}
+let gerando = false;
+async function gerarPdf() {
+  if (gerando) return; gerando = true; const bt = $('#baixar-pdf'); bt.disabled = true; msgPdf('Montando o seu plano...');
+  try {
+    if (!window.jspdf) await carregar('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js');
+    if (!window.html2canvas) await carregar('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js');
+    const box = folhasDoPlano(); document.body.appendChild(box);
+    await document.fonts.ready;
+    await Promise.all([...box.querySelectorAll('img')].map(i => i.complete ? 0 : new Promise(r => { i.onload = i.onerror = r; })));
+    const pdf = new window.jspdf.jsPDF({unit: 'mm', format: 'a4', compress: true});
+    const fs = [...box.querySelectorAll('.folha')];
+    for (let i = 0; i < fs.length; i++) {
+      msgPdf(`Desenhando a página ${i + 1} de ${fs.length}...`);
+      const c = await window.html2canvas(fs[i], {scale: 2, backgroundColor: '#ffffff', logging: false});
+      if (i) pdf.addPage();
+      pdf.addImage(c.toDataURL('image/jpeg', 0.9), 'JPEG', 0, 0, 210, 297);
+    }
+    box.remove();
+    pdf.setProperties({title: 'Meu plano contra os chefões', author: 'Din no Chão'});
+    const nome = ($('#nome-plano').value || '').trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    await entregar(pdf.output('blob'), `plano-chefoes${nome ? '-' + nome : ''}.pdf`);
+  } catch (e) { msgPdf('Não deu para montar o PDF agora. Confira a conexão e tente de novo.'); }
+  finally { gerando = false; bt.disabled = false; $$('.folhas').forEach(x => x.remove()); }
+}
+$('#baixar-pdf').onclick = gerarPdf;
+$('#nome-plano').value = guarda.ler('nome', '');
+$('#nome-plano').addEventListener('input', () => guarda.pôr('nome', $('#nome-plano').value));
+window.__folhasDoPlano = folhasDoPlano; // usado pelo teste da fábrica
 
 // ---------- HUD de fases ----------
 const links = $$('.hud-fases a');

@@ -25,6 +25,7 @@ Ebook ou material para vender/entregar (Hotmart, isca de e-mail, bônus de curso
 - [ ] Aviso educativo, data dos dados e lista de fontes no livro.
 
 ## Lições
+- 29/10/2026 — Plano pessoal em PDF gerado no navegador: jsPDF 2.5.1 + html2canvas 1.4.1 (cdnjs, carregados só no clique) desenham folhas A4 escondidas com o visual da página. SVG com `var(--x)` não pinta como imagem: trocar pelas cores calculadas antes. No claude.ai o download só sai pela permissão `downloads`; fora dele, link de download normal.
 - 29/10/2026 — Para o simulador ser didático: o leitor aposta antes de ver o placar, e cada mês é contado em 3 passos (juros, mínimos, sobra no alvo e o porquê). Nomes dos chefões têm gênero: guardar no dado (`fem`) para o texto não sair "o Sombra".
 - 29/10/2026 — Fim do produto = começo do próximo: mostrar o mundo seguinte trancado e calcular com os números do leitor o que ele ganha lá (sem rendimento, para não virar recomendação de investimento).
 - 29/10/2026 — **v1 reprovada pelo Felipe ("horrível")**: saiu sem pesquisa de referências e parecia relatório de banco (caixas empilhadas, tabelas, verde-planilha, chefões parados). A v2 foi feita depois de olhar Nicky Case, Spent, Habitica, Duolingo, undebt.it e os concorrentes da Hotmart (todos PDFs genéricos) → página interativa em desenho animado vibrante, em que o leitor joga antes de ler.
