@@ -11,7 +11,7 @@ A fábrica é uma **indústria de conteúdo, marcas e produtos digitais** o mais
 | **Precioso Productions** (serviço) | Estúdio de vídeo, marca, site e 3D para clientes no Brasil e no exterior (dólar/euro) | Montando o portfólio. 1ª marca vitrine: **Ninho Alto Coffee** (fictícia, em inglês): manual completo como design system (gerado de `marca.json`), rótulos topográficos, fotos 3D no Blender e site v2 publicados. Plano: `docs/plano-precioso.md` |
 | **Produtos** | Ebook "Chefões do cartão" → minicurso (Hotmart); depois kit de agentes da fábrica | Funil desenhado (`docs/plano-funil.md`), ebook ainda não escrito |
 | **Din no Chão** (finanças) | Canal de Shorts que puxa os produtos | Estilo `grana` pronto, 1º vídeo feito |
-| **Canal de cultura pop** | Laboratório de formatos (sem meta de receita) | Vídeo diário automático (tarefa às 08:23), aprovação no Radar Pop |
+| **Canal de cultura pop** | Laboratório de formatos (sem meta de receita) | Vídeo diário automático **pausado em 29/10** (tarefas das 06:47 e 08:23 desligadas para poupar limite) |
 
 ### Próximos passos
 1. **Ninho Alto:** ~~manual completo como design system~~ (feito 29/10) → vídeo 3D dos grãos rolando do pacote (Blender, física) → site v3 com o vídeo no topo → 3 Reels e 2 anúncios → projeto no Behance.

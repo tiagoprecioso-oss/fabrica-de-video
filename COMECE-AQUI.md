@@ -16,7 +16,8 @@ Tudo o que o Claude precisa está neste repositório. O que **não** vem junto: 
 2. **Claude:** abra o clone no Claude Code (ou conecte o repositório numa sessão do Claude na web) e mande:
    > Leia o README, o CLAUDE.md, o COMECE-AQUI.md e as receitas da fábrica e continue de onde paramos: <passo>.
 3. **Páginas (site, manual, Radar Pop):** a outra conta não edita as do Tiago. Ela publica a própria cópia a partir dos arquivos daqui (`portfolio/ninho-alto/site.html`, `portfolio/ninho-alto/manual.html` com as imagens de `img/`, `radar-pop/radar-pop.html`).
-4. **Blender:** precisa do Blender 4.2 instalado no PC de quem renderiza (`docs/blender.md`). Com placa NVIDIA, use `--gpu`. Sem placa de vídeo, só rascunhos e imagens soltas.
+4. **Blender:** o PC do Felipe não tem placa de vídeo, então lá não se renderiza. Para **fotos**, edite a cena (`blender/ninho_produto.py`) e dê push: o GitHub Actions (**Renderizar peças 3D**) renderiza sozinho e publica na release `pecas-ninho-alto` (pode subir as amostras no workflow, o limite é 6 h). Para **vídeo 3D com física**, só no PC do Tiago (RTX 3060), quando ele voltar a ter limite.
+6. **Tarefas automáticas pausadas (29/10):** as das 06:47 (Radar Pop) e 08:23 (vídeo do dia) foram desligadas na conta do Tiago para poupar limite. Para religar, peça ao Claude do Tiago; ou monte as suas pelo `radar-pop/LEIA-ME.md`.
 5. **Preferências do Tiago que valem sempre:** todo Short/Reels fecha em loop; legendas menores e corridas, sem som a cada palavra; comparação em reais quando houver dado brasileiro; formatos baseados no que já funciona comprovadamente; nada é postado sem o Tiago.
 
 ### Onde paramos (29/10/2026)
