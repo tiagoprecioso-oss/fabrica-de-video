@@ -23,6 +23,13 @@ Toda peça fictícia leva o selo "Projeto conceitual — marca fictícia" (Behan
 
 **Pacotes (sugestão inicial, ajustar depois de 3 clientes):** Reels avulso · pacote mensal 8 Reels · identidade visual + vinheta 3D.
 
+### Clientes em dólar e euro
+- **Portfólio bilíngue** (português + inglês). Pelo menos 2 marcas fictícias pensadas para fora: uma loja online americana (vídeo de produto 3D, anúncio vertical) e um criador/podcast americano (cortes e Shorts com legenda em inglês).
+- **Onde achar (taxas para o freelancer, out/2026, conferir na plataforma):** Contra (0%), Upwork (0–15% por contrato), Fiverr (20%), LinkedIn e Behance (contato direto, sem taxa). Europa: Malt (taxa não verificada).
+- **Vantagem:** o fuso do Brasil bate com o horário comercial dos EUA.
+- **Receber:** pela plataforma ou direto via Wise/Payoneer. Nota fiscal em reais pela cotação do dia.
+- **Formalizar:** edição (CNAE 5912-0/99) pode não caber no MEI; o caminho comum é ME no Simples (Anexo III/V, Fator R). Exportação de serviço tem benefícios de imposto — **confirmar com contador** antes do 1º cliente de fora.
+
 ## 2. Produtos e funis
 ### Produto A — ebook "Chefões do cartão" (primeiro)
 Funil já desenhado em `docs/plano-funil.md`: Shorts Din no Chão → calculadora grátis → lista (e-mail + WhatsApp) → página de venda → Hotmart (R$ 19–27) → **order bump** planilha de dívidas (R$ 9) → **upsell** minicurso em 6 fases (R$ 47).
