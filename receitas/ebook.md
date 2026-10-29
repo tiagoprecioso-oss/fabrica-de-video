@@ -16,7 +16,8 @@ Ebook ou material para vender/entregar (Hotmart, isca de e-mail, bônus de curso
 5. **Página interativa** em `produtos/<produto>/web/index.html` (um arquivo, sem `<html>/<head>`; carregar o skill `artifact-design` antes). A lógica de contas da página tem que ser a mesma do `contas.py`: rodar a página no Playwright e comparar os números com o script. Publicar com a ferramenta Artifact para revisão.
 6. **PDF oficial** (vai para a Hotmart com Social DRM) — `python3 tools/extrair_arte.py produtos/<produto>/web/index.html produtos/<produto>/arte` e depois `python3 tools/ebook.py produtos/<produto>` → `<produto>.pdf` (A4), `<produto>-celular.pdf` (110×196 mm) e `previa.png`. Fontes: Archivo (OFL) em `public/fonts/`. Ilustrações em SVG feitas no próprio script (sem imagem de terceiros).
 7. **Conferir as páginas**: renderizar todas as páginas em folhas de contato (pypdfium2) e olhar: linhas órfãs, título sozinho no pé, caixa cortada, página quase vazia.
-8. **Compliance e revisor**, depois copywriter (página de venda) — e só o Tiago sobe na Hotmart.
+8. **Capa e mockups** — pesquisa em `pesquisa/<produto>-capa.md`, depois `python3 tools/capa.py produtos/<produto>` → `divulgacao/`: capa vertical 2:3, imagem quadrada da Hotmart (1200×1200), mockups 16:9, quadrado e story (livro em 3D por CSS, celular com o simulador, folhas do plano, bônus). Olhar o `teste-miniatura.png`: a capa tem que ler a 200×300 px.
+9. **Compliance e revisor**, depois copywriter (página de venda) — e só o Tiago sobe na Hotmart.
 
 ## Pronto quando
 - [ ] Todo número do texto aparece em `checagem/` como OK.
@@ -25,6 +26,7 @@ Ebook ou material para vender/entregar (Hotmart, isca de e-mail, bônus de curso
 - [ ] Aviso educativo, data dos dados e lista de fontes no livro.
 
 ## Lições
+- 29/10/2026 — Capa: a Hotmart não publica a medida da imagem do produto; ela aparece quadrada na loja. Gerar 1200×1200 e conferir na tela de envio. Na capa, o chefão grande não pode encostar no título (chifres!) e etiquetas vão na área vazia ao lado da palavra mais curta.
 - 29/10/2026 — **Sem fundo branco** (pedido do Felipe: cansa a vista). Fundo verde-sálvia #E7EFE3 e cartões #F1F6EE, na página e no PDF. No PDF, o fundo é pintado em cada página inteira (inclusive margens) pelo tools/ebook.py, antes de criar os campos. Campos de resposta levam uma linha de explicação em letra menor embaixo.
 - 29/10/2026 — PDF "interativo" tem limite: links, campos e caixas funcionam nos leitores comuns; animação e contas automáticas não (JavaScript de PDF só no Adobe). Interatividade de verdade fica na página. Campos: o ebook.py escreve marcadores de texto invisíveis (QZ…ZQ) e o pdf_campos.py cria os campos onde eles estão. Cuidados: o marcador não pode ficar na mesma linha de outro texto (as letras se misturam na extração) e nenhuma regra de estilo pode aumentar a letra dele. Conferir preenchendo uma cópia de teste e renderizando com formulários (pypdfium2 init_forms).
 - Testar se a marca d'água da Hotmart (Social DRM) mantém os campos preenchíveis antes de lançar.
@@ -41,6 +43,7 @@ Ebook ou material para vender/entregar (Hotmart, isca de e-mail, bônus de curso
 - 29/10/2026 — Rodapé com número de página: Chromium imprime em todas as páginas; a capa sai de um segundo PDF sem rodapé e as duas partes são unidas com pypdf.
 
 ## Histórico
+- v6 29/10/2026 — capa e mockups por script (tools/capa.py), com telas tiradas do próprio produto.
 - v5 29/10/2026 — PDF oficial interativo: mapa clicável (links para cada fase e "voltar ao mapa"), fichas e respostas preenchíveis, checklist de 90 dias com caixas de marcar (tools/pdf_campos.py roda sozinho no fim do tools/ebook.py).
 - v4 29/10/2026 — PDF oficial redesenhado no visual da página (tools/ebook.py v2): arte extraída da página (tools/extrair_arte.py), Baloo 2 + Nunito, capa, mapa do jogo, aberturas de fase em página inteira de cor, cartas, extratos, Mundo 2.
 - v3 29/10/2026 — simulador passo a passo com extrato e aposta; gancho para o próximo produto no fim (mundo seguinte trancado + cálculo com os números do leitor).
