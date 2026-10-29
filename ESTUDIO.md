@@ -55,5 +55,6 @@ analista (números) → editor-chefe (o que repetir) → produtor (andamento e C
 
 ## Andamento
 - Ativos: olheiro (06:47), pesquisador, roteirista, diretor, revisor, checador, diretor-de-arte, compositor, editor-chefe, social-media, compliance, produtor.
-- Em construção: estilo `grana` e blocos de finanças; autor-de-ebook e diagramador (ebook "Chefões do cartão").
+- Em construção: estilo `grana` e blocos de finanças.
+- Testados em 29/10: autor-de-ebook e diagramador (ebook "Chefões do cartão", `tools/ebook.py`).
 - Esperando o Tiago: narrador (escolher a voz), editor-de-gameplay (gravação do Fortnite), atendente-whatsapp e desenvolvedor-web (contas e ferramenta de e-mail), analista (canais no ar).

@@ -9,14 +9,14 @@ A fábrica é uma **indústria de conteúdo, marcas e produtos digitais** o mais
 | Linha | O que é | Estado |
 |---|---|---|
 | **Precioso Productions** (serviço) | Estúdio de vídeo, marca, site e 3D para clientes no Brasil e no exterior (dólar/euro) | Montando o portfólio. 1ª marca vitrine: **Ninho Alto Coffee** (fictícia, em inglês): manual completo como design system (gerado de `marca.json`), rótulos topográficos, fotos 3D no Blender e site v2 publicados. Plano: `docs/plano-precioso.md` |
-| **Produtos** | Ebook "Chefões do cartão" → minicurso (Hotmart); depois kit de agentes da fábrica | Funil desenhado (`docs/plano-funil.md`), ebook ainda não escrito |
+| **Produtos** | Ebook "Chefões do cartão" → minicurso (Hotmart); depois kit de agentes da fábrica | Funil desenhado (`docs/plano-funil.md`). **Ebook v1 pronto (29/10, Felipe):** `produtos/chefoes-do-cartao/` (20 p. A4 + versão celular), dados do BC de set/2026, checado; falta revisão do Tiago, página de venda e Hotmart |
 | **Din no Chão** (finanças) | Canal de Shorts que puxa os produtos | Estilo `grana` pronto, 1º vídeo feito |
 | **Canal de cultura pop** | Laboratório de formatos (sem meta de receita) | Vídeo diário automático **pausado em 29/10** (tarefas das 06:47 e 08:23 desligadas para poupar limite) |
 
 ### Próximos passos
 1. **Ninho Alto:** ~~manual completo como design system~~ (feito 29/10) → vídeo 3D dos grãos rolando do pacote (Blender, física) → site v3 com o vídeo no topo → 3 Reels e 2 anúncios → projeto no Behance.
 2. **Precioso Productions:** marca, site e Instagram do estúdio; perfis no Behance, Contra e Upwork.
-3. **Produtos:** escrever e diagramar o ebook; página de venda; Hotmart.
+3. **Produtos:** Tiago revisa o ebook (`produtos/chefoes-do-cartao/chefoes-do-cartao.pdf`) e decide o preço (R$ 19 ou R$ 27) → copywriter faz a página de venda → Hotmart. Para refazer o PDF: `python3 tools/ebook.py produtos/chefoes-do-cartao` (receita `receitas/ebook.md`).
 4. Pendências do Tiago: liberar os links no menu Compartilhar; contador (exportação de serviço). Para o Blender do PC (RTX 3060) não precisa clonar nada: o Claude copia a cena para uma pasta do PC e abre o Blender pelo controle do computador, com aprovação do Tiago.
 
 ### Como começar uma conversa nova com o Claude
