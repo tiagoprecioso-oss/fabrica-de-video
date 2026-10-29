@@ -183,6 +183,7 @@ input[type=range]{accent-color:var(--grana);flex:1;min-width:160px}
 .campo label{font-size:.72rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--apagado)}
 .campo input,.campo select{width:100%;min-width:0;border:2px solid var(--linha);border-radius:11px;padding:9px 10px;background:var(--card);font-weight:700}
 .campo input:focus,.campo select:focus{border-color:var(--azul);outline:none}
+.taxa-aviso{margin:0;font-size:.8rem;font-weight:800;color:var(--fogo-esc)}
 .div-info{grid-column:2;display:flex;flex-wrap:wrap;gap:8px 16px;font-size:.88rem;font-weight:700;color:var(--apagado)}
 .div-info .ruim{color:var(--fogo-esc)} .div-info .bom{color:var(--grana-esc)}
 .remover{border:0;background:none;color:var(--apagado);font-weight:900;cursor:pointer;padding:9px 6px;font-size:.8rem}
@@ -418,7 +419,7 @@ input[type=range]{accent-color:var(--grana);flex:1;min-width:160px}
     </div>
     <div class="capa-acoes">
       <a class="bt" href="#start">Apertar start</a>
-      <div class="chips"><span class="chip">6 fases</span><span class="chip">5 chefões</span><span class="chip">simulador de batalha</span><span class="chip">plano de 90 dias</span></div>
+      <div class="chips"><span class="chip">6 fases</span><span class="chip">9 chefões</span><span class="chip">simulador de batalha</span><span class="chip">plano de 90 dias</span></div>
     </div>
     <p class="capa-info">Juros médios do Banco Central de setembro de 2026. Conteúdo educativo: não é recomendação de investimento.</p>
   </div>
@@ -460,7 +461,7 @@ input[type=range]{accent-color:var(--grana);flex:1;min-width:160px}
     </div>
     <div class="din" id="demo-moral" hidden><span data-din></span><p class="balao">Viu? Com R$ 100 por mês a vida do dragão <strong>sobe</strong>, porque o ataque dele (R$ 152,94 no primeiro mês) é maior que o seu dano. A regra do jogo é uma só: <strong>seu pagamento tem que ser maior que os juros</strong>.</p></div>
     <div class="prosa" style="margin-top:18px">
-      <p>Neste guia você vai conhecer os cinco chefões mais comuns, cadastrar as suas dívidas, simular a batalha com duas estratégias, aprender os ataques especiais e sair com um plano de 90 dias. Tudo <strong>sem passar aperto</strong>: comida, moradia, luz, água, remédio e transporte vêm antes de qualquer chefão.</p>
+      <p>Neste guia você vai conhecer os nove chefões mais comuns, cadastrar as suas dívidas, simular a batalha com duas estratégias, aprender os ataques especiais e sair com um plano de 90 dias. Tudo <strong>sem passar aperto</strong>: comida, moradia, luz, água, remédio e transporte vêm antes de qualquer chefão.</p>
     </div>
   </div>
 </section>
@@ -494,7 +495,7 @@ input[type=range]{accent-color:var(--grana);flex:1;min-width:160px}
       <svg class="grafico" id="graf-teto" viewBox="0 0 640 260" role="img" aria-label="Dívida de R$ 1.000 no rotativo em 12 meses, sem e com o teto da lei"></svg>
       <div class="legenda-graf"><span style="color:var(--apagado)">Eixo de baixo: meses</span><span><i style="background:var(--fogo)"></i>Sem a lei</span><span><i style="background:var(--grana)"></i>Com o teto de 100%</span></div>
     </div>
-    <div class="din"><span data-din></span><p class="balao"><strong>Chefões sem ficha.</strong> Crediário de loja, empréstimo de aplicativo, carnê e "dinheiro na hora" não entram nas médias, e alguns batem mais forte que o dragão. Antes de assinar qualquer coisa, peça o <strong>CET</strong> (Custo Efetivo Total): ele tem que estar no contrato.</p></div>
+    <div class="din"><span data-din></span><p class="balao"><strong>Chefões sem ficha.</strong> Crediário de loja, empréstimo de aplicativo, carnê e "dinheiro na hora" não entram nas médias, e alguns podem bater tão forte quanto os piores da lista. Antes de assinar qualquer coisa, peça o <strong>CET</strong> (Custo Efetivo Total): ele tem que estar no contrato.</p></div>
   </div>
 </section>
 
@@ -638,14 +639,14 @@ input[type=range]{accent-color:var(--grana);flex:1;min-width:160px}
       <article class="golpe">
         <div class="golpe-cab"><span class="golpe-ic" style="background:#DDF6F6"><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8" fill="#fff" stroke="var(--tinta)" stroke-width="2"/><path d="M12 9v4l3 2M9 2h6" stroke="var(--tinta)" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M4 6l2 2" stroke="var(--ciano-esc)" stroke-width="2.4" stroke-linecap="round"/></svg></span><h3>Antecipar parcelas</h3></div>
         <p>Em empréstimo e financiamento parcelado, pagar parcelas antes do vencimento dá direito a <strong>desconto proporcional dos juros</strong> (Código de Defesa do Consumidor, art. 52, §2º). Vale para quitar tudo ou só algumas parcelas.</p>
-        <p>Comece pelas <strong>últimas parcelas</strong> do contrato: são as que carregam mais juros embutidos, então o desconto é maior.</p>
+        <p>Comece pelas <strong>últimas parcelas</strong> do contrato: como estão mais longe, são as que recebem o maior desconto de juros.</p>
         <div class="falas">
           <div class="fala"><span><small>No banco</small><em>"Quero antecipar parcelas deste contrato com o desconto dos juros. Qual o valor para quitar as últimas ___ parcelas hoje?"</em></span><button class="bt leve mini copiar" type="button">Copiar</button></div>
         </div>
       </article>
       <article class="golpe">
         <div class="golpe-cab"><span class="golpe-ic" style="background:var(--roxo-claro)"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="var(--roxo)" stroke="var(--tinta)" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="#fff" stroke="var(--tinta)" stroke-width="2"/><path d="M5.6 5.6l3.6 3.6M18.4 5.6l-3.6 3.6M5.6 18.4l3.6-3.6M18.4 18.4l-3.6-3.6" stroke="#fff" stroke-width="2"/></svg></span><h3>Pedir socorro</h3></div>
-        <p>Se, mesmo cortando tudo que não é essencial, as dívidas não cabem na renda, você pode estar <strong>superendividado</strong>. A Lei 14.181/2021 permite juntar todas as dívidas em um plano único de pagamento, preservando um valor mínimo para você viver.</p>
+        <p>Se, mesmo cortando tudo que não é essencial, as dívidas não cabem na renda, você pode estar <strong>superendividado</strong>. A Lei 14.181/2021 permite juntar as dívidas de consumo em um plano único de pagamento (ficam de fora, por exemplo, financiamento imobiliário e dívidas com garantia), preservando um valor mínimo para você viver.</p>
         <p>Comece pelo Procon da sua cidade, pela Defensoria Pública ou pelo núcleo de conciliação do Tribunal de Justiça do seu estado. O atendimento costuma ser gratuito.</p>
         <p style="font-size:.86rem;color:var(--fogo-esc);font-weight:800">Golpe à vista: ninguém sério cobra taxa antecipada para "limpar seu nome" ou "liberar empréstimo".</p>
       </article>
@@ -660,7 +661,7 @@ input[type=range]{accent-color:var(--grana);flex:1;min-width:160px}
       <span class="fase-num"><b>5</b> Fase 5 de 6</span>
       <h2>Não deixe o chefão voltar</h2>
     </div>
-    <p class="lead" style="max-width:65ch">Quem quita e não muda nada costuma estar devendo de novo em poucos meses. Equipe os seus escudos: toque em cada um quando já tiver feito.</p>
+    <p class="lead" style="max-width:65ch">Quem quita e não muda nada corre o risco de voltar a dever. Equipe os seus escudos: toque em cada um quando já tiver feito.</p>
     <div class="escudos" id="escudos" style="margin-top:22px"></div>
     <p class="disp" id="escudos-txt" style="margin-top:14px;font-size:1.3rem"></p>
 
@@ -729,7 +730,7 @@ input[type=range]{accent-color:var(--grana);flex:1;min-width:160px}
       <li>Resolução CMN nº 4.765/2019: teto de 8% ao mês no cheque especial.</li>
       <li>Lei nº 14.181/2021: Lei do Superendividamento.</li>
       <li>Consignado privado (CLT): média de agosto de 2026 do Banco Central (série 20744). Financiamento de veículos: Banco Central, setembro de 2026.</li>
-      <li>Contas de consumo em atraso: multa de 2% e juros de mora de 1% ao mês (regras da ANEEL e das concessionárias, segundo o Procon-SP).</li>
+      <li>Contas de consumo em atraso: multa de 2% e juros de mora de 1% ao mês (ANEEL e contratos das concessionárias).</li>
       <li>Antecipação do saque-aniversário do FGTS: faixa de taxas praticada em 2026 segundo levantamento de mercado; confira o CET da sua proposta.</li>
       <li>Código de Defesa do Consumidor, art. 52, §2º: redução proporcional dos juros na liquidação antecipada.</li>
       <li>Taxas ao mês calculadas a partir das anuais: (1 + taxa anual)^(1/12) − 1.</li>
@@ -758,7 +759,7 @@ const TIPOS = {
               fraco:'Parcelas fixas e prazo definido. Às vezes dá para trocar por uma dívida mais barata.'},
   consignado:{nome:'Lacaio do Consignado', divida:'Consignado', anual:28.5, cor:'grana', perigo:1,
               aparece:'Aposentados e pensionistas do INSS, servidores e trabalhadores com carteira assinada.',
-              fraco:'É o mais fraco da lista e pode virar arma contra os outros. Cuidado: a parcela sai antes do salário cair.'},
+              fraco:'É um dos mais fracos da lista e pode virar arma contra os outros. Cuidado: a parcela sai antes do salário cair.'},
   consclt:   {nome:'Ogro do Consignado CLT', divida:'Consignado privado (CLT)', anual:56.34, cor:'rosa', perigo:2, ref:'média de agosto de 2026',
               aparece:'Empréstimo com desconto na folha para quem tem carteira assinada, oferecido no app do banco ou da carteira de trabalho digital.',
               fraco:'Custa bem menos que o crédito pessoal comum, mas quase o dobro do consignado médio. Compare o CET antes de achar que todo consignado é barato.'},
@@ -770,7 +771,7 @@ const TIPOS = {
               fraco:'Os juros são baixos, mas o ataque especial dele é o corte do serviço. Negocie direto com a empresa: costuma haver parcelamento.'},
   fgts:      {nome:'Vampiro do FGTS', divida:'Antecipação do saque-aniversário', mensalFixo:1.49, cor:'noite', perigo:2, semSim:true, faixa:'1,29–1,79%',
               aparece:'Ofertas de "dinheiro na hora" usando o FGTS como garantia. Você recebe agora e os saques dos próximos anos vão para o banco.',
-              fraco:'Juros baixos, mas ele morde o futuro: se você for demitido, o saldo usado fica travado e você só recebe a multa de 40%.'},
+              fraco:'Juros baixos, mas ele morde o futuro: se você for demitido sem justa causa, o saldo usado fica travado e você só recebe a multa de 40%.'},
   outro:     {nome:'Chefão sem ficha', divida:'Outra dívida', anual:null, cor:'apagado', perigo:3}
 };
 const mensal = a => (Math.pow(1 + a / 100, 1 / 12) - 1) * 100;   // % ao mês
@@ -1009,6 +1010,7 @@ function desenhaDividas() {
         <div class="campo"><label for="min-${i}">Paga/mês (R$)</label><input id="min-${i}" data-c="minimo" inputmode="decimal" value="${fmtIn(d.minimo)}"></div>
         <button class="remover" type="button" data-rm="${i}" aria-label="Remover chefão">Remover</button>
       </div>
+      <p class="taxa-aviso" id="taxa-aviso-${i}" ${d.tipo === 'outro' ? '' : 'hidden'}>Taxa de exemplo: troque pela taxa do seu contrato (CET).</p>
     </div>
     <div class="div-info num" id="info-${i}"></div>
   </div>`).join('');
@@ -1027,7 +1029,7 @@ function atualizaInfos() {
   if (crescendo.length) $('#alerta-minimo-txt').innerHTML = `<strong>Atenção:</strong> ${crescendo.join(', ')} ${crescendo.length > 1 ? 'estão' : 'está'} ganhando vida todo mês, porque o pagamento não cobre os juros. Na Fase 3 você vê como virar esse jogo.`;
 }
 $('#dividas').addEventListener('input', e => { const l = e.target.closest('.div-linha'); if (!l) return; const d = dividas[+l.dataset.i], c = e.target.dataset.c;
-  if (c === 'tipo') { d.tipo = e.target.value; d.taxa = TIPOS[d.tipo].mensal; l.querySelector('[data-c=taxa]').value = fmtIn(d.taxa); const b = l.querySelector('.boss'); b.dataset.boss = d.tipo; b.dataset.ok = ''; pintar(l); bater(b); }
+  if (c === 'tipo') { d.tipo = e.target.value; d.taxa = TIPOS[d.tipo].mensal; l.querySelector('[data-c=taxa]').value = fmtIn(d.taxa); l.querySelector('.taxa-aviso').hidden = d.tipo !== 'outro'; const b = l.querySelector('.boss'); b.dataset.boss = d.tipo; b.dataset.ok = ''; pintar(l); bater(b); }
   else d[c] = lerNum(e.target.value);
   exemplo = false; $('#aviso-exemplo').hidden = true; salvar(); atualizaInfos(); agendaBatalha(); });
 $('#dividas').addEventListener('click', e => { const rm = e.target.dataset.rm; if (rm == null) return; dividas.splice(+rm, 1); exemplo = false; salvar(); desenhaDividas(); agendaBatalha(); });
