@@ -82,7 +82,9 @@ def mat_pacote(lote):
     sh = ins(m, 'Sheen Weight') or ins(m, 'Sheen')
     if sh: sh.default_value = 0.25
     img = n.new('ShaderNodeTexImage')
-    img.image = bpy.data.images.load(os.path.join(RAIZ, 'saida', 'ninho', f'rotulo_{lote}.png'))
+    _png = os.path.join(RAIZ, 'saida', 'ninho', f'rotulo_{lote}.png')
+    _jpg = os.path.join(RAIZ, 'portfolio', 'ninho-alto', 'img', f'rotulo_{lote}.jpg')  # sem Python no PC: usa o rótulo já gerado
+    img.image = bpy.data.images.load(_png if os.path.exists(_png) else _jpg)
     geo = n.new('ShaderNodeNewGeometry'); sep = n.new('ShaderNodeSeparateXYZ')
     lt = n.new('ShaderNodeMath'); lt.operation = 'LESS_THAN'; lt.inputs[1].default_value = -0.35
     mix = n.new('ShaderNodeMix'); mix.data_type = 'RGBA'
