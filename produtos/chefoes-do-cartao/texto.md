@@ -56,7 +56,7 @@ Crédito pessoal | 110,9 | 6,42 | 64,16
 Consignado CLT | 56,3 | 3,79 | 37,94
 Consignado | 28,5 | 2,11 | 21,12
 Financiamento de veículos | 26,2 | 1,96 | 19,58
-Contas atrasadas | + multa de 2% | 1,00 | 10,00
+Contas atrasadas | + multa de até 2% | 1,00 | 10,00
 :::
 
 ## O bestiário
@@ -118,16 +118,16 @@ dívida: Antecipação do saque-aniversário
 ataque: 1,29% a 1,79% ao mês
 nivel: 2
 como_aparece: Ofertas de "dinheiro na hora" usando o FGTS como garantia. Você recebe agora e os saques dos próximos anos vão para o banco.
-ponto_fraco: Os juros são baixos, mas ele morde o futuro: se você for demitido, o saldo usado fica travado e você só recebe a multa de 40%.
+ponto_fraco: Os juros são baixos, mas ele morde o futuro: se você for demitido sem justa causa, o saldo usado fica travado e você só recebe a multa de 40%.
 :::
 
 :::chefao
 arte: contas
 nome: Goblin das Contas Atrasadas
 dívida: Luz, água e telefone atrasados
-ataque: 1% ao mês + multa de 2%
+ataque: 1% ao mês + multa de até 2%
 nivel: 2
-como_aparece: A conta de consumo vence e fica para depois. Vem multa de 2%, juros de mora de 1% ao mês e correção.
+como_aparece: A conta de consumo vence e fica para depois. Na conta de luz, a regra da ANEEL permite multa de até 2%, juros de mora de 1% ao mês e correção pelo IPCA. Água e telefone têm regras próprias: confira na conta.
 ponto_fraco: Os juros são baixos, mas o ataque especial dele é o corte do serviço. Negocie direto com a empresa: costuma haver parcelamento.
 :::
 
@@ -148,7 +148,7 @@ dívida: Consignado (média do mercado)
 ataque: 2,11% ao mês
 nivel: 1
 como_aparece: Aposentados e pensionistas do INSS, servidores e trabalhadores com carteira assinada.
-ponto_fraco: É o mais fraco da lista e pode virar arma contra os outros (Fase 4). Cuidado: a parcela sai antes do salário cair.
+ponto_fraco: É um dos mais fracos da lista e pode virar arma contra os outros (Fase 4). Cuidado: a parcela sai antes do salário cair.
 :::
 
 ## A coleira do dragão
@@ -160,7 +160,7 @@ teto
 :::
 
 :::din
-**Chefões sem ficha.** Crediário de loja, empréstimo de aplicativo, carnê e "dinheiro na hora" não entram nas médias, e alguns batem mais forte que o dragão. Antes de assinar, peça o **CET**: ele tem que estar no contrato.
+**Chefões sem ficha.** Crediário de loja, empréstimo de aplicativo, carnê e "dinheiro na hora" não entram nas médias, e alguns podem bater tão forte quanto os piores da lista. Antes de assinar, peça o **CET**: ele tem que estar no contrato.
 :::
 
 :::missao
@@ -338,7 +338,7 @@ O banco atual pode cobrir a oferta para não perder você. Use a proposta do con
 :::golpe
 titulo: Trocar dívida cara por barata
 cor: grana
-O golpe mais forte: uma dívida de juros baixos (como o consignado) quita as de juros altos. Se a Ana trocasse as três dívidas (R$ 5.800) por um consignado na taxa média (2,11% ao mês) e mantivesse os R$ 600 por mês, terminaria em **11 meses com R$ 755,97 de juros**, contra 17 meses e R$ 4.323,76 na Avalanche. Uma economia de cerca de **R$ 3.567**.
+O golpe mais forte: uma dívida de juros baixos (como o consignado) quita as de juros altos. Se a Ana trocasse as três dívidas (R$ 5.800) por um consignado na taxa média (2,11% ao mês) e mantivesse os R$ 600 por mês, terminaria em **11 meses com R$ 755,97 de juros**, contra 17 meses e R$ 4.323,76 na Avalanche. Uma economia de cerca de **R$ 3.568**.
 **Só funciona se você fechar a porta das dívidas antigas** (cancelar ou reduzir o limite do cartão e do cheque especial). Senão você fica com as duas. E a parcela do consignado sai antes do salário cair: nunca pode tirar dinheiro do essencial.
 :::
 
@@ -353,13 +353,13 @@ Se a Ana colocasse **R$ 1.000 extras no mês 2**, a batalha cairia de 17 para **
 titulo: Antecipar parcelas
 cor: ciano
 Em empréstimo e financiamento parcelado, pagar parcelas antes do vencimento dá direito a **desconto proporcional dos juros** (Código de Defesa do Consumidor, art. 52, §2º). Vale para quitar tudo ou só algumas parcelas.
-Comece pelas **últimas parcelas** do contrato: são as que carregam mais juros embutidos. Peça no banco: "Qual o valor para quitar as últimas ___ parcelas hoje, com o desconto dos juros?".
+Comece pelas **últimas parcelas** do contrato: como estão mais longe, são as que recebem o maior desconto de juros ao serem antecipadas. Peça no banco: "Qual o valor para quitar as últimas ___ parcelas hoje, com o desconto dos juros?".
 :::
 
 :::golpe
 titulo: Pedir socorro
 cor: roxo
-Se, mesmo cortando tudo que não é essencial, as dívidas não cabem na renda, você pode estar **superendividado**. A Lei 14.181/2021 permite juntar todas as dívidas em um plano único de pagamento, preservando um valor mínimo para você viver.
+Se, mesmo cortando tudo que não é essencial, as dívidas não cabem na renda, você pode estar **superendividado**. A Lei 14.181/2021 permite juntar as dívidas de consumo em um plano único de pagamento, preservando um valor mínimo para você viver. Ficam de fora, por exemplo, o financiamento imobiliário e as dívidas com garantia, como o carro financiado.
 Comece pelo Procon da sua cidade, pela Defensoria Pública ou pelo núcleo de conciliação do Tribunal de Justiça do seu estado. O atendimento costuma ser gratuito.
 :::
 
@@ -374,7 +374,7 @@ Comece pelo Procon da sua cidade, pela Defensoria Pública ou pelo núcleo de co
 # Fase 5 · Não deixe o chefão voltar
 
 :::abertura
-promessa: Quem quita e não muda nada costuma estar devendo de novo em poucos meses. Equipe os seus quatro escudos.
+promessa: Quem quita e não muda nada corre o risco de voltar a dever. Equipe os seus quatro escudos.
 arte: contas
 cor: amarelo
 :::
@@ -461,8 +461,9 @@ Mundo 4 | Próximo nível | Um orçamento que se mantém sozinho, mês após mê
 - Lei nº 14.690/2023 e Resolução CMN nº 5.112/2023: teto de juros e encargos do rotativo e do parcelamento da fatura (100% da dívida original) e portabilidade da dívida do cartão.
 - Resolução CMN nº 4.549/2017: rotativo só até o vencimento da fatura seguinte.
 - Resolução CMN nº 4.765/2019: teto de 8% ao mês no cheque especial.
-- Lei nº 14.181/2021: Lei do Superendividamento.
+- Resolução CMN nº 4.881/2020, art. 7º: obrigação de informar o CET antes da contratação (substituiu a Resolução CMN nº 3.517/2007).
+- Lei nº 14.181/2021: Lei do Superendividamento (Código de Defesa do Consumidor, art. 104-A: repactuação das dívidas de consumo; ficam de fora dívidas com garantia real, financiamentos imobiliários e crédito rural).
 - Código de Defesa do Consumidor, art. 52, §2º: redução proporcional dos juros na liquidação antecipada; art. 49: direito de arrependimento (7 dias).
-- Contas de consumo em atraso: multa de 2% e juros de mora de 1% ao mês (regras da ANEEL e das concessionárias, segundo o Procon-SP).
+- Contas de consumo em atraso: multa de até 2%, juros de mora de 1% ao mês e atualização pelo IPCA na conta de luz (ANEEL, Resolução Normativa nº 1.000/2021, art. 343); água e telefone seguem os contratos das concessionárias.
 - Antecipação do saque-aniversário do FGTS: faixa de taxas praticada em 2026 segundo levantamento de mercado.
 - Taxas ao mês calculadas a partir das anuais: (1 + taxa anual)^(1/12) − 1. Todas as simulações saem do arquivo de contas da edição, que refaz cada número.

@@ -16,14 +16,15 @@ Pedido do Felipe: simulador mais didático, mais chefões, mais ataques e um gan
 |---|---|---|---|
 | Ogro do Consignado CLT | Consignado privado (carteira assinada) | 3,79% a.m. / 56,34% a.a. (ago/2026) | Média do BC, série SGS 20744, via https://meubolsoazul.com.br/br/banco/consignado-privado/banco-do-brasil/ |
 | Tartaruga do Financiamento | Financiamento de veículos | 26,2% a.a. (set/2026) | BC, via https://www.opovo.com.br/noticias/economia/2026/10/29/juro-medio-no-credito-livre-sobe-a-490-em-setembro-mostra-bc-cheque-especial-vai-a-139.html |
-| Goblin das Contas Atrasadas | Luz, água, telefone em atraso | multa de 2% + juros de mora de 1% ao mês + correção; risco de corte do serviço | ANEEL/Procon-SP via https://www.infomoney.com.br/?p=235650 ; multa de 2% na luz: https://idec.org.br/em-acao/em-foco/novas-regras-de-energia-eletrica-ampliam-direitos-do-consumidor |
-| Vampiro do FGTS | Antecipação do saque-aniversário | em geral 1,29% a 1,79% ao mês (2026); trava o saldo do FGTS se você for demitido | https://credited.com.br/financas/emprestimo/antecipacao-saque-aniversario-fgts-taxas-riscos/ |
+| Goblin das Contas Atrasadas | Luz, água, telefone em atraso | luz: multa de até 2% + juros de mora de 1% ao mês + IPCA; risco de corte do serviço | ANEEL, REN 1.000/2021, art. 343 (transcrição em https://seudireito.proteste.org.br/corte-de-energia/ ; oficial: https://www2.aneel.gov.br/cedoc/ren20211000.html). Fontes antigas substituídas em 29/10/2026: InfoMoney de 2012 (?p=235650) e Idec sobre texto preliminar de 2010 |
+| Vampiro do FGTS | Antecipação do saque-aniversário | em geral 1,29% a 1,79% ao mês (2026); trava o saldo do FGTS se você for demitido sem justa causa | https://credited.com.br/financas/emprestimo/antecipacao-saque-aniversario-fgts-taxas-riscos/ |
 
-Notas: o Vampiro do FGTS não entra no simulador (é pago com o próprio FGTS, não com parcelas do mês). O Goblin entra com 1% ao mês (a multa de 2% é única e fica no texto). Lição: consignado CLT custa quase o dobro do consignado médio (28,5% a.a.), então não é sempre "o mais fraco".
+Notas: o Vampiro do FGTS não entra no simulador (é pago com o próprio FGTS, não com parcelas do mês). O Goblin entra com 1% ao mês (a multa de até 2% é única e fica no texto). Lição: consignado CLT custa quase o dobro do consignado médio (28,5% a.a.), então não é sempre "o mais fraco".
 
 ## 3. Novos ataques
 - **Dinheiro extra** (13º, restituição do IR, venda de algo parado): um valor único em um mês, todo no alvo. Simulador: quanto encurta a batalha e quanto economiza de juros.
 - **Antecipar parcelas com desconto**: CDC art. 52, §2º garante redução proporcional dos juros e encargos na liquidação antecipada, total ou parcial (https://www.idinheiro.com.br/glossario/quitacao-antecipada-como-pagar-menos-juros-ao-banco/).
+  - Por que começar pelas últimas parcelas (redação corrigida em 29/10/2026): no sistema Price, as parcelas mais distantes são trazidas a valor presente por mais meses, então recebem o maior desconto de juros ao serem antecipadas. Não usar "carregam mais juros embutidos" (impreciso).
 - Mantidos: renegociar, portabilidade, trocar dívida cara por barata, pedir socorro.
 
 ## 4. Gancho para o próximo produto

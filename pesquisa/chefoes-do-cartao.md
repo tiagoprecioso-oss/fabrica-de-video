@@ -32,17 +32,28 @@ Observação do próprio BC (na notícia): a taxa anual do rotativo é uma extra
 ## 4. Regras que mudam a conta
 - **Teto do cartão:** Lei 14.690/2023 e Resolução CMN 5.112/2023. Desde 3/1/2024, juros e encargos do rotativo e do parcelamento da fatura não podem passar do valor original da dívida (100%). Inclui juros, multa, mora e tarifas ligadas ao crédito. Ou seja: R$ 1.000 viram no máximo R$ 2.000.
   - https://static.poder360.com.br/2023/12/resolucao-cmn-rotativo-cartao.pdf
-  - https://monitormercantil.com.br/bc-regulamenta-lei-que-limita-juros-do-rotativo-do-cartao-a-100/
+  - (link do Monitor Mercantil removido em 29/10/2026: não abre; o checador conferiu o art. 2º-C direto no PDF acima)
 - **Rotativo dura no máximo 1 fatura:** Resolução CMN 4.549/2017 — o saldo do rotativo só pode ficar até o vencimento seguinte; depois o banco precisa oferecer parcelamento com juros menores.
   - https://idec.org.br/em-acao/em-foco/novas-regras-para-rotativo-do-carto-de-credito-entenda-o-que-mudou
 - **Teto do cheque especial:** Resolução CMN 4.765/2019 — no máximo 8% ao mês.
   - https://normativos.bcb.gov.br/Lists/Normativos/Attachments/50875/Res_4765_v2_P.pdf
 - **Portabilidade da dívida do cartão:** desde 1/7/2024 (Res. CMN 5.112) dá para levar o saldo do rotativo e do parcelado para outro banco, sem custo; o banco atual pode fazer contraproposta.
   - https://finsidersbrasil.com.br/regulamentacao/portabilidade-do-rotativo-no-cartao-de-credito-passa-a-valer-nesta-segunda
-- **Superendividamento:** Lei 14.181/2021 — quem não consegue pagar as dívidas sem comprometer o "mínimo existencial" pode pedir repactuação de todas as dívidas num plano único (Procon, Defensoria, Justiça). O valor do mínimo existencial (R$ 600 pelo Decreto 11.567/2023) estava em julgamento no STF em 2026, com maioria pela revisão ao menos anual pelo CMN — **no ebook, não cravar o valor; mandar conferir**.
+- **Superendividamento:** Lei 14.181/2021 — quem não consegue pagar as dívidas sem comprometer o "mínimo existencial" pode pedir repactuação das dívidas de consumo num plano único (Procon, Defensoria, Justiça). Ficam de fora (CDC art. 104-A, §1º, incluído pela Lei 14.181): dívidas com garantia real (ex.: carro com alienação fiduciária), financiamentos imobiliários, crédito rural e contratos feitos sem intenção de pagar. Conferido em duas fontes secundárias (texto oficial do Planalto não abriu nesta sessão):
+  - https://www.demarest.com.br/wp-content/uploads/2021/07/Lei-do-Superendividamento-e-sancionada.pdf
+  - https://www.ribeirocavalcante.com.br/repactuacao-de-dividas-lei-superendividamento-2026.md
+  - Texto oficial (conferir antes de vender): https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2021/lei/l14181.htm
+  O valor do mínimo existencial (R$ 600 pelo Decreto 11.567/2023) estava em julgamento no STF em 2026, com maioria pela revisão ao menos anual pelo CMN — **no ebook, não cravar o valor; mandar conferir**.
   - https://www.migalhas.com.br/quentes/454363/stf-julga-decreto-que-fixou-r-600-como-minimo-existencial
 - **Programas oficiais de renegociação (Desenrola):** o Desenrola 2.0 aceitou adesões até 31/8/2026 (cartão, cheque especial e crédito pessoal; juros até 1,99% ao mês; descontos de até 90%). Situação depois disso incerta → **no ebook, citar de forma genérica: "quando houver programa aberto, confira em gov.br"**.
   - https://www.dgabc.com.br/Noticia/4338651/governo-oficializa-prorrogacao-do-desenrola-ate-31-de-agosto-de-2026
+- **Obrigação de informar o CET:** Resolução CMN 4.881/2020, art. 7º ("previamente à contratação [...] informar o CET ao pretendente"), em vigor desde 1/2/2021; o art. 11, I revogou a Resolução CMN 3.517/2007 (que o checador citou; está revogada).
+  - https://www.bcb.gov.br/content/estabilidadefinanceira/especialnor/Resolu%C3%A7%C3%A3o4881.pdf
+  - https://normativos.bcb.gov.br/Lists/Normativos/Attachments/48005/Res_3517_v4_P.pdf (cabeçalho: "revogado, a partir de 1º/2/2021, pela Resolução CMN nº 4.881")
+- **Contas de consumo em atraso (luz):** ANEEL, Resolução Normativa 1.000/2021, art. 343: juros de mora de 1% ao mês pro rata die, atualização pelo IPCA e multa de até 2% (§1º); vencimento em fim de semana/feriado pago no dia útil seguinte não é atraso (§3º). Transcrição conferida na Proteste (o site da ANEEL bloqueou o acesso automático nesta sessão):
+  - https://seudireito.proteste.org.br/corte-de-energia/
+  - Texto oficial (conferir antes de vender): https://www2.aneel.gov.br/cedoc/ren20211000.html
+  - Água e telefone: regras das agências/concessionárias de cada serviço; o ebook não crava número para eles.
 - **Arrependimento (vendas online):** CDC art. 49 — 7 dias (vale para o próprio ebook na Hotmart).
 
 ## 5. Ferramentas oficiais e gratuitas (para os capítulos 4 e 6)
