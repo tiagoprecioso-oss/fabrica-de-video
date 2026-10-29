@@ -9,7 +9,7 @@ A fábrica é uma **indústria de conteúdo, marcas e produtos digitais** o mais
 | Linha | O que é | Estado |
 |---|---|---|
 | **Precioso Productions** (serviço) | Estúdio de vídeo, marca, site e 3D para clientes no Brasil e no exterior (dólar/euro) | Montando o portfólio. 1ª marca vitrine: **Ninho Alto Coffee** (fictícia, em inglês): manual completo como design system (gerado de `marca.json`), rótulos topográficos, fotos 3D no Blender e site v2 publicados. Plano: `docs/plano-precioso.md` |
-| **Produtos** | Ebook "Chefões do cartão" → minicurso (Hotmart); depois kit de agentes da fábrica | Funil desenhado (`docs/plano-funil.md`). **Ebook v2 interativo (29/10, Felipe):** página `produtos/chefoes-do-cartao/web/index.html` (chefões animados, simulador de batalha com os números do leitor, plano de 90 dias salvo), dados do BC de set/2026, checado. PDF v1 reprovado no visual: refazer no estilo da página. Falta: revisão do Tiago, hospedagem para a Hotmart, página de venda |
+| **Produtos** | Ebook "Chefões do cartão" → minicurso (Hotmart); depois kit de agentes da fábrica | Funil desenhado (`docs/plano-funil.md`). **Ebook v2 interativo (29/10, Felipe):** página `produtos/chefoes-do-cartao/web/index.html` (chefões animados, simulador de batalha com os números do leitor, plano de 90 dias salvo), dados do BC de set/2026, checado. PDF oficial v2 no visual da página (28 p. A4 + celular). Falta: revisão do Tiago, hospedagem para a Hotmart, página de venda |
 | **Din no Chão** (finanças) | Canal de Shorts que puxa os produtos | Estilo `grana` pronto, 1º vídeo feito |
 | **Canal de cultura pop** | Laboratório de formatos (sem meta de receita) | Vídeo diário automático **pausado em 29/10** (tarefas das 06:47 e 08:23 desligadas para poupar limite) |
 

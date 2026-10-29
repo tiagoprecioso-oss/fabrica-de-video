@@ -35,6 +35,27 @@ def exemplo():
         dict(nome='Crédito pessoal', saldo=3000, taxa=M['pessoal'], minimo=150),
     ]
 
+def historico(dividas, orcamento, ordem, max_meses=60):
+    """Vida total mês a mês (mês 0 incluído). Mesma regra de simular(); para em max_meses."""
+    ds = [dict(d, original=d['saldo'], juros=0.0) for d in dividas]
+    tot = [sum(d['saldo'] for d in ds)]
+    while any(d['saldo'] > .005 for d in ds) and len(tot) <= max_meses:
+        for d in ds:
+            if d['saldo'] <= .005: continue
+            j = d['saldo'] * d['taxa']
+            if d.get('teto'): j = max(0.0, min(j, d['original'] - d['juros']))
+            d['saldo'] += j; d['juros'] += j
+        sobra = orcamento
+        for d in ds:
+            if d['saldo'] <= .005: continue
+            p = min(d['minimo'], d['saldo']); d['saldo'] -= p; sobra -= p
+        if ordem is not None:
+            for d in sorted([d for d in ds if d['saldo'] > .005], key=ordem):
+                p = min(sobra, d['saldo']); d['saldo'] -= p; sobra -= p
+                if sobra <= 0: break
+        tot.append(max(0.0, sum(d['saldo'] for d in ds)))
+    return tot
+
 def simular_meses(dividas, orcamento, meses):
     ds = [dict(d, original=d['saldo'], juros=0.0) for d in dividas]; jt = 0.0
     for _ in range(meses):

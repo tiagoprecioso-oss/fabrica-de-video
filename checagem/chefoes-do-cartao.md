@@ -22,3 +22,13 @@ Obs.: checagem feita na mesma sessão que escreveu o texto (sem checador indepen
 | Mínimo existencial | em julgamento no STF (2026) | OK: texto não crava valor |
 
 **Veredito:** APROVADO depois da correção acima.
+
+## PDF oficial v2 (29/10/2026, noite)
+| Item no texto | Fonte / conta | Resultado |
+|---|---|---|
+| Juros de 1 mês sobre R$ 1.000: 152,94 · 93,72 · 75,31 · 64,16 · 37,94 · 21,12 · 19,58 · 10,00 | 1000 × taxa a.m. (consignado CLT 56,34% a.a.; contas 1% a.m.) | OK (CLT corrigido de 37,90 para 37,94) |
+| Extrato mês 1 (Avalanche): juros 187,44 + 60,25 + 192,48 = 440,16; mínimos 300; sobra 300 no Golem; dano 159,84 | contas.py, mês a mês | OK |
+| Extrato mês 8: juros 284,73; mínimos 223,95 (Golem quitado pelo mínimo); sobra 376,05 na Sombra; dano 315,27; mês 9 sobra 400 | contas.py | OK |
+| Gráfico da Ana: Avalanche 17 meses, Bola de Neve 18, só mínimo cresce | contas.historico() | OK |
+| Gastos invisíveis: 40 + 60 + 120 + 35 + 30 = 285/mês; × 12 = 3.420 | conta | OK |
+| Mundo 2: R$ 600 × 12 = R$ 7.200, sem rendimento | conta | OK |

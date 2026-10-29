@@ -14,7 +14,7 @@ Ebook ou material para vender/entregar (Hotmart, isca de e-mail, bônus de curso
 3. **Texto** em `produtos/<produto>/texto.md` (frontmatter + `# ` por seção, `# Fase N · Título` para capítulos, blocos `:::tipo`) — agente: autor-de-ebook. Blocos disponíveis no topo de `tools/ebook.py`.
 4. **Checagem** item por item contra a pesquisa, refazendo as contas — `checagem/<produto>.md` — agente: checador (de preferência outra sessão, que não escreveu o texto).
 5. **Página interativa** em `produtos/<produto>/web/index.html` (um arquivo, sem `<html>/<head>`; carregar o skill `artifact-design` antes). A lógica de contas da página tem que ser a mesma do `contas.py`: rodar a página no Playwright e comparar os números com o script. Publicar com a ferramenta Artifact para revisão.
-6. **PDF** (versão para imprimir) — `python3 tools/ebook.py produtos/<produto>` → `<produto>.pdf` (A4), `<produto>-celular.pdf` (110×196 mm) e `previa.png`. Fontes: Archivo (OFL) em `public/fonts/`. Ilustrações em SVG feitas no próprio script (sem imagem de terceiros).
+6. **PDF oficial** (vai para a Hotmart com Social DRM) — `python3 tools/extrair_arte.py produtos/<produto>/web/index.html produtos/<produto>/arte` e depois `python3 tools/ebook.py produtos/<produto>` → `<produto>.pdf` (A4), `<produto>-celular.pdf` (110×196 mm) e `previa.png`. Fontes: Archivo (OFL) em `public/fonts/`. Ilustrações em SVG feitas no próprio script (sem imagem de terceiros).
 7. **Conferir as páginas**: renderizar todas as páginas em folhas de contato (pypdfium2) e olhar: linhas órfãs, título sozinho no pé, caixa cortada, página quase vazia.
 8. **Compliance e revisor**, depois copywriter (página de venda) — e só o Tiago sobe na Hotmart.
 
@@ -25,6 +25,8 @@ Ebook ou material para vender/entregar (Hotmart, isca de e-mail, bônus de curso
 - [ ] Aviso educativo, data dos dados e lista de fontes no livro.
 
 ## Lições
+- 29/10/2026 — PDF v2: linhas em branco entre blocos quebravam a grade das cartas (cada carta ia para uma coluna só). Agrupar blocos iguais seguidos ignorando parágrafos vazios. Páginas de cor de ponta a ponta usam `@page cheia{margin:0}`.
+- 29/10/2026 — Referência que funcionou para o PDF: manual de jogo (página de personagens, mapa do jogo como sumário) + ebooks ilustrados do Dribbble (páginas de cor alternadas, número gigante como destaque).
 - 29/10/2026 — Plano pessoal em PDF gerado no navegador: jsPDF 2.5.1 + html2canvas 1.4.1 (cdnjs, carregados só no clique) desenham folhas A4 escondidas com o visual da página. SVG com `var(--x)` não pinta como imagem: trocar pelas cores calculadas antes. No claude.ai o download só sai pela permissão `downloads`; fora dele, link de download normal.
 - 29/10/2026 — Para o simulador ser didático: o leitor aposta antes de ver o placar, e cada mês é contado em 3 passos (juros, mínimos, sobra no alvo e o porquê). Nomes dos chefões têm gênero: guardar no dado (`fem`) para o texto não sair "o Sombra".
 - 29/10/2026 — Fim do produto = começo do próximo: mostrar o mundo seguinte trancado e calcular com os números do leitor o que ele ganha lá (sem rendimento, para não virar recomendação de investimento).
@@ -36,6 +38,7 @@ Ebook ou material para vender/entregar (Hotmart, isca de e-mail, bônus de curso
 - 29/10/2026 — Rodapé com número de página: Chromium imprime em todas as páginas; a capa sai de um segundo PDF sem rodapé e as duas partes são unidas com pypdf.
 
 ## Histórico
+- v4 29/10/2026 — PDF oficial redesenhado no visual da página (tools/ebook.py v2): arte extraída da página (tools/extrair_arte.py), Baloo 2 + Nunito, capa, mapa do jogo, aberturas de fase em página inteira de cor, cartas, extratos, Mundo 2.
 - v3 29/10/2026 — simulador passo a passo com extrato e aposta; gancho para o próximo produto no fim (mundo seguinte trancado + cálculo com os números do leitor).
 - v2 29/10/2026 — página interativa como produto principal; pesquisa de referências obrigatória antes do rascunho.
 - v1 29/10/2026 — primeira versão (ebook "Chefões do cartão", Din no Chão).

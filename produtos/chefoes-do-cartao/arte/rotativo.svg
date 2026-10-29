@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><ellipse cx="60" cy="114" rx="38" ry="5" fill="#17302A" opacity=".13"></ellipse>
+      <path d="M22 60 Q2 46 6 26 Q18 40 32 44Z" fill="#D3352B" stroke="#17302A" stroke-width="2.5" stroke-linejoin="round"></path>
+      <path d="M98 60 Q118 46 114 26 Q102 40 88 44Z" fill="#D3352B" stroke="#17302A" stroke-width="2.5" stroke-linejoin="round"></path>
+      <path d="M36 34 Q26 12 42 4 Q42 20 50 28Z" fill="#FFCB2D" stroke="#17302A" stroke-width="2.5" stroke-linejoin="round"></path>
+      <path d="M84 34 Q94 12 78 4 Q78 20 70 28Z" fill="#FFCB2D" stroke="#17302A" stroke-width="2.5" stroke-linejoin="round"></path>
+      <ellipse cx="44" cy="108" rx="11" ry="6" fill="#D3352B" stroke="#17302A" stroke-width="2.5"></ellipse><ellipse cx="76" cy="108" rx="11" ry="6" fill="#D3352B" stroke="#17302A" stroke-width="2.5"></ellipse>
+      <ellipse cx="60" cy="68" rx="40" ry="39" fill="#FF5146" stroke="#17302A" stroke-width="3"></ellipse>
+      <ellipse cx="60" cy="86" rx="23" ry="17" fill="#FFB3A6"></ellipse>
+      <ellipse cx="44" cy="52" rx="10" ry="5" fill="#fff" opacity=".35"></ellipse>
+      <g class="olhos"><ellipse cx="46" cy="60" rx="9.5" ry="10.64" fill="#fff" stroke="#17302A" stroke-width="2.5"></ellipse><ellipse cx="47.5" cy="61.5" rx="4.56" ry="4.94" fill="#17302A"></ellipse><circle cx="49.5" cy="58.5" r="1.6150000000000002" fill="#fff"></circle><ellipse cx="74" cy="60" rx="9.5" ry="10.64" fill="#fff" stroke="#17302A" stroke-width="2.5"></ellipse><ellipse cx="75.5" cy="61.5" rx="4.56" ry="4.94" fill="#17302A"></ellipse><circle cx="77.5" cy="58.5" r="1.6150000000000002" fill="#fff"></circle><path d="M34.5 44.5 L55.5 52.5 M85.5 44.5 L64.5 52.5" stroke="#17302A" stroke-width="5" stroke-linecap="round"></path></g>
+      <path d="M44 82 Q60 94 76 82" stroke="#17302A" stroke-width="4" fill="none" stroke-linecap="round"></path>
+      <path d="M49 85 l3 6 l3 -5 M65 86 l3 5 l3 -6" fill="#fff" stroke="#17302A" stroke-width="1.8" stroke-linejoin="round"></path></svg>
