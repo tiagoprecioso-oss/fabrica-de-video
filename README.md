@@ -9,14 +9,14 @@ A fábrica é uma **indústria de conteúdo, marcas e produtos digitais** o mais
 | Linha | O que é | Estado |
 |---|---|---|
 | **Precioso Productions** (serviço) | Estúdio de vídeo, marca, site e 3D para clientes no Brasil e no exterior (dólar/euro) | Montando o portfólio. 1ª marca vitrine: **Ninho Alto Coffee** (fictícia, em inglês): manual completo como design system (gerado de `marca.json`), rótulos topográficos, fotos 3D no Blender e site v2 publicados. Plano: `docs/plano-precioso.md` |
-| **Produtos** | Ebook "Chefões do cartão" → minicurso (Hotmart); depois kit de agentes da fábrica | Funil desenhado (`docs/plano-funil.md`), ebook ainda não escrito |
+| **Produtos** | Ebook "Chefões do cartão" → minicurso (Hotmart); depois kit de agentes da fábrica | Funil desenhado (`docs/plano-funil.md`). **Ebook v2 interativo (29/10, Felipe):** página `produtos/chefoes-do-cartao/web/index.html` (chefões animados, simulador de batalha com os números do leitor, plano de 90 dias salvo), dados do BC de set/2026, checado. PDF oficial v2 no visual da página (28 p. A4 + celular). Falta: revisão do Tiago, hospedagem para a Hotmart, página de venda |
 | **Din no Chão** (finanças) | Canal de Shorts que puxa os produtos | Estilo `grana` pronto, 1º vídeo feito |
 | **Canal de cultura pop** | Laboratório de formatos (sem meta de receita) | Vídeo diário automático **pausado em 29/10** (tarefas das 06:47 e 08:23 desligadas para poupar limite) |
 
 ### Próximos passos
 1. **Ninho Alto:** ~~manual completo como design system~~ (feito 29/10) → vídeo 3D dos grãos rolando do pacote (Blender, física) → site v3 com o vídeo no topo → 3 Reels e 2 anúncios → projeto no Behance.
 2. **Precioso Productions:** marca, site e Instagram do estúdio; perfis no Behance, Contra e Upwork.
-3. **Produtos:** escrever e diagramar o ebook; página de venda; Hotmart.
+3. **Produtos:** Tiago revisa o ebook interativo (página `produtos/chefoes-do-cartao/web/index.html`; cópia publicada na conta do Felipe) e decide preço (R$ 19 ou R$ 27) e onde hospedar a página para os compradores (GitHub Pages ou similar, link na área de membros da Hotmart) → PDF refeito no mesmo visual → copywriter faz a página de venda → Hotmart. Receita: `receitas/ebook.md` v2.
 4. Pendências do Tiago: liberar os links no menu Compartilhar; contador (exportação de serviço). Para o Blender do PC (RTX 3060) não precisa clonar nada: o Claude copia a cena para uma pasta do PC e abre o Blender pelo controle do computador, com aprovação do Tiago.
 
 ### Como começar uma conversa nova com o Claude

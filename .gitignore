@@ -10,3 +10,5 @@ saida/ninho/
 saida/segundo-cerebro/
 saida/conf/
 saida/ref/
+produtos/*/build/
+produtos/*/divulgacao/telas/

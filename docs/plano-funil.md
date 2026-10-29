@@ -12,7 +12,7 @@ Cópia do plano vivo (https://claude.ai/artifact/R2NRFYjELs4opAFzEJJv7G). Um can
 
 Shorts com dado real (YouTube, Instagram, TikTok, 1/dia) → calculadora no link da bio → lista própria (Fase 0 grátis + 5 e-mails em 7 dias; WhatsApp) → página de venda → checkout Hotmart. Outras portas: afiliados Hotmart, carrosséis, Google, Pinterest, Kindle.
 
-## Primeiro projeto: ebook "Chefões do cartão: como derrotar as dívidas sem passar fome"
+## Primeiro projeto: ebook "Chefões do cartão: como derrotar as dívidas sem passar aperto"
 ~30 páginas ilustradas; cada dívida é um chefão (vida = saldo, ataque = juros). Capítulos: 1) Conheça os chefões; 2) A ficha de cada chefão; 3) Estratégia de ataque (avalanche x bola de neve); 4) Ataques especiais (renegociar, portabilidade, trocar dívida cara por barata); 5) Não deixe o chefão voltar; 6) Missão final: plano de 90 dias. Shorts que puxam: "R$ 1.000 no rotativo viram quanto?" (feito: `videos/fin-rotativo-1000.json`), "Ranking dos juros mais caros", "Rotativo x parcelado x empréstimo".
 
 ## Minicurso em 6 fases (R$ 47, lançamento R$ 37, garantia 7 dias)
@@ -32,6 +32,11 @@ Entrada pelo link da bio ou comentário com palavra-chave (ManyChat) → robô e
 
 ## Regras
 Educativo, sem recomendar investimento nem prometer ganho; CDC art. 49 (7 dias); dados do Banco Central/IBGE com fonte; Lei 14.690/2023 (juros do rotativo/parcelado até 100% da dívida).
+
+## Entrega do ebook (decisão do Felipe, 29/out)
+- **Área de membros da Hotmart (Hotmart Club), por enquanto.** O ebook vai como PDF com Social DRM (marca d'água com nome e e-mail do comprador). A página interativa (`produtos/chefoes-do-cartao/publico/index.html`) entra numa aula como link.
+- Limite: as aulas do Hotmart Club aceitam vídeo, texto, PDF, arquivos para baixar, links e incorporações (YouTube, SlideShare); a ajuda da Hotmart não fala em hospedar página HTML. Então a página precisa morar fora (Netlify ou GitHub Pages, com `noindex`) e o link só aparece dentro da área de membros. Quem recebe o link de um comprador entra. Testar: subir o `.html` (ou um .zip) como arquivo para baixar, o que deixaria o download atrás do login.
+- Fonte: https://suportehotmart.zendesk.com/hc/en-us/articles/207922148-What-kind-of-content-can-I-add-to-a-lesson
 
 ## Decisões em aberto
 Nome do canal/curso · voz · preço do ebook · comissão de afiliados (sugestão 40%) · criar contas (canais, MailerLite, Hotmart).

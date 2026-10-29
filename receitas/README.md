@@ -16,6 +16,7 @@ Cada coisa que a fábrica já fez e deu certo vira uma **receita**: o passo a pa
 | [site.md](site.md) | Site/loja de uma marca, do zero ao link publicado | v2 | testada na Ninho Alto |
 | [foto-produto-3d.md](foto-produto-3d.md) | Fotos de produto em 3D no Blender | v2 | testada na Ninho Alto (render no PC do Tiago) |
 | [motion-3d.md](motion-3d.md) | Vídeos 3D com física (grãos rolando, líquido caindo) | v0 | rascunho, ainda não testada |
+| [ebook.md](ebook.md) | Ebook interativo (página) + PDF para imprimir, com dados checados | v2 | testada no Chefões do cartão |
 | [pesquisa-de-referencias.md](pesquisa-de-referencias.md) | Pesquisar o que os melhores do nicho fazem | v1 | testada |
 
 ## Formato
