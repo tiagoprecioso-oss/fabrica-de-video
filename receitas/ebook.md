@@ -25,6 +25,7 @@ Ebook ou material para vender/entregar (Hotmart, isca de e-mail, bônus de curso
 - [ ] Aviso educativo, data dos dados e lista de fontes no livro.
 
 ## Lições
+- 29/10/2026 — **Sem fundo branco** (pedido do Felipe: cansa a vista). Fundo verde-sálvia #E7EFE3 e cartões #F1F6EE, na página e no PDF. No PDF, o fundo é pintado em cada página inteira (inclusive margens) pelo tools/ebook.py, antes de criar os campos. Campos de resposta levam uma linha de explicação em letra menor embaixo.
 - 29/10/2026 — PDF "interativo" tem limite: links, campos e caixas funcionam nos leitores comuns; animação e contas automáticas não (JavaScript de PDF só no Adobe). Interatividade de verdade fica na página. Campos: o ebook.py escreve marcadores de texto invisíveis (QZ…ZQ) e o pdf_campos.py cria os campos onde eles estão. Cuidados: o marcador não pode ficar na mesma linha de outro texto (as letras se misturam na extração) e nenhuma regra de estilo pode aumentar a letra dele. Conferir preenchendo uma cópia de teste e renderizando com formulários (pypdfium2 init_forms).
 - Testar se a marca d'água da Hotmart (Social DRM) mantém os campos preenchíveis antes de lançar.
 - 29/10/2026 — PDF v2: linhas em branco entre blocos quebravam a grade das cartas (cada carta ia para uma coluna só). Agrupar blocos iguais seguidos ignorando parágrafos vazios. Páginas de cor de ponta a ponta usam `@page cheia{margin:0}`.

@@ -6,11 +6,11 @@
 /* Layout: uma trilha vertical de fases (como um mapa de jogo), cada fase em uma faixa de cor; HUD fixo no topo com a fase atual. */
 :root{
   color-scheme:light;
-  --bg:#F5FAF3;           /* fundo: branco puxado para o verde do dinheiro */
-  --card:#FFFFFF;
+  --bg:#E7EFE3;           /* fundo: verde-sálvia suave (sem branco, mais descansado para a vista) */
+  --card:#F1F6EE;
   --tinta:#17302A;        /* texto */
   --apagado:#5B7067;
-  --linha:#DBE7DC;
+  --linha:#CAD8C8;
   --grana:#1FBF6A; --grana-esc:#139256; --grana-claro:#DDF7E8;
   --fogo:#FF5146;  --fogo-esc:#D3352B;  --fogo-claro:#FFE3DF;
   --laranja:#FF9A22; --laranja-esc:#D9780A;
@@ -181,7 +181,7 @@ input[type=range]{accent-color:var(--grana);flex:1;min-width:160px}
 .div-campos{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr auto;gap:10px;align-items:end;min-width:0}
 .campo{display:grid;gap:3px;min-width:0}
 .campo label{font-size:.72rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--apagado)}
-.campo input,.campo select{width:100%;min-width:0;border:2px solid var(--linha);border-radius:11px;padding:9px 10px;background:#fff;font-weight:700}
+.campo input,.campo select{width:100%;min-width:0;border:2px solid var(--linha);border-radius:11px;padding:9px 10px;background:var(--card);font-weight:700}
 .campo input:focus,.campo select:focus{border-color:var(--azul);outline:none}
 .div-info{grid-column:2;display:flex;flex-wrap:wrap;gap:8px 16px;font-size:.88rem;font-weight:700;color:var(--apagado)}
 .div-info .ruim{color:var(--fogo-esc)} .div-info .bom{color:var(--grana-esc)}
@@ -204,7 +204,7 @@ input[type=range]{accent-color:var(--grana);flex:1;min-width:160px}
 .estrat button[aria-pressed=true]{border-color:var(--azul);box-shadow:0 5px 0 var(--azul);background:#EAF6FE}
 @media (max-width:640px){.estrat{grid-template-columns:1fr}}
 .campo-grande{display:flex;flex-wrap:wrap;align-items:center;gap:10px;font-weight:800}
-.campo-grande input{width:150px;border:3px solid var(--tinta);border-radius:13px;padding:10px 12px;font-family:var(--display);font-size:1.4rem;font-weight:800;background:#fff}
+.campo-grande input{width:150px;border:3px solid var(--tinta);border-radius:13px;padding:10px 12px;font-family:var(--display);font-size:1.4rem;font-weight:800;background:var(--card)}
 .palco{background:linear-gradient(180deg,#DFF3FF 0%,#F2FBFF 60%,#CFEFD9 60%,#BFE8CB 100%);border:3px solid var(--tinta);border-radius:22px;padding:18px 14px 14px;position:relative;overflow:hidden}
 .palco-topo{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px}
 .mes{font-family:var(--display);font-weight:800;font-size:1.5rem;background:var(--tinta);color:#fff;border-radius:12px;padding:2px 14px}
@@ -288,7 +288,7 @@ input[type=range]{accent-color:var(--grana);flex:1;min-width:160px}
 .gasto:has(input:checked){border-color:var(--fogo);background:var(--fogo-claro)}
 
 .extra-campos{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.extra-campos input{width:100%;border:2px solid var(--linha);border-radius:11px;padding:9px 10px;font-weight:700;background:#fff}
+.extra-campos input{width:100%;border:2px solid var(--linha);border-radius:11px;padding:9px 10px;font-weight:700;background:var(--card)}
 /* mundo 2 */
 .mundo2{background:var(--noite-esc);color:#fff;overflow:hidden;position:relative}
 .mundo2 .miolo{padding-block:60px;display:grid;gap:22px;position:relative}
@@ -314,7 +314,7 @@ input[type=range]{accent-color:var(--grana);flex:1;min-width:160px}
 /* baixar plano */
 .baixar{display:grid;grid-template-columns:150px 1fr;gap:22px;align-items:center;background:var(--card);border:3px solid var(--tinta);border-radius:24px;padding:22px;box-shadow:0 7px 0 var(--fogo);margin-top:26px}
 .baixar-arte{position:relative;width:150px;height:150px}
-.baixar-arte .folha-ic{position:absolute;inset:6px 22px 10px 14px;background:#fff;border:3px solid var(--tinta);border-radius:12px;transform:rotate(-6deg);display:grid;gap:7px;padding:16px 12px;align-content:start}
+.baixar-arte .folha-ic{position:absolute;inset:6px 22px 10px 14px;background:var(--card);border:3px solid var(--tinta);border-radius:12px;transform:rotate(-6deg);display:grid;gap:7px;padding:16px 12px;align-content:start}
 .baixar-arte .folha-ic i{height:8px;border-radius:9px;background:var(--linha)}
 .baixar-arte .folha-ic i:nth-child(1){background:var(--fogo);width:70%}.baixar-arte .folha-ic i:nth-child(3){background:var(--grana)}
 .baixar-arte [data-din]{position:absolute;right:0;bottom:0;width:70px}
@@ -326,7 +326,7 @@ input[type=range]{accent-color:var(--grana);flex:1;min-width:160px}
 @media (max-width:560px){.baixar{grid-template-columns:1fr}.baixar-arte{margin:0 auto}}
 /* folhas do PDF (fora da tela) */
 .folhas{position:fixed;left:-30000px;top:0;z-index:-1}
-.folha{width:794px;height:1123px;background:#fff;color:var(--tinta);font-family:var(--texto);font-size:14px;line-height:1.45;position:relative;overflow:hidden;display:flex;flex-direction:column}
+.folha{width:794px;height:1123px;background:var(--bg);color:var(--tinta);font-family:var(--texto);font-size:14px;line-height:1.45;position:relative;overflow:hidden;display:flex;flex-direction:column}
 .folha-topo{background:var(--tinta);color:#fff;padding:34px 44px 30px;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center}
 .folha-topo h1{font-size:44px;line-height:.95;text-transform:uppercase}
 .folha-topo h1 span{color:var(--amarelo)}
@@ -339,7 +339,7 @@ input[type=range]{accent-color:var(--grana);flex:1;min-width:160px}
 .f-vitoria b{font-family:var(--display);font-size:34px;line-height:1}
 .f-vitoria small{display:block;font-weight:900;letter-spacing:.12em;text-transform:uppercase;font-size:11px;color:var(--apagado)}
 .f-tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.f-tiles div{background:var(--bg);border:2px solid var(--linha);border-radius:14px;padding:10px 12px}
+.f-tiles div{background:var(--card);border:2px solid var(--linha);border-radius:14px;padding:10px 12px}
 .f-tiles small{display:block;font-weight:900;letter-spacing:.08em;text-transform:uppercase;font-size:10px;color:var(--apagado)}
 .f-tiles b{font-family:var(--display);font-size:22px}
 .f-tit{font-family:var(--display);font-weight:800;font-size:24px;display:flex;align-items:center;gap:10px}
@@ -374,7 +374,7 @@ input[type=range]{accent-color:var(--grana);flex:1;min-width:160px}
 .anel text{font-family:var(--display);font-weight:800;font-size:26px;fill:var(--tinta)}
 .semanas{display:grid;gap:10px}
 .semana{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;background:var(--card);border:2px solid var(--linha);border-radius:16px;padding:12px 14px;cursor:pointer;transition:background .2s,border-color .2s}
-.semana input{appearance:none;width:30px;height:30px;border:3px solid var(--tinta);border-radius:9px;margin:2px 0 0;display:grid;place-items:center;cursor:pointer;background:#fff;flex:none}
+.semana input{appearance:none;width:30px;height:30px;border:3px solid var(--tinta);border-radius:9px;margin:2px 0 0;display:grid;place-items:center;cursor:pointer;background:var(--card);flex:none}
 .semana input:checked{background:var(--grana);border-color:var(--grana-esc)}
 .semana input:checked::after{content:"";width:9px;height:15px;border:solid #fff;border-width:0 4px 4px 0;transform:rotate(45deg) translate(-1px,-2px)}
 .semana:has(input:checked){background:var(--grana-claro);border-color:var(--grana)}
@@ -1394,7 +1394,7 @@ async function gerarPdf() {
     const fs = [...box.querySelectorAll('.folha')];
     for (let i = 0; i < fs.length; i++) {
       msgPdf(`Desenhando a página ${i + 1} de ${fs.length}...`);
-      const c = await window.html2canvas(fs[i], {scale: 2, backgroundColor: '#ffffff', logging: false});
+      const c = await window.html2canvas(fs[i], {scale: 2, backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--bg').trim() || '#E7EFE3', logging: false});
       if (i) pdf.addPage();
       pdf.addImage(c.toDataURL('image/jpeg', 0.9), 'JPEG', 0, 0, 210, 297);
     }

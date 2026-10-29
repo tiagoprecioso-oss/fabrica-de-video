@@ -11,11 +11,12 @@ parágrafos, listas '-' e '1.', **negrito'; blocos ':::tipo ... :::':
 Estilo: o da página interativa (Baloo 2 + Nunito, paleta "grana" em versão vibrante).
 """
 import html, re, sys, importlib.util
+from pypdf.generic import NameObject
 from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parent.parent
 FONTES = RAIZ / 'public' / 'fonts'
-C = dict(bg='#F5FAF3', tinta='#17302A', apagado='#5B7067', linha='#DBE7DC',
+C = dict(bg='#F5FAF3', papel='#E7EFE3', cartao='#F1F6EE', tinta='#17302A', apagado='#5B7067', linha='#CAD8C8',
          grana='#1FBF6A', grana_esc='#139256', grana_cl='#DDF7E8', fogo='#FF5146', fogo_esc='#D3352B', fogo_cl='#FFE3DF',
          laranja='#FF9A22', laranja_esc='#D9780A', amarelo='#FFCB2D', amarelo_esc='#E0A400', amarelo_cl='#FFF4CC',
          azul='#279FEA', azul_esc='#1679BF', roxo='#9466F5', roxo_esc='#7044D6', roxo_cl='#EEE6FF',
@@ -167,7 +168,9 @@ def bloco(tipo, linhas):
         return ('<table class="tab"><thead><tr>' + ''.join(f'<th>{inl(c)}</th>' for c in rows[0]) + '</tr></thead><tbody>'
                 + ''.join('<tr>' + ''.join(f'<td>{inl(c)}</td>' for c in r) + '</tr>' for r in rows[1:]) + '</tbody></table>')
     if tipo == 'aposta': return f'<aside class="aposta"><span class="q">?</span><div><span class="pilula az">APOSTE</span>{paragrafos(linhas)}<div class="campo-l">{campo_linha("Minha aposta:")}</div></div>{arte("din", 70)}</aside>'
-    if tipo == 'campo': return f'<div class="campo-l solto">{campo_linha(linhas[0].strip())}</div>'
+    if tipo == 'campo':
+        ajuda = ' '.join(l.strip() for l in linhas[1:] if l.strip())
+        return f'<div class="campo-l solto">{campo_linha(linhas[0].strip())}' + (f'<p class="campo-ajuda">{inl(ajuda)}</p>' if ajuda else '') + '</div>'
     if tipo == 'extrato':
         d, _ = chaves(linhas)
         chips = ''.join(f'<span>{inl(x.strip())}</span>' for x in d.get('juros', '').split('|'))
@@ -310,7 +313,7 @@ def css(cel):
 @page cheia{{margin:0}}
 *{{box-sizing:border-box}}
 html{{font-family:Nunito,sans-serif;font-size:{k("11.6pt","10.6pt")};line-height:1.55;color:{T};-webkit-print-color-adjust:exact;print-color-adjust:exact}}
-body{{margin:0}}
+body{{margin:0;background:{C["papel"]}}}
 h1,h2,h3,h4,.disp{{font-family:'Baloo 2',Nunito,sans-serif;font-weight:800;line-height:1.02;letter-spacing:-.01em;margin:0}}
 p{{margin:0 0 .75em;orphans:3;widows:3}} strong{{font-weight:800}}
 ul,ol{{margin:0 0 .9em;padding-left:1.3em}} li{{margin:.25em 0;break-inside:avoid}}
@@ -358,7 +361,7 @@ h3{{font-size:{k("1.55em","1.35em")};margin:1.2em 0 .45em;break-after:avoid}}
 .missao{{background:{T};color:#fff;border-radius:20px;padding:1em 1.2em .3em;margin:1.3em 0;display:grid;grid-template-columns:44px 1fr;gap:12px;break-inside:avoid;box-shadow:0 6px 0 {C["grana"]}}}
 .missao strong{{color:{C["amarelo"]}}} .m-ic svg{{width:40px;height:40px}}
 .hud{{display:grid;grid-template-columns:{k("repeat(4,1fr)","1fr 1fr")};gap:10px;margin:1em 0 1.3em}}
-.hud div{{background:#fff;border:2.5px solid {C["linha"]};border-radius:16px;padding:.7em .8em;box-shadow:0 5px 0 {C["linha"]}}}
+.hud div{{background:{C["cartao"]};border:2.5px solid {C["linha"]};border-radius:16px;padding:.7em .8em;box-shadow:0 5px 0 {C["linha"]}}}
 .hud b{{display:block;font-family:'Baloo 2';font-size:1.25em;margin-top:.2em}} .hud span{{font-size:.86em;color:{C["apagado"]};line-height:1.3;display:block}}
 .numeros{{display:grid;grid-template-columns:1fr 1fr;gap:{k("8mm","4mm")};margin:1.2em 0;break-inside:avoid}}
 .numeros b{{display:block;font-family:'Baloo 2';font-weight:800;font-size:{k("4.2em","3em")};line-height:.95}} .numeros span{{font-weight:700;color:{C["apagado"]};font-size:.95em}}
@@ -368,25 +371,25 @@ h3{{font-size:{k("1.55em","1.35em")};margin:1.2em 0 .45em;break-after:avoid}}
 .rk-t{{height:{k("24px","18px")};background:#EDF3EE;border-radius:9px;overflow:hidden}} .rk-t div{{height:100%;border-radius:9px}}
 .rk b{{font-family:'Baloo 2';font-size:1.15em;text-align:right}}
 .grade-chefao{{display:grid;grid-template-columns:{k("1fr 1fr","1fr")};gap:{k("7mm","5mm")};margin:1em 0}}
-.carta{{border:3px solid {T};border-radius:22px;padding:12px;background:#fff;box-shadow:0 7px 0 var(--c);break-inside:avoid;display:grid;gap:5px;align-content:start}}
+.carta{{border:3px solid {T};border-radius:22px;padding:12px;background:{C["cartao"]};box-shadow:0 7px 0 var(--c);break-inside:avoid;display:grid;gap:5px;align-content:start}}
 .carta-arte{{border-radius:15px;display:flex;justify-content:center;padding:8px 0 2px}} .carta-arte svg{{width:{k("118px","96px")};height:auto}}
 .carta-tipo{{font-size:.72em;font-weight:900;letter-spacing:.07em;text-transform:uppercase;color:{C["apagado"]};margin-top:4px}}
 .carta h4{{font-size:1.4em}} .carta-atk{{font-family:'Baloo 2';font-weight:800;font-size:1.35em;line-height:1.1}}
 .pips{{display:flex;gap:4px;align-items:center;font-size:.66em;font-weight:900;letter-spacing:.1em;color:{C["apagado"]}}} .pips i{{width:17px;height:9px;border-radius:3px;background:#E3EAE4}}
 .carta dl{{margin:.3em 0 0;border-top:2px dashed {C["linha"]};padding-top:.4em}} .carta dt{{font-weight:900;font-size:.68em;letter-spacing:.1em;text-transform:uppercase;margin-top:.35em}} .carta dd{{margin:0;font-size:.88em;line-height:1.4}}
-.graf{{margin:1.2em 0;background:#fff;border:2.5px solid {C["linha"]};border-radius:20px;padding:14px 14px 10px;break-inside:avoid}}
+.graf{{margin:1.2em 0;background:{C["cartao"]};border:2.5px solid {C["linha"]};border-radius:20px;padding:14px 14px 10px;break-inside:avoid}}
 .graf text{{font-family:Nunito;font-size:12px;font-weight:700;fill:{C["apagado"]}}}
 .leg{{display:flex;flex-wrap:wrap;gap:14px;font-weight:800;font-size:.85em;margin-top:6px}} .leg span{{display:inline-flex;align-items:center;gap:6px}} .leg i{{width:18px;height:6px;border-radius:9px;display:inline-block}} .leg .eixo{{color:{C["apagado"]};margin-left:auto}}
 .formula{{font-family:'Baloo 2';font-weight:800;font-size:{k("1.7em","1.3em")};text-align:center;padding:.6em;border:3px dashed {C["grana"]};border-radius:20px;margin:1em 0;background:{C["grana_cl"]}}}
 .regras{{display:grid;grid-template-columns:{k("repeat(3,1fr)","1fr")};gap:10px;margin:1.2em 0;break-inside:avoid}}
-.regras div{{background:#fff;border:2.5px solid {C["linha"]};border-radius:18px;padding:.8em .9em;font-weight:700;line-height:1.35}}
+.regras div{{background:{C["cartao"]};border:2.5px solid {C["linha"]};border-radius:18px;padding:.8em .9em;font-weight:700;line-height:1.35}}
 .regras b{{display:grid;place-items:center;width:36px;height:36px;border-radius:12px;color:#fff;font-family:'Baloo 2';font-size:1.3em;margin-bottom:.4em}}
 .tab{{width:100%;border-collapse:separate;border-spacing:0;margin:1em 0 1.2em;font-size:.92em;break-inside:avoid}}
 .tab th{{background:{T};color:#fff;text-align:left;padding:.5em .7em;font-weight:800}} .tab th:first-child{{border-radius:12px 0 0 0}} .tab th:last-child{{border-radius:0 12px 0 0}}
 .tab td{{padding:.5em .7em;border-bottom:2px solid {C["linha"]};font-weight:700}}
 .aposta{{display:grid;grid-template-columns:62px 1fr 70px;gap:14px;align-items:center;background:#EAF6FE;border:3px solid {C["azul"]};border-radius:22px;padding:1em 1.1em .5em;margin:1.3em 0;break-inside:avoid;box-shadow:0 6px 0 {C["azul"]}}}
 .aposta .q{{width:58px;height:58px;border-radius:18px;background:{C["azul"]};color:#fff;display:grid;place-items:center;font-family:'Baloo 2';font-weight:800;font-size:2.4em}}
-.extrato{{border:3px dashed {C["linha"]};border-radius:22px;padding:14px 16px;margin:1.1em 0;display:grid;gap:9px;break-inside:avoid;background:#fff}}
+.extrato{{border:3px dashed {C["linha"]};border-radius:22px;padding:14px 16px;margin:1.1em 0;display:grid;gap:9px;break-inside:avoid;background:{C["cartao"]}}}
 .ex-cab{{display:flex;justify-content:space-between;align-items:center}} .ex-cab b{{font-family:'Baloo 2';font-size:1.45em}} .ex-cab .pilula{{background:{C["linha"]};color:{C["apagado"]};margin:0}}
 .ex-p{{display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:start}} .ex-p i{{font-style:normal;width:34px;height:34px;border-radius:11px;display:grid;place-items:center;color:#fff;font-weight:900}} .ex-p p{{margin:.2em 0 0}}
 .chips{{display:flex;flex-wrap:wrap;gap:6px;margin-top:5px}} .ex-p .chips span{{font-size:.8em;font-weight:800;border-radius:99px;padding:2px 10px;background:{C["bg"]};border:1.5px solid {C["linha"]};color:{T}}}
@@ -396,15 +399,15 @@ h3{{font-size:{k("1.55em","1.35em")};margin:1.2em 0 .45em;break-after:avoid}}
 .bt{{border-radius:20px;padding:.9em 1em;border:3px solid;display:grid;gap:4px;align-content:start}} .bt b{{font-family:'Baloo 2';font-size:1.15em;line-height:1.1}} .bt span{{font-size:.92em;font-weight:700}}
 .bt.perde{{background:{C["fogo_cl"]};border-color:{C["fogo"]}}} .bt.meio{{background:{C["amarelo_cl"]};border-color:{C["amarelo_esc"]}}} .bt.ganha{{background:{C["grana_cl"]};border-color:{C["grana"]};box-shadow:0 0 0 4px {C["azul"]}}}
 .grade-golpe{{display:grid;grid-template-columns:{k("1fr 1fr","1fr")};gap:{k("6mm","4mm")};margin:1em 0}}
-.golpe{{border:3px solid {T};border-radius:22px;padding:14px 16px 4px;background:#fff;box-shadow:0 6px 0 var(--c);break-inside:avoid}}
+.golpe{{border:3px solid {T};border-radius:22px;padding:14px 16px 4px;background:{C["cartao"]};box-shadow:0 6px 0 var(--c);break-inside:avoid}}
 .g-cab{{display:flex;align-items:center;gap:10px;margin-bottom:.5em}} .g-ic{{width:48px;height:48px;border-radius:15px;display:grid;place-items:center;flex:none}} .golpe h4{{font-size:1.35em}} .golpe p{{font-size:.93em}}
 .escudos{{display:grid;grid-template-columns:{k("1fr 1fr","1fr")};gap:10px;margin:1.1em 0}}
-.escudos div{{display:grid;grid-template-columns:58px 1fr;gap:4px 12px;align-items:center;background:#fff;border:2.5px solid {C["linha"]};border-radius:18px;padding:.8em;break-inside:avoid}}
+.escudos div{{display:grid;grid-template-columns:58px 1fr;gap:4px 12px;align-items:center;background:{C["cartao"]};border:2.5px solid {C["linha"]};border-radius:18px;padding:.8em;break-inside:avoid}}
 .escudos svg{{grid-row:span 2}} .escudos b{{font-family:'Baloo 2';font-size:1.2em;line-height:1.1}} .escudos span{{font-size:.88em;color:#3A564D;line-height:1.35}}
 .plano{{display:grid;grid-template-columns:{k("1fr 1fr","1fr")};gap:8px 14px;margin:1em 0}}
 .pl{{display:grid;grid-template-columns:28px 1fr;gap:10px;border-bottom:2px solid {C["linha"]};padding:.3em 0 .6em;break-inside:avoid}}
 .pl i{{width:26px;height:26px;border:3px solid {T};border-radius:8px;margin-top:3px}} .pl small{{font-weight:900;font-size:.68em;letter-spacing:.12em;text-transform:uppercase;color:{C["grana_esc"]}}} .pl b{{display:block;font-family:'Baloo 2';font-size:1.15em;line-height:1.1}} .pl span{{font-size:.88em;color:#3A564D}}
-.ficha{{border:3px solid {T};border-radius:20px;padding:.8em 1em .5em;margin:0 0 7mm;break-inside:avoid;background:#fff}}
+.ficha{{border:3px solid {T};border-radius:20px;padding:.8em 1em .5em;margin:0 0 7mm;break-inside:avoid;background:{C["cartao"]}}}
 .fi-top{{display:flex;align-items:center;gap:8px;font-family:'Baloo 2';font-size:1.2em;margin-bottom:.2em}} .fi-top b{{font-weight:800}}
 .fi-l{{display:flex;align-items:flex-end;gap:8px;border-bottom:2px dotted {C["apagado"]};padding:{k(".75em",".6em")} 0 .2em;font-size:.9em}}
 .fi-l span{{font-weight:800;white-space:nowrap}} .fi-l em{{font-style:normal;color:{C["apagado"]};margin-left:auto;padding-right:{k("7em","2.5em")}}}
@@ -415,7 +418,8 @@ a{{color:inherit;text-decoration:none}}
 .fi-l .esp{{flex:1;min-width:30px}} .fi-l em{{margin-left:.4em;padding-right:0}}
 .pl i{{display:grid;place-items:center}} .pl i .mk{{position:relative;top:9px}}
 .campo-l .fi-l{{border-bottom:2px dotted currentColor;margin-top:.4em;padding-top:.3em}}
-.campo-l.solto{{background:#fff;border:2.5px solid {C["linha"]};border-radius:16px;padding:.2em 1em .6em;margin:1em 0}}
+.campo-l.solto{{background:{C["cartao"]};border:2.5px solid {C["linha"]};border-radius:16px;padding:.2em 1em .6em;margin:1em 0}}
+.campo-ajuda{{font-size:.78em;line-height:1.35;color:{C["apagado"]};margin:.45em 0 0;font-weight:600}}
 .ab-mapa{{position:absolute;top:{k("9mm","5mm")};right:{k("18mm","9mm")};font-weight:900;font-size:.8em;letter-spacing:.06em;border:2px solid currentColor;border-radius:99px;padding:.25em .9em;z-index:2;opacity:.9}}
 .mundo2{{position:relative;overflow:hidden}}
 /* mundo 2 */
@@ -453,7 +457,14 @@ def pdf(pasta, cel):
         b.close()
     from pypdf import PdfReader, PdfWriter
     r = PdfReader(str(saida)); w = PdfWriter()
-    for pgn in r.pages: w.add_page(pgn)
+    from pypdf.generic import StreamObject, ArrayObject
+    rgb = ' '.join(f'{int(C["papel"][i:i + 2], 16) / 255:.3f}' for i in (1, 3, 5))
+    for pgn in r.pages:
+        pg2 = w.add_page(pgn); W_, H_ = float(pg2.mediabox.width), float(pg2.mediabox.height)
+        fundo = StreamObject(); fundo.set_data(f'q {rgb} rg 0 0 {W_:.2f} {H_:.2f} re f Q\n'.encode())
+        bruto = pg2.raw_get('/Contents'); conteudo = bruto.get_object()
+        lista = [conteudo.raw_get(i) for i in range(len(conteudo))] if isinstance(conteudo, ArrayObject) else [bruto]
+        pg2[NameObject('/Contents')] = ArrayObject([w._add_object(fundo)] + lista)
     w.add_metadata({'/Title': meta.get('titulo', ''), '/Author': meta.get('autor', ''), '/Subject': meta.get('subtitulo', '')})
     with open(saida, 'wb') as fh: w.write(fh)
     sys.path.insert(0, str(Path(__file__).parent)); from pdf_campos import main as campos

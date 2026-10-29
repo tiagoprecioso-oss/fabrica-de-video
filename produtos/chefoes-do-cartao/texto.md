@@ -216,10 +216,12 @@ Parcelas que faltam |
 
 :::campo
 Minha vida total (R$):
+Some o saldo de todas as suas dívidas hoje: é quanto você deve no total, a "vida" de todos os chefões juntos.
 :::
 
 :::campo
 Meu ataque do mês (R$):
+Some os juros que todas as dívidas cobram em um mês (vida × taxa ao mês de cada uma). É o quanto as dívidas crescem por mês se você não pagar nada.
 :::
 
 # Fase 3 · Estratégia de ataque
