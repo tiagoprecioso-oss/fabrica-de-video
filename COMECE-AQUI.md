@@ -28,7 +28,8 @@ Tudo o que o Claude precisa está neste repositório. O que **não** vem junto: 
   3. Grãos novos: rugosidade ~0,55, fenda funda, cor variando por grão, escala real (≈1 cm).
   4. Render final com mais amostras e 2000 px+; comparar lado a lado com `portfolio/ninho-alto/img/hero.jpg` antes de trocar.
   5. **Em andamento (29/10, 15h40):** cena `--cena queda` em `blender/ninho_produto.py` (Reels 9:16, grãos soltos em camadas caindo na frente do pacote, física de corpo rígido, `--video` grava .mp4). A física já funciona (teste: `NINHO_DEBUG=1 blender -b -P blender/ninho_produto.py -- --cena queda --frames 1-60` imprime a altura dos grãos). Falta: alguns grãos voam para fora da laje (conferir quique/atrito e o espalhamento ao bater no pacote), ajustar o enquadramento (a lente 70 corta o pacote; testar 50 mm e câmera mais longe) e renderizar no PC do Tiago: `--cena queda --proporcao 9:16 --res 1080 --frames 1-240 --amostras 128 --gpu --video`. Depois:
-  6. Antes era: vídeo dos grãos caindo do pacote com física (`receitas/motion-3d.md`), pacote girando para Reels, café sendo servido; site v3 usando `tokens.css`.
+  6. **Pedido do Tiago (29/10):** melhorar o **ambiente** dos renders 3D (cenário mais rico e com cara de estúdio de verdade: mais elementos de cena, luz mais trabalhada, profundidade) e fazer o **site da Ninho Alto bem imersivo, interativo e animado** (ex.: pacote 3D girando com o mouse/scroll, grãos caindo ligados à rolagem, transições entre os lotes). Pesquisar referências de sites imersivos de produto antes do primeiro rascunho (`receitas/pesquisa-de-referencias.md`) e seguir `receitas/site.md`.
+  7. Antes era: vídeo dos grãos caindo do pacote com física (`receitas/motion-3d.md`), pacote girando para Reels, café sendo servido; site v3 usando `tokens.css`.
 
 ## O que tem aqui
 | Arquivo | O que é |
