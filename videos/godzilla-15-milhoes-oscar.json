@@ -1,0 +1,52 @@
+{
+  "id": "godzilla-15-milhoes-oscar",
+  "modelo": "Curiosidades",
+  "estilo": "espaco",
+  "titulo": "O Godzilla de menos de US$ 15 milhões que ganhou o Oscar",
+  "duracao": 38,
+  "batidas": 66,
+  "trilha": "trilhas/godzilla-15-milhoes-oscar.wav",
+  "blocos": [
+    {"tipo": "numero", "de": 0, "ate": 7, "camera": "empurrar", "saida": "whip",
+     "valor": 15, "moeda": "$", "casas": 0, "chip": "CUSTOU MENOS DE",
+     "nota": "MILHÕES DE DÓLARES", "nota2": "GODZILLA MINUS ONE (2023)"},
+    {"tipo": "curiosidade", "de": 7, "ate": 12, "camera": "orbita", "entrada": "whip", "saida": "whip",
+     "numero": 1, "total": 5, "cor": "ciano", "valor": "37º",
+     "titulo": "O primeiro Godzilla com Oscar", "texto": "37º filme da franquia, 1º a ganhar uma estatueta."},
+    {"tipo": "curiosidade", "de": 12, "ate": 17, "camera": "inclinar", "entrada": "whip", "saida": "whip",
+     "numero": 2, "total": 5, "cor": "rosa", "valor": "35",
+     "titulo": "Artistas de efeitos visuais", "texto": "610 planos com efeitos. Oscar de Efeitos Visuais em 2024."},
+    {"tipo": "curiosidade", "de": 17, "ate": 22, "camera": "empurrar", "entrada": "whip", "saida": "whip",
+     "numero": 3, "total": 5, "cor": "violeta", "valor": "1969",
+     "titulo": "O último diretor a ganhar antes", "texto": "Stanley Kubrick, por 2001: Uma Odisseia no Espaço."},
+    {"tipo": "curiosidade", "de": 22, "ate": 27, "camera": "orbita", "entrada": "whip", "saida": "whip",
+     "numero": 4, "total": 5, "cor": "verde", "valor": "7×",
+     "titulo": "Mais de 7 vezes o custo", "texto": "US$ 113,8 milhões de bilheteria no mundo."},
+    {"tipo": "curiosidade", "de": 27, "ate": 32, "camera": "inclinar", "entrada": "whip", "saida": "whip",
+     "numero": 5, "total": 5, "cor": "amarelo", "valor": "5/11",
+     "titulo": "Minus Zero chega ao Brasil", "texto": "Um dia antes dos EUA (6/11)."},
+    {"tipo": "titulo", "de": 32, "ate": 38, "camera": "mergulho", "entrada": "whip", "saida": "loop",
+     "linha1": "PRIMEIRAS CRÍTICAS", "linha2": "+90%", "corLinha": "amarelo"}
+  ],
+  "legendas": [
+    {"de": 0, "ate": 3.5, "texto": "Um Godzilla de *menos de US$ 15 milhões* ganhou o *Oscar*."},
+    {"de": 3.5, "ate": 7, "texto": "*Godzilla Minus One*, de 2023, do diretor *Takashi Yamazaki*."},
+    {"de": 7, "ate": 12, "texto": "1: era o *37º filme* do Godzilla, e o *primeiro* com Oscar."},
+    {"de": 12, "ate": 17, "texto": "2: levou *Efeitos Visuais* com só *35 artistas* na equipe."},
+    {"de": 17, "ate": 22, "texto": "3: antes dele, o último diretor a ganhar isso foi *Kubrick*."},
+    {"de": 22, "ate": 27, "texto": "4: faturou *US$ 113 milhões*, mais de *7 vezes* o custo."},
+    {"de": 27, "ate": 32, "texto": "5: a continuação, *Minus Zero*, estreia no Brasil em *5/11*."},
+    {"de": 32, "ate": 35.5, "texto": "Um dia *antes* dos EUA, e com *mais de 90%* na crítica."},
+    {"de": 35.5, "ate": 38, "texto": "E tudo porque, em *2024*…"}
+  ],
+  "rodape": [{"de": 0, "texto": "Fontes: Box Office Mojo · TheWrap · THR · Rotten Tomatoes"}],
+  "fontes": [
+    {"titulo": "Box Office Mojo — Godzilla Minus One (US$ 113.820.494 no mundo)", "url": "https://www.boxofficemojo.com/title/tt23289160"},
+    {"titulo": "Wikipedia — Godzilla Minus One (orçamento, 37º filme, Oscar)", "url": "https://wiki.riteme.site/wiki/Minus_One"},
+    {"titulo": "Wikipedia — Godzilla Minus Zero (EUA 6/11/2026, Rotten Tomatoes)", "url": "https://en.wikipedia.org/wiki/Godzilla_Minus_Zero"},
+    {"titulo": "Ingresso.com — Minus Zero com 96% no Rotten Tomatoes; Minus One custou US$ 15 mi", "url": "https://www.ingresso.com/noticias/filme-sequencia-godzilla-minus-zero-debuta-quase-100-por-cento-aprovacao-critica-rotten-tomatoes"},
+    {"titulo": "Critical Hits — Minus Zero estreia no Brasil em 5/11, um dia antes dos EUA", "url": "https://criticalhits.com.br/cinema-e-tv/godzilla-minus-zero-ganha-novo-teaser-e-data-de-estreia-no-brasil/"},
+    {"titulo": "TheWrap — Yamazaki, 1º diretor a ganhar Efeitos Visuais desde Kubrick", "url": "https://www.thewrap.com/godzilla-minus-one-oscar-win-stanley-kubrick-milestone/"},
+    {"titulo": "Dark Horizons/THR — 35 artistas, 610 planos de efeitos", "url": "https://www.darkhorizons.com/?p=172636"}
+  ]
+}
