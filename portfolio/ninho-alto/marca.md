@@ -29,7 +29,8 @@ Loja online americana (DTC) de café especial brasileiro de altitude, da Mantiqu
 - [x] Rótulos topográficos dos 3 lotes
 - [x] Fotos de produto 3D (hero + 3 pacotes)
 - [x] Site/loja conceito v2 (artifact "Ninho Alto Coffee"; fonte: `site.html`)
-- [ ] Macro dos grãos em 3D (cena `graos` ainda parece chocolate: falta textura, cor irregular e fenda funda)
+- [x] Fotos 3D v2 (29/10): texturas reais, papel com vincos, render na RTX 3060
+- [ ] Macro dos grãos em 3D (v2 melhorou: fenda com película, cor por grão; ainda parece CG de perto)
 - [ ] 3 Reels verticais na fábrica (lançamento do Reserve, "por que altitude muda o café", receita de pour-over)
 - [ ] Vídeo de produto 3D no Blender (cena `pacote` já anima o giro: renderizar no PC do Tiago com GPU)
 - [ ] 2 anúncios verticais (Meta/TikTok) e 1 carrossel

@@ -22,7 +22,7 @@ Tudo o que o Claude precisa está neste repositório. O que **não** vem junto: 
 
 ### Onde paramos (29/10/2026)
 - Feito hoje: manual da Ninho Alto como design system (`portfolio/ninho-alto/marca.json` → `python3 tools/manual_ninho.py`).
-- **Próximo:** refazer as fotos 3D da Ninho Alto com GPU e materiais reais, porque as atuais (renderizadas na nuvem, só CPU) ficaram fracas:
+- **Feito (29/10, fim da tarde):** fotos 3D v2 renderizadas no PC do Tiago (itens 1–4 abaixo, menos o macro). **Próximo:** vídeo dos grãos caindo (item 5) e macro dos grãos. Plano original:
   1. Texturas CC0 escaneadas da Poly Haven (pedra, papel kraft, cerâmica) no lugar das procedurais.
   2. Pacote com simulação de tecido (dobras e amassados).
   3. Grãos novos: rugosidade ~0,55, fenda funda, cor variando por grão, escala real (≈1 cm).
