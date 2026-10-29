@@ -73,7 +73,10 @@ def rotulo(lote, W=1200, H=1600):
     d.rectangle((0, H - 110, W, H), fill=lote['cor'])
     d.text((m, H - 72), 'WHOLE BEAN · 340 g / 12 oz', font=fonte('IBMPlexMono-Medium.ttf', 28), fill=PAPEL)
     d.text((W - m, H - 72), 'CONCEPT', font=fonte('IBMPlexMono-Medium.ttf', 28), fill=PAPEL, anchor='ra')
-    out = os.path.join(SAIDA, f"rotulo_{lote['id']}.png"); im.save(out); return out
+    out = os.path.join(SAIDA, f"rotulo_{lote['id']}.png"); im.save(out)
+    rep = os.path.join(RAIZ, 'portfolio', 'ninho-alto', 'rotulos'); os.makedirs(rep, exist_ok=True)
+    im.save(os.path.join(rep, f"rotulo_{lote['id']}.png"), optimize=True)  # cópia versionada para o Blender no PC
+    return out
 
 if __name__ == '__main__':
     for l in LOTES: print(rotulo(l))
