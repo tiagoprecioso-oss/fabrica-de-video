@@ -25,6 +25,8 @@ Ebook ou material para vender/entregar (Hotmart, isca de e-mail, bônus de curso
 - [ ] Aviso educativo, data dos dados e lista de fontes no livro.
 
 ## Lições
+- 29/10/2026 — PDF "interativo" tem limite: links, campos e caixas funcionam nos leitores comuns; animação e contas automáticas não (JavaScript de PDF só no Adobe). Interatividade de verdade fica na página. Campos: o ebook.py escreve marcadores de texto invisíveis (QZ…ZQ) e o pdf_campos.py cria os campos onde eles estão. Cuidados: o marcador não pode ficar na mesma linha de outro texto (as letras se misturam na extração) e nenhuma regra de estilo pode aumentar a letra dele. Conferir preenchendo uma cópia de teste e renderizando com formulários (pypdfium2 init_forms).
+- Testar se a marca d'água da Hotmart (Social DRM) mantém os campos preenchíveis antes de lançar.
 - 29/10/2026 — PDF v2: linhas em branco entre blocos quebravam a grade das cartas (cada carta ia para uma coluna só). Agrupar blocos iguais seguidos ignorando parágrafos vazios. Páginas de cor de ponta a ponta usam `@page cheia{margin:0}`.
 - 29/10/2026 — Referência que funcionou para o PDF: manual de jogo (página de personagens, mapa do jogo como sumário) + ebooks ilustrados do Dribbble (páginas de cor alternadas, número gigante como destaque).
 - 29/10/2026 — Plano pessoal em PDF gerado no navegador: jsPDF 2.5.1 + html2canvas 1.4.1 (cdnjs, carregados só no clique) desenham folhas A4 escondidas com o visual da página. SVG com `var(--x)` não pinta como imagem: trocar pelas cores calculadas antes. No claude.ai o download só sai pela permissão `downloads`; fora dele, link de download normal.
@@ -38,6 +40,7 @@ Ebook ou material para vender/entregar (Hotmart, isca de e-mail, bônus de curso
 - 29/10/2026 — Rodapé com número de página: Chromium imprime em todas as páginas; a capa sai de um segundo PDF sem rodapé e as duas partes são unidas com pypdf.
 
 ## Histórico
+- v5 29/10/2026 — PDF oficial interativo: mapa clicável (links para cada fase e "voltar ao mapa"), fichas e respostas preenchíveis, checklist de 90 dias com caixas de marcar (tools/pdf_campos.py roda sozinho no fim do tools/ebook.py).
 - v4 29/10/2026 — PDF oficial redesenhado no visual da página (tools/ebook.py v2): arte extraída da página (tools/extrair_arte.py), Baloo 2 + Nunito, capa, mapa do jogo, aberturas de fase em página inteira de cor, cartas, extratos, Mundo 2.
 - v3 29/10/2026 — simulador passo a passo com extrato e aposta; gancho para o próximo produto no fim (mundo seguinte trancado + cálculo com os números do leitor).
 - v2 29/10/2026 — página interativa como produto principal; pesquisa de referências obrigatória antes do rascunho.

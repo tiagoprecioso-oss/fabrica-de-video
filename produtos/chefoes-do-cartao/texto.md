@@ -214,6 +214,14 @@ Parcelas que faltam |
 **Missão da Fase 2.** Preencha uma ficha por dívida (há fichas em branco no fim do livro, ou use o simulador). Depois some a **vida total** e o **ataque do mês**. Esses dois números são o placar do seu jogo.
 :::
 
+:::campo
+Minha vida total (R$):
+:::
+
+:::campo
+Meu ataque do mês (R$):
+:::
+
 # Fase 3 · Estratégia de ataque
 
 :::abertura
@@ -292,6 +300,14 @@ Simulação educativa com as taxas médias de setembro de 2026 e mínimos fixos.
 
 :::missao
 **Missão da Fase 3.** Descubra quanto sobra por mês para as dívidas (renda menos essencial). Ordene as suas fichas pela taxa (Avalanche) e pelo saldo (Bola de Neve), escolha uma estratégia e escreva: **"Meu primeiro alvo é ____"**.
+:::
+
+:::campo
+Meu primeiro alvo é:
+:::
+
+:::campo
+Minha estratégia (Avalanche ou Bola de Neve):
 :::
 
 # Fase 4 · Ataques especiais

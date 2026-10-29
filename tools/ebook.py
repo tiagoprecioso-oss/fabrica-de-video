@@ -62,6 +62,14 @@ def chaves(linhas):
         elif l.strip(): resto.append(l)
     return d, resto
 
+# ---------- campos do PDF (marcadores lidos por tools/pdf_campos.py) ----------
+NCAMPO = [0]
+def mk(nome):
+    return f'<span class="mk">QZ{nome}ZQ</span>'
+def campo_linha(rotulo, prefixo=''):
+    NCAMPO[0] += 1; n = NCAMPO[0]
+    return f'<div class="fi-l"><span>{inl(rotulo)}</span><em>{inl(prefixo)}</em>{mk(f"t{n}a")}<i class="esp"></i>{mk(f"t{n}b")}</div>'
+
 # ---------- arte ----------
 ARTE = {}
 def arte(nome, w=120, extra=''):
@@ -158,7 +166,8 @@ def bloco(tipo, linhas):
         rows = campos(linhas)
         return ('<table class="tab"><thead><tr>' + ''.join(f'<th>{inl(c)}</th>' for c in rows[0]) + '</tr></thead><tbody>'
                 + ''.join('<tr>' + ''.join(f'<td>{inl(c)}</td>' for c in r) + '</tr>' for r in rows[1:]) + '</tbody></table>')
-    if tipo == 'aposta': return f'<aside class="aposta"><span class="q">?</span><div><span class="pilula az">APOSTE</span>{paragrafos(linhas)}</div>{arte("din", 70)}</aside>'
+    if tipo == 'aposta': return f'<aside class="aposta"><span class="q">?</span><div><span class="pilula az">APOSTE</span>{paragrafos(linhas)}<div class="campo-l">{campo_linha("Minha aposta:")}</div></div>{arte("din", 70)}</aside>'
+    if tipo == 'campo': return f'<div class="campo-l solto">{campo_linha(linhas[0].strip())}</div>'
     if tipo == 'extrato':
         d, _ = chaves(linhas)
         chips = ''.join(f'<span>{inl(x.strip())}</span>' for x in d.get('juros', '').split('|'))
@@ -179,7 +188,8 @@ def bloco(tipo, linhas):
         cs = ['grana', 'azul', 'roxo', 'laranja']
         return '<div class="escudos">' + ''.join(f'<div><svg viewBox="0 0 24 24" width="54" height="54"><path d="M12 2 L21 5 V11 Q21 18 12 22 Q3 18 3 11 V5Z" fill="{cor(cs[i])}" stroke="{C["tinta"]}" stroke-width="1.6" stroke-linejoin="round"/><path d="M8 12l3 3 5-6" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><b>{inl(a)}</b><span>{inl(b)}</span></div>' for i, (a, b) in enumerate(campos(linhas))) + '</div>'
     if tipo == 'plano':
-        return '<div class="plano">' + ''.join(f'<div class="pl"><i></i><div><small>{inl(s)}</small><b>{inl(t)}</b><span>{inl(x)}</span></div></div>' for s, t, x in campos(linhas)) + '</div>'
+        NCAMPO[0] += 1; base = NCAMPO[0]
+        return '<div class="plano">' + ''.join(f'<div class="pl"><i>{mk(f"c{base}x{k}")}</i><div><small>{inl(s)}</small><b>{inl(t)}</b><span>{inl(x)}</span></div></div>' for k, (s, t, x) in enumerate(campos(linhas))) + '</div>'
     if tipo == 'fichas':
         n = int(linhas[0].strip())
         cf = [['Nome do chefão', ''], ['Onde está (banco, loja)', ''], ['Vida (saldo devedor hoje)', 'R$'], ['Ataque (taxa ao mês)', '%'], ['Ataque do mês (vida × taxa)', 'R$'], ['Parcela ou mínimo', 'R$'], ['Parcelas que faltam', ''], ['Atrasada? Há quanto tempo?', ''], ['Estratégia e ataque especial', '']]
@@ -187,7 +197,7 @@ def bloco(tipo, linhas):
     raise ValueError('bloco desconhecido: ' + tipo)
 
 def ficha_html(rows, titulo='Ficha do chefão'):
-    ls = ''.join(f'<div class="fi-l"><span>{inl(a)}</span><em>{inl(b[0]) if b and b[0] else ""}</em></div>' for a, *b in rows)
+    ls = ''.join(campo_linha(a, b[0] if b and b[0] else '') for a, *b in rows)
     return f'<div class="ficha"><div class="fi-top">{arte("din", 34)}<b>{titulo}</b></div>{ls}</div>'
 
 # ---------- seções ----------
@@ -234,7 +244,7 @@ def corpo(linhas):
 def abertura_html(n, titulo, d):
     c = cor(d.get('cor', 'azul')); a = d.get('arte', 'rotativo')
     escuro = d.get('cor') in ('amarelo', 'grana', 'ciano')
-    return (f'<section class="abertura" style="background:{c};color:{C["tinta"] if escuro else "#fff"}"><div class="ab-num">{n}</div>'
+    return (f'<section class="abertura" id="fase-{n}" style="background:{c};color:{C["tinta"] if escuro else "#fff"}"><a class="ab-mapa" href="#mapa">← mapa do jogo</a><div class="ab-num">{n}</div>'
             f'<div class="ab-txt"><span class="ab-rot" style="background:{C["tinta"] if escuro else "#ffffff2e"};color:#fff">FASE {n} DE 6</span><h1>{inl(titulo)}</h1><p>{inl(d.get("promessa", ""))}</p></div>'
             f'<div class="ab-arte">{arte(a, 420)}</div><div class="ab-chao"></div></section>')
 
@@ -245,7 +255,7 @@ def mundo2_html(titulo, linhas):
     cofre = (f'<svg viewBox="0 0 150 140" width="220" height="205"><ellipse cx="75" cy="132" rx="52" ry="6" fill="#000" opacity=".25"/><rect x="18" y="22" width="114" height="104" rx="20" fill="{C["amarelo"]}" stroke="{C["tinta"]}" stroke-width="4"/>'
              f'<rect x="30" y="34" width="90" height="80" rx="12" fill="{C["amarelo_esc"]}" stroke="{C["tinta"]}" stroke-width="3"/><circle cx="75" cy="74" r="22" fill="#fff" stroke="{C["tinta"]}" stroke-width="4"/>'
              f'<path d="M75 58v32M59 74h32" stroke="{C["tinta"]}" stroke-width="4" stroke-linecap="round"/><rect x="120" y="54" width="8" height="40" rx="4" fill="{C["tinta"]}"/></svg>')
-    return (f'<section class="mundo2"><span class="ab-rot" style="background:{C["amarelo"]};color:{C["tinta"]}">FIM DE JOGO? AINDA NÃO</span><h1>{inl(titulo.replace(" · ", ": "))}</h1>'
+    return (f'<section class="mundo2" id="mundo-2"><a class="ab-mapa" href="#mapa">← mapa do jogo</a><span class="ab-rot" style="background:{C["amarelo"]};color:{C["tinta"]}">FIM DE JOGO? AINDA NÃO</span><h1>{inl(titulo.replace(" · ", ": "))}</h1>'
             f'<div class="m2-topo"><div>{"".join("<p>" + inl(t) + "</p>" for t in txt)}</div>{cofre}</div><div class="mundos">{cards}</div>'
             f'<p class="m2-pe">O minicurso continua daqui. Fique de olho na área de membros.</p></section>')
 
@@ -255,9 +265,9 @@ def mapa_html(secs):
     nos = ''
     for i, f in enumerate(fases):
         lado = 'esq' if i % 2 == 0 else 'dir'
-        nos += f'<div class="no {lado}"><span class="bola" style="background:{cor(cores[i])}">{f.group(1)}</span><div><small>FASE {f.group(1)}</small><b>{inl(f.group(2))}</b></div></div>'
-    nos += f'<div class="no esq trancado"><span class="bola" style="background:{C["noite"]}">{icone("cadeado", "")}</span><div><small>MUNDO 2</small><b>O Cofre</b></div></div>'
-    return f'<section class="mapa"><h2>O mapa do jogo</h2><p>Seis fases para derrotar os chefões. No fim, o próximo mundo.</p><div class="trilha"><svg class="caminho" viewBox="0 0 100 700" preserveAspectRatio="none"><path d="M30 30 C 90 80, 90 120, 70 130 S 10 210, 30 230 S 90 320, 70 330 S 10 410, 30 430 S 90 520, 70 530 S 10 610, 30 640" fill="none" stroke="{C["linha"]}" stroke-width="7" stroke-dasharray="2 14" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg>{nos}</div></section>'
+        nos += f'<a class="no {lado}" href="#fase-{f.group(1)}"><span class="bola" style="background:{cor(cores[i])}">{f.group(1)}</span><div><small>FASE {f.group(1)}</small><b>{inl(f.group(2))}</b></div></a>'
+    nos += f'<a class="no esq trancado" href="#mundo-2"><span class="bola" style="background:{C["noite"]}">{icone("cadeado", "")}</span><div><small>MUNDO 2</small><b>O Cofre</b></div></a>'
+    return f'<section class="mapa" id="mapa"><h2>O mapa do jogo</h2><p>Seis fases para derrotar os chefões. No fim, o próximo mundo. <strong>Toque em uma fase para ir até ela.</strong></p><div class="trilha"><svg class="caminho" viewBox="0 0 100 700" preserveAspectRatio="none"><path d="M30 30 C 90 80, 90 120, 70 130 S 10 210, 30 230 S 90 320, 70 330 S 10 410, 30 430 S 90 520, 70 530 S 10 610, 30 640" fill="none" stroke="{C["linha"]}" stroke-width="7" stroke-dasharray="2 14" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg>{nos}</div></section>'
 
 def secao_html(sec):
     m = re.match(r'(Fase (\d+)|Mundo (\d+)) · (.*)', sec['titulo'])
@@ -399,10 +409,20 @@ h3{{font-size:{k("1.55em","1.35em")};margin:1.2em 0 .45em;break-after:avoid}}
 .fi-l{{display:flex;align-items:flex-end;gap:8px;border-bottom:2px dotted {C["apagado"]};padding:{k(".75em",".6em")} 0 .2em;font-size:.9em}}
 .fi-l span{{font-weight:800;white-space:nowrap}} .fi-l em{{font-style:normal;color:{C["apagado"]};margin-left:auto;padding-right:{k("7em","2.5em")}}}
 .fichas .ficha:nth-child(2n){{{"" if cel else "break-after:page"}}}
+/* interatividade */
+a{{color:inherit;text-decoration:none}}
+.mk,.pl .mk,.fi-l .mk{{font-size:2px!important;line-height:0!important;color:rgba(255,255,255,0)!important;letter-spacing:0!important;white-space:nowrap;font-weight:400!important}}
+.fi-l .esp{{flex:1;min-width:30px}} .fi-l em{{margin-left:.4em;padding-right:0}}
+.pl i{{display:grid;place-items:center}} .pl i .mk{{position:relative;top:9px}}
+.campo-l .fi-l{{border-bottom:2px dotted currentColor;margin-top:.4em;padding-top:.3em}}
+.campo-l.solto{{background:#fff;border:2.5px solid {C["linha"]};border-radius:16px;padding:.2em 1em .6em;margin:1em 0}}
+.ab-mapa{{position:absolute;top:{k("9mm","5mm")};right:{k("18mm","9mm")};font-weight:900;font-size:.8em;letter-spacing:.06em;border:2px solid currentColor;border-radius:99px;padding:.25em .9em;z-index:2;opacity:.9}}
+.mundo2{{position:relative;overflow:hidden}}
 /* mundo 2 */
 .mundo2{{page:cheia;break-before:page;height:{k("297mm","196mm")};background:{C["noite_esc"]};color:#fff;padding:{k("22mm 18mm","12mm 9mm")};display:flex;flex-direction:column;gap:{k("7mm","4mm")}}}
 .mundo2 .ab-rot{{align-self:flex-start}}
 .mundo2 h1{{font-size:{k("4em","2.6em")};margin-top:.2em}}
+{'.mundo2 h1{font-size:2.2em}.m2-topo p{font-size:.92em;margin-bottom:.5em}.mundo{padding:.6em .8em}.mundo b{font-size:1.1em}.mundo span{font-size:.8em}.m2-topo svg{display:none}' if cel else ''}
 .m2-topo{{display:grid;grid-template-columns:{k("1fr 220px","1fr")};gap:8mm;align-items:center}} .m2-topo p{{font-size:{k("1.2em","1em")};color:#E3DCF8}} .m2-topo strong{{color:{C["amarelo"]}}}
 {"" if not cel else ".m2-topo svg{width:120px;height:auto}"}
 .mundos{{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:auto}}
@@ -436,6 +456,8 @@ def pdf(pasta, cel):
     for pgn in r.pages: w.add_page(pgn)
     w.add_metadata({'/Title': meta.get('titulo', ''), '/Author': meta.get('autor', ''), '/Subject': meta.get('subtitulo', '')})
     with open(saida, 'wb') as fh: w.write(fh)
+    sys.path.insert(0, str(Path(__file__).parent)); from pdf_campos import main as campos
+    campos(str(saida))   # marcadores invisíveis → campos preenchíveis e caixas de marcar
     return saida, len(r.pages)
 
 def previa(arq_pdf, saida, paginas):
