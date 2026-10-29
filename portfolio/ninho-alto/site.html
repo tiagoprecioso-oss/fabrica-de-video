@@ -1,0 +1,395 @@
+<title>Ninho Alto Coffee</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Figtree:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: Brazilian-modernist tile panels (Athos Bulcão spirit) framing a one-page store; specs read like a coffee lab sheet */
+:root {
+  --sky: #E9EEF8;      /* page */
+  --paper: #FFFFFF;    /* panels */
+  --ink: #111A3A;      /* text */
+  --muted: #4A5478;
+  --cobalt: #2343C4;   /* brand blue */
+  --sun: #F4C430;      /* brand yellow */
+  --cherry: #C82634;   /* coffee cherry red */
+  --line: #C9D2EA;
+  --on-cobalt: #FFFFFF;
+  --f-display: "Syne", "Arial Black", system-ui, sans-serif;
+  --f-body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --sky: #0B1230; --paper: #131C45; --ink: #EEF2FF; --muted: #A8B2D8;
+    --cobalt: #4F6BF0; --sun: #F6CC4A; --cherry: #F0505C; --line: #2A3670; --on-cobalt: #FFFFFF;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --sky: #0B1230; --paper: #131C45; --ink: #EEF2FF; --muted: #A8B2D8;
+  --cobalt: #4F6BF0; --sun: #F6CC4A; --cherry: #F0505C; --line: #2A3670; --on-cobalt: #FFFFFF;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--sky); color: var(--ink); font-family: var(--f-body); font-size: 17px; line-height: 1.6; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--sky); }
+.wrap { max-width: 1120px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3 { font-family: var(--f-display); line-height: 1.02; margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
+p { margin: 0; }
+a { color: inherit; }
+.label { font-family: var(--f-mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+button { font: inherit; cursor: pointer; }
+:focus-visible { outline: 3px solid var(--sun); outline-offset: 3px; }
+
+/* header */
+header { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--sky); border-bottom: 1px solid var(--line); }
+.bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 14px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.brand svg { width: 38px; height: 38px; flex: none; }
+.brand b { font-family: var(--f-display); font-size: 21px; letter-spacing: .02em; }
+nav { display: flex; gap: 22px; font-weight: 500; font-size: 15px; }
+nav a { text-decoration: none; }
+nav a:hover { color: var(--cobalt); }
+.bag { display: flex; align-items: center; gap: 8px; background: var(--ink); color: var(--sky); border: 0; border-radius: 999px; padding: 8px 16px; font-weight: 600; font-size: 15px; }
+.bag span { background: var(--sun); color: #111A3A; border-radius: 999px; min-width: 22px; height: 22px; display: inline-grid; place-items: center; font-size: 13px; font-variant-numeric: tabular-nums; }
+@media (max-width: 760px) { nav { display: none; } }
+
+/* hero */
+.hero { display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: center; padding-block: 56px 40px; }
+.hero > div { min-width: 0; }
+.hero h1 { font-size: clamp(38px, 5vw, 66px); font-weight: 700; line-height: 1.04; }
+.hero h1 em { font-style: normal; color: var(--cobalt); }
+.hero .lede { margin-top: 22px; font-size: 19px; color: var(--muted); max-width: 46ch; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.btn { border: 2px solid var(--ink); background: transparent; color: var(--ink); border-radius: 999px; padding: 12px 22px; font-weight: 600; text-decoration: none; display: inline-block; }
+.btn.primary { background: var(--cobalt); border-color: var(--cobalt); color: var(--on-cobalt); }
+.btn:hover { transform: translateY(-1px); }
+.facts { display: flex; flex-wrap: wrap; gap: 28px; margin-top: 34px; }
+.facts div { display: grid; }
+.facts strong { font-family: var(--f-display); font-size: 30px; font-variant-numeric: tabular-nums; }
+
+/* tile panel */
+.tiles { display: grid; grid-template-columns: repeat(4, 1fr); aspect-ratio: 1; max-width: 100%; border-radius: 6px; overflow: hidden; box-shadow: 0 30px 60px -30px rgba(17,26,58,.45); }
+.t { position: relative; background: var(--paper); }
+.t.a { background: radial-gradient(circle at 0 0, var(--cobalt) 0 50%, var(--paper) 50.5%); }
+.t.b { background: radial-gradient(circle at 100% 100%, var(--sun) 0 50%, var(--paper) 50.5%); }
+.t.c { background: linear-gradient(135deg, var(--cobalt) 0 50%, var(--paper) 50%); }
+.t.d { background: radial-gradient(circle at 50% 50%, var(--cherry) 0 22%, var(--paper) 22.5%); }
+.t.e { background: var(--cobalt); }
+.t.f { background: linear-gradient(45deg, var(--sun) 0 50%, var(--cobalt) 50%); }
+.t.g { background: radial-gradient(circle at 100% 0, var(--cherry) 0 50%, var(--sun) 50.5%); }
+.t.h { background: linear-gradient(90deg, var(--paper) 0 50%, var(--ink) 50%); }
+.tiles .center { grid-column: 2 / 4; grid-row: 2 / 4; background: var(--ink); display: grid; place-items: center; }
+.tiles .center svg { width: 64%; height: auto; }
+@media (prefers-reduced-motion: no-preference) {
+  .t { animation: pop .7s cubic-bezier(.2,.8,.2,1) both; }
+  .t:nth-child(odd) { animation-delay: .08s; }
+  .t:nth-child(3n) { animation-delay: .16s; }
+}
+@keyframes pop { from { transform: scale(.86); } to { transform: none; } }
+@media (max-width: 860px) { .hero { grid-template-columns: 1fr; padding-block: 36px 24px; } .tiles { max-width: 460px; } }
+
+/* sections */
+section { padding-block: 64px; }
+.head { display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; margin-bottom: 30px; }
+.head h2 { font-size: clamp(32px, 4.6vw, 54px); }
+.head p { max-width: 44ch; color: var(--muted); }
+
+/* coffees */
+.coffees { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.coffee { background: var(--paper); border: 1px solid var(--line); border-radius: 6px; display: grid; grid-template-rows: auto 1fr; overflow: hidden; min-width: 0; }
+.bagart { aspect-ratio: 4 / 3; display: grid; place-items: center; position: relative; }
+.bagart .pouch { width: 44%; aspect-ratio: 3 / 4; border-radius: 10px 10px 6px 6px; background: #FFFFFF; display: grid; place-items: center; box-shadow: 0 18px 30px -16px rgba(0,0,0,.45); position: relative; }
+.bagart .pouch::before { content: ""; position: absolute; top: 9%; left: 0; right: 0; height: 3px; background: #C9D2EA; }
+.bagart .pouch svg { width: 46%; }
+.bagart .pouch i { position: absolute; bottom: 10%; font-style: normal; font-family: var(--f-mono); font-size: 10px; letter-spacing: .1em; color: #111A3A; }
+.c1 .bagart { background: var(--sun); }
+.c2 .bagart { background: var(--cobalt); }
+.c3 .bagart { background: var(--cherry); }
+.body { padding: 22px; display: grid; gap: 14px; align-content: start; }
+.body h3 { font-size: 26px; }
+.notes { color: var(--muted); }
+.spec { display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; font-family: var(--f-mono); font-size: 13px; border-top: 1px dashed var(--line); padding-top: 14px; }
+.spec dt { color: var(--muted); }
+.spec dd { margin: 0; font-variant-numeric: tabular-nums; }
+.roast { display: flex; gap: 4px; align-items: center; }
+.roast b { width: 16px; height: 8px; border-radius: 2px; background: var(--line); }
+.roast b.on { background: var(--ink); }
+.buy { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 4px; }
+.price { font-family: var(--f-display); font-size: 26px; font-variant-numeric: tabular-nums; }
+.price small { font-family: var(--f-mono); font-size: 12px; color: var(--muted); font-weight: 400; }
+.add { background: var(--ink); color: var(--sky); border: 0; border-radius: 999px; padding: 10px 18px; font-weight: 600; }
+@media (max-width: 900px) { .coffees { grid-template-columns: 1fr; } .coffee { grid-template-columns: 1fr 1.3fr; grid-template-rows: none; } .bagart { aspect-ratio: auto; } }
+@media (max-width: 560px) { .coffee { grid-template-columns: 1fr; } .bagart { aspect-ratio: 16 / 9; } .bagart .pouch { width: 28%; } }
+
+/* origin band */
+.band { background: var(--cobalt); color: var(--on-cobalt); }
+.band .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; padding-block: 72px; align-items: center; }
+.band .wrap > div { min-width: 0; }
+.band h2 { font-size: clamp(34px, 5vw, 60px); }
+.band p { opacity: .9; max-width: 52ch; }
+.band .label { color: var(--sun); }
+.alt { font-family: var(--f-mono); font-size: 13px; }
+.alt svg { width: 100%; height: auto; display: block; }
+@media (max-width: 860px) { .band .wrap { grid-template-columns: 1fr; padding-block: 52px; } }
+
+/* subscription builder */
+.sub { display: grid; grid-template-columns: 1.2fr .8fr; gap: 24px; }
+.sub > * { min-width: 0; }
+.panel { background: var(--paper); border: 1px solid var(--line); border-radius: 6px; padding: 26px; display: grid; gap: 22px; }
+fieldset { border: 0; padding: 0; margin: 0; display: grid; gap: 10px; }
+legend { padding: 0; margin-bottom: 10px; }
+.opts { display: flex; flex-wrap: wrap; gap: 10px; }
+.opts input { position: absolute; opacity: 0; pointer-events: none; }
+.opts label { border: 2px solid var(--line); border-radius: 999px; padding: 9px 16px; cursor: pointer; font-weight: 500; }
+.opts input:checked + label { border-color: var(--cobalt); background: var(--cobalt); color: var(--on-cobalt); }
+.opts input:focus-visible + label { outline: 3px solid var(--sun); outline-offset: 2px; }
+.total { background: var(--ink); color: var(--sky); border-radius: 6px; padding: 26px; display: grid; gap: 12px; align-content: start; }
+.total .label { color: var(--sun); }
+.total .big { font-family: var(--f-display); font-size: 54px; line-height: 1; font-variant-numeric: tabular-nums; }
+.total dl { display: grid; grid-template-columns: 1fr auto; gap: 6px 12px; font-family: var(--f-mono); font-size: 13px; margin: 0; }
+.total dd { margin: 0; text-align: right; font-variant-numeric: tabular-nums; }
+.total .btn { border-color: var(--sun); background: var(--sun); color: #111A3A; text-align: center; }
+@media (max-width: 860px) { .sub { grid-template-columns: 1fr; } }
+
+/* brew */
+.brew { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 2px solid var(--ink); }
+.brew > div { padding: 22px 22px 22px 0; display: grid; gap: 10px; align-content: start; min-width: 0; }
+.brew > div + div { padding-left: 22px; border-left: 1px solid var(--line); }
+.brew h3 { font-size: 24px; }
+.ratio { font-family: var(--f-mono); font-size: 14px; color: var(--cobalt); font-variant-numeric: tabular-nums; }
+@media (max-width: 760px) { .brew { grid-template-columns: 1fr; } .brew > div + div { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); } }
+
+/* footer */
+footer { border-top: 1px solid var(--line); padding-block: 40px; }
+.foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 24px; align-items: start; }
+.news { display: flex; gap: 8px; flex-wrap: wrap; }
+.news input { border: 2px solid var(--line); background: var(--paper); color: var(--ink); border-radius: 999px; padding: 10px 16px; font: inherit; min-width: 0; width: 240px; max-width: 100%; }
+.concept { margin-top: 26px; font-size: 14px; color: var(--muted); border: 1px dashed var(--line); border-radius: 6px; padding: 14px 16px; }
+.toast { position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--ink); color: var(--sky); padding: 12px 20px; border-radius: 999px; font-weight: 600; z-index: 20; max-width: calc(100% - 32px); text-align: center; }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="mark" viewBox="0 0 100 100">
+      <!-- coffee bean whose crease is a mountain ridge cradling a nest -->
+      <ellipse cx="50" cy="50" rx="34" ry="44" fill="var(--sun)"/>
+      <path d="M22 62 L38 40 L48 52 L60 32 L78 60" fill="none" stroke="#111A3A" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M34 70 Q50 82 66 70" fill="none" stroke="#111A3A" stroke-width="6" stroke-linecap="round"/>
+      <circle cx="60" cy="22" r="5" fill="#C82634"/>
+    </symbol>
+  </defs>
+</svg>
+
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="#top" aria-label="Ninho Alto Coffee, home"><svg><use href="#mark"/></svg><b>ninho alto</b></a>
+    <nav aria-label="Main">
+      <a href="#coffees">Coffees</a><a href="#origin">Origin</a><a href="#subscribe">Subscribe</a><a href="#brew">Brew guide</a>
+    </nav>
+    <button class="bag" id="bagBtn" type="button" aria-live="polite">Bag <span id="bagCount">0</span></button>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap hero">
+    <div>
+      <p class="label">Single-origin Brazil · roasted in small batches</p>
+      <h1>Grown above <em>1,100 m</em>. Roasted the week you order.</h1>
+      <p class="lede">Ninho Alto brings high-altitude coffee from family farms in the Mantiqueira mountains of Minas Gerais straight to your kitchen, roasted to order and shipped within 72 hours.</p>
+      <div class="ctas">
+        <a class="btn primary" href="#subscribe">Build a subscription</a>
+        <a class="btn" href="#coffees">Shop the three coffees</a>
+      </div>
+      <div class="facts">
+        <div><strong>1,100–1,400 m</strong><span class="label">altitude</span></div>
+        <div><strong>72 h</strong><span class="label">roast to ship</span></div>
+        <div><strong>3</strong><span class="label">lots this harvest</span></div>
+      </div>
+    </div>
+    <div class="tiles" aria-hidden="true">
+      <div class="t a"></div><div class="t b"></div><div class="t c"></div><div class="t d"></div>
+      <div class="t e"></div><div class="center"><svg viewBox="0 0 100 100"><use href="#mark"/></svg></div><div class="t f"></div>
+      <div class="t g"></div><div class="t h"></div>
+      <div class="t d"></div><div class="t c"></div><div class="t b"></div><div class="t a"></div>
+    </div>
+  </div>
+
+  <section id="coffees">
+    <div class="wrap">
+      <div class="head">
+        <h2>Three lots. One mountain.</h2>
+        <p>Each bag carries the farm, the altitude and the process, so you know what changes from cup to cup.</p>
+      </div>
+      <div class="coffees">
+        <article class="coffee c1">
+          <div class="bagart"><div class="pouch"><svg viewBox="0 0 100 100"><use href="#mark"/></svg><i>SUNRISE</i></div></div>
+          <div class="body">
+            <h3>Cerrado Sunrise</h3>
+            <p class="notes">Milk chocolate, hazelnut, orange peel. The everyday cup.</p>
+            <dl class="spec">
+              <dt>Process</dt><dd>Pulped natural</dd>
+              <dt>Altitude</dt><dd>1,150 m</dd>
+              <dt>Variety</dt><dd>Yellow Catuaí</dd>
+              <dt>Roast</dt><dd><span class="roast" aria-label="Medium roast, 3 of 5"><b class="on"></b><b class="on"></b><b class="on"></b><b></b><b></b></span></dd>
+            </dl>
+            <div class="buy"><span class="price">$19 <small>/ 12 oz</small></span><button class="add" type="button" data-name="Cerrado Sunrise">Add to bag</button></div>
+          </div>
+        </article>
+        <article class="coffee c2">
+          <div class="bagart"><div class="pouch"><svg viewBox="0 0 100 100"><use href="#mark"/></svg><i>NIGHT</i></div></div>
+          <div class="body">
+            <h3>Mantiqueira Night</h3>
+            <p class="notes">Dark cocoa, molasses, toasted almond. Made for espresso.</p>
+            <dl class="spec">
+              <dt>Process</dt><dd>Natural</dd>
+              <dt>Altitude</dt><dd>1,250 m</dd>
+              <dt>Variety</dt><dd>Red Bourbon</dd>
+              <dt>Roast</dt><dd><span class="roast" aria-label="Medium-dark roast, 4 of 5"><b class="on"></b><b class="on"></b><b class="on"></b><b class="on"></b><b></b></span></dd>
+            </dl>
+            <div class="buy"><span class="price">$21 <small>/ 12 oz</small></span><button class="add" type="button" data-name="Mantiqueira Night">Add to bag</button></div>
+          </div>
+        </article>
+        <article class="coffee c3">
+          <div class="bagart"><div class="pouch"><svg viewBox="0 0 100 100"><use href="#mark"/></svg><i>RESERVE</i></div></div>
+          <div class="body">
+            <h3>Ninho Reserve</h3>
+            <p class="notes">Red berries, panela, jasmine. A small lot for pour-over.</p>
+            <dl class="spec">
+              <dt>Process</dt><dd>Anaerobic natural</dd>
+              <dt>Altitude</dt><dd>1,400 m</dd>
+              <dt>Variety</dt><dd>Yellow Bourbon</dd>
+              <dt>Roast</dt><dd><span class="roast" aria-label="Light roast, 2 of 5"><b class="on"></b><b class="on"></b><b></b><b></b><b></b></span></dd>
+            </dl>
+            <div class="buy"><span class="price">$26 <small>/ 12 oz</small></span><button class="add" type="button" data-name="Ninho Reserve">Add to bag</button></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div class="band" id="origin">
+    <div class="wrap">
+      <div>
+        <p class="label">Origin</p>
+        <h2>Why altitude changes the cup</h2>
+        <p style="margin-top:18px">Cooler nights in the mountains slow the coffee cherry down. Slower ripening means denser beans and more sugar, which is where the fruit and the sweetness in your cup come from. Our lots sit between 1,100 and 1,400 meters, picked by hand when the cherries turn red or yellow.</p>
+      </div>
+      <figure class="alt" style="margin:0">
+        <svg viewBox="0 0 400 220" role="img" aria-label="Mountain profile marking the altitude of each lot: Sunrise at 1,150 meters, Night at 1,250 meters, Reserve at 1,400 meters">
+          <path d="M0 220 L70 150 L120 175 L200 70 L250 110 L300 40 L400 160 L400 220 Z" fill="rgba(255,255,255,.12)"/>
+          <path d="M0 220 L70 150 L120 175 L200 70 L250 110 L300 40 L400 160" fill="none" stroke="#F4C430" stroke-width="3"/>
+          <g font-family="IBM Plex Mono, monospace" font-size="12" fill="#FFFFFF">
+            <circle cx="96" cy="162" r="6" fill="#F4C430"/><text x="40" y="200">SUNRISE 1,150 m</text>
+            <circle cx="232" cy="96" r="6" fill="#F4C430"/><text x="170" y="138">NIGHT 1,250 m</text>
+            <circle cx="300" cy="40" r="6" fill="#C82634" stroke="#FFFFFF" stroke-width="2"/><text x="230" y="24">RESERVE 1,400 m</text>
+          </g>
+        </svg>
+      </figure>
+    </div>
+  </div>
+
+  <section id="subscribe">
+    <div class="wrap">
+      <div class="head">
+        <h2>Build your subscription</h2>
+        <p>Subscribers save 15% and can skip, swap or cancel any time before the next roast.</p>
+      </div>
+      <form class="sub" id="subForm">
+        <div class="panel">
+          <fieldset>
+            <legend class="label">Coffee</legend>
+            <div class="opts">
+              <input type="radio" name="coffee" id="o-sun" value="19" checked><label for="o-sun">Cerrado Sunrise</label>
+              <input type="radio" name="coffee" id="o-night" value="21"><label for="o-night">Mantiqueira Night</label>
+              <input type="radio" name="coffee" id="o-res" value="26"><label for="o-res">Ninho Reserve</label>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend class="label">Bag size</legend>
+            <div class="opts">
+              <input type="radio" name="size" id="s-12" value="1" checked><label for="s-12">12 oz (340 g)</label>
+              <input type="radio" name="size" id="s-2lb" value="2.4"><label for="s-2lb">2 lb (907 g)</label>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend class="label">Delivery</legend>
+            <div class="opts">
+              <input type="radio" name="freq" id="f-2" value="2"><label for="f-2">Every 2 weeks</label>
+              <input type="radio" name="freq" id="f-4" value="4" checked><label for="f-4">Every 4 weeks</label>
+            </div>
+          </fieldset>
+        </div>
+        <aside class="total" aria-live="polite">
+          <p class="label">Per delivery</p>
+          <p class="big" id="tPrice">$16.15</p>
+          <dl>
+            <dt>Regular price</dt><dd id="tReg">$19.00</dd>
+            <dt>Subscriber saving</dt><dd id="tSave">−$2.85</dd>
+            <dt>Cups per bag (15 g dose)</dt><dd id="tCups">22</dd>
+            <dt>Cost per cup</dt><dd id="tCup">$0.73</dd>
+          </dl>
+          <button class="btn" type="submit">Start subscription</button>
+        </aside>
+      </form>
+    </div>
+  </section>
+
+  <section id="brew">
+    <div class="wrap">
+      <div class="head"><h2>Brew guide</h2><p>Start here, then adjust by taste. Grind finer if the cup is sour, coarser if it is bitter.</p></div>
+      <div class="brew">
+        <div><p class="label">Pour-over</p><h3>Ninho Reserve</h3><p class="ratio">15 g : 250 g water · 94 °C · 3:00</p><p class="notes">Medium-fine grind. Bloom with 40 g for 40 seconds.</p></div>
+        <div><p class="label">Espresso</p><h3>Mantiqueira Night</h3><p class="ratio">18 g in : 36 g out · 28 s</p><p class="notes">Fine grind. Rest the bag 7 days after the roast date.</p></div>
+        <div><p class="label">French press</p><h3>Cerrado Sunrise</h3><p class="ratio">30 g : 500 g water · 4:00</p><p class="notes">Coarse grind. Break the crust, skim, then press slowly.</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <a class="brand" href="#top"><svg><use href="#mark"/></svg><b>ninho alto</b></a>
+      <form class="news" id="newsForm">
+        <label class="label" for="email" style="flex-basis:100%">Roast-day emails</label>
+        <input type="email" id="email" placeholder="you@email.com" required>
+        <button class="add" type="submit">Sign up</button>
+      </form>
+    </div>
+    <p class="concept">Concept project. Ninho Alto is a fictional brand created by Precioso Productions to show branding, web, video and 3D work. Products, prices and farms are illustrative; nothing here is for sale.</p>
+  </div>
+</footer>
+
+<div class="toast" id="toast" hidden></div>
+
+<script>
+(function () {
+  var toastEl = document.getElementById('toast'), timer;
+  function toast(msg) { toastEl.textContent = msg; toastEl.hidden = false; clearTimeout(timer); timer = setTimeout(function () { toastEl.hidden = true; }, 2600); }
+  var count = 0, countEl = document.getElementById('bagCount');
+  document.querySelectorAll('.add[data-name]').forEach(function (b) {
+    b.addEventListener('click', function () { count++; countEl.textContent = count; toast(b.dataset.name + ' added to the demo bag'); });
+  });
+  document.getElementById('bagBtn').addEventListener('click', function () { toast(count ? count + ' item(s) in the demo bag. Checkout is off in this concept.' : 'Your demo bag is empty'); });
+
+  var form = document.getElementById('subForm');
+  var fmt = function (n) { return '$' + n.toFixed(2); };
+  function calc() {
+    var base = parseFloat(form.coffee.value), size = parseFloat(form.size.value);
+    var reg = Math.round(base * size * 100) / 100;
+    var price = Math.round(reg * 0.85 * 100) / 100;
+    var grams = size === 1 ? 340 : 907, cups = Math.floor(grams / 15);
+    document.getElementById('tReg').textContent = fmt(reg);
+    document.getElementById('tSave').textContent = '−' + fmt(reg - price);
+    document.getElementById('tPrice').textContent = fmt(price);
+    document.getElementById('tCups').textContent = cups;
+    document.getElementById('tCup').textContent = fmt(price / cups);
+  }
+  form.addEventListener('change', calc);
+  form.addEventListener('submit', function (e) { e.preventDefault(); toast('Concept store: subscriptions are not live'); });
+  document.getElementById('newsForm').addEventListener('submit', function (e) { e.preventDefault(); toast('Concept store: no emails are sent'); });
+  calc();
+})();
+</script>

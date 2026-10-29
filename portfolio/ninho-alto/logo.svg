@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 100" role="img" aria-label="Ninho Alto">
+  <ellipse cx="50" cy="50" rx="34" ry="44" fill="#F4C430"/>
+  <path d="M22 62 L38 40 L48 52 L60 32 L78 60" fill="none" stroke="#111A3A" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M34 70 Q50 82 66 70" fill="none" stroke="#111A3A" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="60" cy="22" r="5" fill="#C82634"/>
+  <text x="104" y="66" font-family="Syne, Arial Black, sans-serif" font-weight="700" font-size="46" fill="#111A3A">ninho alto</text>
+</svg>
