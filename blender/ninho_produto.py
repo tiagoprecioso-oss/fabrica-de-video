@@ -10,7 +10,7 @@ from mathutils import Vector
 
 argv = sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else []
 ap = argparse.ArgumentParser()
-ap.add_argument('--cena', default='hero', choices=['hero', 'pacote', 'graos'])
+ap.add_argument('--cena', default='hero', choices=['hero', 'pacote', 'graos', 'queda'])
 ap.add_argument('--lote', default='reserve')
 ap.add_argument('--saida', default='saida/ninho/hero_')
 ap.add_argument('--frames', default='1-1')
@@ -18,6 +18,7 @@ ap.add_argument('--res', type=int, default=1600)
 ap.add_argument('--proporcao', default='16:10')
 ap.add_argument('--amostras', type=int, default=96)
 ap.add_argument('--gpu', action='store_true')
+ap.add_argument('--video', action='store_true', help='grava .mp4 (H.264) em vez de PNGs')
 a = ap.parse_args(argv)
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 random.seed(7)
@@ -218,7 +219,7 @@ def grao(loc, esc=1.0):
     return ob
 
 def chao_e_parede(cor_parede=(0.30, 0.285, 0.265)):
-    bpy.ops.mesh.primitive_cube_add(size=1, location=(0, 0.2, -0.04)); laje = bpy.context.object
+    bpy.ops.mesh.primitive_cube_add(size=1, location=(0, 0.2, -0.04)); laje = bpy.context.object; laje.name = 'laje'
     laje.scale = (3.4, 1.6, 0.08); laje.data.materials.append(mat_pedra())
     bv = laje.modifiers.new('b', 'BEVEL'); bv.width = 0.01; bv.segments = 3
     bpy.ops.mesh.primitive_plane_add(size=30, location=(0, 4.0, 0), rotation=(math.pi / 2, 0, 0))
@@ -271,6 +272,42 @@ elif a.cena == 'pacote':
     for _ in range(140):
         grao((random.gauss(0.35, 0.3), random.gauss(-0.35, 0.12), 0.0))
     camera((0.0, -3.0, 0.75), (0, 0.2, 0.45), lente=60, f=3.2)
+elif a.cena == 'queda':
+    # Reels 9:16: o pacote em pé e um fio de grãos caindo do alto (fora do quadro) e formando um monte na frente dele.
+    # Física de corpo rígido; cada camada de grãos fica presa (cinemática) e é solta 2 quadros depois da anterior.
+    # Escala da cena: 1 unidade ≈ 0,33 m → gravidade ≈ 29 para os grãos caírem na velocidade real.
+    chao_e_parede(); luzes()
+    sc.gravity = (0, 0, -29.0)
+    bpy.ops.rigidbody.world_add(); rw = sc.rigidbody_world
+    rw.substeps_per_frame = 24; rw.solver_iterations = 20
+    rw.point_cache.frame_start, rw.point_cache.frame_end = f0, f1
+    def rigido(ob, tipo='ACTIVE', forma='CONVEX_HULL', atrito=0.6, quique=0.15, massa=0.002):
+        bpy.context.view_layer.objects.active = ob; ob.select_set(True)
+        bpy.ops.rigidbody.object_add(type=tipo); rb = ob.rigid_body
+        rb.collision_shape = forma; rb.friction = atrito; rb.restitution = quique; rb.mass = massa
+        rb.use_margin = True; rb.collision_margin = 0.0008; ob.select_set(False)
+        return rb
+    laje = bpy.data.objects['laje']
+    rigido(laje, 'PASSIVE', 'BOX', 0.8, 0.1)
+    p = pacote(a.lote, (-0.16, 0.12, 0), math.radians(6)); bpy.context.view_layer.update()
+    rigido(p, 'PASSIVE', 'CONVEX_HULL', 0.5, 0.1)
+    cx, cy, n = 0.2, -0.36, 0
+    for camada in range(34):
+        solta = f0 + 2 + camada * 2
+        for i in range(3):
+            for j in range(3):
+                x = cx + (i - 1) * 0.045 + random.uniform(-.004, .004)
+                y = cy + (j - 1) * 0.045 + random.uniform(-.004, .004)
+                g = grao((x, y, 1.38 + camada * 0.05))
+                g.rotation_euler = (random.uniform(0, 6.3), random.uniform(0, 6.3), random.uniform(0, 6.3))
+                rb = rigido(g); rb.kinematic = True
+                g.keyframe_insert('rigid_body.kinematic', frame=solta - 1)
+                rb.kinematic = False; g.keyframe_insert('rigid_body.kinematic', frame=solta)
+                n += 1
+    cam = camera((0.05, -2.75, 0.62), (0.03, 0.0, 0.5), lente=70, f=3.5)
+    cam.keyframe_insert('location', frame=f0)
+    cam.location = (0.08, -2.45, 0.56); cam.keyframe_insert('location', frame=f1)  # dolly in lento
+    print('graos na queda:', n)
 else:  # graos
     chao_e_parede(); luzes(0.8)
     pts = []  # uma camada de grãos sem encostar (sorteio com distância mínima)
@@ -280,5 +317,19 @@ else:  # graos
     for x, y in pts: grao((x, y, 0.0), esc=random.uniform(0.9, 1.1))
     camera((0.05, -0.62, 0.30), (0.0, 0.06, 0.0), lente=85, f=4.0)
 
+if os.environ.get('NINHO_DEBUG'):
+    gs = [o for o in bpy.data.objects if o.name.startswith('grao')]
+    for fr in range(f0, f1 + 1):
+        sc.frame_set(fr)
+        if fr not in (1, 10, 20, 40, f1): continue
+        zs = sorted(o.matrix_world.translation.z for o in gs)
+        xs = [round(o.matrix_world.translation.x, 2) for o in gs[:3]]
+        print('DBG', fr, 'zmin', round(zs[0], 3), 'zmed', round(zs[len(zs)//2], 3), 'x', xs)
+    sys.exit(0)
+if a.video and f1 > f0:
+    s = sc.render.image_settings
+    if hasattr(s, 'media_type'): s.media_type = 'VIDEO'  # Blender 5.x
+    s.file_format = 'FFMPEG'; sc.render.ffmpeg.format = 'MPEG4'; sc.render.ffmpeg.codec = 'H264'
+    sc.render.ffmpeg.constant_rate_factor = 'HIGH'
 bpy.ops.render.render(animation=(f1 > f0), write_still=(f1 == f0))
 print('ok', sc.render.filepath)
