@@ -25,6 +25,8 @@ Ebook ou material para vender/entregar (Hotmart, isca de e-mail, bônus de curso
 - [ ] Aviso educativo, data dos dados e lista de fontes no livro.
 
 ## Lições
+- 29/10/2026 — Para o simulador ser didático: o leitor aposta antes de ver o placar, e cada mês é contado em 3 passos (juros, mínimos, sobra no alvo e o porquê). Nomes dos chefões têm gênero: guardar no dado (`fem`) para o texto não sair "o Sombra".
+- 29/10/2026 — Fim do produto = começo do próximo: mostrar o mundo seguinte trancado e calcular com os números do leitor o que ele ganha lá (sem rendimento, para não virar recomendação de investimento).
 - 29/10/2026 — **v1 reprovada pelo Felipe ("horrível")**: saiu sem pesquisa de referências e parecia relatório de banco (caixas empilhadas, tabelas, verde-planilha, chefões parados). A v2 foi feita depois de olhar Nicky Case, Spent, Habitica, Duolingo, undebt.it e os concorrentes da Hotmart (todos PDFs genéricos) → página interativa em desenho animado vibrante, em que o leitor joga antes de ler.
 - 29/10/2026 — Simulador da página conferido contra `contas.py`: bateu centavo por centavo (17 meses / R$ 4.323,76 na Avalanche).
 - 29/10/2026 — "Endividamento de 50,1%" é dívida total ÷ renda de 12 meses, não "renda comprometida" (essa é o comprometimento, 29%). Conferir a definição do indicador, não só o número.
@@ -33,5 +35,6 @@ Ebook ou material para vender/entregar (Hotmart, isca de e-mail, bônus de curso
 - 29/10/2026 — Rodapé com número de página: Chromium imprime em todas as páginas; a capa sai de um segundo PDF sem rodapé e as duas partes são unidas com pypdf.
 
 ## Histórico
+- v3 29/10/2026 — simulador passo a passo com extrato e aposta; gancho para o próximo produto no fim (mundo seguinte trancado + cálculo com os números do leitor).
 - v2 29/10/2026 — página interativa como produto principal; pesquisa de referências obrigatória antes do rascunho.
 - v1 29/10/2026 — primeira versão (ebook "Chefões do cartão", Din no Chão).

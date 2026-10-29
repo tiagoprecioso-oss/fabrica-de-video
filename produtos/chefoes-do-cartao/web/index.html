@@ -17,6 +17,9 @@
   --amarelo:#FFCB2D; --amarelo-esc:#E0A400; --amarelo-claro:#FFF4CC;
   --azul:#279FEA; --azul-esc:#1679BF;
   --roxo:#9466F5; --roxo-esc:#7044D6; --roxo-claro:#EEE6FF;
+  --rosa:#FF6FA8; --rosa-esc:#D9478A;
+  --ciano:#17C1C3; --ciano-esc:#0B9496;
+  --noite:#4B3A78; --noite-esc:#2F2350;
   --display:'Baloo 2','Nunito',ui-rounded,system-ui,sans-serif;
   --texto:'Nunito',ui-rounded,system-ui,-apple-system,'Segoe UI',sans-serif;
   --raio:18px;
@@ -228,6 +231,25 @@ input[type=range]{accent-color:var(--grana);flex:1;min-width:160px}
 @media (max-width:640px){.resultados{grid-template-columns:1fr}}
 .erro{background:var(--fogo-claro);border:2px solid var(--fogo);border-radius:14px;padding:12px 14px;font-weight:800;color:var(--fogo-esc)}
 
+
+/* extrato do mês e aposta */
+.extrato{background:var(--card);border:3px dashed var(--linha);border-radius:18px;padding:14px 16px;display:grid;gap:10px;min-height:120px}
+.ex-cab{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.ex-cab b{font-family:var(--display);font-size:1.25rem}
+.ex-passo{display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:start;animation:entra .35s ease both}
+.ex-passo:nth-child(3){animation-delay:.25s}.ex-passo:nth-child(4){animation-delay:.5s}.ex-passo:nth-child(5){animation-delay:.75s}
+.ex-n{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;font-weight:900;color:#fff}
+.ex-passo p{font-size:.95rem;line-height:1.45}
+.ex-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.ex-chips span{font-size:.78rem;font-weight:800;border-radius:99px;padding:2px 9px;background:var(--bg);border:1.5px solid var(--linha)}
+.ex-saldo{border-radius:12px;padding:10px 12px;font-weight:800;animation:entra .35s ease both;animation-delay:1s}
+.ex-saldo.bom{background:var(--grana-claro);color:var(--grana-esc)} .ex-saldo.ruim{background:var(--fogo-claro);color:var(--fogo-esc)}
+.ex-vitoria{background:var(--amarelo-claro);border:2px solid var(--amarelo);border-radius:12px;padding:10px 12px;font-weight:800}
+@keyframes entra{from{transform:translateY(6px)}to{transform:none}}
+.aposta{display:grid;gap:12px;margin-top:10px}
+.aposta .bt[aria-pressed=true]{background:var(--azul);color:#fff;border-color:var(--azul);box-shadow:0 5px 0 var(--azul-esc)}
+.link{background:none;border:0;padding:0;color:var(--azul-esc);font-weight:900;text-decoration:underline;cursor:pointer;justify-self:start}
+
 /* ataques especiais */
 .golpes{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .golpe{background:var(--card);border:3px solid var(--tinta);border-radius:20px;padding:18px;display:grid;gap:10px;align-content:start;min-width:0}
@@ -265,6 +287,30 @@ input[type=range]{accent-color:var(--grana);flex:1;min-width:160px}
 .gasto input[type=number]{width:74px;border:2px solid var(--linha);border-radius:9px;padding:4px 6px;font-weight:800}
 .gasto:has(input:checked){border-color:var(--fogo);background:var(--fogo-claro)}
 
+.extra-campos{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.extra-campos input{width:100%;border:2px solid var(--linha);border-radius:11px;padding:9px 10px;font-weight:700;background:#fff}
+/* mundo 2 */
+.mundo2{background:var(--noite-esc);color:#fff;overflow:hidden;position:relative}
+.mundo2 .miolo{padding-block:60px;display:grid;gap:22px;position:relative}
+.mundo2 .fase-num{color:var(--amarelo)} .mundo2 .fase-num b{background:var(--amarelo);color:var(--tinta)}
+.mundo2 h2{font-size:clamp(2.2rem,7.5vw,3.4rem);font-weight:800}
+.mundo2 .lead{color:#D9D0F5}
+.cofre{display:grid;grid-template-columns:150px 1fr;gap:20px;align-items:center;background:rgba(255,255,255,.07);border:2px solid rgba(255,255,255,.18);border-radius:22px;padding:20px}
+.cofre svg{width:150px;height:auto}
+.cofre-num{font-family:var(--display);font-weight:800;font-size:clamp(2rem,7vw,2.8rem);color:var(--amarelo);line-height:1}
+.cofre input[type=range]{accent-color:var(--amarelo);width:100%}
+@media (max-width:560px){.cofre{grid-template-columns:1fr}.cofre svg{width:120px;margin:0 auto}}
+.mundos{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.mundo{border-radius:18px;padding:14px;display:grid;gap:6px;align-content:start;border:2px solid rgba(255,255,255,.2);background:rgba(255,255,255,.05);position:relative;min-width:0}
+.mundo b{font-family:var(--display);font-size:1.2rem;line-height:1.1}
+.mundo span{font-size:.86rem;color:#CFC5EE;line-height:1.35}
+.mundo small{font-size:.7rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:var(--amarelo)}
+.mundo.feito{background:var(--grana);border-color:var(--grana)} .mundo.feito span,.mundo.feito small{color:#fff}
+.mundo .cadeado{position:absolute;top:12px;right:12px;width:22px;height:22px}
+@media (max-width:760px){.mundos{grid-template-columns:1fr 1fr}}
+.cta{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.cta .bt{background:var(--amarelo);color:var(--tinta);box-shadow:0 5px 0 var(--amarelo-esc)}
+.cta p{color:#CFC5EE;font-size:.9rem;max-width:44ch}
 /* plano */
 .plano-top{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
 .anel{width:110px;height:110px}
@@ -370,7 +416,7 @@ input[type=range]{accent-color:var(--grana);flex:1;min-width:160px}
       <h2>Conheça os chefões</h2>
     </div>
     <div class="prosa">
-      <p class="lead">As dívidas das famílias brasileiras já somam <strong>50,1% de tudo o que elas ganham em um ano</strong>, e <strong>29% da renda de cada mês</strong> vai para juros e parcelas (Banco Central, agosto de 2026). Mas nem todo chefão bate igual.</p>
+      <p class="lead">As dívidas das famílias brasileiras já somam <strong>50,1% de tudo o que elas ganham em um ano</strong>, e <strong>29% da renda de cada mês</strong> vai para juros e parcelas (Banco Central, agosto de 2026). Mas nem todo chefão bate igual: o mais forte cobra mais de 15 vezes o que cobra o mais fraco.</p>
     </div>
     <div class="painel" style="margin-top:22px">
       <div class="slider-linha"><label for="rk-valor">Se você devesse</label><input type="range" id="rk-valor" min="100" max="10000" step="100" value="1000"><span class="disp num" id="rk-valor-txt" style="font-size:1.4rem">R$ 1.000</span></div>
@@ -379,7 +425,7 @@ input[type=range]{accent-color:var(--grana);flex:1;min-width:160px}
       <p style="font-size:.82rem;color:var(--apagado);margin-top:12px">Taxas médias ao ano do Banco Central (setembro de 2026), convertidas para o mês.</p>
     </div>
 
-    <h3 style="margin-top:40px">O bestiário</h3>
+    <h3 style="margin-top:40px">O bestiário: 9 chefões</h3>
     <p style="margin:6px 0 16px;color:var(--apagado)">Toque em um chefão para ver como ele aparece e qual é o ponto fraco.</p>
     <div class="besti" id="besti"></div>
 
@@ -389,7 +435,7 @@ input[type=range]{accent-color:var(--grana);flex:1;min-width:160px}
     </div>
     <div class="painel" style="margin-top:16px">
       <svg class="grafico" id="graf-teto" viewBox="0 0 640 260" role="img" aria-label="Dívida de R$ 1.000 no rotativo em 12 meses, sem e com o teto da lei"></svg>
-      <div class="legenda-graf"><span><i style="background:var(--fogo)"></i>Sem a lei</span><span><i style="background:var(--grana)"></i>Com o teto de 100%</span></div>
+      <div class="legenda-graf"><span style="color:var(--apagado)">Eixo de baixo: meses</span><span><i style="background:var(--fogo)"></i>Sem a lei</span><span><i style="background:var(--grana)"></i>Com o teto de 100%</span></div>
     </div>
     <div class="din"><span data-din></span><p class="balao"><strong>Chefões sem ficha.</strong> Crediário de loja, empréstimo de aplicativo, carnê e "dinheiro na hora" não entram nas médias, e alguns batem mais forte que o dragão. Antes de assinar qualquer coisa, peça o <strong>CET</strong> (Custo Efetivo Total): ele tem que estar no contrato.</p></div>
   </div>
@@ -442,7 +488,8 @@ input[type=range]{accent-color:var(--grana);flex:1;min-width:160px}
       <p class="lead">Três regras valem para qualquer estratégia: pague o essencial primeiro, pague o mínimo de todas as dívidas para nenhuma atrasar, e jogue <strong>todo o dinheiro que sobrar em um chefão de cada vez</strong>.</p>
       <p>A diferença está em qual chefão recebe o dinheiro extra. Na <strong>Avalanche</strong>, vai para a maior taxa de juros: é a que paga menos juros no total. Na <strong>Bola de Neve</strong>, vai para o menor saldo: você vence uma fase mais cedo, e essa vitória dá gás para continuar.</p>
     </div>
-    <div class="painel" style="margin-top:22px;display:grid;gap:18px">
+    <div class="din"><span data-din></span><p class="balao">Vamos lutar com as dívidas que você cadastrou na Fase 2. Aperte <strong>Próximo mês</strong> e eu explico, passo a passo, para onde vai cada real.</p></div>
+    <div class="painel" style="display:grid;gap:18px">
       <div class="campo-grande"><label for="orc">Quanto sobra por mês para as dívidas, depois do essencial?</label><span>R$ <input id="orc" type="number" inputmode="decimal" min="0" step="10" value="600"></span></div>
       <div class="estrat" role="group" aria-label="Estratégia">
         <button type="button" data-e="avalanche" aria-pressed="true"><b>Avalanche</b><span>Extra na maior taxa. Menos juros.</span></button>
@@ -453,17 +500,27 @@ input[type=range]{accent-color:var(--grana);flex:1;min-width:160px}
         <div class="palco-topo"><span class="mes num" id="mes">Mês 0</span><div class="palco-total"><span class="rot">Vida total</span><b class="num" id="palco-total">R$ 0</b></div></div>
         <div class="lutadores" id="lutadores"></div>
       </div>
-      <div class="botoes"><button class="bt azul" id="lutar" type="button">Lutar!</button><button class="bt leve mini" id="pular" type="button">Ver o resultado direto</button></div>
+      <div class="botoes"><button class="bt azul" id="proximo" type="button">Próximo mês</button><button class="bt" id="lutar" type="button">Lutar até o fim</button><button class="bt leve mini" id="pular" type="button">Ver o final</button><button class="bt leve mini" id="recomecar" type="button">Recomeçar</button></div>
+      <div class="extrato" id="extrato" aria-live="polite"></div>
       <div id="orc-erro" class="erro" hidden></div>
     </div>
-    <h3 style="margin-top:34px">O placar das três estratégias</h3>
-    <div class="resultados" id="resultados" style="margin-top:14px"></div>
-    <div class="painel" style="margin-top:16px">
-      <div class="rot" style="margin-bottom:6px">Vida total dos chefões, mês a mês</div>
-      <svg class="grafico" id="graf-bat" viewBox="0 0 640 280" role="img" aria-label="Saldo total das dívidas ao longo dos meses em cada estratégia"></svg>
-      <div class="legenda-graf"><span><i style="background:var(--grana)"></i>Avalanche</span><span><i style="background:var(--amarelo-esc)"></i>Bola de Neve</span><span><i style="background:var(--fogo)"></i>Só o mínimo</span></div>
+
+    <h3 style="margin-top:38px">Faça sua aposta</h3>
+    <div class="aposta" id="aposta">
+      <p class="lead">Com as suas dívidas e esse valor por mês, qual estratégia paga <strong>menos juros</strong> no total?</p>
+      <div class="botoes"><button class="bt leve" type="button" data-ap="avalanche">Avalanche</button><button class="bt leve" type="button" data-ap="bola">Bola de Neve</button><button class="bt leve" type="button" data-ap="empate">Dá empate</button></div>
+      <button class="link" type="button" id="revelar">Revelar sem apostar</button>
     </div>
-    <div class="din"><span data-din></span><p class="balao" id="moral-bat"></p></div>
+    <div id="aposta-res" class="din" hidden><span data-din></span><p class="balao" id="aposta-txt"></p></div>
+    <div id="placar-wrap" hidden>
+      <div class="resultados" id="resultados" style="margin-top:14px"></div>
+      <div class="painel" style="margin-top:16px">
+        <div class="rot" style="margin-bottom:6px">Vida total dos chefões (eixo de baixo: meses)</div>
+        <svg class="grafico" id="graf-bat" viewBox="0 0 640 280" role="img" aria-label="Saldo total das dívidas ao longo dos meses em cada estratégia"></svg>
+        <div class="legenda-graf"><span><i style="background:var(--grana)"></i>Avalanche</span><span><i style="background:var(--amarelo-esc)"></i>Bola de Neve</span><span><i style="background:var(--fogo)"></i>Só o mínimo</span></div>
+      </div>
+      <div class="din"><span data-din></span><p class="balao" id="moral-bat"></p></div>
+    </div>
     <p style="font-size:.82rem;color:var(--apagado)">Simulação educativa: juros compostos mês a mês, mínimos fixos e teto de 100% para rotativo e parcelado do cartão. Na vida real, empréstimos têm parcelas fixas e o mínimo do cartão muda a cada fatura.</p>
   </div>
 </section>
@@ -476,7 +533,7 @@ input[type=range]{accent-color:var(--grana);flex:1;min-width:160px}
         <span class="fase-num"><b>4</b> Fase 4 de 6</span>
         <h2>Ataques especiais</h2>
       </div>
-      <p class="lead" style="max-width:65ch">Pagar com disciplina funciona, mas é lento. Os ataques especiais diminuem a força do chefão antes da luta.</p>
+      <p class="lead" style="max-width:65ch">Pagar com disciplina funciona, mas é lento. Estes seis ataques diminuem a força do chefão ou aumentam o seu dano.</p>
     </div>
     <div class="golpes" style="margin-top:24px">
       <article class="golpe">
@@ -506,6 +563,27 @@ input[type=range]{accent-color:var(--grana);flex:1;min-width:160px}
           <div class="economia num" id="troca-eco"></div>
         </div>
         <p style="font-size:.86rem;color:var(--fogo-esc);font-weight:800">Só funciona se você fechar a porta das dívidas antigas (cancelar ou reduzir o limite do cartão e do cheque especial). Senão você fica com as duas. E a parcela do consignado sai antes do salário cair: ela nunca pode tirar dinheiro do essencial.</p>
+      </article>
+      <article class="golpe">
+        <div class="golpe-cab"><span class="golpe-ic" style="background:var(--amarelo-claro)"><svg viewBox="0 0 24 24"><path d="M13 2 L5 13 h6 l-2 9 l9 -12 h-6z" fill="var(--amarelo)" stroke="var(--tinta)" stroke-width="2" stroke-linejoin="round"/></svg></span><h3>Dinheiro extra</h3></div>
+        <p>13º salário, restituição do Imposto de Renda, venda de algo parado em casa: um dinheiro que chega uma vez só. Jogado inteiro no alvo, ele vale muito mais do que parece. Simule com as suas dívidas (estratégia Avalanche):</p>
+        <div class="extra-campos">
+          <div class="campo"><label for="ex-valor">Valor extra (R$)</label><input id="ex-valor" inputmode="decimal" value="1000"></div>
+          <div class="campo"><label for="ex-mes">Chega no mês</label><input id="ex-mes" type="number" min="1" max="60" value="2"></div>
+        </div>
+        <div class="troca-res">
+          <div style="background:var(--fogo-claro)"><span>Sem o extra</span><b class="num" id="ex-a">–</b></div>
+          <div style="background:var(--grana-claro)"><span>Com o extra</span><b class="num" id="ex-b">–</b></div>
+        </div>
+        <div class="economia num" id="ex-eco"></div>
+      </article>
+      <article class="golpe">
+        <div class="golpe-cab"><span class="golpe-ic" style="background:#DDF6F6"><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8" fill="#fff" stroke="var(--tinta)" stroke-width="2"/><path d="M12 9v4l3 2M9 2h6" stroke="var(--tinta)" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M4 6l2 2" stroke="var(--ciano-esc)" stroke-width="2.4" stroke-linecap="round"/></svg></span><h3>Antecipar parcelas</h3></div>
+        <p>Em empréstimo e financiamento parcelado, pagar parcelas antes do vencimento dá direito a <strong>desconto proporcional dos juros</strong> (Código de Defesa do Consumidor, art. 52, §2º). Vale para quitar tudo ou só algumas parcelas.</p>
+        <p>Comece pelas <strong>últimas parcelas</strong> do contrato: são as que carregam mais juros embutidos, então o desconto é maior.</p>
+        <div class="falas">
+          <div class="fala"><span><small>No banco</small><em>"Quero antecipar parcelas deste contrato com o desconto dos juros. Qual o valor para quitar as últimas ___ parcelas hoje?"</em></span><button class="bt leve mini copiar" type="button">Copiar</button></div>
+        </div>
       </article>
       <article class="golpe">
         <div class="golpe-cab"><span class="golpe-ic" style="background:var(--roxo-claro)"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="var(--roxo)" stroke="var(--tinta)" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="#fff" stroke="var(--tinta)" stroke-width="2"/><path d="M5.6 5.6l3.6 3.6M18.4 5.6l-3.6 3.6M5.6 18.4l3.6-3.6M18.4 18.4l-3.6-3.6" stroke="#fff" stroke-width="2"/></svg></span><h3>Pedir socorro</h3></div>
@@ -547,7 +625,27 @@ input[type=range]{accent-color:var(--grana);flex:1;min-width:160px}
       <p class="lead" style="flex:1;min-width:220px">Doze semanas, uma missão por semana. Marque cada uma quando concluir: o progresso fica salvo neste navegador.</p>
     </div>
     <div class="semanas" id="semanas" style="margin-top:20px"></div>
-    <div class="din"><span data-din></span><p class="balao">Em 90 dias talvez nem todos os chefões estejam derrotados, e tudo bem. A vitória desta fase é <strong>saber exatamente quanto você deve, quanto paga de juros e ver a barra de vida descendo todo mês</strong>. Quando o último chefão cair, não deixe o dinheiro das parcelas sumir: uma parte vai para o escudo, outra para os seus planos.</p></div>
+    <div class="din"><span data-din></span><p class="balao">Em 90 dias talvez nem todos os chefões estejam derrotados, e tudo bem. A vitória desta fase é <strong>saber exatamente quanto você deve, quanto paga de juros e ver a barra de vida descendo todo mês</strong>. E quando o último chefão cair, o jogo continua logo aqui embaixo.</p></div>
+  </div>
+</section>
+
+<section class="mundo2" id="mundo-2">
+  <div class="miolo">
+    <span class="fase-num"><b>★</b> Fim de jogo? Ainda não</span>
+    <h2>Mundo 2: o Cofre</h2>
+    <p class="lead" id="m2-lead">Quando o último chefão cai, o dinheiro que ia para as dívidas continua chegando todo mês. A diferença é que agora ele é seu.</p>
+    <div class="cofre">
+      <svg viewBox="0 0 150 140" aria-hidden="true"><ellipse cx="75" cy="132" rx="52" ry="6" fill="#000" opacity=".25"/><rect x="18" y="22" width="114" height="104" rx="20" fill="var(--amarelo)" stroke="#17302A" stroke-width="4"/><rect x="30" y="34" width="90" height="80" rx="12" fill="var(--amarelo-esc)" stroke="#17302A" stroke-width="3"/><circle cx="75" cy="74" r="22" fill="#fff" stroke="#17302A" stroke-width="4"/><path d="M75 58v32M59 74h32" stroke="#17302A" stroke-width="4" stroke-linecap="round"/><circle cx="62" cy="64" r="3" fill="#17302A"/><circle cx="88" cy="64" r="3" fill="#17302A"/><rect x="120" y="54" width="8" height="40" rx="4" fill="#17302A"/><path d="M40 126v8M110 126v8" stroke="#17302A" stroke-width="6" stroke-linecap="round"/></svg>
+      <div style="display:grid;gap:8px;min-width:0">
+        <span class="rot" style="color:#CFC5EE">Guardando o que ia para os chefões</span>
+        <span class="cofre-num num" id="m2-total">R$ 0</span>
+        <label for="m2-meses" id="m2-label" style="font-weight:800">em 12 meses</label>
+        <input type="range" id="m2-meses" min="3" max="36" value="12">
+        <span style="font-size:.82rem;color:#CFC5EE">Conta simples, sem rendimento: valor por mês × meses. Onde guardar é assunto do Mundo 2.</span>
+      </div>
+    </div>
+    <div class="mundos" id="mundos"></div>
+    <div class="cta"><a class="bt" id="m2-link" href="#mundo-2">Quero o Mundo 2</a><p id="m2-cta-txt">O minicurso continua daqui: montar o Cofre (reserva de emergência), caçar os power-ups e montar um orçamento que não deixa os chefões voltarem.</p></div>
   </div>
 </section>
 
@@ -560,6 +658,10 @@ input[type=range]{accent-color:var(--grana);flex:1;min-width:160px}
       <li>Resolução CMN nº 4.549/2017: rotativo só até o vencimento da fatura seguinte.</li>
       <li>Resolução CMN nº 4.765/2019: teto de 8% ao mês no cheque especial.</li>
       <li>Lei nº 14.181/2021: Lei do Superendividamento.</li>
+      <li>Consignado privado (CLT): média de agosto de 2026 do Banco Central (série 20744). Financiamento de veículos: Banco Central, setembro de 2026.</li>
+      <li>Contas de consumo em atraso: multa de 2% e juros de mora de 1% ao mês (regras da ANEEL e das concessionárias, segundo o Procon-SP).</li>
+      <li>Antecipação do saque-aniversário do FGTS: faixa de taxas praticada em 2026 segundo levantamento de mercado; confira o CET da sua proposta.</li>
+      <li>Código de Defesa do Consumidor, art. 52, §2º: redução proporcional dos juros na liquidação antecipada.</li>
       <li>Taxas ao mês calculadas a partir das anuais: (1 + taxa anual)^(1/12) − 1.</li>
     </ol>
     <p class="aviso">Este guia é educativo. Não recomenda investimento, não promete resultado e não substitui orientação profissional. As taxas mudam todo mês: confira sempre o contrato e o CET da sua dívida. Seus números ficam guardados só neste navegador.</p>
@@ -578,7 +680,7 @@ const TIPOS = {
   parcelado: {nome:'Golem do Parcelado', divida:'Parcelamento da fatura', anual:193.0, cor:'laranja', teto:true, perigo:4,
               aparece:'Você parcela a fatura no app, ou o banco transforma o rotativo em parcelas depois de um mês.',
               fraco:'Também tem o teto de 100% da lei, e as parcelas fixas deixam ver o fim.'},
-  cheque:    {nome:'Sombra do Cheque Especial', divida:'Cheque especial', anual:139.0, cor:'roxo', perigo:3,
+  cheque:    {nome:'Sombra do Cheque Especial', divida:'Cheque especial', anual:139.0, cor:'roxo', perigo:3, fem:true,
               aparece:'A conta fica negativa e o banco cobre com o limite. O app soma o limite ao saldo e parece que o dinheiro é seu.',
               fraco:'Tem teto de 8% ao mês e some na hora em que a conta volta ao positivo.'},
   pessoal:   {nome:'Cavaleiro do Crédito Pessoal', divida:'Crédito pessoal', anual:110.9, cor:'azul', perigo:3,
@@ -587,10 +689,25 @@ const TIPOS = {
   consignado:{nome:'Lacaio do Consignado', divida:'Consignado', anual:28.5, cor:'grana', perigo:1,
               aparece:'Aposentados e pensionistas do INSS, servidores e trabalhadores com carteira assinada.',
               fraco:'É o mais fraco da lista e pode virar arma contra os outros. Cuidado: a parcela sai antes do salário cair.'},
+  consclt:   {nome:'Ogro do Consignado CLT', divida:'Consignado privado (CLT)', anual:56.34, cor:'rosa', perigo:2, ref:'média de agosto de 2026',
+              aparece:'Empréstimo com desconto na folha para quem tem carteira assinada, oferecido no app do banco ou da carteira de trabalho digital.',
+              fraco:'Custa bem menos que o crédito pessoal comum, mas quase o dobro do consignado médio. Compare o CET antes de achar que todo consignado é barato.'},
+  veiculos:  {nome:'Tartaruga do Financiamento', divida:'Financiamento de veículos', anual:26.2, cor:'ciano', perigo:2, fem:true,
+              aparece:'Carro ou moto financiados em muitas parcelas. A taxa parece baixa, mas o prazo longo faz os juros somarem muito.',
+              fraco:'Taxa entre as menores do mercado. Antecipar parcelas dá desconto dos juros (Código de Defesa do Consumidor).'},
+  contas:    {nome:'Goblin das Contas Atrasadas', divida:'Luz, água e telefone atrasados', mensalFixo:1, cor:'amarelo', perigo:2, nota:'+ multa de 2%',
+              aparece:'A conta de consumo vence e fica para depois. Vem multa de 2%, juros de mora de 1% ao mês e correção.',
+              fraco:'Os juros são baixos, mas o ataque especial dele é o corte do serviço. Negocie direto com a empresa: costuma haver parcelamento.'},
+  fgts:      {nome:'Vampiro do FGTS', divida:'Antecipação do saque-aniversário', mensalFixo:1.49, cor:'noite', perigo:2, semSim:true, faixa:'1,29–1,79%',
+              aparece:'Ofertas de "dinheiro na hora" usando o FGTS como garantia. Você recebe agora e os saques dos próximos anos vão para o banco.',
+              fraco:'Juros baixos, mas ele morde o futuro: se você for demitido, o saldo usado fica travado e você só recebe a multa de 40%.'},
   outro:     {nome:'Chefão sem ficha', divida:'Outra dívida', anual:null, cor:'apagado', perigo:3}
 };
 const mensal = a => (Math.pow(1 + a / 100, 1 / 12) - 1) * 100;   // % ao mês
-for (const t of Object.values(TIPOS)) t.mensal = t.anual == null ? 5 : mensal(t.anual);
+for (const t of Object.values(TIPOS)) {
+  if (t.mensalFixo != null) { t.mensal = t.mensalFixo; t.anual = (Math.pow(1 + t.mensalFixo / 100, 12) - 1) * 100; }
+  else t.mensal = t.anual == null ? 5 : mensal(t.anual);
+}
 const ANA = [
   {tipo:'parcelado', nome:'Cartão do banco', saldo:2000, taxa:TIPOS.parcelado.mensal, minimo:100},
   {tipo:'cheque', nome:'Cheque especial', saldo:800, taxa:TIPOS.cheque.mensal, minimo:50},
@@ -667,6 +784,40 @@ function desenho(tipo) {
       ${olhos(48, 72, 80, 8.5)}
       <path d="M52 96 Q60 102 68 96" stroke="${T}" stroke-width="3.5" fill="none" stroke-linecap="round"/>
       <circle cx="36" cy="92" r="4" fill="#FF9DB0" opacity=".7"/><circle cx="84" cy="92" r="4" fill="#FF9DB0" opacity=".7"/>`;
+    case 'consclt': return `${sombraChao}
+      ${pes('var(--rosa-esc)')}
+      <ellipse cx="14" cy="70" rx="9" ry="12" fill="var(--rosa-esc)" stroke="${T}" stroke-width="2.5"/><ellipse cx="106" cy="70" rx="9" ry="12" fill="var(--rosa-esc)" stroke="${T}" stroke-width="2.5"/>
+      <path d="M14 70 Q14 28 60 26 Q106 28 106 70 Q106 106 60 106 Q14 106 14 70Z" fill="var(--rosa)" stroke="${T}" stroke-width="3"/>
+      <path d="M36 32 Q42 22 50 30 M70 30 Q78 22 84 32" stroke="${T}" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M34 50 Q60 40 86 50" stroke="${T}" stroke-width="5" fill="none" stroke-linecap="round"/>
+      ${olhos(48, 72, 60, 7)}
+      <path d="M38 82 Q60 94 82 82" stroke="${T}" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <path d="M42 84 L44 72 L50 85Z M78 84 L76 72 L70 85Z" fill="#fff" stroke="${T}" stroke-width="2" stroke-linejoin="round"/>
+      <ellipse cx="40" cy="44" rx="9" ry="4" fill="#fff" opacity=".3"/>`;
+    case 'veiculos': return `${sombraChao}
+      <circle cx="36" cy="104" r="9" fill="${T}"/><circle cx="36" cy="104" r="3.5" fill="#fff"/><circle cx="82" cy="104" r="9" fill="${T}"/><circle cx="82" cy="104" r="3.5" fill="#fff"/>
+      <ellipse cx="102" cy="74" rx="14" ry="13" fill="#9BE7D8" stroke="${T}" stroke-width="3"/>
+      <path d="M100 81 Q105 84 110 80" stroke="${T}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M14 96 Q14 40 58 40 Q102 40 100 96Z" fill="var(--ciano)" stroke="${T}" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M40 58 l10 -8 l14 0 l8 8 l-4 14 l-24 0Z M26 80 l14 -8 M72 72 l18 8" stroke="${T}" stroke-width="2.5" fill="var(--ciano-esc)" opacity=".55" stroke-linejoin="round"/>
+      <rect x="10" y="90" width="94" height="8" rx="4" fill="var(--ciano-esc)" stroke="${T}" stroke-width="2.5"/>
+      <g class="olhos"><circle cx="106" cy="70" r="5" fill="#fff" stroke="${T}" stroke-width="2"/><circle cx="107.5" cy="71" r="2.4" fill="${T}"/></g><g class="ko-olhos" stroke="${T}" stroke-width="3" stroke-linecap="round"><path d="M102 66 l8 8 M110 66 l-8 8"/></g>`;
+    case 'contas': return `${sombraChao}
+      ${pes('var(--amarelo-esc)')}
+      <path d="M26 54 L4 34 L30 44Z" fill="var(--amarelo)" stroke="${T}" stroke-width="2.5" stroke-linejoin="round"/>
+      <path d="M94 54 L116 34 L90 44Z" fill="var(--amarelo)" stroke="${T}" stroke-width="2.5" stroke-linejoin="round"/>
+      <ellipse cx="60" cy="70" rx="36" ry="36" fill="var(--amarelo)" stroke="${T}" stroke-width="3"/>
+      <path d="M62 78 L54 92 L62 92 L56 104 L70 86 L62 86 L68 78Z" fill="#fff" stroke="${T}" stroke-width="2" stroke-linejoin="round"/>
+      ${olhos(48, 72, 58, 8, 'bravo')}
+      <path d="M46 74 Q54 80 60 74 Q66 80 74 74" stroke="${T}" stroke-width="3.5" fill="none" stroke-linecap="round"/>`;
+    case 'fgts': return `${sombraChao}
+      <path d="M14 104 L24 56 L60 70 L96 56 L106 104Z" fill="var(--fogo)" stroke="${T}" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M26 104 V66 Q26 26 60 26 Q94 26 94 66 V104Z" fill="var(--noite)" stroke="${T}" stroke-width="3"/>
+      <path d="M60 26 L52 40 L60 46 L68 40Z" fill="var(--noite-esc)"/>
+      <path d="M24 56 L40 50 L46 70 M96 56 L80 50 L74 70" stroke="${T}" stroke-width="3" fill="var(--fogo)" stroke-linejoin="round"/>
+      <g style="--boss-cor:var(--noite)">${olhos(48, 72, 58, 8.5, 'sonso')}</g>
+      <path d="M48 78 Q60 86 72 78" stroke="${T}" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+      <path d="M52 80 l2 8 l3 -7 M63 81 l3 7 l2 -8" fill="#fff" stroke="${T}" stroke-width="1.8" stroke-linejoin="round"/>`;
     default: return `${sombraChao}${pes('#8EA39A')}
       <ellipse cx="60" cy="68" rx="38" ry="38" fill="#B9C9C1" stroke="${T}" stroke-width="3"/>
       <text x="60" y="54" text-anchor="middle" font-family="Baloo 2,sans-serif" font-weight="800" font-size="20" fill="${T}" opacity=".5">?</text>
@@ -715,7 +866,6 @@ function linhas(svg, series, opc = {}) {
   for (let k = 0; k <= 4; k++) { const v = topo * k / 4; s += `<line class="eixo" x1="${m.l}" x2="${W - m.r}" y1="${Y(v)}" y2="${Y(v)}"/><text x="${m.l - 8}" y="${Y(v) + 4}" text-anchor="end">${brl(v, 0)}</text>`; }
   const passoX = n <= 12 ? 1 : n <= 24 ? 3 : n <= 60 ? 6 : 12;
   for (let i = 0; i <= n; i += passoX) s += `<text x="${X(i)}" y="${H - 12}" text-anchor="middle">${i}</text>`;
-  s += `<text x="${W - m.r}" y="${H - 12}" text-anchor="end" style="font-size:11px">meses</text>`;
   for (const se of series) {
     const d = se.v.map((v, i) => `${i ? 'L' : 'M'}${X(i).toFixed(1)} ${Y(Math.min(v, topo)).toFixed(1)}`).join(' ');
     s += `<path d="${d}" fill="none" stroke="${se.c}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" ${se.tr ? 'stroke-dasharray="2 8"' : ''}/>`;
@@ -749,20 +899,21 @@ $('#demo-zera').onclick = () => { Object.assign(demo, {vida: 1000, juros: 0, mes
 demoPinta();
 
 // ---------- 1. ranking, bestiário, teto ----------
-const ORDEM = ['rotativo', 'parcelado', 'cheque', 'pessoal', 'consignado'];
+const ORDEM = ['rotativo', 'parcelado', 'cheque', 'pessoal', 'consclt', 'consignado', 'veiculos', 'contas'];
+const BESTI = ['rotativo', 'parcelado', 'cheque', 'pessoal', 'consclt', 'fgts', 'contas', 'veiculos', 'consignado'];
 function ranking() {
   const v = +$('#rk-valor').value; $('#rk-valor-txt').textContent = brl(v, 0);
   const maxJ = v * TIPOS.rotativo.mensal / 100;
   $('#ranking').innerHTML = ORDEM.map(k => { const t = TIPOS[k], j = v * t.mensal / 100;
-    return `<div class="rk"><div class="rk-nome">${t.divida}</div><div class="rk-trilho"><div class="rk-barra" style="width:${Math.max(3, j / maxJ * 100)}%;background:${cor(t.cor)}"></div></div><div class="rk-val num"><b>${brl(j)}</b><span>${pct(t.mensal)} ao mês · ${pct(t.anual, 1)} ao ano</span></div></div>`; }).join('');
+    return `<div class="rk"><div class="rk-nome">${t.divida}</div><div class="rk-trilho"><div class="rk-barra" style="width:${Math.max(3, j / maxJ * 100)}%;background:${cor(t.cor)}"></div></div><div class="rk-val num"><b>${brl(j)}</b><span>${pct(t.mensal)} ao mês${t.nota ? ' ' + t.nota : ' · ' + pct(t.anual, 1) + ' ao ano'}</span></div></div>`; }).join('');
 }
 $('#rk-valor').addEventListener('input', ranking); ranking();
 
-$('#besti').innerHTML = ORDEM.map(k => { const t = TIPOS[k];
-  return `<button class="carta" type="button" aria-expanded="false" style="--cor:${cor(t.cor)};--cor-txt:${cor(t.cor === 'amarelo' ? 'amarelo-esc' : t.cor + '-esc')}">
+$('#besti').innerHTML = BESTI.map(k => { const t = TIPOS[k];
+  return `<button class="carta" type="button" aria-expanded="false" style="--cor:${cor(t.cor)};--cor-txt:${cor(t.cor + '-esc')}">
     <div class="carta-arte"><span class="boss" data-boss="${k}"></span></div>
     <span class="carta-tipo">${t.divida}</span><span class="disp">${t.nome}</span>
-    <span class="carta-atk num">${pct(t.mensal)} <small>ao mês</small></span>
+    <span class="carta-atk num">${t.faixa || pct(t.mensal)} <small>ao mês</small>${t.nota ? '<small style="display:block;line-height:1.2">' + t.nota + '</small>' : ''}</span>
     <span class="pips">PERIGO ${[0, 1, 2, 3, 4].map(i => `<i class="${i < t.perigo ? 'on' : ''}"></i>`).join('')}</span>
     <span class="carta-mais" hidden><span><b>Como aparece</b>${t.aparece}</span><span><b>Ponto fraco</b>${t.fraco}</span></span>
     <span class="carta-abrir">Ver ficha</span></button>`; }).join('');
@@ -782,7 +933,7 @@ function desenhaDividas() {
     <span class="boss" data-boss="${d.tipo}"></span>
     <div style="display:grid;gap:10px;min-width:0">
       <div class="div-campos">
-        <div class="campo"><label for="tipo-${i}">Tipo</label><select id="tipo-${i}" data-c="tipo">${Object.entries(TIPOS).map(([k, t]) => `<option value="${k}" ${k === d.tipo ? 'selected' : ''}>${t.divida}</option>`).join('')}</select></div>
+        <div class="campo"><label for="tipo-${i}">Tipo</label><select id="tipo-${i}" data-c="tipo">${Object.entries(TIPOS).filter(([k, t]) => !t.semSim).map(([k, t]) => `<option value="${k}" ${k === d.tipo ? 'selected' : ''}>${t.divida}</option>`).join('')}</select></div>
         <div class="campo"><label for="saldo-${i}">Vida (R$)</label><input id="saldo-${i}" data-c="saldo" inputmode="decimal" value="${fmtIn(d.saldo)}"></div>
         <div class="campo"><label for="taxa-${i}">Taxa % a.m.</label><input id="taxa-${i}" data-c="taxa" inputmode="decimal" value="${fmtIn(d.taxa)}"></div>
         <div class="campo"><label for="min-${i}">Paga/mês (R$)</label><input id="min-${i}" data-c="minimo" inputmode="decimal" value="${fmtIn(d.minimo)}"></div>
@@ -815,34 +966,41 @@ $('#usar-ana').onclick = () => { dividas = ANA.map(d => ({...d})); exemplo = tru
 $('#limpar').onclick = () => { dividas = [{tipo: 'rotativo', saldo: 0, taxa: TIPOS.rotativo.mensal, minimo: 0}]; exemplo = false; salvar(); desenhaDividas(); agendaBatalha(); };
 
 // ---------- 3. simulação (mesma lógica de produtos/chefoes-do-cartao/contas.py) ----------
-function simular(lista, orc, ordem, max = 600) {
+// extras: {mês: valor} de dinheiro extra que vai inteiro para o alvo naquele mês (ataque "dinheiro extra")
+function simular(lista, orc, ordem, extras = {}, max = 600) {
   const ds = lista.filter(d => d.saldo > 0).map((d, i) => ({...d, i, orig: d.saldo, juros: 0, fim: null, taxaM: d.taxa / 100, teto: !!TIPOS[d.tipo].teto}));
   const somaMin = ds.reduce((a, d) => a + d.minimo, 0);
   if (ordem !== 'minimos' && orc < somaMin - .005) return {erro: somaMin};
   if (ordem === 'minimos') orc = somaMin;
-  const quadros = [ds.map(d => d.saldo)], total = [ds.reduce((a, d) => a + d.saldo, 0)];
+  const quadros = [ds.map(d => d.saldo)], total = [ds.reduce((a, d) => a + d.saldo, 0)], det = [];
   let mes = 0, jt = 0; const vivas = () => ds.filter(d => d.saldo > .005);
   while (vivas().length) {
-    mes++;
-    for (const d of vivas()) { let j = d.saldo * d.taxaM; if (d.teto) j = Math.max(0, Math.min(j, d.orig - d.juros)); d.saldo += j; d.juros += j; jt += j; }
-    let sobra = orc;
-    for (const d of vivas()) { const p = Math.min(d.minimo, d.saldo); d.saldo -= p; sobra -= p; }
-    if (ordem !== 'minimos') for (const d of vivas().sort(ordem === 'avalanche' ? (a, b) => b.taxaM - a.taxaM : (a, b) => a.saldo - b.saldo)) { if (sobra <= 0) break; const p = Math.min(sobra, d.saldo); d.saldo -= p; sobra -= p; }
-    for (const d of ds) if (d.saldo <= .005 && d.fim == null) { d.saldo = 0; d.fim = mes; }
-    quadros.push(ds.map(d => d.saldo)); total.push(ds.reduce((a, d) => a + d.saldo, 0));
-    if (mes >= max) return {nunca: true, mes, juros: jt, ds, quadros, total, pago: orc * mes};
+    mes++; const r = {j: ds.map(() => 0), m: ds.map(() => 0), x: ds.map(() => 0), alvos: [], extraMes: extras[mes] || 0};
+    for (const d of vivas()) { let j = d.saldo * d.taxaM; if (d.teto) j = Math.max(0, Math.min(j, d.orig - d.juros)); d.saldo += j; d.juros += j; jt += j; r.j[d.i] = j; }
+    let sobra = orc + (ordem === 'minimos' ? 0 : r.extraMes);
+    for (const d of vivas()) { const p = Math.min(d.minimo, d.saldo); d.saldo -= p; sobra -= p; r.m[d.i] = p; }
+    r.sobra = Math.max(0, sobra);
+    if (ordem !== 'minimos') for (const d of vivas().sort(ordem === 'avalanche' ? (a, b) => b.taxaM - a.taxaM : (a, b) => a.saldo - b.saldo)) {
+      if (sobra <= .005) break; r.alvos.push({i: d.i, saldo: d.saldo}); const p = Math.min(sobra, d.saldo); d.saldo -= p; sobra -= p; r.x[d.i] = p; }
+    r.mortos = [];
+    for (const d of ds) if (d.saldo <= .005 && d.fim == null) { d.saldo = 0; d.fim = mes; r.mortos.push(d.i); }
+    det.push(r); quadros.push(ds.map(d => d.saldo)); total.push(ds.reduce((a, d) => a + d.saldo, 0));
+    if (mes >= max) return {nunca: true, mes, juros: jt, ds, quadros, total, det, pago: orc * mes};
   }
   const fins = ds.map(d => d.fim).filter(Boolean);
-  return {mes, juros: jt, ds, quadros, total, primeira: fins.length ? Math.min(...fins) : null, primeiraNome: ds.find(d => d.fim === Math.min(...fins))};
+  return {mes, juros: jt, ds, quadros, total, det, primeira: fins.length ? Math.min(...fins) : null, primeiraNome: ds.find(d => d.fim === Math.min(...fins))};
 }
 let estrat = guarda.ler('estrategia', 'avalanche');
 $('#orc').value = guarda.ler('orcamento', 600);
 $$('.estrat button').forEach(b => { b.setAttribute('aria-pressed', b.dataset.e === estrat); b.onclick = () => { estrat = b.dataset.e; guarda.pôr('estrategia', estrat); $$('.estrat button').forEach(x => x.setAttribute('aria-pressed', x === b)); prepara(); }; });
 $('#orc').addEventListener('input', () => { guarda.pôr('orcamento', lerNum($('#orc').value)); agendaBatalha(); });
-let anim = null, sims = {};
+let anim = null, sims = {}, kAtual = 0, revelado = false;
 const nomeD = d => TIPOS[d.tipo].nome;
+const art = d => TIPOS[d.tipo].fem ? 'a' : 'o';
+const derrot = d => TIPOS[d.tipo].fem ? 'derrotada' : 'derrotado';
+const limite = s => s.nunca ? 36 : s.quadros.length - 1;
 function prepara() {
-  clearInterval(anim); anim = null; $('#lutar').disabled = false;
+  clearInterval(anim); anim = null; kAtual = 0; botoesLuta(true);
   const orc = lerNum($('#orc').value), vivas = dividas.filter(d => d.saldo > 0);
   sims = {avalanche: simular(vivas, orc, 'avalanche'), bola: simular(vivas, orc, 'bola'), minimos: simular(vivas, orc, 'minimos')};
   const s = sims[estrat], erro = $('#orc-erro');
@@ -850,42 +1008,92 @@ function prepara() {
   if (s.erro) erro.textContent = `O valor por mês (${brl(orc)}) é menor que a soma dos pagamentos mínimos (${brl(s.erro)}). Aumente o valor ou veja os ataques especiais da Fase 4.`;
   $('#lutadores').innerHTML = vivas.map((d, i) => `<div class="lutador" data-l="${i}" style="position:relative"><span class="boss" data-boss="${d.tipo}"></span><div class="vida"><div class="vida-trilho"><div class="vida-cheia" style="width:100%;background:${cor(TIPOS[d.tipo].cor)}"></div></div></div><small>${nomeD(d)}<br><span class="num" data-v>${brl(d.saldo, 0)}</span></small></div>`).join('') || '<p style="font-weight:800">Cadastre pelo menos um chefão na Fase 2.</p>';
   pintar($('#lutadores'));
-  quadro(0); resultados();
+  quadro(0); extrato(0); resultados(); mundo2();
+}
+function botoesLuta(on) { ['#proximo', '#lutar'].forEach(id => $(id).disabled = !on); }
+function alvoDe(s, q) {
+  if (estrat === 'minimos') return null;
+  const vivas = s.ds.filter((d, i) => q[i] > .005); if (!vivas.length) return null;
+  return vivas.sort(estrat === 'avalanche' ? (a, b) => b.taxaM - a.taxaM : (a, b) => q[a.i] - q[b.i])[0];
 }
 function quadro(k) {
   const s = sims[estrat]; if (!s || s.erro || !s.quadros) return;
-  const q = s.quadros[Math.min(k, s.quadros.length - 1)];
-  $('#mes').textContent = 'Mês ' + Math.min(k, s.quadros.length - 1);
-  $('#palco-total').textContent = brl(s.total[Math.min(k, s.total.length - 1)], 0);
-  const vivasAgora = s.ds.filter((d, i) => q[i] > .005);
-  let alvo = null;
-  if (estrat !== 'minimos' && vivasAgora.length) alvo = vivasAgora.sort(estrat === 'avalanche' ? (a, b) => b.taxaM - a.taxaM : (a, b) => q[s.ds.indexOf(a)] - q[s.ds.indexOf(b)])[0];
+  k = Math.min(k, s.quadros.length - 1); const q = s.quadros[k];
+  $('#mes').textContent = 'Mês ' + k;
+  $('#palco-total').textContent = brl(s.total[k], 0);
+  const alvo = alvoDe(s, q);
   s.ds.forEach((d, i) => { const el = $(`.lutador[data-l="${i}"]`); if (!el) return;
     const max = Math.max(...s.quadros.map(f => f[i])), v = q[i];
     el.querySelector('.vida-cheia').style.width = (v / max * 100) + '%';
-    el.querySelector('[data-v]').textContent = v > .005 ? brl(v, 0) : 'Derrotado!';
+    el.querySelector('[data-v]').textContent = v > .005 ? brl(v, 0) : 'Vencido!';
     el.querySelector('.boss').classList.toggle('ko', v <= .005);
     const tag = el.querySelector('.alvo-tag'); if (tag) tag.remove();
     if (alvo === d) el.insertAdjacentHTML('afterbegin', '<span class="alvo-tag">ALVO</span>'); });
 }
-function lutar() {
-  const s = sims[estrat]; if (!s || s.erro || !s.quadros) return;
-  clearInterval(anim); let k = 0; const n = s.quadros.length - 1, lim = s.nunca ? 36 : n;
-  $('#lutar').disabled = true;
-  const vel = Math.max(70, Math.min(320, 5200 / lim));
-  anim = setInterval(() => {
-    k++; const ant = s.quadros[k - 1], q = s.quadros[k];
-    s.ds.forEach((d, i) => { const el = $(`.lutador[data-l="${i}"] .boss`); if (!el || ant[i] <= .005) return;
-      if (q[i] < ant[i] - .01) bater(el, '−' + brl(ant[i] - q[i], 0), 'var(--grana-esc)'); else if (q[i] > ant[i] + .01) bater(el, '+' + brl(q[i] - ant[i], 0), 'var(--fogo-esc)');
-      if (q[i] <= .005) { const t = document.createElement('div'); t.className = 'toast'; t.textContent = `Mês ${k}: ${nomeD(d)} derrotado!`; $('#palco').appendChild(t); setTimeout(() => t.remove(), 1800); confete(60); } });
-    quadro(k);
-    if (k >= lim) { clearInterval(anim); anim = null; $('#lutar').disabled = false; if (!s.nunca) confete(160);
-      else { const t = document.createElement('div'); t.className = 'toast'; t.style.background = 'var(--fogo)'; t.textContent = '3 anos depois e a dívida só cresceu'; $('#palco').appendChild(t); setTimeout(() => t.remove(), 2600); } }
-  }, calmo ? 1 : vel);
+function extrato(k) {
+  const s = sims[estrat], box = $('#extrato');
+  if (!s || s.erro || !s.det) { box.innerHTML = ''; return; }
+  if (k === 0) {
+    const atk = s.ds.reduce((a, d) => a + d.saldo * d.taxaM, 0), orc = estrat === 'minimos' ? s.ds.reduce((a, d) => a + d.minimo, 0) : lerNum($('#orc').value);
+    box.innerHTML = `<div class="ex-cab"><b>Antes da luta</b><span class="rot">${estrat === 'avalanche' ? 'Avalanche' : estrat === 'bola' ? 'Bola de Neve' : 'Só o mínimo'}</span></div>
+      <p>Todo mês acontecem três coisas, sempre nesta ordem: os chefões atacam com juros, você paga o mínimo de cada um e ${estrat === 'minimos' ? 'para por aí' : 'o que sobra vai inteiro para o chefão marcado como <strong>ALVO</strong>'}.</p>
+      <p>Seu ataque por mês: <strong>${brl(orc)}</strong>. Ataque dos chefões no primeiro mês: <strong>${brl(atk)}</strong>. ${orc > atk ? 'Você bate mais forte que eles: a vida total vai cair.' : 'Eles batem mais forte que você: a vida total vai subir.'}</p>`;
+    return;
+  }
+  const r = s.det[k - 1], J = r.j.reduce((a, b) => a + b, 0), Mn = r.m.reduce((a, b) => a + b, 0), X = r.x.reduce((a, b) => a + b, 0), pago = Mn + X, dano = pago - J;
+  const chips = s.ds.map((d, i) => r.j[i] > .005 ? `<span>${nomeD(d).split(' ')[0]} +${brl(r.j[i])}</span>` : '').join('');
+  let p3;
+  if (estrat === 'minimos') p3 = 'Não sobra nada para atacar. Sem ataque extra, cada chefão só perde o que o mínimo passar dos juros.';
+  else if (!r.alvos.length) p3 = 'Não sobrou nada depois dos mínimos neste mês.';
+  else {
+    const a0 = s.ds[r.alvos[0].i], porque = estrat === 'avalanche' ? `porque tem a <strong>maior taxa</strong> (${pct(a0.taxaM * 100)} ao mês)` : `porque tem o <strong>menor saldo</strong> (${brl(r.alvos[0].saldo, 0)})`;
+    p3 = `Sobraram <strong>${brl(r.sobra)}</strong>${r.extraMes ? ` (com ${brl(r.extraMes, 0)} de dinheiro extra)` : ''}. Vai tudo para ${art(a0)} <strong>${nomeD(a0)}</strong>, ${porque}.`;
+    if (r.alvos.length > 1) p3 += ` ${TIPOS[a0.tipo].fem ? 'Ela' : 'Ele'} caiu antes de usar tudo, então o resto foi para ${r.alvos.slice(1).map(a => art(s.ds[a.i]) + ' ' + nomeD(s.ds[a.i])).join(' e ')}.`;
+  }
+  let vit = '';
+  for (const i of r.mortos) { const d = s.ds[i]; vit += `<div class="ex-vitoria">${nomeD(d)} ${derrot(d)} no mês ${k}! ${estrat === 'minimos' ? '' : `A partir de agora, os ${brl(d.minimo, 0)} que iam para ${TIPOS[d.tipo].fem ? 'ela' : 'ele'} por mês viram ataque extra contra o próximo alvo. É assim que a bola de neve cresce.`}</div>`; }
+  $('#extrato').innerHTML = `<div class="ex-cab"><b>Extrato do mês ${k}</b><span class="rot">${estrat === 'avalanche' ? 'Avalanche' : estrat === 'bola' ? 'Bola de Neve' : 'Só o mínimo'}</span></div>
+    <div class="ex-passo"><span class="ex-n" style="background:var(--fogo)">1</span><p>Os chefões atacam: <strong>+${brl(J)}</strong> de juros.<span class="ex-chips">${chips}</span></p></div>
+    <div class="ex-passo"><span class="ex-n" style="background:var(--azul)">2</span><p>Você paga o mínimo de cada um: <strong>−${brl(Mn)}</strong>.</p></div>
+    <div class="ex-passo"><span class="ex-n" style="background:var(--grana)">3</span><p>${p3}</p></div>
+    <div class="ex-saldo ${dano >= 0 ? 'bom' : 'ruim'}">Você pagou ${brl(pago)}. Os juros levaram ${brl(J)}. ${dano >= 0 ? `Dano real: <strong>${brl(dano)}</strong> a menos de dívida.` : `A dívida <strong>cresceu ${brl(-dano)}</strong>.`}</div>${vit}`;
 }
-$('#lutar').onclick = lutar;
-$('#pular').onclick = () => { clearInterval(anim); anim = null; $('#lutar').disabled = false; const s = sims[estrat]; if (s && s.quadros) quadro(s.nunca ? 36 : s.quadros.length - 1); };
+function avanca(k) {
+  const s = sims[estrat]; if (!s || s.erro || !s.quadros) return false;
+  const lim = limite(s); if (k > lim) return false;
+  const ant = s.quadros[k - 1], q = s.quadros[k];
+  s.ds.forEach((d, i) => { const el = $(`.lutador[data-l="${i}"] .boss`); if (!el || ant[i] <= .005) return;
+    if (q[i] < ant[i] - .01) bater(el, '−' + brl(ant[i] - q[i], 0), 'var(--grana-esc)'); else if (q[i] > ant[i] + .01) bater(el, '+' + brl(q[i] - ant[i], 0), 'var(--fogo-esc)');
+    if (q[i] <= .005) { const t = document.createElement('div'); t.className = 'toast'; t.textContent = `Mês ${k}: ${nomeD(d)} ${derrot(d)}!`; $('#palco').appendChild(t); setTimeout(() => t.remove(), 1800); confete(60); } });
+  kAtual = k; quadro(k); extrato(k);
+  if (k >= lim) { botoesLuta(false); if (!s.nunca) confete(160);
+    else { const t = document.createElement('div'); t.className = 'toast'; t.style.background = 'var(--fogo)'; t.textContent = '3 anos depois e a dívida só cresceu'; $('#palco').appendChild(t); setTimeout(() => t.remove(), 2600); } }
+  return true;
+}
+$('#proximo').onclick = () => { clearInterval(anim); anim = null; avanca(kAtual + 1); };
+$('#lutar').onclick = () => {
+  const s = sims[estrat]; if (!s || s.erro || !s.quadros) return;
+  clearInterval(anim); const vel = Math.max(90, Math.min(360, 5600 / limite(s)));
+  anim = setInterval(() => { if (!avanca(kAtual + 1)) { clearInterval(anim); anim = null; } }, calmo ? 1 : vel);
+};
+$('#pular').onclick = () => { clearInterval(anim); anim = null; const s = sims[estrat]; if (s && s.quadros) { kAtual = limite(s); quadro(kAtual); extrato(kAtual); botoesLuta(false); } };
+$('#recomecar').onclick = prepara;
+
+// aposta
+$$('[data-ap]').forEach(b => b.onclick = () => { $$('[data-ap]').forEach(x => x.setAttribute('aria-pressed', x === b)); revela(b.dataset.ap); });
+$('#revelar').onclick = () => revela(null);
+function revela(aposta) {
+  revelado = true; $('#placar-wrap').hidden = false;
+  const a = sims.avalanche, b = sims.bola, box = $('#aposta-res'), txt = $('#aposta-txt');
+  if (!a || !b || a.erro || b.erro || a.nunca || b.nunca || !a.ds.length) { box.hidden = true; resultados(); return; }
+  const dif = b.juros - a.juros, certo = Math.abs(dif) < 1 ? 'empate' : dif > 0 ? 'avalanche' : 'bola';
+  box.hidden = aposta == null;
+  if (aposta != null) txt.innerHTML = (aposta === certo ? '<strong>Acertou!</strong> ' : '<strong>Não foi dessa vez.</strong> ') +
+    (certo === 'empate' ? 'As duas pagam praticamente os mesmos juros com as suas dívidas.' : certo === 'avalanche' ? `A Avalanche paga ${brl(dif)} a menos de juros, porque ataca primeiro o chefão que mais cobra por mês. Cada mês que ele fica vivo custa caro.` : `Com as suas dívidas, a Bola de Neve pagou ${brl(-dif)} a menos. Acontece quando a menor dívida também é a de juros mais altos.`);
+  resultados();
+}
 function resultados() {
+  if (!revelado) return;
   const box = $('#resultados'), a = sims.avalanche, b = sims.bola, m = sims.minimos;
   const card = (cls, tit, s) => {
     if (!s || s.erro) return `<div class="res ${cls}"><b>${tit}</b><span>Valor por mês menor que os mínimos.</span></div>`;
@@ -906,10 +1114,9 @@ function resultados() {
     moral.innerHTML = `A Avalanche ${eco > .5 ? 'economiza <strong>' + brl(eco) + '</strong> de juros' : 'empata em juros com a Bola de Neve'}${a.mes < b.mes ? ' e termina ' + (b.mes - a.mes) + (b.mes - a.mes > 1 ? ' meses' : ' mês') + ' antes' : ''}. A Bola de Neve dá a primeira vitória no mês ${b.primeira}${b.primeira < a.primeira ? ', ' + (a.primeira - b.primeira) + ' meses antes' : ''}. <strong>As duas são muito melhores que pagar só o mínimo.</strong> Se você desanima fácil, vá de Bola de Neve; se aguenta esperar, Avalanche.`;
   } else if (a && a.erro) moral.innerHTML = 'O valor por mês não cobre nem os mínimos. Comece pelos ataques especiais da Fase 4: renegociar e trocar dívida cara por barata.';
   else moral.innerHTML = 'Com esse valor por mês a dívida não termina. Aumente o valor da batalha ou use um ataque especial da Fase 4.';
-  troca();
 }
 const estratVencedora = () => { const a = sims.avalanche, b = sims.bola; if (!a || !b || a.nunca || b.nunca || a.erro || b.erro) return ''; return a.juros <= b.juros ? 'avalanche' : 'bola'; };
-let tempo = null; function agendaBatalha() { clearTimeout(tempo); tempo = setTimeout(prepara, 250); }
+let tempo = null; function agendaBatalha() { clearTimeout(tempo); tempo = setTimeout(() => { prepara(); troca(); extra(); }, 250); }
 
 // ---------- 4. troca por dívida barata ----------
 function troca() {
@@ -924,6 +1131,43 @@ function troca() {
   $('#troca-eco').innerHTML = nova && !a.nunca ? (a.juros - nova.juros > 0 ? `Economia de ${brl(a.juros - nova.juros)} e ${Math.max(0, a.mes - nova.mes)} meses a menos` : 'Nessa taxa a troca não compensa') : '';
 }
 $('#troca-taxa').addEventListener('input', troca);
+
+// ---------- 4b. dinheiro extra ----------
+function extra() {
+  const orc = lerNum($('#orc').value), vivas = dividas.filter(d => d.saldo > 0), v = lerNum($('#ex-valor').value), m = Math.max(1, Math.round(+$('#ex-mes').value || 1));
+  const sem = simular(vivas, orc, 'avalanche'), com = simular(vivas, orc, 'avalanche', {[m]: v});
+  const fmt = s => !s || s.erro || !s.ds.length ? '–' : s.nunca ? 'nunca termina' : `${s.mes} meses<br>${brl(s.juros)} de juros`;
+  $('#ex-a').innerHTML = fmt(sem); $('#ex-b').innerHTML = fmt(com);
+  const eco = $('#ex-eco');
+  if (!sem || sem.erro || com.erro || !sem.ds.length) eco.textContent = '';
+  else if (sem.nunca && !com.nunca) eco.textContent = `Com esse extra, a batalha passa a ter fim: ${com.mes} meses`;
+  else if (sem.nunca) eco.textContent = 'Sozinho, esse extra não resolve: combine com outro ataque.';
+  else if (m > sem.mes) eco.textContent = `As dívidas já acabam no mês ${sem.mes}: o extra chegaria depois da vitória.`;
+  else eco.textContent = `Economia de ${brl(sem.juros - com.juros)} de juros e ${sem.mes - com.mes} ${sem.mes - com.mes === 1 ? 'mês' : 'meses'} a menos`;
+}
+['#ex-valor', '#ex-mes'].forEach(id => $(id).addEventListener('input', extra));
+
+// ---------- mundo 2 ----------
+const LINK_MUNDO2 = '';   // link da lista de espera do minicurso: decisão do Tiago
+const MUNDOS = [
+  ['Mundo 1', 'Os Chefões', 'Dívidas mapeadas, estratégia escolhida, plano de 90 dias.'],
+  ['Mundo 2', 'O Cofre', 'Reserva de emergência: quanto guardar, onde e em que ordem.'],
+  ['Mundo 3', 'Os Power-ups', 'Gastos invisíveis e renda extra para acelerar tudo.'],
+  ['Mundo 4', 'Próximo nível', 'Um orçamento que se mantém sozinho, mês após mês.']
+];
+function mundo2() {
+  const s = sims.avalanche, orc = lerNum($('#orc').value), meses = +$('#m2-meses').value;
+  $('#m2-total').textContent = brl(orc * meses, 0);
+  $('#m2-label').textContent = `${brl(orc, 0)} por mês, em ${meses} meses`;
+  const lead = $('#m2-lead');
+  if (s && !s.erro && !s.nunca && s.ds.length) lead.innerHTML = `Na Avalanche, o seu último chefão cai no <strong>mês ${s.mes}</strong>. No mês seguinte, os ${brl(orc, 0)} que iam para as dívidas continuam chegando. A diferença é que agora eles são seus.`;
+  const feitas12 = feitas.every(Boolean);
+  $('#mundos').innerHTML = MUNDOS.map(([n, t, d], i) => `<div class="mundo ${i === 0 && feitas12 ? 'feito' : ''}">${i > 0 ? '<svg class="cadeado" viewBox="0 0 24 24" aria-label="Trancado"><rect x="4" y="10" width="16" height="12" rx="3" fill="var(--amarelo)" stroke="#17302A" stroke-width="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="var(--amarelo)" stroke-width="3" fill="none"/></svg>' : ''}<small>${n}${i === 0 ? (feitas12 ? ' · vencido' : ' · você está aqui') : ''}</small><b>${t}</b><span>${d}</span></div>`).join('');
+  const a = $('#m2-link');
+  if (LINK_MUNDO2) { a.href = LINK_MUNDO2; a.target = '_blank'; a.rel = 'noopener'; }
+  else { a.removeAttribute('href'); a.setAttribute('aria-disabled', 'true'); a.textContent = 'Lista de espera em breve'; a.style.opacity = .7; }
+}
+$('#m2-meses').addEventListener('input', mundo2);
 
 // ---------- copiar falas ----------
 $$('.copiar').forEach(b => b.onclick = async () => { const t = b.parentElement.querySelector('em').textContent;
@@ -986,7 +1230,7 @@ function desenhaPlano() {
   anel();
 }
 function anel() { const n = feitas.filter(Boolean).length; $('#anel').setAttribute('stroke-dashoffset', 289 - 289 * n / 12); $('#anel-txt').textContent = `${n}/12`; }
-$('#semanas').addEventListener('change', e => { const i = +e.target.dataset.i; feitas[i] = e.target.checked; guarda.pôr('plano', feitas); anel(); if (e.target.checked) confete(feitas.every(Boolean) ? 220 : 40); });
+$('#semanas').addEventListener('change', e => { const i = +e.target.dataset.i; feitas[i] = e.target.checked; guarda.pôr('plano', feitas); anel(); mundo2(); if (e.target.checked) confete(feitas.every(Boolean) ? 220 : 40); });
 desenhaPlano();
 
 // ---------- HUD de fases ----------
@@ -994,6 +1238,6 @@ const links = $$('.hud-fases a');
 const obs = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) return; const f = +e.target.dataset.fase; links.forEach(a => { const n = +a.dataset.f; a.classList.toggle('on', n === f); a.classList.toggle('feita', n < f); }); }), {rootMargin: '-45% 0px -50% 0px'});
 $$('[data-fase]').forEach(s => obs.observe(s));
 
-pintar(); desenhaDividas(); prepara();
+pintar(); desenhaDividas(); prepara(); troca(); extra();
 })();
 </script>

@@ -1,9 +1,10 @@
 """Contas do ebook 'Chefões do cartão'. Refaz todos os exemplos do texto.
 Uso: python3 produtos/chefoes-do-cartao/contas.py"""
-ANUAL = {'rotativo': 451.7, 'parcelado': 193.0, 'cheque': 139.0, 'pessoal': 110.9, 'consignado': 28.5}
+ANUAL = {'rotativo': 451.7, 'parcelado': 193.0, 'cheque': 139.0, 'pessoal': 110.9, 'consignado': 28.5,
+         'consclt': 56.34, 'veiculos': 26.2}  # consclt: média de ago/2026 (BC, série 20744)
 M = {k: (1 + v / 100) ** (1 / 12) - 1 for k, v in ANUAL.items()}
 
-def simular(dividas, orcamento, ordem):
+def simular(dividas, orcamento, ordem, extras=None):
     """dividas: lista de dicts nome, saldo, taxa (a.m.), minimo, teto (bool: juros acumulados <= saldo original).
     Paga os mínimos e joga a sobra na primeira dívida viva segundo 'ordem'. Retorna meses, juros totais, mês de quitação de cada."""
     ds = [dict(d, original=d['saldo'], juros=0.0, fim=None) for d in dividas]
@@ -15,7 +16,7 @@ def simular(dividas, orcamento, ordem):
             j = d['saldo'] * d['taxa']
             if d.get('teto'): j = max(0.0, min(j, d['original'] - d['juros']))
             d['saldo'] += j; d['juros'] += j; juros_tot += j
-        sobra = orcamento
+        sobra = orcamento + (extras or {}).get(mes, 0)
         for d in ds:
             if d['saldo'] <= 0.005: continue
             p = min(d['minimo'], d['saldo']); d['saldo'] -= p; sobra -= p
@@ -70,3 +71,7 @@ if __name__ == '__main__':
     # Price: parcela de 5800 em 12x a 2,11%
     i = M['consignado']; pmt = tot * i / (1 - (1 + i) ** -12)
     print(f'Consignado 12x: parcela R$ {pmt:.2f}, total R$ {pmt*12:.2f}')
+    # Fase 4: dinheiro extra de R$ 1.000 no mês 2 (Avalanche)
+    ce = simular(exemplo(), orc, lambda d: -d['taxa'], {2: 1000})
+    print('Avalanche + R$ 1.000 no mês 2:', ce[0], 'meses, juros R$', round(ce[1], 2), '| economia R$', round(av[1] - ce[1], 2), 'e', av[0] - ce[0], 'meses')
+    print('Contas atrasadas: 1% a.m. =', f"{((1.01)**12-1)*100:.2f}% a.a.")
