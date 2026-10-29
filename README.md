@@ -1,8 +1,52 @@
-# Fábrica de vídeos — Radar Pop
+# Fábrica — Precioso Productions
 
-**Novo por aqui? Leia [COMECE-AQUI.md](COMECE-AQUI.md).** O estúdio (22 agentes) está em [ESTUDIO.md](ESTUDIO.md).
+**Novo por aqui (ou conversa nova com o Claude)? Leia esta página inteira, depois [CLAUDE.md](CLAUDE.md) e [receitas/](receitas/README.md).** O organograma dos 27 agentes está em [ESTUDIO.md](ESTUDIO.md).
 
-Sistema de agentes do Claude que transforma uma pauta em um Short/Reels pronto (1080×1920, com trilha e final em loop).
+A fábrica é uma **indústria de conteúdo, marcas e produtos digitais** o mais automática possível. Regra número 1: **tudo sai da fábrica** — toda peça é gerada por script, JSON ou arquivo deste repositório. Regra número 2: **tudo que dá certo vira receita** em `receitas/`, e a receita melhora a cada uso.
+
+## Estado em 29/10/2026
+
+| Linha | O que é | Estado |
+|---|---|---|
+| **Precioso Productions** (serviço) | Estúdio de vídeo, marca, site e 3D para clientes no Brasil e no exterior (dólar/euro) | Montando o portfólio. 1ª marca vitrine: **Ninho Alto Coffee** (fictícia, em inglês): manual, rótulos topográficos, fotos 3D no Blender e site v2 publicados. Plano: `docs/plano-precioso.md` |
+| **Produtos** | Ebook "Chefões do cartão" → minicurso (Hotmart); depois kit de agentes da fábrica | Funil desenhado (`docs/plano-funil.md`), ebook ainda não escrito |
+| **Din no Chão** (finanças) | Canal de Shorts que puxa os produtos | Estilo `grana` pronto, 1º vídeo feito |
+| **Canal de cultura pop** | Laboratório de formatos (sem meta de receita) | Vídeo diário automático (tarefa às 08:23), aprovação no Radar Pop |
+
+### Próximos passos
+1. **Ninho Alto:** manual completo como design system → vídeo 3D dos grãos rolando do pacote (Blender, física) → site v3 com o vídeo no topo → 3 Reels e 2 anúncios → projeto no Behance.
+2. **Precioso Productions:** marca, site e Instagram do estúdio; perfis no Behance, Contra e Upwork.
+3. **Produtos:** escrever e diagramar o ebook; página de venda; Hotmart.
+4. Pendências do Tiago: liberar os links no menu Compartilhar; contador (exportação de serviço); conectar a pasta da fábrica no app Claude para computador, para o Claude usar o Blender do PC (RTX 3060) em motion.
+
+### Como começar uma conversa nova com o Claude
+- **Melhor jeito:** app Claude para computador → conectar a pasta da fábrica (clone deste repositório). Assim o Claude roda o Blender e o render no PC do Tiago.
+- Primeira mensagem sugerida: *"Leia o README, o CLAUDE.md e as receitas da fábrica e continue de onde paramos: <próximo passo>."*
+
+### Onde está cada coisa
+| Pasta / arquivo | O que tem |
+|---|---|
+| `receitas/` | Passo a passo de tudo que já deu certo (vídeo curto, marca, site, foto 3D, motion 3D, pesquisa de referências) |
+| `portfolio/<marca>/` | Manual (`marca.md`), site (`site.html`), imagens (`img/`) de cada marca |
+| `blender/` | Cenas 3D por código (`ninho_produto.py`, `cena_cartao.py`) |
+| `tools/` | Ferramentas: render, rótulos, peças 3D, conferir página, referências, instalar Blender |
+| `videos/`, `pesquisa/`, `roteiros/`, `revisoes/` | Uma linha por vídeo do canal |
+| `docs/` | Planos (Precioso, funil), direitos, monetização, Blender |
+| `.claude/agents/` | Os 27 agentes |
+
+### Páginas vivas (claude.ai do Tiago, privadas até compartilhar)
+- Radar Pop (pautas e aprovação de vídeos): https://claude.ai/artifact/LasVjXDtUwVj9qAkA5KZis
+- Ninho Alto Coffee (site conceito): https://claude.ai/artifact/WhrQ8VnGzQKWuXbuPGEfmt
+- Chão da Fábrica: https://claude.ai/artifact/RTfocgFhiAuJ45xtALqbfP
+- Plano do funil: https://claude.ai/artifact/R2NRFYjELs4opAFzEJJv7G
+
+## Automações no GitHub
+- **Renderizar vídeos:** todo `videos/*.json` novo na `main` vira release com `.mp4` e folha de revisão (~3 min).
+- **Renderizar peças 3D:** quando uma cena em `blender/ninho_*.py` ou o gerador de rótulos muda, renderiza as fotos 3D e publica na release `pecas-ninho-alto`.
+
+---
+
+# Fábrica de vídeos (detalhes técnicos)
 
 ## O fluxo
 

@@ -1,10 +1,10 @@
 # Comece aqui (Tiago, Felipe e Lucca)
 
-Este repositório é o estúdio inteiro: a fábrica de vídeos, os 22 agentes, o Radar Pop, o painel Chão da Fábrica e os planos. Estado em 27/out/2026.
+Este repositório é o estúdio inteiro: a fábrica, os 27 agentes, as receitas, o Radar Pop e os planos. **O estado atual e os próximos passos estão no [README.md](README.md)** (esta página guarda o guia de instalação).
 
 ## Abrir no seu computador
 1. Instale o Claude Code e o Git. Para renderizar localmente: Node 18+ e Python 3 com `numpy`.
-2. `git clone https://github.com/tiagoprecioso-oss/fabrica-de-video` e abra a pasta no Claude Code. Os 22 agentes de `.claude/agents/` carregam sozinhos.
+2. `git clone https://github.com/tiagoprecioso-oss/fabrica-de-video` e abra a pasta no Claude Code. Os agentes de `.claude/agents/` e as regras do `CLAUDE.md` carregam sozinhos.
 3. Peça, por exemplo: *"Faça o próximo vídeo de finanças seguindo o ESTUDIO.md"* ou *"Escreva o ebook Chefões do cartão com o autor-de-ebook e o diagramador"*.
 4. Não precisa renderizar no seu PC: todo JSON novo em `videos/` que chega na `main` é renderizado pelo GitHub Actions e vira uma release com o `.mp4`.
 
@@ -13,7 +13,8 @@ Felipe e Lucca: façam um **fork** (ou peçam ao Tiago acesso de colaborador) e 
 ## O que tem aqui
 | Arquivo | O que é |
 |---|---|
-| `ESTUDIO.md` | Organograma: 22 agentes em 6 departamentos e as linhas de produção |
+| `ESTUDIO.md` | Organograma: 27 agentes em 7 departamentos e as linhas de produção |
+| `receitas/` | Passo a passo de tudo que já deu certo |
 | `MODELOS.md` | Formatos de vídeo, estilos, camada gameplay e o formato de finanças (chefão, extrato) |
 | `docs/plano-funil.md` | Plano do funil de finanças (ebook "Chefões do cartão" → minicurso → WhatsApp) |
 | `docs/pesquisa-monetizacao.md` | Como canais dark ganham dinheiro, aqui e em outros países |
