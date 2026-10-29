@@ -1,6 +1,6 @@
 ---
 titulo: Chefões do cartão
-subtitulo: Como derrotar as dívidas sem passar fome
+subtitulo: Como derrotar as dívidas sem passar aperto
 autor: Din no Chão
 edicao: 1ª edição · outubro de 2026
 dados: Banco Central, setembro de 2026
@@ -30,7 +30,7 @@ Neste livro você vai:
 5. Montar as defesas para o chefão não voltar.
 6. Sair com um plano de 90 dias, semana por semana.
 
-Tudo isso **sem passar fome**: comida, aluguel, luz, água e transporte vêm antes de qualquer chefão. Dívida se paga com o que sobra do essencial, nunca no lugar dele.
+Tudo isso **sem passar aperto**: comida, aluguel, luz, água e transporte vêm antes de qualquer chefão. Dívida se paga com o que sobra do essencial, nunca no lugar dele.
 
 :::alerta
 Este livro é educativo. Ele não recomenda investimento, não promete resultado e não substitui orientação de um profissional. As taxas mudam todo mês: as daqui são as médias do Banco Central de setembro de 2026. Sempre confira o contrato e o CET (Custo Efetivo Total) da sua dívida.

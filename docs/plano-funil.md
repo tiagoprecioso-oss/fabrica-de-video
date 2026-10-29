@@ -12,7 +12,7 @@ Cópia do plano vivo (https://claude.ai/artifact/R2NRFYjELs4opAFzEJJv7G). Um can
 
 Shorts com dado real (YouTube, Instagram, TikTok, 1/dia) → calculadora no link da bio → lista própria (Fase 0 grátis + 5 e-mails em 7 dias; WhatsApp) → página de venda → checkout Hotmart. Outras portas: afiliados Hotmart, carrosséis, Google, Pinterest, Kindle.
 
-## Primeiro projeto: ebook "Chefões do cartão: como derrotar as dívidas sem passar fome"
+## Primeiro projeto: ebook "Chefões do cartão: como derrotar as dívidas sem passar aperto"
 ~30 páginas ilustradas; cada dívida é um chefão (vida = saldo, ataque = juros). Capítulos: 1) Conheça os chefões; 2) A ficha de cada chefão; 3) Estratégia de ataque (avalanche x bola de neve); 4) Ataques especiais (renegociar, portabilidade, trocar dívida cara por barata); 5) Não deixe o chefão voltar; 6) Missão final: plano de 90 dias. Shorts que puxam: "R$ 1.000 no rotativo viram quanto?" (feito: `videos/fin-rotativo-1000.json`), "Ranking dos juros mais caros", "Rotativo x parcelado x empréstimo".
 
 ## Minicurso em 6 fases (R$ 47, lançamento R$ 37, garantia 7 dias)
