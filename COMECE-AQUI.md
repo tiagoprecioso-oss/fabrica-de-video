@@ -21,7 +21,8 @@ Tudo o que o Claude precisa está neste repositório. O que **não** vem junto: 
 5. **Preferências do Tiago que valem sempre:** todo Short/Reels fecha em loop; legendas menores e corridas, sem som a cada palavra; comparação em reais quando houver dado brasileiro; formatos baseados no que já funciona comprovadamente; nada é postado sem o Tiago.
 
 ### Onde paramos (29/10/2026)
-- **Ebook "Chefões do cartão" v1 (Felipe, 29/10 à tarde):** texto, contas, checagem e PDFs em `produtos/chefoes-do-cartao/`; gerador `tools/ebook.py`; receita `receitas/ebook.md`. Próximo: revisão do Tiago, preço, página de venda (copywriter) e Hotmart. Blender ficou intocado para o Tiago (PC com GPU).
+- **Ebook "Chefões do cartão" (Felipe, 29/10 à tarde):** v1 em PDF reprovada pelo Felipe (sem pesquisa, visual de relatório). **v2 = página interativa** em desenho animado (`produtos/chefoes-do-cartao/web/index.html`), feita depois de pesquisar referências (`pesquisa/chefoes-design.md`). Publicada na conta do Felipe: https://claude.ai/artifact/KDdJ7H4vUdiWpzFTvENSp2 . Próximo: revisão do Tiago, hospedagem para compradores, PDF no mesmo visual, página de venda.
+- **Regras novas do Felipe (29/10), já no CLAUDE.md:** pesquisar antes de todo produto; tudo que puder ser imersivo, interativo e animado, é; Blender só no PC do Tiago (a cena `queda` não foi mexida).
 - Feito hoje: manual da Ninho Alto como design system (`portfolio/ninho-alto/marca.json` → `python3 tools/manual_ninho.py`).
 - **Feito (29/10, fim da tarde):** fotos 3D v2 renderizadas no PC do Tiago (itens 1–4 abaixo, menos o macro). **Próximo:** vídeo dos grãos caindo (item 5) e macro dos grãos. Plano original:
   1. Texturas CC0 escaneadas da Poly Haven (pedra, papel kraft, cerâmica) no lugar das procedurais.

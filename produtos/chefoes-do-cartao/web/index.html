@@ -1,0 +1,999 @@
+<title>Chefões do Cartão</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap">
+<style>
+/* Layout: uma trilha vertical de fases (como um mapa de jogo), cada fase em uma faixa de cor; HUD fixo no topo com a fase atual. */
+:root{
+  color-scheme:light;
+  --bg:#F5FAF3;           /* fundo: branco puxado para o verde do dinheiro */
+  --card:#FFFFFF;
+  --tinta:#17302A;        /* texto */
+  --apagado:#5B7067;
+  --linha:#DBE7DC;
+  --grana:#1FBF6A; --grana-esc:#139256; --grana-claro:#DDF7E8;
+  --fogo:#FF5146;  --fogo-esc:#D3352B;  --fogo-claro:#FFE3DF;
+  --laranja:#FF9A22; --laranja-esc:#D9780A;
+  --amarelo:#FFCB2D; --amarelo-esc:#E0A400; --amarelo-claro:#FFF4CC;
+  --azul:#279FEA; --azul-esc:#1679BF;
+  --roxo:#9466F5; --roxo-esc:#7044D6; --roxo-claro:#EEE6FF;
+  --display:'Baloo 2','Nunito',ui-rounded,system-ui,sans-serif;
+  --texto:'Nunito',ui-rounded,system-ui,-apple-system,'Segoe UI',sans-serif;
+  --raio:18px;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--tinta);font-family:var(--texto);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--tinta)}
+h1,h2,h3,.disp{font-family:var(--display);line-height:1.05;letter-spacing:-.01em;text-wrap:balance;margin:0}
+p{margin:0}
+strong{font-weight:800}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--azul);outline-offset:3px;border-radius:8px}
+.num{font-variant-numeric:tabular-nums}
+.miolo{max-width:760px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.largo{max-width:1040px}
+
+/* HUD */
+.hud{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--tinta);color:#fff}
+.hud .miolo{display:flex;align-items:center;gap:12px;padding-block:8px}
+.hud-tit{font-family:var(--display);font-weight:800;font-size:1.05rem;white-space:nowrap}
+.hud-fases{display:flex;gap:6px;margin-left:auto}
+.hud-fases a{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-weight:900;font-size:.85rem;text-decoration:none;color:#fff;background:#2C4A41;border:2px solid #2C4A41;transition:transform .2s,background .2s}
+.hud-fases a.on{background:var(--amarelo);color:var(--tinta);border-color:#fff;transform:scale(1.12)}
+.hud-fases a.feita{background:var(--grana);border-color:var(--grana)}
+@media (max-width:440px){.hud-tit{font-size:.92rem}.hud-fases{gap:4px}.hud-fases a{width:26px;height:26px;font-size:.78rem}}
+
+/* botões gordinhos */
+.bt{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:14px;padding:12px 18px;font-weight:900;font-size:.98rem;letter-spacing:.02em;cursor:pointer;background:var(--grana);color:#fff;box-shadow:0 5px 0 var(--grana-esc);transition:transform .08s,box-shadow .08s;text-transform:uppercase}
+.bt:active{transform:translateY(4px);box-shadow:0 1px 0 var(--grana-esc)}
+.bt.fogo{background:var(--fogo);box-shadow:0 5px 0 var(--fogo-esc)}.bt.fogo:active{box-shadow:0 1px 0 var(--fogo-esc)}
+.bt.azul{background:var(--azul);box-shadow:0 5px 0 var(--azul-esc)}.bt.azul:active{box-shadow:0 1px 0 var(--azul-esc)}
+.bt.leve{background:var(--card);color:var(--tinta);box-shadow:0 5px 0 var(--linha);border:2px solid var(--linha)}.bt.leve:active{box-shadow:0 1px 0 var(--linha)}
+.bt.mini{padding:8px 12px;font-size:.8rem;border-radius:11px;box-shadow:0 4px 0 var(--grana-esc)}
+.bt.leve.mini{box-shadow:0 4px 0 var(--linha)}
+.bt[disabled]{opacity:.5;cursor:not-allowed}
+
+/* capa */
+.capa{background:var(--tinta);color:#fff;overflow:hidden;position:relative}
+.capa .miolo{padding-block:36px 44px;display:grid;gap:22px;position:relative}
+.capa-selo{display:inline-flex;align-items:center;gap:8px;background:#244038;border-radius:99px;padding:6px 14px 6px 8px;font-weight:800;font-size:.85rem;width:max-content;max-width:100%}
+.capa-selo svg{width:26px;height:26px}
+.capa h1{font-size:clamp(3rem,13vw,6.2rem);font-weight:800;line-height:.9;text-transform:uppercase}
+.capa h1 span{color:var(--amarelo);display:block}
+.capa-sub{font-size:1.25rem;font-weight:700;color:#BFE9D2;max-width:30ch}
+.desfile{display:flex;align-items:flex-end;justify-content:center;gap:2px;margin-top:6px}
+.desfile .boss{width:19%;max-width:150px}
+.desfile .boss:nth-child(3){width:26%;max-width:200px}
+.capa-chao{height:14px;border-radius:99px;background:#244038;margin-top:-10px}
+.capa-acoes{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.capa-info{font-size:.85rem;color:#9DB8AC}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:2px solid #3B5C51;border-radius:99px;padding:4px 12px;font-weight:800;font-size:.82rem;color:#D6F1E3}
+
+/* chefões (desenhos) */
+.boss{position:relative;display:block}
+.boss svg{display:block;width:100%;height:auto;overflow:visible;transform-origin:50% 100%;animation:bob 2.8s ease-in-out infinite}
+.boss:nth-child(2n) svg{animation-delay:-1.1s}
+.boss:nth-child(3n) svg{animation-delay:-.6s}
+.boss .ko-olhos{display:none}
+.boss.hit svg{animation:apanha .45s ease-out}
+.boss.ko svg{animation:none;transform:scaleY(.62) translateY(14%);filter:grayscale(.7);opacity:.55;transition:transform .5s cubic-bezier(.5,1.8,.5,1),opacity .5s}
+.boss.ko .olhos{display:none}.boss.ko .ko-olhos{display:inline}
+@keyframes bob{0%,100%{transform:translateY(0) scale(1,1)}50%{transform:translateY(-5%) scale(1.02,.98)}}
+@keyframes apanha{0%{transform:translateX(0)}20%{transform:translateX(-9%) rotate(-6deg);filter:brightness(1.8)}45%{transform:translateX(7%) rotate(4deg)}70%{transform:translateX(-3%)}100%{transform:none}}
+.dano{position:absolute;left:50%;top:10%;transform:translateX(-50%);font-family:var(--display);font-weight:800;font-size:1.3rem;pointer-events:none;white-space:nowrap;animation:sobe 1.1s ease-out forwards;text-shadow:0 2px 0 #fff}
+@keyframes sobe{from{transform:translate(-50%,0)}to{transform:translate(-50%,-60px);opacity:0}}
+
+/* faixas das fases */
+.faixa{padding-block:56px}
+.faixa.clara{background:var(--card)}
+.fase-cab{display:grid;gap:10px;margin-bottom:26px}
+.fase-num{display:inline-flex;align-items:center;gap:10px;font-weight:900;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:var(--fogo)}
+.fase-num b{display:grid;place-items:center;width:34px;height:34px;border-radius:11px;background:var(--fogo);color:#fff;font-size:1rem;letter-spacing:0}
+.fase-cab h2{font-size:clamp(2.1rem,7vw,3.2rem);font-weight:800}
+.lead{font-size:1.12rem;color:#2D4A41}
+.prosa{display:grid;gap:14px;max-width:65ch}
+.prosa ul{margin:0;padding-left:1.2em;display:grid;gap:6px}
+h3{font-size:1.55rem;font-weight:800;margin-top:10px}
+
+/* Din fala */
+.din{display:grid;grid-template-columns:64px 1fr;gap:12px;align-items:start;margin:22px 0}
+.din svg{width:64px;height:64px}
+.balao{background:var(--amarelo-claro);border:2px solid var(--amarelo);border-radius:4px 18px 18px 18px;padding:12px 16px;font-weight:600;min-width:0}
+.balao strong{color:#8A5A00}
+.din.alerta .balao{background:var(--fogo-claro);border-color:var(--fogo)}
+.din.alerta .balao strong{color:var(--fogo-esc)}
+
+/* cartões e painéis */
+.painel{background:var(--card);border:2px solid var(--linha);border-radius:var(--raio);padding:20px;box-shadow:0 6px 0 var(--linha)}
+.faixa.clara .painel{background:var(--bg)}
+.rot{font-size:.74rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:var(--apagado)}
+
+/* barra de vida */
+.vida{display:grid;gap:4px}
+.vida-top{display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-weight:800;font-size:.9rem}
+.vida-trilho{height:18px;border-radius:99px;background:#E9EFEA;border:2px solid var(--tinta);overflow:hidden}
+.vida-cheia{height:100%;border-radius:99px;background:var(--fogo);transition:width .45s cubic-bezier(.3,1.4,.5,1);box-shadow:inset 0 -5px 0 rgba(0,0,0,.14);position:relative}
+.vida-cheia::after{content:"";position:absolute;left:8px;right:8px;top:3px;height:4px;border-radius:9px;background:rgba(255,255,255,.45)}
+
+/* demo dano x ataque */
+.arena{display:grid;grid-template-columns:minmax(120px,190px) 1fr;gap:20px;align-items:center}
+.arena .boss{max-width:190px}
+.arena-num{font-family:var(--display);font-weight:800;font-size:2.3rem;line-height:1}
+.arena-acoes{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}
+.diario{margin-top:14px;font-size:.92rem;display:grid;gap:4px;max-height:132px;overflow:auto}
+.diario div{display:flex;justify-content:space-between;gap:10px;padding:5px 10px;border-radius:9px;background:var(--bg)}
+.diario .sobe{color:var(--fogo-esc)} .diario .desce{color:var(--grana-esc)}
+@media (max-width:560px){.arena{grid-template-columns:1fr}.arena .boss{margin:0 auto;max-width:150px}}
+
+/* hud explicação */
+.legenda{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:8px 0 4px}
+.legenda div{background:var(--card);border:2px solid var(--linha);border-radius:14px;padding:12px;display:grid;gap:2px;min-width:0}
+.legenda b{font-family:var(--display);font-size:1.12rem}
+.legenda span{font-size:.86rem;color:var(--apagado);line-height:1.35}
+@media (max-width:640px){.legenda{grid-template-columns:1fr 1fr}}
+
+/* ranking */
+.ranking{display:grid;gap:12px}
+.rk{display:grid;grid-template-columns:150px 1fr 118px;gap:12px;align-items:center}
+.rk-nome{font-weight:800;line-height:1.2}
+.rk-trilho{height:26px;background:#EDF3EE;border-radius:9px;overflow:hidden}
+.rk-barra{height:100%;border-radius:9px;transition:width .6s cubic-bezier(.3,1.3,.5,1)}
+.rk-val{text-align:right;line-height:1.15}
+.rk-val b{font-family:var(--display);font-size:1.15rem}
+.rk-val span{display:block;font-size:.78rem;color:var(--apagado)}
+.slider-linha{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:4px 0 18px;font-weight:800}
+input[type=range]{accent-color:var(--grana);flex:1;min-width:160px}
+@media (max-width:560px){.rk{grid-template-columns:1fr 112px}.rk-trilho{grid-column:1/-1;grid-row:2}}
+
+/* bestiário */
+.besti{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
+.carta{background:var(--card);border:3px solid var(--tinta);border-radius:22px;padding:14px;display:grid;gap:10px;text-align:left;cursor:pointer;box-shadow:0 7px 0 var(--cor);transition:transform .15s}
+.carta:hover{transform:translateY(-3px) rotate(-.6deg)}
+.carta-arte{background:color-mix(in srgb,var(--cor) 14%,#fff);border-radius:15px;padding:10px 24px 6px}
+.carta .disp{font-size:1.3rem;font-weight:800}
+.carta-tipo{font-size:.78rem;font-weight:800;color:var(--apagado);text-transform:uppercase;letter-spacing:.06em}
+.carta-atk{font-family:var(--display);font-weight:800;font-size:1.5rem;color:var(--cor-txt)}
+.carta-atk small{font-family:var(--texto);font-size:.8rem;color:var(--apagado);font-weight:700}
+.pips{display:flex;gap:4px;align-items:center;font-size:.72rem;font-weight:900;letter-spacing:.08em;color:var(--apagado)}
+.pips i{width:16px;height:9px;border-radius:3px;background:#E3EAE4}
+.pips i.on{background:var(--cor)}
+.carta-mais{display:grid;gap:8px;font-size:.92rem;border-top:2px dashed var(--linha);padding-top:10px}
+.carta-mais b{display:block;font-size:.74rem;letter-spacing:.08em;text-transform:uppercase}
+.carta-abrir{font-size:.8rem;font-weight:900;color:var(--azul-esc)}
+
+/* gráfico */
+.grafico{width:100%;height:auto;display:block}
+.grafico text{font-family:var(--texto);font-size:12px;fill:var(--apagado);font-weight:700}
+.grafico .eixo{stroke:var(--linha);stroke-width:1.5}
+.legenda-graf{display:flex;flex-wrap:wrap;gap:14px;font-size:.86rem;font-weight:800;margin-top:6px}
+.legenda-graf span{display:inline-flex;align-items:center;gap:6px}
+.legenda-graf i{width:18px;height:6px;border-radius:9px;display:inline-block}
+
+/* formulário de dívidas */
+.dividas{display:grid;gap:14px}
+.div-linha{display:grid;grid-template-columns:76px 1fr;gap:14px;background:var(--card);border:2px solid var(--linha);border-radius:18px;padding:14px;align-items:start}
+.div-linha .boss{width:76px}
+.div-campos{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr auto;gap:10px;align-items:end;min-width:0}
+.campo{display:grid;gap:3px;min-width:0}
+.campo label{font-size:.72rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--apagado)}
+.campo input,.campo select{width:100%;min-width:0;border:2px solid var(--linha);border-radius:11px;padding:9px 10px;background:#fff;font-weight:700}
+.campo input:focus,.campo select:focus{border-color:var(--azul);outline:none}
+.div-info{grid-column:2;display:flex;flex-wrap:wrap;gap:8px 16px;font-size:.88rem;font-weight:700;color:var(--apagado)}
+.div-info .ruim{color:var(--fogo-esc)} .div-info .bom{color:var(--grana-esc)}
+.remover{border:0;background:none;color:var(--apagado);font-weight:900;cursor:pointer;padding:9px 6px;font-size:.8rem}
+@media (max-width:700px){.div-campos{grid-template-columns:1fr 1fr}.div-campos .campo:first-child{grid-column:1/-1}.div-linha{grid-template-columns:56px 1fr}.div-linha .boss{width:56px}.div-info{grid-column:1/-1}}
+.exemplo-aviso{display:inline-flex;gap:8px;align-items:center;background:var(--amarelo-claro);border:2px dashed var(--amarelo-esc);border-radius:12px;padding:6px 12px;font-weight:800;font-size:.86rem}
+.placar{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.placar div{background:var(--tinta);color:#fff;border-radius:16px;padding:14px 16px;display:grid;gap:2px}
+.placar b{font-family:var(--display);font-size:1.7rem;line-height:1.1}
+.placar span{font-size:.78rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#A9C9BC}
+.placar div:nth-child(2) b{color:#FF8C84}
+@media (max-width:560px){.placar{grid-template-columns:1fr}}
+.botoes{display:flex;flex-wrap:wrap;gap:12px}
+
+/* batalha */
+.estrat{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.estrat button{border:3px solid var(--linha);background:var(--card);border-radius:18px;padding:14px;text-align:left;cursor:pointer;display:grid;gap:4px;box-shadow:0 5px 0 var(--linha)}
+.estrat button b{font-family:var(--display);font-size:1.25rem}
+.estrat button span{font-size:.86rem;color:var(--apagado);line-height:1.35}
+.estrat button[aria-pressed=true]{border-color:var(--azul);box-shadow:0 5px 0 var(--azul);background:#EAF6FE}
+@media (max-width:640px){.estrat{grid-template-columns:1fr}}
+.campo-grande{display:flex;flex-wrap:wrap;align-items:center;gap:10px;font-weight:800}
+.campo-grande input{width:150px;border:3px solid var(--tinta);border-radius:13px;padding:10px 12px;font-family:var(--display);font-size:1.4rem;font-weight:800;background:#fff}
+.palco{background:linear-gradient(180deg,#DFF3FF 0%,#F2FBFF 60%,#CFEFD9 60%,#BFE8CB 100%);border:3px solid var(--tinta);border-radius:22px;padding:18px 14px 14px;position:relative;overflow:hidden}
+.palco-topo{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px}
+.mes{font-family:var(--display);font-weight:800;font-size:1.5rem;background:var(--tinta);color:#fff;border-radius:12px;padding:2px 14px}
+.palco-total{font-weight:900;text-align:right;line-height:1.1}
+.palco-total b{font-family:var(--display);font-size:1.5rem;display:block}
+.lutadores{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:12px;align-items:end}
+.lutador{display:grid;gap:6px;justify-items:center;text-align:center;min-width:0}
+.lutador .boss{width:min(100%,120px)}
+.lutador .vida{width:100%}
+.lutador .vida-trilho{height:13px}
+.lutador small{font-weight:800;font-size:.78rem;line-height:1.2}
+.alvo-tag{position:absolute;top:-8px;left:50%;transform:translateX(-50%);background:var(--amarelo);color:var(--tinta);font-weight:900;font-size:.7rem;border-radius:99px;padding:2px 8px;letter-spacing:.06em;z-index:2;white-space:nowrap}
+.toast{position:absolute;left:50%;top:56px;transform:translateX(-50%);background:var(--tinta);color:#fff;border-radius:12px;padding:8px 14px;font-weight:800;font-size:.9rem;animation:toast 1.8s ease forwards;z-index:3;white-space:nowrap}
+@keyframes toast{0%{transform:translate(-50%,-10px)}10%,80%{transform:translate(-50%,0)}100%{transform:translate(-50%,-10px);opacity:0}}
+.resultados{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.res{border-radius:18px;padding:14px;display:grid;gap:4px;border:3px solid}
+.res b{font-family:var(--display);font-size:1.2rem}
+.res .grande{font-family:var(--display);font-weight:800;font-size:1.7rem;line-height:1.05}
+.res span{font-size:.86rem;font-weight:700}
+.res.minimos{background:var(--fogo-claro);border-color:var(--fogo)}
+.res.bola{background:var(--amarelo-claro);border-color:var(--amarelo-esc)}
+.res.avalanche{background:var(--grana-claro);border-color:var(--grana)}
+.res.vence{box-shadow:0 0 0 4px var(--azul)}
+@media (max-width:640px){.resultados{grid-template-columns:1fr}}
+.erro{background:var(--fogo-claro);border:2px solid var(--fogo);border-radius:14px;padding:12px 14px;font-weight:800;color:var(--fogo-esc)}
+
+/* ataques especiais */
+.golpes{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.golpe{background:var(--card);border:3px solid var(--tinta);border-radius:20px;padding:18px;display:grid;gap:10px;align-content:start;min-width:0}
+.golpe-cab{display:flex;align-items:center;gap:10px}
+.golpe-ic{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;flex:none}
+.golpe-ic svg{width:28px;height:28px}
+.golpe h3{margin:0;font-size:1.35rem}
+.golpe p{font-size:.95rem}
+@media (max-width:700px){.golpes{grid-template-columns:1fr}}
+.falas{display:grid;gap:8px}
+.fala{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;background:var(--bg);border-radius:12px;padding:8px 10px;font-size:.9rem}
+.fala em{font-style:normal;font-weight:700}
+.fala small{display:block;font-size:.7rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--apagado)}
+.troca{display:grid;gap:12px}
+.troca-res{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.troca-res div{border-radius:14px;padding:12px;display:grid;gap:2px}
+.troca-res b{font-family:var(--display);font-size:1.25rem}
+.troca-res span{font-size:.82rem;font-weight:800}
+.economia{font-family:var(--display);font-weight:800;font-size:1.5rem;color:var(--grana-esc)}
+
+/* defesas */
+.escudos{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.escudo{border:3px solid var(--linha);background:var(--card);border-radius:20px;padding:14px;display:grid;gap:8px;justify-items:center;text-align:center;cursor:pointer;box-shadow:0 5px 0 var(--linha);transition:transform .15s}
+.escudo svg{width:58px;height:58px;transition:transform .35s cubic-bezier(.4,1.8,.5,1)}
+.escudo b{font-family:var(--display);font-size:1.1rem;line-height:1.1}
+.escudo span{font-size:.84rem;color:var(--apagado);line-height:1.35}
+.escudo .forma{fill:#E3EAE4;transition:fill .2s}
+.escudo[aria-pressed=true]{border-color:var(--grana);box-shadow:0 5px 0 var(--grana);background:var(--grana-claro)}
+.escudo[aria-pressed=true] .forma{fill:var(--grana)}
+.escudo[aria-pressed=true] svg{transform:scale(1.12) rotate(-6deg)}
+@media (max-width:760px){.escudos{grid-template-columns:1fr 1fr}}
+.gastos{display:flex;flex-wrap:wrap;gap:10px}
+.gasto{display:flex;align-items:center;gap:8px;border:2px solid var(--linha);background:var(--card);border-radius:99px;padding:6px 8px 6px 14px;font-weight:800;font-size:.9rem}
+.gasto input[type=checkbox]{width:20px;height:20px;accent-color:var(--fogo)}
+.gasto input[type=number]{width:74px;border:2px solid var(--linha);border-radius:9px;padding:4px 6px;font-weight:800}
+.gasto:has(input:checked){border-color:var(--fogo);background:var(--fogo-claro)}
+
+/* plano */
+.plano-top{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.anel{width:110px;height:110px}
+.anel text{font-family:var(--display);font-weight:800;font-size:26px;fill:var(--tinta)}
+.semanas{display:grid;gap:10px}
+.semana{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;background:var(--card);border:2px solid var(--linha);border-radius:16px;padding:12px 14px;cursor:pointer;transition:background .2s,border-color .2s}
+.semana input{appearance:none;width:30px;height:30px;border:3px solid var(--tinta);border-radius:9px;margin:2px 0 0;display:grid;place-items:center;cursor:pointer;background:#fff;flex:none}
+.semana input:checked{background:var(--grana);border-color:var(--grana-esc)}
+.semana input:checked::after{content:"";width:9px;height:15px;border:solid #fff;border-width:0 4px 4px 0;transform:rotate(45deg) translate(-1px,-2px)}
+.semana:has(input:checked){background:var(--grana-claro);border-color:var(--grana)}
+.semana small{font-size:.72rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--grana-esc)}
+.semana b{display:block;font-family:var(--display);font-size:1.15rem;line-height:1.15}
+.semana span{font-size:.92rem;color:#3A564D}
+
+/* rodapé */
+.rodape{background:var(--tinta);color:#C9DDD4;font-size:.9rem}
+.rodape .miolo{padding-block:44px;display:grid;gap:18px}
+.rodape h2{color:#fff;font-size:1.6rem}
+.rodape ol{margin:0;padding-left:1.2em;display:grid;gap:6px}
+.rodape a{color:var(--amarelo)}
+.aviso{border:2px solid #3B5C51;border-radius:14px;padding:12px 14px}
+
+#confete{position:fixed;inset:0;pointer-events:none;z-index:20;width:100%;height:100%}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+
+<canvas id="confete" aria-hidden="true"></canvas>
+
+<header class="hud" aria-label="Progresso">
+  <div class="miolo largo">
+    <span class="hud-tit">Chefões do Cartão</span>
+    <nav class="hud-fases" aria-label="Fases">
+      <a href="#fase-1" data-f="1" aria-label="Fase 1">1</a><a href="#fase-2" data-f="2" aria-label="Fase 2">2</a><a href="#fase-3" data-f="3" aria-label="Fase 3">3</a><a href="#fase-4" data-f="4" aria-label="Fase 4">4</a><a href="#fase-5" data-f="5" aria-label="Fase 5">5</a><a href="#fase-6" data-f="6" aria-label="Fase 6">6</a>
+    </nav>
+  </div>
+</header>
+
+<section class="capa" aria-labelledby="titulo">
+  <div class="miolo largo">
+    <span class="capa-selo"><span data-din></span>Din no Chão · guia interativo</span>
+    <h1 id="titulo">Chefões <span>do cartão</span></h1>
+    <p class="capa-sub">Como derrotar as dívidas sem passar fome. Você joga com os seus próprios números.</p>
+    <div>
+      <div class="desfile" aria-hidden="true">
+        <span class="boss" data-boss="cheque"></span><span class="boss" data-boss="parcelado"></span><span class="boss" data-boss="rotativo"></span><span class="boss" data-boss="pessoal"></span><span class="boss" data-boss="consignado"></span>
+      </div>
+      <div class="capa-chao"></div>
+    </div>
+    <div class="capa-acoes">
+      <a class="bt" href="#start">Apertar start</a>
+      <div class="chips"><span class="chip">6 fases</span><span class="chip">5 chefões</span><span class="chip">simulador de batalha</span><span class="chip">plano de 90 dias</span></div>
+    </div>
+    <p class="capa-info">Juros médios do Banco Central de setembro de 2026. Conteúdo educativo: não é recomendação de investimento.</p>
+  </div>
+</section>
+
+<!-- START -->
+<section class="faixa" id="start">
+  <div class="miolo">
+    <div class="fase-cab">
+      <span class="fase-num"><b>▶</b> Antes de começar</span>
+      <h2>Toda dívida é um chefão</h2>
+    </div>
+    <div class="prosa">
+      <p class="lead">Dívida parece um monstro sem rosto. Aqui cada uma ganha um rosto, uma barra de vida e uma força de ataque. E chefão de videogame tem padrão, ponto fraco e ordem certa para ser enfrentado.</p>
+    </div>
+    <div class="legenda">
+      <div><b>Vida</b><span>o saldo que você deve hoje</span></div>
+      <div><b>Ataque</b><span>os juros que ele cobra por mês</span></div>
+      <div><b>Seu dano</b><span>o que você paga além dos juros</span></div>
+      <div><b>Fase vencida</b><span>dívida quitada</span></div>
+    </div>
+    <div class="din"><span data-din></span><p class="balao">Oi, eu sou o Din. Antes de ler qualquer regra, <strong>teste você mesmo</strong>: este dragão tem R$ 1.000 de vida e ataca com 15,29% ao mês. Passe alguns meses pagando R$ 100 e depois R$ 300.</p></div>
+    <div class="painel">
+      <div class="arena">
+        <span class="boss" id="demo-boss" data-boss="rotativo"></span>
+        <div>
+          <div class="rot">Dragão do Rotativo</div>
+          <div class="arena-num num" id="demo-vida">R$ 1.000,00</div>
+          <div class="vida" style="margin-top:8px"><div class="vida-trilho"><div class="vida-cheia" id="demo-barra" style="width:50%"></div></div></div>
+          <p style="font-size:.86rem;color:var(--apagado);margin-top:6px">A barra cheia é o teto da lei: R$ 2.000.</p>
+          <div class="arena-acoes">
+            <button class="bt fogo" id="demo-100" type="button">Mês pagando R$ 100</button>
+            <button class="bt" id="demo-300" type="button">Mês pagando R$ 300</button>
+            <button class="bt leve mini" id="demo-zera" type="button">Recomeçar</button>
+          </div>
+        </div>
+      </div>
+      <div class="diario num" id="demo-diario" aria-live="polite"></div>
+    </div>
+    <div class="din" id="demo-moral" hidden><span data-din></span><p class="balao">Viu? Com R$ 100 por mês a vida do dragão <strong>sobe</strong>, porque o ataque dele (R$ 152,94 no primeiro mês) é maior que o seu dano. A regra do jogo é uma só: <strong>seu pagamento tem que ser maior que os juros</strong>.</p></div>
+    <div class="prosa" style="margin-top:18px">
+      <p>Neste guia você vai conhecer os cinco chefões mais comuns, cadastrar as suas dívidas, simular a batalha com duas estratégias, aprender os ataques especiais e sair com um plano de 90 dias. Tudo <strong>sem passar fome</strong>: comida, moradia, luz, água, remédio e transporte vêm antes de qualquer chefão.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FASE 1 -->
+<section class="faixa clara" id="fase-1" data-fase="1">
+  <div class="miolo">
+    <div class="fase-cab">
+      <span class="fase-num"><b>1</b> Fase 1 de 6</span>
+      <h2>Conheça os chefões</h2>
+    </div>
+    <div class="prosa">
+      <p class="lead">As dívidas das famílias brasileiras já somam <strong>50,1% de tudo o que elas ganham em um ano</strong>, e <strong>29% da renda de cada mês</strong> vai para juros e parcelas (Banco Central, agosto de 2026). Mas nem todo chefão bate igual.</p>
+    </div>
+    <div class="painel" style="margin-top:22px">
+      <div class="slider-linha"><label for="rk-valor">Se você devesse</label><input type="range" id="rk-valor" min="100" max="10000" step="100" value="1000"><span class="disp num" id="rk-valor-txt" style="font-size:1.4rem">R$ 1.000</span></div>
+      <div class="rot" style="margin-bottom:10px">Juros de um mês em cada chefão</div>
+      <div class="ranking" id="ranking"></div>
+      <p style="font-size:.82rem;color:var(--apagado);margin-top:12px">Taxas médias ao ano do Banco Central (setembro de 2026), convertidas para o mês.</p>
+    </div>
+
+    <h3 style="margin-top:40px">O bestiário</h3>
+    <p style="margin:6px 0 16px;color:var(--apagado)">Toque em um chefão para ver como ele aparece e qual é o ponto fraco.</p>
+    <div class="besti" id="besti"></div>
+
+    <h3 style="margin-top:40px">A coleira do dragão</h3>
+    <div class="prosa" style="margin-top:8px">
+      <p>Sem limite, R$ 1.000 no rotativo dobrariam em 5 meses. Desde janeiro de 2024, a Lei 14.690/2023 colocou uma coleira nele: juros, multa e encargos somados não podem passar do valor original da dívida. Então <strong>R$ 1.000 viram no máximo R$ 2.000</strong>. Ainda é o dobro. A coleira segura o dragão, não mata.</p>
+    </div>
+    <div class="painel" style="margin-top:16px">
+      <svg class="grafico" id="graf-teto" viewBox="0 0 640 260" role="img" aria-label="Dívida de R$ 1.000 no rotativo em 12 meses, sem e com o teto da lei"></svg>
+      <div class="legenda-graf"><span><i style="background:var(--fogo)"></i>Sem a lei</span><span><i style="background:var(--grana)"></i>Com o teto de 100%</span></div>
+    </div>
+    <div class="din"><span data-din></span><p class="balao"><strong>Chefões sem ficha.</strong> Crediário de loja, empréstimo de aplicativo, carnê e "dinheiro na hora" não entram nas médias, e alguns batem mais forte que o dragão. Antes de assinar qualquer coisa, peça o <strong>CET</strong> (Custo Efetivo Total): ele tem que estar no contrato.</p></div>
+  </div>
+</section>
+
+<!-- FASE 2 -->
+<section class="faixa" id="fase-2" data-fase="2">
+  <div class="miolo">
+    <div class="fase-cab">
+      <span class="fase-num"><b>2</b> Fase 2 de 6</span>
+      <h2>Monte a ficha dos seus chefões</h2>
+    </div>
+    <div class="prosa">
+      <p class="lead">Ninguém vence o que não enxerga. Cadastre aqui cada dívida sua com quatro números: quanto deve, a taxa ao mês, quanto paga por mês e o tipo.</p>
+      <p>Onde achar os números:</p>
+      <ul>
+        <li><strong>Registrato</strong>, do Banco Central (grátis, com a conta gov.br): lista todas as dívidas no seu CPF em bancos.</li>
+        <li><strong>Fatura do cartão</strong>: traz o total, o mínimo, a taxa do rotativo, a do parcelamento e o CET.</li>
+        <li><strong>App do banco</strong>: saldo do cheque especial e dos empréstimos, taxa e parcelas restantes.</li>
+        <li><strong>Serasa</strong>: dívidas em atraso, inclusive com lojas e contas de consumo.</li>
+      </ul>
+    </div>
+    <div style="margin:22px 0 12px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between">
+      <span class="exemplo-aviso" id="aviso-exemplo">Exemplo da Ana (personagem inventada). Troque pelos seus números.</span>
+      <div class="botoes">
+        <button class="bt mini" id="add-div" type="button">+ Chefão</button>
+        <button class="bt leve mini" id="usar-ana" type="button">Exemplo da Ana</button>
+        <button class="bt leve mini" id="limpar" type="button">Começar do zero</button>
+      </div>
+    </div>
+    <div class="dividas" id="dividas"></div>
+    <p style="font-size:.82rem;color:var(--apagado);margin-top:10px">A taxa já vem com a média do Banco Central para o tipo escolhido. Troque pela taxa do seu contrato. Os dados ficam só neste navegador.</p>
+    <div class="placar" style="margin-top:18px">
+      <div><span>Vida total</span><b class="num" id="pl-vida">R$ 0</b></div>
+      <div><span>Ataque do mês (juros)</span><b class="num" id="pl-atk">R$ 0</b></div>
+      <div><span>Mínimos somados</span><b class="num" id="pl-min">R$ 0</b></div>
+    </div>
+    <div class="din alerta" id="alerta-minimo" hidden><span data-din></span><p class="balao" id="alerta-minimo-txt"></p></div>
+  </div>
+</section>
+
+<!-- FASE 3 -->
+<section class="faixa clara" id="fase-3" data-fase="3">
+  <div class="miolo">
+    <div class="fase-cab">
+      <span class="fase-num"><b>3</b> Fase 3 de 6</span>
+      <h2>Estratégia de ataque</h2>
+    </div>
+    <div class="prosa">
+      <p class="lead">Três regras valem para qualquer estratégia: pague o essencial primeiro, pague o mínimo de todas as dívidas para nenhuma atrasar, e jogue <strong>todo o dinheiro que sobrar em um chefão de cada vez</strong>.</p>
+      <p>A diferença está em qual chefão recebe o dinheiro extra. Na <strong>Avalanche</strong>, vai para a maior taxa de juros: é a que paga menos juros no total. Na <strong>Bola de Neve</strong>, vai para o menor saldo: você vence uma fase mais cedo, e essa vitória dá gás para continuar.</p>
+    </div>
+    <div class="painel" style="margin-top:22px;display:grid;gap:18px">
+      <div class="campo-grande"><label for="orc">Quanto sobra por mês para as dívidas, depois do essencial?</label><span>R$ <input id="orc" type="number" inputmode="decimal" min="0" step="10" value="600"></span></div>
+      <div class="estrat" role="group" aria-label="Estratégia">
+        <button type="button" data-e="avalanche" aria-pressed="true"><b>Avalanche</b><span>Extra na maior taxa. Menos juros.</span></button>
+        <button type="button" data-e="bola" aria-pressed="false"><b>Bola de Neve</b><span>Extra no menor saldo. Vitória mais cedo.</span></button>
+        <button type="button" data-e="minimos" aria-pressed="false"><b>Só o mínimo</b><span>O que acontece sem plano.</span></button>
+      </div>
+      <div class="palco" id="palco">
+        <div class="palco-topo"><span class="mes num" id="mes">Mês 0</span><div class="palco-total"><span class="rot">Vida total</span><b class="num" id="palco-total">R$ 0</b></div></div>
+        <div class="lutadores" id="lutadores"></div>
+      </div>
+      <div class="botoes"><button class="bt azul" id="lutar" type="button">Lutar!</button><button class="bt leve mini" id="pular" type="button">Ver o resultado direto</button></div>
+      <div id="orc-erro" class="erro" hidden></div>
+    </div>
+    <h3 style="margin-top:34px">O placar das três estratégias</h3>
+    <div class="resultados" id="resultados" style="margin-top:14px"></div>
+    <div class="painel" style="margin-top:16px">
+      <div class="rot" style="margin-bottom:6px">Vida total dos chefões, mês a mês</div>
+      <svg class="grafico" id="graf-bat" viewBox="0 0 640 280" role="img" aria-label="Saldo total das dívidas ao longo dos meses em cada estratégia"></svg>
+      <div class="legenda-graf"><span><i style="background:var(--grana)"></i>Avalanche</span><span><i style="background:var(--amarelo-esc)"></i>Bola de Neve</span><span><i style="background:var(--fogo)"></i>Só o mínimo</span></div>
+    </div>
+    <div class="din"><span data-din></span><p class="balao" id="moral-bat"></p></div>
+    <p style="font-size:.82rem;color:var(--apagado)">Simulação educativa: juros compostos mês a mês, mínimos fixos e teto de 100% para rotativo e parcelado do cartão. Na vida real, empréstimos têm parcelas fixas e o mínimo do cartão muda a cada fatura.</p>
+  </div>
+</section>
+
+<!-- FASE 4 -->
+<section class="faixa" id="fase-4" data-fase="4">
+  <div class="miolo largo">
+    <div class="miolo" style="padding:0">
+      <div class="fase-cab">
+        <span class="fase-num"><b>4</b> Fase 4 de 6</span>
+        <h2>Ataques especiais</h2>
+      </div>
+      <p class="lead" style="max-width:65ch">Pagar com disciplina funciona, mas é lento. Os ataques especiais diminuem a força do chefão antes da luta.</p>
+    </div>
+    <div class="golpes" style="margin-top:24px">
+      <article class="golpe">
+        <div class="golpe-cab"><span class="golpe-ic" style="background:var(--amarelo-claro)"><svg viewBox="0 0 24 24"><path d="M5 4h11l3 3v13H5z" fill="var(--amarelo)" stroke="var(--tinta)" stroke-width="2" stroke-linejoin="round"/><path d="M8 10h8M8 14h8M8 18h5" stroke="var(--tinta)" stroke-width="2" stroke-linecap="round"/></svg></span><h3>Renegociar</h3></div>
+        <p>Banco prefere receber menos do que não receber. Dívida atrasada costuma ter desconto à vista ou parcelamento com juros menores. Negocie no app do banco, no Serasa Limpa Nome, no <strong>consumidor.gov.br</strong> ou em programas do governo quando houver um aberto (confira em gov.br).</p>
+        <div class="falas">
+          <div class="fala"><span><small>Na ligação</small><em>"Quero quitar esta dívida. Qual a melhor proposta à vista? E parcelado, qual a taxa ao mês e o CET?"</em></span><button class="bt leve mini copiar" type="button">Copiar</button></div>
+          <div class="fala"><span><small>Se não cabe</small><em>"Esse valor não cabe no meu orçamento. Consigo pagar R$ ___ por mês. Existe proposta nesse valor?"</em></span><button class="bt leve mini copiar" type="button">Copiar</button></div>
+          <div class="fala"><span><small>Antes de aceitar</small><em>"Pode me mandar a proposta por escrito, com taxa ao mês, CET, número de parcelas e valor total?"</em></span><button class="bt leve mini copiar" type="button">Copiar</button></div>
+        </div>
+        <p style="font-size:.86rem;color:var(--fogo-esc);font-weight:800">Só aceite o acordo que cabe no bolso. Acordo quebrado volta pior.</p>
+      </article>
+      <article class="golpe">
+        <div class="golpe-cab"><span class="golpe-ic" style="background:#E2F3FD"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="9" height="12" rx="2" fill="var(--azul)" stroke="var(--tinta)" stroke-width="2"/><rect x="13" y="6" width="9" height="12" rx="2" fill="#fff" stroke="var(--tinta)" stroke-width="2"/><path d="M8 3c5 0 9 0 9 3M17 6l-2-2M17 6l2-2" stroke="var(--tinta)" stroke-width="2" fill="none" stroke-linecap="round"/></svg></span><h3>Portabilidade</h3></div>
+        <p>Desde julho de 2024, a dívida do cartão (rotativo e parcelado) pode ser levada para outro banco, como já acontecia com empréstimos. Outro banco oferece taxa menor, quita a dívida no atual e você passa a pagar a ele. <strong>Não tem custo.</strong></p>
+        <p>O banco atual pode cobrir a oferta para não perder você. Use a proposta do concorrente como arma na negociação.</p>
+      </article>
+      <article class="golpe">
+        <div class="golpe-cab"><span class="golpe-ic" style="background:var(--grana-claro)"><svg viewBox="0 0 24 24"><path d="M4 8h13l-3-3M20 16H7l3 3" stroke="var(--grana-esc)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><h3>Trocar dívida cara por barata</h3></div>
+        <p>O golpe mais forte: uma dívida de juros baixos (como o consignado) quita as de juros altos. Simule com as suas dívidas:</p>
+        <div class="troca">
+          <div class="slider-linha" style="margin:0"><label for="troca-taxa">Taxa da dívida nova</label><input type="range" id="troca-taxa" min="1" max="6" step="0.01" value="2.11"><span class="disp num" id="troca-taxa-txt" style="font-size:1.2rem">2,11% a.m.</span></div>
+          <div class="troca-res">
+            <div style="background:var(--fogo-claro)"><span>Avalanche, sem troca</span><b class="num" id="troca-a">–</b></div>
+            <div style="background:var(--grana-claro)"><span>Com a troca</span><b class="num" id="troca-b">–</b></div>
+          </div>
+          <div class="economia num" id="troca-eco"></div>
+        </div>
+        <p style="font-size:.86rem;color:var(--fogo-esc);font-weight:800">Só funciona se você fechar a porta das dívidas antigas (cancelar ou reduzir o limite do cartão e do cheque especial). Senão você fica com as duas. E a parcela do consignado sai antes do salário cair: ela nunca pode tirar dinheiro do essencial.</p>
+      </article>
+      <article class="golpe">
+        <div class="golpe-cab"><span class="golpe-ic" style="background:var(--roxo-claro)"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="var(--roxo)" stroke="var(--tinta)" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="#fff" stroke="var(--tinta)" stroke-width="2"/><path d="M5.6 5.6l3.6 3.6M18.4 5.6l-3.6 3.6M5.6 18.4l3.6-3.6M18.4 18.4l-3.6-3.6" stroke="#fff" stroke-width="2"/></svg></span><h3>Pedir socorro</h3></div>
+        <p>Se, mesmo cortando tudo que não é essencial, as dívidas não cabem na renda, você pode estar <strong>superendividado</strong>. A Lei 14.181/2021 permite juntar todas as dívidas em um plano único de pagamento, preservando um valor mínimo para você viver.</p>
+        <p>Comece pelo Procon da sua cidade, pela Defensoria Pública ou pelo núcleo de conciliação do Tribunal de Justiça do seu estado. O atendimento costuma ser gratuito.</p>
+        <p style="font-size:.86rem;color:var(--fogo-esc);font-weight:800">Golpe à vista: ninguém sério cobra taxa antecipada para "limpar seu nome" ou "liberar empréstimo".</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- FASE 5 -->
+<section class="faixa clara" id="fase-5" data-fase="5">
+  <div class="miolo">
+    <div class="fase-cab">
+      <span class="fase-num"><b>5</b> Fase 5 de 6</span>
+      <h2>Não deixe o chefão voltar</h2>
+    </div>
+    <p class="lead" style="max-width:65ch">Quem quita e não muda nada costuma estar devendo de novo em poucos meses. Equipe os seus escudos: toque em cada um quando já tiver feito.</p>
+    <div class="escudos" id="escudos" style="margin-top:22px"></div>
+    <p class="disp" id="escudos-txt" style="margin-top:14px;font-size:1.3rem"></p>
+
+    <h3 style="margin-top:40px">Caça aos gastos invisíveis</h3>
+    <p style="margin:6px 0 16px;max-width:65ch">Marque o que você pode cortar ou reduzir e ajuste os valores. O Din calcula quanto isso encurta a sua batalha.</p>
+    <div class="gastos" id="gastos"></div>
+    <div class="din" style="margin-top:18px"><span data-din></span><p class="balao" id="gastos-txt"></p></div>
+  </div>
+</section>
+
+<!-- FASE 6 -->
+<section class="faixa" id="fase-6" data-fase="6">
+  <div class="miolo">
+    <div class="fase-cab">
+      <span class="fase-num"><b>6</b> Fase 6 de 6</span>
+      <h2>Missão final: 90 dias</h2>
+    </div>
+    <div class="plano-top">
+      <svg class="anel" viewBox="0 0 110 110" aria-hidden="true"><circle cx="55" cy="55" r="46" fill="none" stroke="var(--linha)" stroke-width="12"/><circle id="anel" cx="55" cy="55" r="46" fill="none" stroke="var(--grana)" stroke-width="12" stroke-linecap="round" stroke-dasharray="289" stroke-dashoffset="289" transform="rotate(-90 55 55)" style="transition:stroke-dashoffset .6s"/><text id="anel-txt" x="55" y="64" text-anchor="middle">0/12</text></svg>
+      <p class="lead" style="flex:1;min-width:220px">Doze semanas, uma missão por semana. Marque cada uma quando concluir: o progresso fica salvo neste navegador.</p>
+    </div>
+    <div class="semanas" id="semanas" style="margin-top:20px"></div>
+    <div class="din"><span data-din></span><p class="balao">Em 90 dias talvez nem todos os chefões estejam derrotados, e tudo bem. A vitória desta fase é <strong>saber exatamente quanto você deve, quanto paga de juros e ver a barra de vida descendo todo mês</strong>. Quando o último chefão cair, não deixe o dinheiro das parcelas sumir: uma parte vai para o escudo, outra para os seus planos.</p></div>
+  </div>
+</section>
+
+<footer class="rodape">
+  <div class="miolo">
+    <h2>Fontes</h2>
+    <ol>
+      <li>Banco Central do Brasil, estatísticas monetárias e de crédito divulgadas em 29/10/2026: taxas médias de juros de setembro de 2026; endividamento e comprometimento de renda de agosto de 2026.</li>
+      <li>Lei nº 14.690/2023 e Resolução CMN nº 5.112/2023: teto de juros e encargos do rotativo e do parcelamento da fatura (100% da dívida original) e portabilidade da dívida do cartão.</li>
+      <li>Resolução CMN nº 4.549/2017: rotativo só até o vencimento da fatura seguinte.</li>
+      <li>Resolução CMN nº 4.765/2019: teto de 8% ao mês no cheque especial.</li>
+      <li>Lei nº 14.181/2021: Lei do Superendividamento.</li>
+      <li>Taxas ao mês calculadas a partir das anuais: (1 + taxa anual)^(1/12) − 1.</li>
+    </ol>
+    <p class="aviso">Este guia é educativo. Não recomenda investimento, não promete resultado e não substitui orientação profissional. As taxas mudam todo mês: confira sempre o contrato e o CET da sua dívida. Seus números ficam guardados só neste navegador.</p>
+    <p>Chefões do Cartão · Din no Chão · 1ª edição, outubro de 2026</p>
+  </div>
+</footer>
+
+<script>
+(() => {
+'use strict';
+// ---------- dados (Banco Central, set/2026) ----------
+const TIPOS = {
+  rotativo:  {nome:'Dragão do Rotativo', divida:'Rotativo do cartão', anual:451.7, cor:'fogo', teto:true, perigo:5,
+              aparece:'Você paga só o mínimo da fatura, ou qualquer valor menor que o total. O resto vira rotativo.',
+              fraco:'A lei limita juros e encargos a 100% da dívida original. E ele só dura até a próxima fatura: depois o banco tem que oferecer um parcelamento mais barato.'},
+  parcelado: {nome:'Golem do Parcelado', divida:'Parcelamento da fatura', anual:193.0, cor:'laranja', teto:true, perigo:4,
+              aparece:'Você parcela a fatura no app, ou o banco transforma o rotativo em parcelas depois de um mês.',
+              fraco:'Também tem o teto de 100% da lei, e as parcelas fixas deixam ver o fim.'},
+  cheque:    {nome:'Sombra do Cheque Especial', divida:'Cheque especial', anual:139.0, cor:'roxo', perigo:3,
+              aparece:'A conta fica negativa e o banco cobre com o limite. O app soma o limite ao saldo e parece que o dinheiro é seu.',
+              fraco:'Tem teto de 8% ao mês e some na hora em que a conta volta ao positivo.'},
+  pessoal:   {nome:'Cavaleiro do Crédito Pessoal', divida:'Crédito pessoal', anual:110.9, cor:'azul', perigo:3,
+              aparece:'Empréstimo pelo app do banco, financeiras e ofertas "pré-aprovadas".',
+              fraco:'Parcelas fixas e prazo definido. Às vezes dá para trocar por uma dívida mais barata.'},
+  consignado:{nome:'Lacaio do Consignado', divida:'Consignado', anual:28.5, cor:'grana', perigo:1,
+              aparece:'Aposentados e pensionistas do INSS, servidores e trabalhadores com carteira assinada.',
+              fraco:'É o mais fraco da lista e pode virar arma contra os outros. Cuidado: a parcela sai antes do salário cair.'},
+  outro:     {nome:'Chefão sem ficha', divida:'Outra dívida', anual:null, cor:'apagado', perigo:3}
+};
+const mensal = a => (Math.pow(1 + a / 100, 1 / 12) - 1) * 100;   // % ao mês
+for (const t of Object.values(TIPOS)) t.mensal = t.anual == null ? 5 : mensal(t.anual);
+const ANA = [
+  {tipo:'parcelado', nome:'Cartão do banco', saldo:2000, taxa:TIPOS.parcelado.mensal, minimo:100},
+  {tipo:'cheque', nome:'Cheque especial', saldo:800, taxa:TIPOS.cheque.mensal, minimo:50},
+  {tipo:'pessoal', nome:'Empréstimo do app', saldo:3000, taxa:TIPOS.pessoal.mensal, minimo:150}
+];
+
+// ---------- utilidades ----------
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const brl = (v, c = 2) => v.toLocaleString('pt-BR', {style:'currency', currency:'BRL', minimumFractionDigits:c, maximumFractionDigits:c});
+const pct = (v, c = 2) => v.toLocaleString('pt-BR', {minimumFractionDigits:c, maximumFractionDigits:c}) + '%';
+const cor = n => `var(--${n})`;
+const guarda = {
+  ler(k, d) { try { const v = localStorage.getItem('chefoes:' + k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
+  pôr(k, v) { try { localStorage.setItem('chefoes:' + k, JSON.stringify(v)); } catch (e) {} }
+};
+const calmo = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// ---------- desenhos ----------
+const TINTA = '#17302A';
+function olhos(x1, x2, y, r = 9, tipo = 'normal') {
+  const pup = (x) => `<ellipse cx="${x + 1.5}" cy="${y + 1.5}" rx="${r * .48}" ry="${r * .52}" fill="${TINTA}"/><circle cx="${x + 3.5}" cy="${y - 1.5}" r="${r * .17}" fill="#fff"/>`;
+  let s = `<g class="olhos"><ellipse cx="${x1}" cy="${y}" rx="${r}" ry="${r * 1.12}" fill="#fff" stroke="${TINTA}" stroke-width="2.5"/>${pup(x1)}<ellipse cx="${x2}" cy="${y}" rx="${r}" ry="${r * 1.12}" fill="#fff" stroke="${TINTA}" stroke-width="2.5"/>${pup(x2)}`;
+  if (tipo === 'bravo') s += `<path d="M${x1 - r - 2} ${y - r - 6} L${x1 + r} ${y - r + 2} M${x2 + r + 2} ${y - r - 6} L${x2 - r} ${y - r + 2}" stroke="${TINTA}" stroke-width="5" stroke-linecap="round"/>`;
+  if (tipo === 'sonso') s += `<path d="M${x1 - r - 1} ${y - 2} h${2 * r + 2} M${x2 - r - 1} ${y - 2} h${2 * r + 2}" stroke="${TINTA}" stroke-width="3"/><rect x="${x1 - r - 1}" y="${y - r * 1.3}" width="${2 * r + 2}" height="${r * 1.2}" fill="var(--boss-cor)"/><rect x="${x2 - r - 1}" y="${y - r * 1.3}" width="${2 * r + 2}" height="${r * 1.2}" fill="var(--boss-cor)"/>`;
+  s += `</g><g class="ko-olhos" stroke="${TINTA}" stroke-width="4.5" stroke-linecap="round"><path d="M${x1 - 6} ${y - 6} l12 12 M${x1 + 6} ${y - 6} l-12 12 M${x2 - 6} ${y - 6} l12 12 M${x2 + 6} ${y - 6} l-12 12"/></g>`;
+  return s;
+}
+const pes = c => `<ellipse cx="44" cy="108" rx="11" ry="6" fill="${c}" stroke="${TINTA}" stroke-width="2.5"/><ellipse cx="76" cy="108" rx="11" ry="6" fill="${c}" stroke="${TINTA}" stroke-width="2.5"/>`;
+const sombraChao = `<ellipse cx="60" cy="114" rx="38" ry="5" fill="${TINTA}" opacity=".13"/>`;
+function desenho(tipo) {
+  const T = TINTA;
+  switch (tipo) {
+    case 'rotativo': return `${sombraChao}
+      <path d="M22 60 Q2 46 6 26 Q18 40 32 44Z" fill="var(--fogo-esc)" stroke="${T}" stroke-width="2.5" stroke-linejoin="round"/>
+      <path d="M98 60 Q118 46 114 26 Q102 40 88 44Z" fill="var(--fogo-esc)" stroke="${T}" stroke-width="2.5" stroke-linejoin="round"/>
+      <path d="M36 34 Q26 12 42 4 Q42 20 50 28Z" fill="var(--amarelo)" stroke="${T}" stroke-width="2.5" stroke-linejoin="round"/>
+      <path d="M84 34 Q94 12 78 4 Q78 20 70 28Z" fill="var(--amarelo)" stroke="${T}" stroke-width="2.5" stroke-linejoin="round"/>
+      ${pes('var(--fogo-esc)')}
+      <ellipse cx="60" cy="68" rx="40" ry="39" fill="var(--fogo)" stroke="${T}" stroke-width="3"/>
+      <ellipse cx="60" cy="86" rx="23" ry="17" fill="#FFB3A6"/>
+      <ellipse cx="44" cy="52" rx="10" ry="5" fill="#fff" opacity=".35"/>
+      ${olhos(46, 74, 60, 9.5, 'bravo')}
+      <path d="M44 82 Q60 94 76 82" stroke="${T}" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <path d="M49 85 l3 6 l3 -5 M65 86 l3 5 l3 -6" fill="#fff" stroke="${T}" stroke-width="1.8" stroke-linejoin="round"/>`;
+    case 'parcelado': return `${sombraChao}
+      <ellipse cx="18" cy="74" rx="9" ry="13" fill="var(--laranja-esc)" stroke="${T}" stroke-width="2.5"/>
+      <ellipse cx="102" cy="74" rx="9" ry="13" fill="var(--laranja-esc)" stroke="${T}" stroke-width="2.5"/>
+      ${pes('var(--laranja-esc)')}
+      <rect x="22" y="26" width="76" height="80" rx="22" fill="var(--laranja)" stroke="${T}" stroke-width="3"/>
+      <rect x="22" y="26" width="76" height="20" rx="10" fill="var(--laranja-esc)"/>
+      <rect x="38" y="16" width="8" height="18" rx="4" fill="#fff" stroke="${T}" stroke-width="2.5"/><rect x="74" y="16" width="8" height="18" rx="4" fill="#fff" stroke="${T}" stroke-width="2.5"/>
+      <path d="M30 84 h60 M30 96 h60 M50 76 v26 M70 76 v26" stroke="${T}" stroke-width="2" opacity=".2"/>
+      ${olhos(46, 74, 60, 8.5, 'bravo')}
+      <rect x="48" y="74" width="24" height="7" rx="3.5" fill="${T}"/>`;
+    case 'cheque': return `${sombraChao}
+      <path d="M22 108 V62 Q22 20 60 20 Q98 20 98 62 V108 Q90 99 82 108 Q74 99 66 108 Q58 99 50 108 Q42 99 34 108 Q28 101 22 108Z" fill="var(--roxo)" stroke="${T}" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M30 56 Q34 34 52 28" stroke="#fff" stroke-width="5" opacity=".3" fill="none" stroke-linecap="round"/>
+      <g style="--boss-cor:var(--roxo)">${olhos(47, 73, 58, 9.5, 'sonso')}</g>
+      <path d="M46 80 Q60 90 76 76" stroke="${T}" stroke-width="4" fill="none" stroke-linecap="round"/>`;
+    case 'pessoal': return `${sombraChao}
+      <path d="M60 18 Q60 4 76 4 Q86 6 84 16 Q74 10 66 18Z" fill="var(--fogo)" stroke="${T}" stroke-width="2.5" stroke-linejoin="round"/>
+      ${pes('var(--azul-esc)')}
+      <path d="M24 106 V60 Q24 18 60 18 Q96 18 96 60 V106 Z" fill="var(--azul)" stroke="${T}" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M60 18 V106" stroke="${T}" stroke-width="2" opacity=".18"/>
+      <rect x="30" y="50" width="60" height="22" rx="11" fill="${T}"/>
+      <g class="olhos"><circle cx="47" cy="61" r="5.5" fill="var(--amarelo)"/><circle cx="73" cy="61" r="5.5" fill="var(--amarelo)"/></g>
+      <g class="ko-olhos" stroke="var(--amarelo)" stroke-width="4" stroke-linecap="round"><path d="M42 56 l10 10 M52 56 l-10 10 M68 56 l10 10 M78 56 l-10 10"/></g>
+      <circle cx="34" cy="86" r="3" fill="${T}" opacity=".35"/><circle cx="86" cy="86" r="3" fill="${T}" opacity=".35"/>
+      <path d="M34 34 Q42 26 52 25" stroke="#fff" stroke-width="5" opacity=".35" fill="none" stroke-linecap="round"/>`;
+    case 'consignado': return `${sombraChao}
+      <path d="M60 52 Q56 36 66 30" stroke="${T}" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="67" cy="28" r="6" fill="var(--amarelo)" stroke="${T}" stroke-width="2.5"/>
+      <path d="M26 108 Q16 108 18 90 Q22 52 60 52 Q98 52 102 90 Q104 108 94 108Z" fill="var(--grana)" stroke="${T}" stroke-width="3"/>
+      <ellipse cx="44" cy="66" rx="9" ry="4" fill="#fff" opacity=".35"/>
+      ${olhos(48, 72, 80, 8.5)}
+      <path d="M52 96 Q60 102 68 96" stroke="${T}" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+      <circle cx="36" cy="92" r="4" fill="#FF9DB0" opacity=".7"/><circle cx="84" cy="92" r="4" fill="#FF9DB0" opacity=".7"/>`;
+    default: return `${sombraChao}${pes('#8EA39A')}
+      <ellipse cx="60" cy="68" rx="38" ry="38" fill="#B9C9C1" stroke="${T}" stroke-width="3"/>
+      <text x="60" y="54" text-anchor="middle" font-family="Baloo 2,sans-serif" font-weight="800" font-size="20" fill="${T}" opacity=".5">?</text>
+      ${olhos(47, 73, 70, 8.5)}
+      <path d="M50 90 h20" stroke="${T}" stroke-width="4" stroke-linecap="round"/>`;
+  }
+}
+function svgBoss(tipo) { return `<svg viewBox="0 0 120 120" aria-hidden="true">${desenho(tipo)}</svg>`; }
+function svgDin() {
+  const T = TINTA;
+  return `<svg viewBox="0 0 64 64" aria-hidden="true"><ellipse cx="32" cy="60" rx="16" ry="3" fill="${T}" opacity=".15"/><circle cx="32" cy="30" r="26" fill="var(--amarelo)" stroke="${T}" stroke-width="3"/><circle cx="32" cy="30" r="19" fill="none" stroke="var(--amarelo-esc)" stroke-width="3"/><ellipse cx="24" cy="27" rx="3.6" ry="4.4" fill="${T}"/><ellipse cx="40" cy="27" rx="3.6" ry="4.4" fill="${T}"/><circle cx="25.2" cy="25.6" r="1.2" fill="#fff"/><circle cx="41.2" cy="25.6" r="1.2" fill="#fff"/><path d="M24 37 Q32 44 40 37" stroke="${T}" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="18" cy="35" r="3" fill="#FF9DB0" opacity=".8"/><circle cx="46" cy="35" r="3" fill="#FF9DB0" opacity=".8"/><path d="M14 14 Q20 8 28 7" stroke="#fff" stroke-width="3" opacity=".6" fill="none" stroke-linecap="round"/></svg>`;
+}
+function pintar(raiz = document) {
+  raiz.querySelectorAll('[data-boss]').forEach(el => { if (!el.dataset.ok) { el.innerHTML = svgBoss(el.dataset.boss); el.dataset.ok = 1; } });
+  raiz.querySelectorAll('[data-din]').forEach(el => { if (!el.dataset.ok) { el.innerHTML = svgDin(); el.dataset.ok = 1; } });
+}
+function bater(el, texto, c) {
+  if (!el) return;
+  el.classList.remove('hit'); void el.offsetWidth; el.classList.add('hit');
+  if (texto && !calmo) { const d = document.createElement('span'); d.className = 'dano'; d.textContent = texto; d.style.color = c; el.appendChild(d); setTimeout(() => d.remove(), 1100); }
+}
+
+// ---------- confete ----------
+const cv = $('#confete'), cx = cv.getContext('2d'); let pedacos = [], rodando = false;
+function confete(n = 140) {
+  if (calmo) return;
+  cv.width = innerWidth; cv.height = innerHeight;
+  const cores = ['#1FBF6A', '#FFCB2D', '#FF5146', '#279FEA', '#9466F5', '#FF9A22'];
+  for (let i = 0; i < n; i++) pedacos.push({x: innerWidth / 2 + (Math.random() - .5) * 200, y: innerHeight * .35, vx: (Math.random() - .5) * 14, vy: -Math.random() * 14 - 4, r: Math.random() * 6.28, c: cores[i % 6], w: 6 + Math.random() * 6, t: 0});
+  if (!rodando) { rodando = true; requestAnimationFrame(passo); }
+}
+function passo() {
+  cx.clearRect(0, 0, cv.width, cv.height);
+  pedacos = pedacos.filter(p => p.t < 160 && p.y < cv.height + 20);
+  for (const p of pedacos) { p.t++; p.vy += .35; p.vx *= .99; p.x += p.vx; p.y += p.vy; p.r += .15; cx.save(); cx.translate(p.x, p.y); cx.rotate(p.r); cx.fillStyle = p.c; cx.fillRect(-p.w / 2, -p.w / 4, p.w, p.w / 2); cx.restore(); }
+  if (pedacos.length) requestAnimationFrame(passo); else { rodando = false; cx.clearRect(0, 0, cv.width, cv.height); }
+}
+
+// ---------- gráfico de linhas ----------
+function linhas(svg, series, opc = {}) {
+  const W = 640, H = +svg.getAttribute('viewBox').split(' ')[3], m = {l: 70, r: 20, t: 16, b: 34};
+  const n = Math.max(...series.map(s => s.v.length)) - 1, maxV = opc.max || Math.max(...series.flatMap(s => s.v));
+  const topo = Math.ceil(maxV / (opc.passo || 1000)) * (opc.passo || 1000);
+  const X = i => m.l + (W - m.l - m.r) * i / Math.max(1, n), Y = v => H - m.b - (H - m.t - m.b) * v / topo;
+  let s = '';
+  for (let k = 0; k <= 4; k++) { const v = topo * k / 4; s += `<line class="eixo" x1="${m.l}" x2="${W - m.r}" y1="${Y(v)}" y2="${Y(v)}"/><text x="${m.l - 8}" y="${Y(v) + 4}" text-anchor="end">${brl(v, 0)}</text>`; }
+  const passoX = n <= 12 ? 1 : n <= 24 ? 3 : n <= 60 ? 6 : 12;
+  for (let i = 0; i <= n; i += passoX) s += `<text x="${X(i)}" y="${H - 12}" text-anchor="middle">${i}</text>`;
+  s += `<text x="${W - m.r}" y="${H - 12}" text-anchor="end" style="font-size:11px">meses</text>`;
+  for (const se of series) {
+    const d = se.v.map((v, i) => `${i ? 'L' : 'M'}${X(i).toFixed(1)} ${Y(Math.min(v, topo)).toFixed(1)}`).join(' ');
+    s += `<path d="${d}" fill="none" stroke="${se.c}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" ${se.tr ? 'stroke-dasharray="2 8"' : ''}/>`;
+    const u = se.v.length - 1; s += `<circle cx="${X(u)}" cy="${Y(Math.min(se.v[u], topo))}" r="6" fill="${se.c}" stroke="#fff" stroke-width="2"/>`;
+  }
+  svg.innerHTML = s;
+}
+
+// ---------- 0. demo dano x ataque ----------
+const demo = {vida: 1000, juros: 0, mes: 0};
+const tx = TIPOS.rotativo.mensal / 100;
+function demoPinta() {
+  $('#demo-vida').textContent = brl(demo.vida);
+  $('#demo-barra').style.width = Math.max(0, Math.min(100, demo.vida / 2000 * 100)) + '%';
+}
+function demoMes(pag) {
+  demo.mes++;
+  let j = demo.vida * tx; j = Math.max(0, Math.min(j, 1000 - demo.juros)); demo.juros += j;
+  const antes = demo.vida; demo.vida = Math.max(0, demo.vida + j - pag);
+  const linha = document.createElement('div');
+  const dif = demo.vida - antes;
+  linha.innerHTML = `<span>Mês ${demo.mes}: ataque ${brl(j)}, você pagou ${brl(Math.min(pag, antes + j))}</span><b class="${dif > 0 ? 'sobe' : 'desce'}">${dif > 0 ? '+' : '−'}${brl(Math.abs(dif))}</b>`;
+  $('#demo-diario').prepend(linha);
+  bater($('#demo-boss'), dif > 0 ? '+' + brl(dif, 0) : '−' + brl(-dif, 0), dif > 0 ? 'var(--fogo-esc)' : 'var(--grana-esc)');
+  if (demo.vida <= 0) { $('#demo-boss').classList.add('ko'); confete(80); }
+  demoPinta(); $('#demo-moral').hidden = false;
+}
+$('#demo-100').onclick = () => demo.vida > 0 && demoMes(100);
+$('#demo-300').onclick = () => demo.vida > 0 && demoMes(300);
+$('#demo-zera').onclick = () => { Object.assign(demo, {vida: 1000, juros: 0, mes: 0}); $('#demo-diario').innerHTML = ''; $('#demo-boss').classList.remove('ko'); demoPinta(); };
+demoPinta();
+
+// ---------- 1. ranking, bestiário, teto ----------
+const ORDEM = ['rotativo', 'parcelado', 'cheque', 'pessoal', 'consignado'];
+function ranking() {
+  const v = +$('#rk-valor').value; $('#rk-valor-txt').textContent = brl(v, 0);
+  const maxJ = v * TIPOS.rotativo.mensal / 100;
+  $('#ranking').innerHTML = ORDEM.map(k => { const t = TIPOS[k], j = v * t.mensal / 100;
+    return `<div class="rk"><div class="rk-nome">${t.divida}</div><div class="rk-trilho"><div class="rk-barra" style="width:${Math.max(3, j / maxJ * 100)}%;background:${cor(t.cor)}"></div></div><div class="rk-val num"><b>${brl(j)}</b><span>${pct(t.mensal)} ao mês · ${pct(t.anual, 1)} ao ano</span></div></div>`; }).join('');
+}
+$('#rk-valor').addEventListener('input', ranking); ranking();
+
+$('#besti').innerHTML = ORDEM.map(k => { const t = TIPOS[k];
+  return `<button class="carta" type="button" aria-expanded="false" style="--cor:${cor(t.cor)};--cor-txt:${cor(t.cor === 'amarelo' ? 'amarelo-esc' : t.cor + '-esc')}">
+    <div class="carta-arte"><span class="boss" data-boss="${k}"></span></div>
+    <span class="carta-tipo">${t.divida}</span><span class="disp">${t.nome}</span>
+    <span class="carta-atk num">${pct(t.mensal)} <small>ao mês</small></span>
+    <span class="pips">PERIGO ${[0, 1, 2, 3, 4].map(i => `<i class="${i < t.perigo ? 'on' : ''}"></i>`).join('')}</span>
+    <span class="carta-mais" hidden><span><b>Como aparece</b>${t.aparece}</span><span><b>Ponto fraco</b>${t.fraco}</span></span>
+    <span class="carta-abrir">Ver ficha</span></button>`; }).join('');
+$$('.carta').forEach(c => c.addEventListener('click', () => { const m = c.querySelector('.carta-mais'), ab = m.hidden; m.hidden = !ab; c.setAttribute('aria-expanded', ab); c.querySelector('.carta-abrir').textContent = ab ? 'Fechar ficha' : 'Ver ficha'; if (ab) bater(c.querySelector('.boss')); }));
+
+(() => { const sem = [], com = []; for (let i = 0; i <= 12; i++) { sem.push(1000 * Math.pow(1 + tx, i)); com.push(Math.min(2000, 1000 * Math.pow(1 + tx, i))); }
+  linhas($('#graf-teto'), [{v: sem, c: 'var(--fogo)'}, {v: com, c: 'var(--grana)'}], {passo: 1000}); })();
+
+// ---------- 2. dívidas do leitor ----------
+let dividas = guarda.ler('dividas', null), exemplo = false;
+if (!Array.isArray(dividas) || !dividas.length) { dividas = ANA.map(d => ({...d})); exemplo = true; } else exemplo = guarda.ler('exemplo', false);
+const salvar = () => { guarda.pôr('dividas', dividas); guarda.pôr('exemplo', exemplo); };
+const fmtIn = v => (Math.round(v * 100) / 100).toString().replace('.', ',');
+const lerNum = s => { const v = parseFloat(String(s).replace(/\./g, '').replace(',', '.')); return isFinite(v) ? v : 0; };
+function desenhaDividas() {
+  $('#dividas').innerHTML = dividas.map((d, i) => `<div class="div-linha" data-i="${i}">
+    <span class="boss" data-boss="${d.tipo}"></span>
+    <div style="display:grid;gap:10px;min-width:0">
+      <div class="div-campos">
+        <div class="campo"><label for="tipo-${i}">Tipo</label><select id="tipo-${i}" data-c="tipo">${Object.entries(TIPOS).map(([k, t]) => `<option value="${k}" ${k === d.tipo ? 'selected' : ''}>${t.divida}</option>`).join('')}</select></div>
+        <div class="campo"><label for="saldo-${i}">Vida (R$)</label><input id="saldo-${i}" data-c="saldo" inputmode="decimal" value="${fmtIn(d.saldo)}"></div>
+        <div class="campo"><label for="taxa-${i}">Taxa % a.m.</label><input id="taxa-${i}" data-c="taxa" inputmode="decimal" value="${fmtIn(d.taxa)}"></div>
+        <div class="campo"><label for="min-${i}">Paga/mês (R$)</label><input id="min-${i}" data-c="minimo" inputmode="decimal" value="${fmtIn(d.minimo)}"></div>
+        <button class="remover" type="button" data-rm="${i}" aria-label="Remover chefão">Remover</button>
+      </div>
+    </div>
+    <div class="div-info num" id="info-${i}"></div>
+  </div>`).join('');
+  pintar($('#dividas'));
+  $('#aviso-exemplo').hidden = !exemplo;
+  atualizaInfos();
+}
+function atualizaInfos() {
+  let vida = 0, atk = 0, min = 0; const crescendo = [];
+  dividas.forEach((d, i) => { const j = d.saldo * d.taxa / 100; vida += d.saldo; atk += j; min += d.minimo;
+    const el = $('#info-' + i); if (!el) return;
+    const ruim = d.minimo <= j && d.saldo > 0; if (ruim) crescendo.push(TIPOS[d.tipo].nome);
+    el.innerHTML = `<span>${TIPOS[d.tipo].nome}</span><span>Ataque do mês: <b>${brl(j)}</b></span><span class="${ruim ? 'ruim' : 'bom'}">${ruim ? 'Seu pagamento não cobre os juros: ele está crescendo' : 'Seu dano: ' + brl(d.minimo - j) + ' por mês'}</span>`; });
+  $('#pl-vida').textContent = brl(vida); $('#pl-atk').textContent = brl(atk); $('#pl-min').textContent = brl(min);
+  $('#alerta-minimo').hidden = !crescendo.length;
+  if (crescendo.length) $('#alerta-minimo-txt').innerHTML = `<strong>Atenção:</strong> ${crescendo.join(', ')} ${crescendo.length > 1 ? 'estão' : 'está'} ganhando vida todo mês, porque o pagamento não cobre os juros. Na Fase 3 você vê como virar esse jogo.`;
+}
+$('#dividas').addEventListener('input', e => { const l = e.target.closest('.div-linha'); if (!l) return; const d = dividas[+l.dataset.i], c = e.target.dataset.c;
+  if (c === 'tipo') { d.tipo = e.target.value; d.taxa = TIPOS[d.tipo].mensal; l.querySelector('[data-c=taxa]').value = fmtIn(d.taxa); const b = l.querySelector('.boss'); b.dataset.boss = d.tipo; b.dataset.ok = ''; pintar(l); bater(b); }
+  else d[c] = lerNum(e.target.value);
+  exemplo = false; $('#aviso-exemplo').hidden = true; salvar(); atualizaInfos(); agendaBatalha(); });
+$('#dividas').addEventListener('click', e => { const rm = e.target.dataset.rm; if (rm == null) return; dividas.splice(+rm, 1); exemplo = false; salvar(); desenhaDividas(); agendaBatalha(); });
+$('#add-div').onclick = () => { if (exemplo) { dividas = []; exemplo = false; } dividas.push({tipo: 'rotativo', saldo: 1000, taxa: TIPOS.rotativo.mensal, minimo: 100}); salvar(); desenhaDividas(); agendaBatalha(); const u = $('#dividas').lastElementChild; u && u.querySelector('[data-c=saldo]').focus(); };
+$('#usar-ana').onclick = () => { dividas = ANA.map(d => ({...d})); exemplo = true; salvar(); desenhaDividas(); agendaBatalha(); };
+$('#limpar').onclick = () => { dividas = [{tipo: 'rotativo', saldo: 0, taxa: TIPOS.rotativo.mensal, minimo: 0}]; exemplo = false; salvar(); desenhaDividas(); agendaBatalha(); };
+
+// ---------- 3. simulação (mesma lógica de produtos/chefoes-do-cartao/contas.py) ----------
+function simular(lista, orc, ordem, max = 600) {
+  const ds = lista.filter(d => d.saldo > 0).map((d, i) => ({...d, i, orig: d.saldo, juros: 0, fim: null, taxaM: d.taxa / 100, teto: !!TIPOS[d.tipo].teto}));
+  const somaMin = ds.reduce((a, d) => a + d.minimo, 0);
+  if (ordem !== 'minimos' && orc < somaMin - .005) return {erro: somaMin};
+  if (ordem === 'minimos') orc = somaMin;
+  const quadros = [ds.map(d => d.saldo)], total = [ds.reduce((a, d) => a + d.saldo, 0)];
+  let mes = 0, jt = 0; const vivas = () => ds.filter(d => d.saldo > .005);
+  while (vivas().length) {
+    mes++;
+    for (const d of vivas()) { let j = d.saldo * d.taxaM; if (d.teto) j = Math.max(0, Math.min(j, d.orig - d.juros)); d.saldo += j; d.juros += j; jt += j; }
+    let sobra = orc;
+    for (const d of vivas()) { const p = Math.min(d.minimo, d.saldo); d.saldo -= p; sobra -= p; }
+    if (ordem !== 'minimos') for (const d of vivas().sort(ordem === 'avalanche' ? (a, b) => b.taxaM - a.taxaM : (a, b) => a.saldo - b.saldo)) { if (sobra <= 0) break; const p = Math.min(sobra, d.saldo); d.saldo -= p; sobra -= p; }
+    for (const d of ds) if (d.saldo <= .005 && d.fim == null) { d.saldo = 0; d.fim = mes; }
+    quadros.push(ds.map(d => d.saldo)); total.push(ds.reduce((a, d) => a + d.saldo, 0));
+    if (mes >= max) return {nunca: true, mes, juros: jt, ds, quadros, total, pago: orc * mes};
+  }
+  const fins = ds.map(d => d.fim).filter(Boolean);
+  return {mes, juros: jt, ds, quadros, total, primeira: fins.length ? Math.min(...fins) : null, primeiraNome: ds.find(d => d.fim === Math.min(...fins))};
+}
+let estrat = guarda.ler('estrategia', 'avalanche');
+$('#orc').value = guarda.ler('orcamento', 600);
+$$('.estrat button').forEach(b => { b.setAttribute('aria-pressed', b.dataset.e === estrat); b.onclick = () => { estrat = b.dataset.e; guarda.pôr('estrategia', estrat); $$('.estrat button').forEach(x => x.setAttribute('aria-pressed', x === b)); prepara(); }; });
+$('#orc').addEventListener('input', () => { guarda.pôr('orcamento', lerNum($('#orc').value)); agendaBatalha(); });
+let anim = null, sims = {};
+const nomeD = d => TIPOS[d.tipo].nome;
+function prepara() {
+  clearInterval(anim); anim = null; $('#lutar').disabled = false;
+  const orc = lerNum($('#orc').value), vivas = dividas.filter(d => d.saldo > 0);
+  sims = {avalanche: simular(vivas, orc, 'avalanche'), bola: simular(vivas, orc, 'bola'), minimos: simular(vivas, orc, 'minimos')};
+  const s = sims[estrat], erro = $('#orc-erro');
+  erro.hidden = !s.erro;
+  if (s.erro) erro.textContent = `O valor por mês (${brl(orc)}) é menor que a soma dos pagamentos mínimos (${brl(s.erro)}). Aumente o valor ou veja os ataques especiais da Fase 4.`;
+  $('#lutadores').innerHTML = vivas.map((d, i) => `<div class="lutador" data-l="${i}" style="position:relative"><span class="boss" data-boss="${d.tipo}"></span><div class="vida"><div class="vida-trilho"><div class="vida-cheia" style="width:100%;background:${cor(TIPOS[d.tipo].cor)}"></div></div></div><small>${nomeD(d)}<br><span class="num" data-v>${brl(d.saldo, 0)}</span></small></div>`).join('') || '<p style="font-weight:800">Cadastre pelo menos um chefão na Fase 2.</p>';
+  pintar($('#lutadores'));
+  quadro(0); resultados();
+}
+function quadro(k) {
+  const s = sims[estrat]; if (!s || s.erro || !s.quadros) return;
+  const q = s.quadros[Math.min(k, s.quadros.length - 1)];
+  $('#mes').textContent = 'Mês ' + Math.min(k, s.quadros.length - 1);
+  $('#palco-total').textContent = brl(s.total[Math.min(k, s.total.length - 1)], 0);
+  const vivasAgora = s.ds.filter((d, i) => q[i] > .005);
+  let alvo = null;
+  if (estrat !== 'minimos' && vivasAgora.length) alvo = vivasAgora.sort(estrat === 'avalanche' ? (a, b) => b.taxaM - a.taxaM : (a, b) => q[s.ds.indexOf(a)] - q[s.ds.indexOf(b)])[0];
+  s.ds.forEach((d, i) => { const el = $(`.lutador[data-l="${i}"]`); if (!el) return;
+    const max = Math.max(...s.quadros.map(f => f[i])), v = q[i];
+    el.querySelector('.vida-cheia').style.width = (v / max * 100) + '%';
+    el.querySelector('[data-v]').textContent = v > .005 ? brl(v, 0) : 'Derrotado!';
+    el.querySelector('.boss').classList.toggle('ko', v <= .005);
+    const tag = el.querySelector('.alvo-tag'); if (tag) tag.remove();
+    if (alvo === d) el.insertAdjacentHTML('afterbegin', '<span class="alvo-tag">ALVO</span>'); });
+}
+function lutar() {
+  const s = sims[estrat]; if (!s || s.erro || !s.quadros) return;
+  clearInterval(anim); let k = 0; const n = s.quadros.length - 1, lim = s.nunca ? 36 : n;
+  $('#lutar').disabled = true;
+  const vel = Math.max(70, Math.min(320, 5200 / lim));
+  anim = setInterval(() => {
+    k++; const ant = s.quadros[k - 1], q = s.quadros[k];
+    s.ds.forEach((d, i) => { const el = $(`.lutador[data-l="${i}"] .boss`); if (!el || ant[i] <= .005) return;
+      if (q[i] < ant[i] - .01) bater(el, '−' + brl(ant[i] - q[i], 0), 'var(--grana-esc)'); else if (q[i] > ant[i] + .01) bater(el, '+' + brl(q[i] - ant[i], 0), 'var(--fogo-esc)');
+      if (q[i] <= .005) { const t = document.createElement('div'); t.className = 'toast'; t.textContent = `Mês ${k}: ${nomeD(d)} derrotado!`; $('#palco').appendChild(t); setTimeout(() => t.remove(), 1800); confete(60); } });
+    quadro(k);
+    if (k >= lim) { clearInterval(anim); anim = null; $('#lutar').disabled = false; if (!s.nunca) confete(160);
+      else { const t = document.createElement('div'); t.className = 'toast'; t.style.background = 'var(--fogo)'; t.textContent = '3 anos depois e a dívida só cresceu'; $('#palco').appendChild(t); setTimeout(() => t.remove(), 2600); } }
+  }, calmo ? 1 : vel);
+}
+$('#lutar').onclick = lutar;
+$('#pular').onclick = () => { clearInterval(anim); anim = null; $('#lutar').disabled = false; const s = sims[estrat]; if (s && s.quadros) quadro(s.nunca ? 36 : s.quadros.length - 1); };
+function resultados() {
+  const box = $('#resultados'), a = sims.avalanche, b = sims.bola, m = sims.minimos;
+  const card = (cls, tit, s) => {
+    if (!s || s.erro) return `<div class="res ${cls}"><b>${tit}</b><span>Valor por mês menor que os mínimos.</span></div>`;
+    if (!s.ds.length) return `<div class="res ${cls}"><b>${tit}</b><span>Sem chefões cadastrados.</span></div>`;
+    if (s.nunca) { const d12 = s.total[Math.min(12, s.total.length - 1)];
+      return `<div class="res ${cls}"><b>${tit}</b><span class="grande">Nunca termina</span><span>Depois de 12 meses você pagou ${brl(s.pago / s.mes * 12, 0)} e ainda deve ${brl(d12)}.</span></div>`; }
+    return `<div class="res ${cls} ${cls === estratVencedora() ? 'vence' : ''}"><b>${tit}</b><span class="grande num">${s.mes} meses</span><span class="num">Juros pagos: ${brl(s.juros)}</span><span class="num">Primeira vitória: mês ${s.primeira}${s.primeiraNome ? ' (' + nomeD(s.primeiraNome) + ')' : ''}</span></div>`;
+  };
+  box.innerHTML = card('minimos', 'Só o mínimo', m) + card('bola', 'Bola de Neve', b) + card('avalanche', 'Avalanche', a);
+  const series = [];
+  if (m && m.total) series.push({v: m.total.slice(0, Math.max(a && a.total ? a.total.length : 13, b && b.total ? b.total.length : 13, 13)), c: 'var(--fogo)'});
+  if (b && b.total) series.push({v: b.total, c: 'var(--amarelo-esc)'});
+  if (a && a.total) series.push({v: a.total, c: 'var(--grana)'});
+  if (series.length) linhas($('#graf-bat'), series, {passo: 1000}); else $('#graf-bat').innerHTML = '';
+  const moral = $('#moral-bat');
+  if (a && b && !a.erro && !b.erro && !a.nunca && !b.nunca && a.ds.length) {
+    const eco = b.juros - a.juros;
+    moral.innerHTML = `A Avalanche ${eco > .5 ? 'economiza <strong>' + brl(eco) + '</strong> de juros' : 'empata em juros com a Bola de Neve'}${a.mes < b.mes ? ' e termina ' + (b.mes - a.mes) + (b.mes - a.mes > 1 ? ' meses' : ' mês') + ' antes' : ''}. A Bola de Neve dá a primeira vitória no mês ${b.primeira}${b.primeira < a.primeira ? ', ' + (a.primeira - b.primeira) + ' meses antes' : ''}. <strong>As duas são muito melhores que pagar só o mínimo.</strong> Se você desanima fácil, vá de Bola de Neve; se aguenta esperar, Avalanche.`;
+  } else if (a && a.erro) moral.innerHTML = 'O valor por mês não cobre nem os mínimos. Comece pelos ataques especiais da Fase 4: renegociar e trocar dívida cara por barata.';
+  else moral.innerHTML = 'Com esse valor por mês a dívida não termina. Aumente o valor da batalha ou use um ataque especial da Fase 4.';
+  troca();
+}
+const estratVencedora = () => { const a = sims.avalanche, b = sims.bola; if (!a || !b || a.nunca || b.nunca || a.erro || b.erro) return ''; return a.juros <= b.juros ? 'avalanche' : 'bola'; };
+let tempo = null; function agendaBatalha() { clearTimeout(tempo); tempo = setTimeout(prepara, 250); }
+
+// ---------- 4. troca por dívida barata ----------
+function troca() {
+  const taxa = +$('#troca-taxa').value; $('#troca-taxa-txt').textContent = pct(taxa) + ' a.m.';
+  const a = sims.avalanche, orc = lerNum($('#orc').value), total = dividas.reduce((s, d) => s + Math.max(0, d.saldo), 0);
+  if (!a || a.erro || !total) { $('#troca-a').textContent = '–'; $('#troca-b').textContent = '–'; $('#troca-eco').textContent = ''; return; }
+  let s = total, n = 0, j = 0; const i = taxa / 100;
+  while (s > .005 && n < 600) { n++; const jj = s * i; j += jj; s += jj; s -= Math.min(orc, s); }
+  const nova = n >= 600 ? null : {mes: n, juros: j};
+  $('#troca-a').innerHTML = a.nunca ? 'nunca termina' : `${a.mes} meses<br>${brl(a.juros)} de juros`;
+  $('#troca-b').innerHTML = nova ? `${nova.mes} meses<br>${brl(nova.juros)} de juros` : 'nunca termina';
+  $('#troca-eco').innerHTML = nova && !a.nunca ? (a.juros - nova.juros > 0 ? `Economia de ${brl(a.juros - nova.juros)} e ${Math.max(0, a.mes - nova.mes)} meses a menos` : 'Nessa taxa a troca não compensa') : '';
+}
+$('#troca-taxa').addEventListener('input', troca);
+
+// ---------- copiar falas ----------
+$$('.copiar').forEach(b => b.onclick = async () => { const t = b.parentElement.querySelector('em').textContent;
+  try { await navigator.clipboard.writeText(t); b.textContent = 'Copiado'; } catch (e) { const r = document.createRange(); r.selectNodeContents(b.parentElement.querySelector('em')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Selecionado'; }
+  setTimeout(() => b.textContent = 'Copiar', 1600); });
+
+// ---------- 5. escudos e gastos ----------
+const ESC = [
+  ['Cartão só gasta o que existe', 'Só compre no crédito o que já tem na conta, e pague a fatura total.', 'M32 6 L54 14 V30 Q54 48 32 58 Q10 48 10 30 V14Z'],
+  ['Escudo de emergência', 'Uma reserva pequena, de R$ 300 a R$ 500, para o imprevisto não virar rotativo.', 'M32 6 L54 14 V30 Q54 48 32 58 Q10 48 10 30 V14Z'],
+  ['Portas fechadas', 'Limite do cheque especial e do cartão reduzidos; cartão fora dos apps de compra.', 'M32 6 L54 14 V30 Q54 48 32 58 Q10 48 10 30 V14Z'],
+  ['Alarme de "pré-aprovado"', 'Limite extra liberado é o chefão batendo na porta. Desconfie.', 'M32 6 L54 14 V30 Q54 48 32 58 Q10 48 10 30 V14Z']
+];
+const ICS = ['M22 28h20v12H22z M26 28v-4h12v4', 'M32 20v20 M24 26l8-6 8 6', 'M24 34l6 6 12-14', 'M32 20v12 M32 38v2'];
+let escudos = guarda.ler('escudos', [false, false, false, false]);
+function desenhaEscudos() {
+  $('#escudos').innerHTML = ESC.map(([t, d, p], i) => `<button class="escudo" type="button" aria-pressed="${!!escudos[i]}" data-i="${i}"><svg viewBox="0 0 64 64" aria-hidden="true"><path class="forma" d="${p}" stroke="${TINTA}" stroke-width="3" stroke-linejoin="round"/><path d="${ICS[i]}" stroke="${TINTA}" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><b>${t}</b><span>${d}</span></button>`).join('');
+  const n = escudos.filter(Boolean).length;
+  $('#escudos-txt').textContent = n === 4 ? 'Defesa completa: 4 de 4 escudos.' : `${n} de 4 escudos equipados.`;
+}
+$('#escudos').addEventListener('click', e => { const b = e.target.closest('.escudo'); if (!b) return; const i = +b.dataset.i; escudos[i] = !escudos[i]; guarda.pôr('escudos', escudos); desenhaEscudos(); if (escudos.every(Boolean)) confete(90); });
+desenhaEscudos();
+const GASTOS = [['Streaming que você nem vê', 40], ['Taxas de entrega', 60], ['Apostas', 100], ['Tarifa de pacote do banco', 35], ['Lanches e cafés na rua', 120], ['Apps e assinaturas esquecidas', 30]];
+let gastos = guarda.ler('gastos', GASTOS.map(([n, v]) => ({n, v, on: false})));
+function desenhaGastos() {
+  $('#gastos').innerHTML = gastos.map((g, i) => `<label class="gasto"><input type="checkbox" data-i="${i}" ${g.on ? 'checked' : ''}>${g.n}<span>R$</span><input type="number" min="0" step="5" data-v="${i}" value="${g.v}" aria-label="Valor por mês de ${g.n}"></label>`).join('');
+  gastosTexto();
+}
+function gastosTexto() {
+  const extra = gastos.filter(g => g.on).reduce((a, g) => a + (+g.v || 0), 0), el = $('#gastos-txt');
+  if (!extra) { el.innerHTML = 'Marque os gastos que dá para cortar. Cada real que sai daqui vira dano extra contra os chefões.'; return; }
+  const orc = lerNum($('#orc').value), vivas = dividas.filter(d => d.saldo > 0), base = simular(vivas, orc, 'avalanche'), novo = simular(vivas, orc + extra, 'avalanche');
+  let fim = '';
+  if (base.erro || novo.erro || !vivas.length) fim = '';
+  else if (base.nunca && !novo.nunca) fim = ` Com isso, uma batalha que <strong>nunca terminava</strong> passa a acabar em <strong>${novo.mes} meses</strong>.`;
+  else if (!base.nunca && !novo.nunca) fim = ` Na Avalanche, sua batalha cai de ${base.mes} para <strong>${novo.mes} meses</strong> e você deixa de pagar <strong>${brl(base.juros - novo.juros)}</strong> de juros.`;
+  el.innerHTML = `Cortando isso você ganha <strong>${brl(extra)} por mês</strong> (${brl(extra * 12, 0)} por ano) de dano extra.${fim}`;
+}
+$('#gastos').addEventListener('input', e => { const t = e.target; if (t.dataset.i != null) gastos[+t.dataset.i].on = t.checked; if (t.dataset.v != null) gastos[+t.dataset.v].v = +t.value || 0; guarda.pôr('gastos', gastos); gastosTexto(); });
+desenhaGastos();
+
+// ---------- 6. plano de 90 dias ----------
+const PLANO = [
+  ['Mapa do jogo', 'Puxe o Registrato, as faturas e os extratos. Cadastre cada dívida na Fase 2.'],
+  ['Placar', 'Anote a vida total e o ataque do mês. Liste o essencial e descubra quanto sobra para as dívidas.'],
+  ['Estratégia', 'Escolha Avalanche ou Bola de Neve na Fase 3 e defina o primeiro alvo.'],
+  ['Feche as portas', 'Reduza o limite do cheque especial e do cartão. Tire os cartões salvos dos apps.'],
+  ['Renegociar', 'Ligue para os credores das dívidas atrasadas com as falas da Fase 4. Peça tudo por escrito.'],
+  ['Comparar', 'Simule portabilidade e troca por dívida mais barata. Compare taxa ao mês e CET.'],
+  ['Decidir', 'Feche só os acordos que cabem no bolso. Atualize as fichas da Fase 2.'],
+  ['Gastos invisíveis', 'Corte três gastos e mande a economia para o alvo.'],
+  ['Escudo', 'Comece a reserva de emergência, nem que seja com R$ 50.'],
+  ['Placar de novo', 'Atualize as fichas. A vida total caiu? O ataque do mês caiu?'],
+  ['Ajuste', 'Se algum chefão está crescendo, volte à Fase 4. Se tudo cai, mantenha o ritmo.'],
+  ['Próximo alvo', 'Comemore cada fase vencida e escreva o plano dos próximos 90 dias.']
+];
+let feitas = guarda.ler('plano', PLANO.map(() => false));
+function desenhaPlano() {
+  $('#semanas').innerHTML = PLANO.map(([t, d], i) => `<label class="semana"><input type="checkbox" data-i="${i}" ${feitas[i] ? 'checked' : ''}><span><small>Semana ${i + 1}</small><b>${t}</b><span>${d}</span></span></label>`).join('');
+  anel();
+}
+function anel() { const n = feitas.filter(Boolean).length; $('#anel').setAttribute('stroke-dashoffset', 289 - 289 * n / 12); $('#anel-txt').textContent = `${n}/12`; }
+$('#semanas').addEventListener('change', e => { const i = +e.target.dataset.i; feitas[i] = e.target.checked; guarda.pôr('plano', feitas); anel(); if (e.target.checked) confete(feitas.every(Boolean) ? 220 : 40); });
+desenhaPlano();
+
+// ---------- HUD de fases ----------
+const links = $$('.hud-fases a');
+const obs = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) return; const f = +e.target.dataset.fase; links.forEach(a => { const n = +a.dataset.f; a.classList.toggle('on', n === f); a.classList.toggle('feita', n < f); }); }), {rootMargin: '-45% 0px -50% 0px'});
+$$('[data-fase]').forEach(s => obs.observe(s));
+
+pintar(); desenhaDividas(); prepara();
+})();
+</script>
