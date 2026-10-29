@@ -8,16 +8,16 @@ A fábrica é uma **indústria de conteúdo, marcas e produtos digitais** o mais
 
 | Linha | O que é | Estado |
 |---|---|---|
-| **Precioso Productions** (serviço) | Estúdio de vídeo, marca, site e 3D para clientes no Brasil e no exterior (dólar/euro) | Montando o portfólio. 1ª marca vitrine: **Ninho Alto Coffee** (fictícia, em inglês): manual, rótulos topográficos, fotos 3D no Blender e site v2 publicados. Plano: `docs/plano-precioso.md` |
+| **Precioso Productions** (serviço) | Estúdio de vídeo, marca, site e 3D para clientes no Brasil e no exterior (dólar/euro) | Montando o portfólio. 1ª marca vitrine: **Ninho Alto Coffee** (fictícia, em inglês): manual completo como design system (gerado de `marca.json`), rótulos topográficos, fotos 3D no Blender e site v2 publicados. Plano: `docs/plano-precioso.md` |
 | **Produtos** | Ebook "Chefões do cartão" → minicurso (Hotmart); depois kit de agentes da fábrica | Funil desenhado (`docs/plano-funil.md`), ebook ainda não escrito |
 | **Din no Chão** (finanças) | Canal de Shorts que puxa os produtos | Estilo `grana` pronto, 1º vídeo feito |
 | **Canal de cultura pop** | Laboratório de formatos (sem meta de receita) | Vídeo diário automático (tarefa às 08:23), aprovação no Radar Pop |
 
 ### Próximos passos
-1. **Ninho Alto:** manual completo como design system → vídeo 3D dos grãos rolando do pacote (Blender, física) → site v3 com o vídeo no topo → 3 Reels e 2 anúncios → projeto no Behance.
+1. **Ninho Alto:** ~~manual completo como design system~~ (feito 29/10) → vídeo 3D dos grãos rolando do pacote (Blender, física) → site v3 com o vídeo no topo → 3 Reels e 2 anúncios → projeto no Behance.
 2. **Precioso Productions:** marca, site e Instagram do estúdio; perfis no Behance, Contra e Upwork.
 3. **Produtos:** escrever e diagramar o ebook; página de venda; Hotmart.
-4. Pendências do Tiago: liberar os links no menu Compartilhar; contador (exportação de serviço); conectar a pasta da fábrica no app Claude para computador, para o Claude usar o Blender do PC (RTX 3060) em motion.
+4. Pendências do Tiago: liberar os links no menu Compartilhar; contador (exportação de serviço). Para o Blender do PC (RTX 3060) não precisa clonar nada: o Claude copia a cena para uma pasta do PC e abre o Blender pelo controle do computador, com aprovação do Tiago.
 
 ### Como começar uma conversa nova com o Claude
 - **Melhor jeito:** app Claude para computador → conectar a pasta da fábrica (clone deste repositório). Assim o Claude roda o Blender e o render no PC do Tiago.
@@ -37,6 +37,7 @@ A fábrica é uma **indústria de conteúdo, marcas e produtos digitais** o mais
 ### Páginas vivas (claude.ai do Tiago, privadas até compartilhar)
 - Radar Pop (pautas e aprovação de vídeos): https://claude.ai/artifact/LasVjXDtUwVj9qAkA5KZis
 - Ninho Alto Coffee (site conceito): https://claude.ai/artifact/WhrQ8VnGzQKWuXbuPGEfmt
+- Ninho Alto Brand Manual (design system): https://claude.ai/artifact/CC21K2ujie5tX9nE1t7d41
 - Chão da Fábrica: https://claude.ai/artifact/RTfocgFhiAuJ45xtALqbfP
 - Plano do funil: https://claude.ai/artifact/R2NRFYjELs4opAFzEJJv7G
 

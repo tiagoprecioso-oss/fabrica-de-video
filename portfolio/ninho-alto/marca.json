@@ -1,0 +1,111 @@
+{
+  "_sobre": "Fonte única da marca Ninho Alto Coffee. Toda peça (rótulos, site, manual, vídeos, 3D) lê daqui. Mudou aqui, roda tools/manual_ninho.py e tools/rotulo_ninho.py.",
+  "versao": "1.0",
+  "data": "2026-10-29",
+  "nome": "Ninho Alto Coffee",
+  "wordmark": "NINHO ALTO",
+  "aviso_conceito": "Concept project — fictional brand by Precioso Productions",
+  "promessa": "Grown above 1,100 m. Roasted the week you order.",
+  "conceito": "Direct-to-consumer specialty coffee from the Mantiqueira highlands of Minas Gerais, Brazil. Three lots, each from a named slope. Roasted on demand on Mondays, shipped within 72 hours, 15% off on subscription.",
+  "publico": "US coffee drinkers who buy whole bean online, care about origin data and brew at home (pour-over, espresso).",
+
+  "voz": {
+    "resumo": "Direct and technical without being snobbish. Every sentence carries one concrete fact: an altitude, a process, a number of hours.",
+    "faca": [
+      "Picked at 1,400 m. Fermented 72 hours without oxygen. Tastes like red berries and panela.",
+      "Roasted Monday, at your door by Thursday.",
+      "Use 18 g of coffee for 300 g of water. Start at 93 °C."
+    ],
+    "evite": [
+      "Elevate your morning ritual.",
+      "The finest beans on Earth, handpicked with love.",
+      "Exclamation marks, emoji, and superlatives without a number."
+    ]
+  },
+
+  "cores": {
+    "neutras": [
+      {"token": "stone",   "nome": "Stone",   "hex": "#ECE9E4", "escuro": "#151412", "uso": "Page background. The ground of every screen."},
+      {"token": "paper",   "nome": "Paper",   "hex": "#F4F2EC", "escuro": "#F4F2EC", "uso": "Labels and packaging only. Never a page background."},
+      {"token": "surface", "nome": "Slab",    "hex": "#E2DED7", "escuro": "#1F1D1A", "uso": "Behind product renders; the tone of the stone slab."},
+      {"token": "line",    "nome": "Line",    "hex": "#CFC9BF", "escuro": "#34312C", "uso": "Hairlines, table rules, input borders."},
+      {"token": "muted",   "nome": "Muted",   "hex": "#69645C", "escuro": "#A39D93", "uso": "Secondary text and captions."},
+      {"token": "ink",     "nome": "Ink",     "hex": "#1C1B19", "escuro": "#ECE8E1", "uso": "Text, wordmark, the altitude dot."}
+    ],
+    "lotes": [
+      {"token": "ochre",   "nome": "Ochre",   "hex": "#B0761E", "escuro": "#D59A3C", "lote": "sunrise"},
+      {"token": "navy",    "nome": "Night",   "hex": "#24385C", "escuro": "#8EA6CF", "lote": "night"},
+      {"token": "oxblood", "nome": "Oxblood", "hex": "#8C2622", "escuro": "#D0645C", "lote": "reserve"}
+    ],
+    "regra": "Color lives on the packaging. Interfaces stay neutral; a lot color appears only as the label band, the product dot and that lot's contour lines."
+  },
+
+  "tipos": {
+    "sans": {"familia": "Hanken Grotesk", "arquivo": "public/fonts/HankenGrotesk.ttf", "pesos": [400, 500, 600], "fallback": "\"Helvetica Neue\", Arial, sans-serif", "uso": "Everything: headlines, body, buttons. 600 only in the wordmark."},
+    "mono": {"familia": "IBM Plex Mono", "arquivo": "public/fonts/IBMPlexMono-Regular.ttf", "pesos": [400, 500], "fallback": "ui-monospace, Menlo, monospace", "uso": "Lot sheets, prices, altitudes, small uppercase labels. Always tabular figures."},
+    "escala": [
+      {"nome": "Display", "px": 52, "peso": 500, "familia": "sans", "entrelinha": 1.08, "tracking": "-0.02em", "exemplo": "Grown above 1,100 m."},
+      {"nome": "Title",   "px": 38, "peso": 500, "familia": "sans", "entrelinha": 1.08, "tracking": "-0.02em", "exemplo": "Harvest 2026"},
+      {"nome": "Heading", "px": 26, "peso": 500, "familia": "sans", "entrelinha": 1.15, "tracking": "-0.01em", "exemplo": "Mantiqueira Night"},
+      {"nome": "Lead",    "px": 20, "peso": 400, "familia": "sans", "entrelinha": 1.45, "tracking": "0", "exemplo": "Three lots from one mountain range."},
+      {"nome": "Body",    "px": 16, "peso": 400, "familia": "sans", "entrelinha": 1.55, "tracking": "0", "exemplo": "Dark cocoa, molasses, almond. Natural, 1,250 m."},
+      {"nome": "Small",   "px": 14, "peso": 400, "familia": "sans", "entrelinha": 1.5,  "tracking": "0", "exemplo": "Ships within 72 hours."},
+      {"nome": "Label",   "px": 12, "peso": 400, "familia": "mono", "entrelinha": 1.4,  "tracking": "0.06em", "caixa_alta": true, "exemplo": "Process · Variety · Altitude"}
+    ]
+  },
+
+  "espaco": {"base": 4, "passos": [4, 8, 12, 16, 24, 32, 48, 72], "margem_lateral": "max(16px, env(safe-area-inset-*))", "largura_max": 1320, "cantos": 0, "regra": "Square corners everywhere (labels are cut paper). Hairlines instead of shadows."},
+
+  "logo": {
+    "respiro": "Clear space on every side equals the cap height of the wordmark (H).",
+    "minimo_px": 96,
+    "minimo_mm": 20,
+    "tracking": "0.32em",
+    "fundos_ok": ["stone", "paper", "ink", "ochre", "navy", "oxblood"],
+    "nao": [
+      "Do not set it in another typeface or weight.",
+      "Do not tighten the letter spacing.",
+      "Do not add the old sun-and-mountain symbol or any mascot.",
+      "Do not place it over a busy part of a photo.",
+      "Do not use it in lowercase.",
+      "Do not outline, shadow or gradient it."
+    ]
+  },
+
+  "lotes": [
+    {"id": "sunrise", "nome": "Cerrado Sunrise", "cor": "ochre",   "alt_m": 1150, "processo": "Pulped natural",    "variedade": "Yellow Catuaí",  "notas": "Milk chocolate · hazelnut · orange peel", "torra": "Medium",      "preco_usd": 19, "semente": 3},
+    {"id": "night",   "nome": "Mantiqueira Night", "cor": "navy", "alt_m": 1250, "processo": "Natural",           "variedade": "Red Bourbon",    "notas": "Dark cocoa · molasses · almond",          "torra": "Medium-dark", "preco_usd": 21, "semente": 11},
+    {"id": "reserve", "nome": "Ninho Reserve",  "cor": "oxblood",  "alt_m": 1400, "processo": "Anaerobic natural", "variedade": "Yellow Bourbon", "notas": "Red berries · panela · jasmine",          "torra": "Light",       "preco_usd": 26, "semente": 29}
+  ],
+
+  "foto": {
+    "regras": [
+      ["Light", "One soft window light from camera left, about 45°. Shadows fall right and stay open."],
+      ["Surface", "Grey stone slab (Slab tone). No wood, no burlap, no linen."],
+      ["Props", "Beans, one ceramic cup, a pour-over cone. Never more than two at once."],
+      ["Lens", "50 mm equivalent, eye level or 30° above. No fisheye, no dutch angle."],
+      ["Crop", "Products 4:5. Hero 16:9 on desktop, 4:3 on phones. Vertical video 9:16."],
+      ["Source", "Every image is a Blender render from blender/ninho_produto.py. No stock photos."]
+    ]
+  },
+
+  "motion": {
+    "regras": [
+      ["Speed", "Slow and physical. Camera moves take 5–8 s; nothing snaps."],
+      ["Camera", "Dolly in, slow orbit up to 30°, or a locked shot. No zoom punches, no whip pans."],
+      ["Physics", "Beans fall, bounce and settle at real-world speed under real gravity. No slow-motion tricks."],
+      ["Easing", "Ease-in-out (cubic) on every camera move; linear only for falling objects."],
+      ["Length", "Reels and ads 8–15 s and they loop: the last frame matches the first."],
+      ["Type", "Text cuts in and out, never flies. One line at a time, Body or Lead size, Label for data."],
+      ["Sound", "Room tone and the sound of beans. No stock music swells."]
+    ]
+  },
+
+  "pecas": [
+    ["Labels", "tools/rotulo_ninho.py", "saida/ninho/rotulo_*.png"],
+    ["Product renders", "blender/ninho_produto.py + tools/pecas_ninho.sh", "portfolio/ninho-alto/img/"],
+    ["Logo files and tokens.css", "tools/manual_ninho.py", "portfolio/ninho-alto/logo/, tokens.css"],
+    ["This manual", "tools/manual_ninho.py", "portfolio/ninho-alto/manual.html"],
+    ["Store concept", "portfolio/ninho-alto/site.html", "artifact Ninho Alto Coffee"]
+  ]
+}

@@ -1,0 +1,33 @@
+/* Ninho Alto tokens v1.0 — gerado por tools/manual_ninho.py a partir de marca.json. Não editar à mão. */
+:root {
+  --stone: #ECE9E4;
+  --paper: #F4F2EC;
+  --surface: #E2DED7;
+  --line: #CFC9BF;
+  --muted: #69645C;
+  --ink: #1C1B19;
+  --ochre: #B0761E;
+  --navy: #24385C;
+  --oxblood: #8C2622;
+  --f-sans: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --t-display: 500 52px/1.08 var(--f-sans);
+  --t-title: 500 38px/1.08 var(--f-sans);
+  --t-heading: 500 26px/1.15 var(--f-sans);
+  --t-lead: 400 20px/1.45 var(--f-sans);
+  --t-body: 400 16px/1.55 var(--f-sans);
+  --t-small: 400 14px/1.5 var(--f-sans);
+  --t-label: 400 12px/1.4 var(--f-mono);
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+  --s-7: 48px;
+  --s-8: 72px;
+  --max: 1320px;
+  --radius: 0;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --stone: #151412; --paper: #F4F2EC; --surface: #1F1D1A; --line: #34312C; --muted: #A39D93; --ink: #ECE8E1; --ochre: #D59A3C; --navy: #8EA6CF; --oxblood: #D0645C; color-scheme: dark; } }
+:root[data-theme="dark"] { --stone: #151412; --paper: #F4F2EC; --surface: #1F1D1A; --line: #34312C; --muted: #A39D93; --ink: #ECE8E1; --ochre: #D59A3C; --navy: #8EA6CF; --oxblood: #D0645C; color-scheme: dark; }

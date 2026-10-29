@@ -12,7 +12,7 @@ Cada coisa que a fábrica já fez e deu certo vira uma **receita**: o passo a pa
 | Receita | Para quê | Versão | Estado |
 |---|---|---|---|
 | [video-curto.md](video-curto.md) | Short/Reels de dados (canal pop e Din no Chão) | v3 | rodando todo dia |
-| [marca.md](marca.md) | Criar uma marca (conceito, identidade, manual) | v1 | testada na Ninho Alto |
+| [marca.md](marca.md) | Criar uma marca (conceito, identidade, manual como design system) | v2 | testada na Ninho Alto |
 | [site.md](site.md) | Site/loja de uma marca, do zero ao link publicado | v2 | testada na Ninho Alto |
 | [foto-produto-3d.md](foto-produto-3d.md) | Fotos de produto em 3D no Blender | v1 | testada na Ninho Alto |
 | [motion-3d.md](motion-3d.md) | Vídeos 3D com física (grãos rolando, líquido caindo) | v0 | rascunho, ainda não testada |

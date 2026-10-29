@@ -1,4 +1,4 @@
-"""Rótulos da marca conceito Ninho Alto (mapas topográficos por lote).
+"""Rótulos da marca conceito Ninho Alto (mapas topográficos por lote). Lê nomes, cores, altitudes e sementes de portfolio/ninho-alto/marca.json.
 Uso: python3 tools/rotulo_ninho.py  → saida/ninho/rotulo_<lote>.png (texturas para o Blender e imagens para o site)
 """
 import os, numpy as np, matplotlib
@@ -10,12 +10,13 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 FONTES = os.path.join(RAIZ, 'public', 'fonts')
 SAIDA = os.path.join(RAIZ, 'saida', 'ninho'); os.makedirs(SAIDA, exist_ok=True)
 
-PAPEL = (244, 242, 236); TINTA = (28, 27, 25)
-LOTES = [
-    dict(id='sunrise', nome='Cerrado Sunrise', cor=(176, 118, 30), alt='1,150 m', proc='Pulped natural', var='Yellow Catuaí', notas='Milk chocolate · hazelnut · orange peel', semente=3),
-    dict(id='night', nome='Mantiqueira Night', cor=(36, 56, 92), alt='1,250 m', proc='Natural', var='Red Bourbon', notas='Dark cocoa · molasses · almond', semente=11),
-    dict(id='reserve', nome='Ninho Reserve', cor=(140, 38, 34), alt='1,400 m', proc='Anaerobic natural', var='Yellow Bourbon', notas='Red berries · panela · jasmine', semente=29),
-]
+import json
+MARCA = json.load(open(os.path.join(RAIZ, 'portfolio', 'ninho-alto', 'marca.json'), encoding='utf-8'))
+_COR = {c['token']: c['hex'] for c in MARCA['cores']['neutras'] + MARCA['cores']['lotes']}
+rgb = lambda h: tuple(int(h[i:i + 2], 16) for i in (1, 3, 5))
+PAPEL = rgb(_COR['paper']); TINTA = rgb(_COR['ink'])
+LOTES = [dict(id=l['id'], nome=l['nome'], cor=rgb(_COR[l['cor']]), alt=f"{l['alt_m']:,} m", proc=l['processo'],
+              var=l['variedade'], notas=l['notas'], semente=l['semente']) for l in MARCA['lotes']]
 
 def fonte(nome, tam, peso=None):
     f = ImageFont.truetype(os.path.join(FONTES, nome), tam)
