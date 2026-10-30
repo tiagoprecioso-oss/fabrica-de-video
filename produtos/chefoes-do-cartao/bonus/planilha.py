@@ -241,7 +241,7 @@ wm = wb.create_sheet('Meus chefões', 1)
 fundo(wm, 50, 15)
 wm.sheet_properties.tabColor = VERMELHO
 larguras(wm, {'A': 6, 'B': 30, 'C': 30, 'D': 28, 'E': 14, 'F': 11, 'G': 11, 'H': 11, 'I': 14, 'J': 14,
-              'K': 14, 'L': 34, 'M': 12, 'N': 12, 'O': 3})
+              'K': 14, 'L': 44, 'M': 12, 'N': 12, 'O': 3})
 celula(wm, 'A1', 'MEUS CHEFÕES', size=22, bold=True, merge='A1:F1')
 celula(wm, 'A2', 'Din: ninguém vence o que não enxerga. Quatro números por dívida e você sabe contra o que está lutando.',
        italic=True, merge='A2:L2')
@@ -344,7 +344,7 @@ for col, t in zip(['H', 'I', 'L', 'M', 'N'], ['Ordem', 'Dívida', 'Chefão', 'Vi
 celula(wm, f'I{O0 + 3}', None, merge=f'I{O0 + 3}:K{O0 + 3}', bg=VERDE_CLARO, borda=True)
 
 def busca(col_rank, col_val, pos):
-    return f'=IFERROR(INDEX(${col_val}${D0}:${col_val}${D1},MATCH({pos},${col_rank}${D0}:${col_rank}${D1},0)),"")'
+    return f'=IF({pos}="","",IFERROR(INDEX(${col_val}${D0}:${col_val}${D1},MATCH({pos},${col_rank}${D0}:${col_rank}${D1},0)),""))'
 for k in range(N):
     r = O0 + 4 + k
     bg = AMARELO if k == 0 else None
@@ -353,7 +353,7 @@ for k in range(N):
         pos = f'${base}{r}'
         for col, src in cols:
             if src is None:
-                celula(wm, f'{col}{r}', k + 1, fmt='0"º"', bold=True, h='center', borda=True, bg=bg)
+                celula(wm, f'{col}{r}', f'=IF(COUNT(${rank}${D0}:${rank}${D1})>={k + 1},{k + 1},"")', fmt='0"º"', bold=True, h='center', borda=True, bg=bg)
             else:
                 fmt = BRL if src == 'E' else PCT if src == 'H' else None
                 merge = f'C{r}:D{r}' if col == 'C' else f'I{r}:K{r}' if col == 'I' else None
