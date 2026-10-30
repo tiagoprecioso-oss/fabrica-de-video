@@ -159,7 +159,7 @@ celula(ws, f'B{r}', 'COMO JOGAR', bold=True, size=13, merge=f'B{r}:C{r}'); r += 
 for n, tit, txt in passos:
     celula(ws, f'B{r}', n, size=14, bold=True, cor='FFFFFF', bg=TINTA, h='center', v='top')
     c = celula(ws, f'C{r}', f'{tit} {txt}', wrap=True, v='top')
-    ws.row_dimensions[r].height = 34
+    ws.row_dimensions[r].height = 48
     r += 1
 
 r += 1
