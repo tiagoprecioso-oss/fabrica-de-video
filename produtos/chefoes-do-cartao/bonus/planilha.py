@@ -104,7 +104,9 @@ def celula(ws, ref, valor=None, *, size=11, bold=False, cor=TINTA, bg=None, fmt=
     if borda:
         if merge:
             for linha in ws[merge]:
-                for x in linha: x.border = BORDA; x.fill = fill(bg) if bg else x.fill
+                for x in linha:
+                    x.border = BORDA
+                    if bg: x.fill = fill(bg)
         else: c.border = BORDA
     return c
 
@@ -356,8 +358,6 @@ for k in range(N):
                 fmt = BRL if src == 'E' else PCT if src == 'H' else None
                 merge = f'C{r}:D{r}' if col == 'C' else f'I{r}:K{r}' if col == 'I' else None
                 celula(wm, f'{col}{r}', busca(rank, src, pos), fmt=fmt, borda=True, bg=bg, bold=(k == 0), size=10, merge=merge)
-    if k == 0:
-        for col in 'GO'[:1]: pass
     wm.row_dimensions[r].height = 19
 celula(wm, f'G{O0 + 4}', '← ALVO', bold=True, size=10, cor='8A6A00')
 FIM = O0 + 4 + N + 1
